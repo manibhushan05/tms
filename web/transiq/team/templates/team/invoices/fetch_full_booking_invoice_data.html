@@ -1,0 +1,106 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/parsley/css/parsley.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Invoices</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+
+                    <div class="x_content">
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li class="message-error">{{ message|linebreaks }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <form class="form-horizontal form-label-left" id="fullBookingInvoiceForm"
+                                {#                                  method="GET"#}
+                                {#                                  action="/page/full-booking-invoie/"#}
+                        >
+                            <div class="item form-group col-md-6 col-sm-6 col-xs-12 customer_name_select">
+                                <label class="control-label" for="customer_payment">
+                                    Customer who will make payment *</label>
+                                <select class="form-control" name="customer_to_be_billed" id="customer_payment"
+                                        onChange="getFullBookingInvoie('/page/full-booking-invoie/')"
+                                        required>
+                                    <option></option>
+                                    {% for customer in customers %}
+                                        <option value="{{ customer.id }}">{{ customer.name }}, {{ customer.code }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12" style="display: none;">
+                                <button id="submit_id" class="btn btn-lg btn-success">PROCEED</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+    <style>
+        .message-error {
+            color: red;
+        }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script>
+
+        $("#customer_payment").select2({
+            placeholder: "Select Customer Name",
+            ajax: {
+                url: '/api/sme-sme-list/',
+                headers: {"Authorization": localStorage.getItem('token')},
+                delay: 250,
+                data: function (params) {
+                    return {
+                        search: params.term
+                    };
+                },
+                processResults: function (data) {
+                    var officeArray = [];
+                    $.each(data.data, function (key, value) {
+                        officeArray.push({id: value.id, text: value.sme_profile.name +', '+value.company_code})
+                    });
+                    return {results: officeArray};
+                },
+                error: function (jqXHR, status, error) {
+                if(jqXHR.status === "401"){
+                    redirectToLogin(error);
+                  }
+            }
+            },
+            allowClear: true
+        }).change(function (e) {
+            $(this).parsley().validate();
+            {# $("#submit_id").click();#}
+        });
+
+        function getFullBookingInvoie(url) {
+            var formData = $('#fullBookingInvoiceForm').serialize();
+            getAjaxCallFunction(url + '?' + formData);
+        }
+
+
+    </script>
+{% endblock %}

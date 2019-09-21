@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load helper_tags_team %}
+
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>
+        Following are the To Pay bookings for which inward payments have not been received. No. of bookings: {{ number_of_open_booking }}
+    </h4>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Shipment Date</th>
+            <th>Invoice Date</th>
+            <th>No. of days(Inv Old)</th>
+            <th>Company</th>
+            <th>LR Number</th>
+            <th>Total Amount</th>
+            <th>Received</th>
+            <th>TDS</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Lorry Number</th>
+        </tr>
+        {% for booking in bookings %}
+            <tr>
+
+                <td>{{ booking.shipment_date }}</td>
+                <td>{{ booking.billing_invoice_date }}</td>
+                <td>{{ booking.invoice_age }} </td>
+                <td>{{ booking.customer_placed_order }}</td>
+                <td>{{ booking.lr_number }}</td>
+                <td>{{ booking.total_amount_to_company }}</td>
+                <td>{{ booking.total_in_ward_amount }}</td>
+                <td>{{ booking.tds_deducted_amount }}</td>
+                <td>{{ booking.from_city }}</td>
+                <td>{{ booking.to_city }}</td>
+                <td>{{ booking.vehicle_number }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+</body>
+</html>

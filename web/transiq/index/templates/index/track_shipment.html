@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load user_tags %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/aaho/images/logo/logo.png" type="image/x-icon"/>
+    <title>Aaho - Online Truck Booking</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="{% static "vendor/mCustomScrollbar/jquery.mCustomScrollbar.min.css" %}" rel="stylesheet">
+    <link href="{% static "vendor/icheck-1/skins/flat/green.css" %}" rel="stylesheet">
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css" %}"
+          rel="stylesheet">
+    {% block css %}{% endblock %}
+    <!-- Custom Theme Style -->
+    <link href="{% static "vendor/gentelella/css/custom.min.css" %}" rel="stylesheet">
+    <style>
+        .titleTop {
+            margin-top: 15px;
+            position: absolute;
+            margin-left: 50px;
+        }
+    </style>
+    <style>
+
+        <!--
+        Progress with steps
+
+        -->
+
+        ol.progtrckr {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        ol.progtrckr li {
+            display: inline-block;
+            text-align: center;
+            line-height: 3em;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="2"] li {
+            width: 49%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="3"] li {
+            width: 33%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="4"] li {
+            width: 24%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="5"] li {
+            width: 19%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="6"] li {
+            width: 16%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="7"] li {
+            width: 14%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="8"] li {
+            width: 12%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="9"] li {
+            width: 11%;
+        }
+
+        ol.progtrckr li.progtrckr-done {
+            color: black;
+            border-bottom: 4px solid yellowgreen;
+        }
+
+        ol.progtrckr li.progtrckr-todo {
+            color: darkslategrey;
+            border-bottom: 4px solid silver;
+        }
+
+        ol.progtrckr li:after {
+            content: "\00a0\00a0";
+        }
+
+        ol.progtrckr li:before {
+            position: relative;
+            bottom: -2.5em;
+            float: left;
+            left: 50%;
+            line-height: 1em;
+        }
+
+        ol.progtrckr li.progtrckr-done:before {
+            content: "\2713";
+            color: white;
+            background-color: green;
+            height: 1.2em;
+            width: 1.2em;
+            line-height: 1.2em;
+            border: none;
+            border-radius: 1.2em;
+        }
+
+        ol.progtrckr li.progtrckr-todo:before {
+            content: "\039F";
+            color: silver;
+            background-color: white;
+            font-size: 1.5em;
+            bottom: -1.6em;
+        }
+
+        #error-message {
+            color: red;
+        }
+
+    </style>
+</head>
+
+<body class="nav-md">
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form id="track-shipment-form" method="GET" action="/track-shipment/">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <label style="font-size: 1.5rem"
+                                   for="received_from">
+                                Track your Aaho shipment here. Please enter the Lorry Receipt (LR) Number<span
+                                    class="required">*</span> :
+                            </label>
+                            <input type="text" name="shipment_id" id="shipment-id" data-parsley-length="[3, 40]"
+                                   placeholder="Enter LR Number" required="required">
+                            <button class="btn btn-success btn-md" type="submit">
+                                Track Shipment
+                            </button>
+                            <button class="btn btn-primary btn-md" id="btn-home" type="button">
+                                Home
+                            </button>
+                        </div>
+                    </form>
+
+
+                    {% if not booking %}
+                        <ol class="progtrckr" data-progtrckr-steps="5">
+                            <li class="progtrckr-done">Pre-Loading</li>
+                            <li class="progtrckr-done">Loading</li>
+                            <li class="progtrckr-done">In-Transit</li>
+                            <li class="progtrckr-todo">Unloading</li>
+                            <li class="progtrckr-todo">Delivered</li>
+                        </ol>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="booking-details">
+                            <table class="table table-hover">
+                                {% if lr_obj.booking.consignor_name %}
+                                    <tr>
+                                        <td>Consignor Name</td>
+                                        <td>{{ lr_obj.booking.consignor_name }}</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>Source</td>
+                                    <td>{{ lr_obj.booking.from_city }}</td>
+                                </tr>
+                                {% if  lr_obj.booking.consignee_name %}
+                                    <tr>
+                                        <td>Consignee Name</td>
+                                        <td>{{ lr_obj.booking.consignee_name }}</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>Destination</td>
+                                    <td>{{ lr_obj.booking.to_city }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipment Date</td>
+                                    <td>{{ lr_obj.booking.shipment_date|date:'d-M-Y' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>LR Number</td>
+                                    <td>{{ lr_obj.lr_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Seen</td>
+                                    <td>
+                                        {{ gps.updated_on|date:'d-M-Y f:i A' }}, {{ gps.name }}, {{ gps.district }}, {{ gps.state }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    {% else %}
+                        {% if lr_obj.booking.pod_status == 'completed' %}
+                            <ol class="progtrckr" data-progtrckr-steps="5">
+                                <li class="progtrckr-done">Pre-Loading</li>
+                                <li class="progtrckr-done">Loading</li>
+                                <li class="progtrckr-done">In-Transit</li>
+                                <li class="progtrckr-done">Unloading</li>
+                                <li class="progtrckr-done">Delivered</li>
+                            </ol>
+                        {% else %}
+                            <ol class="progtrckr" data-progtrckr-steps="5">
+                                <li class="progtrckr-done">Pre-Loading</li>
+                                <li class="progtrckr-done">Loading</li>
+                                <li class="progtrckr-done">In-Transit</li>
+                                <li class="progtrckr-todo">Unloading</li>
+                                <li class="progtrckr-todo">Delivered</li>
+                            </ol>
+                        {% endif %}
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" id="booking-details">
+                            <table class="table table-hover">
+                                {% if lr_obj.booking.consignor_name %}
+                                    <tr>
+                                        <td>Consignor Name</td>
+                                        <td>{{ lr_obj.booking.consignor_name }}</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>Source</td>
+                                    <td>{{ lr_obj.booking.from_city }}</td>
+                                </tr>
+                                {% if  lr_obj.booking.consignee_name %}
+                                    <tr>
+                                        <td>Consignee Name</td>
+                                        <td>{{ lr_obj.booking.consignee_name }}</td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td>Destination</td>
+                                    <td>{{ lr_obj.booking.to_city }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipment Date</td>
+                                    <td>{{ lr_obj.booking.shipment_date|date:'d-M-Y' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>LR Number</td>
+                                    <td>{{ lr_obj.lr_number }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>
+                                        <div id="error-message">
+                                            {% for message in messages %}
+                                                <div class="{{ message.info }}">
+                                                    {{ message }}
+
+                                                </div>
+
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="col-md-8 col-sm-8 col-xs-12 col-lg-8">
+                        <div id="map_wrapper">
+                            <div id="map-canvas" class="mapping"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #zoom-single-map {
+        color: brown;
+        font-size: 18px;
+        background-color: Transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+    }
+
+    #map_wrapper {
+        height: 45vw;
+    }
+
+    #map-canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    #shipment-id {
+        font-size: 20px;
+        box-sizing: border-box;
+        height: auto;
+    }
+
+    #booking-details {
+        margin-top: 40px;
+    }
+
+    #booking-details p {
+        font-size: 18px;
+    }
+</style>
+
+
+<!-- jQuery -->
+<script src="{% static "vendor/jQuery/js/jquery.min.js" %}"></script>
+<!-- Bootstrap -->
+<script src="{% static "vendor/bootstrap/3.3.6/js/bootstrap.min.js" %}"></script>
+<!-- FastClick -->
+<script src="{% static "vendor/fastclick/fastclick.min.js" %}"></script>
+<!-- NProgress -->
+<script src="{% static "vendor/nprogress/js/nprogress.min.js" %}"></script>
+
+<script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('form').parsley('validate');
+    });
+    $('#btn-home').click(function () {
+        window.location.href = '/';
+    });
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATPbYqRVUt6whnofEU7fHrSILZBooy6Hk&callback=initialize">
+</script>
+
+<script>
+    {% if gps != None %}
+        function initialize() {
+            var map;
+            var mapOptions = {
+                mapTypeId: 'roadmap',
+                minZoom: 6,
+                maxZoom: 20,
+                zoom: 10
+            };
+            // Display a map on the page
+            map = new google.maps.Map(document.getElementById("map-canvas"),
+                mapOptions);
+            map.setTilt(45);
+
+            var markers = [['{{ gps.latitude }}', '{{ gps.longitude }}', '{{ gps.vehicle_number }}',{% if gps.driver_name %} ' {{ gps.driver_name }}'{% else %}'Unknown'{% endif %}, {% if gps.driver_number %} '{{ gps.driver_number }}'{% else %}'Unknown'{% endif %}, '{{ gps.updated_on|date:'d-M-Y f:i A' }}']];
+
+            // Info Window Content
+            var infoWindowContent = new Array(markers.length);
+            infoWindowContent[0] = ['<div class="info_content">' +
+            "<h3>" + markers[0][2] + "</h3>" +
+            "<p> <b> Driver Name: " + markers[0][3] + "</b></p>" +
+            "<p> <b> Driver Phone: " + markers[0][4] + "</b></p>" +
+            "<p> <b> Last Updated: " + markers[0][5] + "</b></p>" +
+            "</div>"
+            ];
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+            // Loop through our array of markers & place each one on the map
+            for (i = 0; i < markers.length; i++) {
+                var position = new google.maps.LatLng(markers[i][0], markers[i][1]);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0],
+                    icon: '/static/aaho/images/map_icon.png',
+                });
+                // Allow each marker to have an info window
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                        map.setZoom(13);
+                        map.setCenter(marker.getPosition());
+                    }
+                })(marker, i));
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+                map.setZoom(13);
+                map.setCenter(marker.getPosition());
+                google.maps.event.addListener(marker, "click", function () {
+                    map.panTo(marker.center);
+                    map.setZoom(8);
+                    infoWindow.close();
+                });
+            }
+            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
+                google.maps.event.removeListener(boundsListener);
+            });
+
+        }
+    {% else %}
+        var map;
+        function initialize() {
+            map = new google.maps.Map(document.getElementById("map-canvas"), {
+                center: {lat: 23.2599, lng: 77.4126},
+                zoom: 6
+            });
+        }
+    {% endif %}
+</script>
+<script src="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js" %}"></script>
+</body>
+</html>

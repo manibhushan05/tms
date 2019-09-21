@@ -1,0 +1,268 @@
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+{% is_invoice_raised id as is_invoice_raised %}
+<div class="" id="div-deduction-to-vendor">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Rate Details</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content rate-details-content">
+                    {% if not user|has_group:"emp_group3" %}
+                        <div class="col-md-5 col-sm-5 col-lg-5 col-xs-12 label_color_1">
+                            <h4>Party</h4>
+                            <hr>
+                            <div class="item form-group">
+                                <label><span class="required">Party Charged Weight (in Tonnes) *</span></label>
+                                <input type="number" class="form-control" name="charged_weight" id="charged_weight"
+                                       placeholder="Charged Weight" step="0.001" data-parsley-min="0" min="0"
+                                       data-parsley-max="9999" data-parsley-type="number"
+                                       {% if is_invoice_raised %}readonly{% endif %}
+                                       value="{{ charged_weight|default:0 }}" required>
+                            </div>
+                            <div class="item form-group">
+                                <label id="party_rate_label"><span class="required">Party Rate *</span></label>
+                                <input type="number" class="form-control" name="party_rate"
+                                       id="party_rate" placeholder="Party Rate" value="{{ party_rate|floatformat }}"
+                                       data-parsley-min="0" data-parsley-max="999999" data-parsley-type="number"
+                                       {% if not user|has_group:"emp_group1" %}readonly{% endif %}
+                                       {% if is_invoice_raised %}readonly{% endif %} required>
+                            </div>
+                            <div class="item form-group">
+                                <label id="freight_from_company_label" for="freight_from_company">Freight from
+                                    Company:</label>
+                                <input type="number" class="form-control" name="freight_from_company"
+                                       id="freight_from_company" data-parsley-min="0" data-parsley-max="9999999"
+                                       data-parsley-type="number" placeholder="= Party Rate*Charged Wt"
+                                       value="{{ customer_freight }}" readonly>
+                            </div>
+                            <div class="item form-group">
+                                <label id="additional_charges_for_company_label" for="additional_charges_for_company">Additional
+                                    Charges if any (+)</label>
+                                <input type="number" class="form-control"
+                                       name="additional_charges_for_company"
+                                       id="additional_charges_for_company" {% if is_invoice_raised %}readonly{% endif %}
+                                       placeholder="Loading+Unloading+Det+Other" data-parsley-min="0"
+                                       data-parsley-max="999999" data-parsley-type="number"
+                                       value="{{ additional_charges_for_company|default_if_none:0 }}"
+                                       required>
+                            </div>
+                            <div class="item form-group">
+                                <label id="invoice_remarks_for_additional_charges_label"
+                                       for="invoice_remarks_for_additional_charges">Remarks for additional
+                                    charges</label>
+                                <input type="text" class="form-control"
+                                       name="invoice_remarks_for_additional_charges"
+                                       id="invoice_remarks_for_additional_charges"
+                                       placeholder="Invoice remarks for additional charges" data-parsley-minlength="3"
+                                       data-parsley-maxlength="200" {% if is_invoice_raised %}readonly{% endif %}
+                                       value="{{ invoice_remarks_for_additional_charges|default_if_none:'' }}">
+                            </div>
+                            <div class="item form-group">
+                                <label id="deductions_for_company_label" for="deductions_for_company">Deductions /
+                                    Discounts if any (-):</label>
+                                <input type="number" class="form-control" name="deductions_for_company"
+                                       id="deductions_for_company" placeholder="Amount" data-parsley-min="0" min="0"
+                                       data-parsley-max="999999" data-parsley-type="number"
+                                       value="{{ deductions_for_company|default_if_none:0 }}"
+                                       {% if is_invoice_raised %}readonly{% endif %} required>
+                            </div>
+                            <div class="item form-group">
+                                <label for="invoice_remarks_for_deduction_discount"
+                                       id="invoice_remarks_for_deduction_discount_label">Invoice remarks for
+                                    deductions/discounts</label>
+                                <input type="text" class="form-control" name="invoice_remarks_for_deduction_discount"
+                                       id="invoice_remarks_for_deduction_discount"
+                                       placeholder="Invoice remarks for deductions/discounts" data-parsley-minlength="3"
+                                       data-parsley-maxlength="100" {% if is_invoice_raised %}readonly{% endif %}
+                                       value="{{ invoice_remarks_for_deduction_discount|default_if_none:'' }}">
+                            </div>
+                            <div class="item form-group">
+                                <label for="advance_from_company" id="advance_from_company_label">Advance to Trans
+                                    IQ</label>
+                                <input type="number" class="form-control" name="advance_amount_from_company"
+                                       id="advance_from_company" placeholder="Amount" data-parsley-min="0"
+                                       data-parsley-max="999999" data-parsley-type="number"
+                                       value="{{ advance_amount_from_company|default_if_none:0 }}"
+                                       {% if is_invoice_raised %}readonly{% endif %} required>
+                            </div>
+                            <div class="item form-group">
+                                <label for="tds_deducted_amount" id="tds_deducted_amount_label">TDS Deducted:</label>
+                                <input type="number" class="form-control" name="tds_deducted_amount"
+                                       id="tds_deducted_amount" placeholder="TDS Deducted:" data-parsley-min="0"
+                                       data-parsley-max="999999" {% if is_invoice_raised %}readonly{% endif %}
+                                       value="{{ tds_deducted_amount|default_if_none:0 }}" readonly>
+                            </div>
+                            <div class="item form-group">
+                                <label for="total_amount_to_party" id="total_amount_to_party_label">Total Amount to
+                                    Party:</label>
+                                <input type="number" class="form-control" name="total_amount_to_party"
+                                       id="total_amount_to_party" data-parsley-max="9999999"
+                                       placeholder="Total Amount to Party:" data-parsley-min="0" min="0"
+                                       value="{{ total_amount_to_company|default_if_none:0 }}" readonly>
+                            </div>
+                            <div class="item form-group">
+                                <label for="refundable_amount" id="refundable_amount_label">Refundable :</label>
+                                <input type="number" class="form-control" name="refund_amount"
+                                       id="refundable_amount" placeholder="Refundable Amount:" data-parsley-min="0"
+                                       min="0" data-parsley-max="999999" data-parsley-type="number"
+                                       {% if not user|has_group:"emp_group1" %}readonly{% endif %}
+                                       value="{{ refund_amount|default_if_none:0 }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12 verticalLine"></div>
+                    {% else %}
+                        <input type="hidden" name="total_amount_to_party" id="total_amount_to_party"
+                               value="{{ total_amount_to_company|default_if_none:0 }}">
+                    {% endif %}
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                        <h4 class="label_color_2">Supplier</h4>
+                        <hr>
+                        <div class="item form-group">
+                            <label for="supplier_charged_weight"><span class="required">Supplier Charged Weight(in Tonnes) *</span></label>
+                            <input type="number" class="form-control" name="supplier_charged_weight"
+                                   id="supplier_charged_weight" placeholder="Supplier Charged Weight" required
+                                   step="0.001" data-parsley-min="0" min="0" data-parsley-max="99999"
+                                   data-parsley-type="number" value="{{ supplier_charged_weight|default:0 }}">
+                        </div>
+                        <div class="item form-group">
+                            <label> <span class="required">Supplier Rate *</span></label>
+                            <input type="number" class="form-control" name="supplier_rate" id="supplier_rate"
+                                   placeholder="Supplier Rate" value="{{ supplier_rate|floatformat }}"
+                                   data-parsley-min="0" data-parsley-max="999999" data-parsley-type="number"
+                                   {% if not user|has_group:"emp_group1" %}readonly{% endif %} required>
+                        </div>
+                        <div class="item form-group">
+                            <label for="freight_owner">Freight to Owner:</label>
+                            <input type="number" class="form-control" name="freight_owner" id="freight_owner"
+                                   value="{{ supplier_freight }}" readonly>
+                        </div>
+                        <h4 class="label_color_2">Additional Charges for Vendor(+)</h4>
+                        <hr>
+                        <div class="item form-group label_color_2">
+                            <label>Loading Charges</label>
+                            <input type="number" class="form-control" name="loading_charge" id="loading_charges"
+                                   placeholder="Loading Charges" data-parsley-min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" value="{{ loading_charge|floatformat }}" required>
+                        </div>
+                        <div class="item form-group label_color_2">
+                            <label>Unloading Charges</label>
+                            <input type="number" class="form-control" name="unloading_charge" id="unloading_charges"
+                                   placeholder="Unloading Charges" data-parsley-min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" value="{{ unloading_charge|floatformat }}" required>
+                        </div>
+                        <div class="item form-group label_color_2">
+                            <label>Detention Charges</label>
+                            <input type="number" class="form-control" name="detention_charge" id="detention_charges"
+                                   placeholder="Detention Charges" data-parsley-min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" value="{{ detention_charge|floatformat }}" required>
+                        </div>
+                        <div class="item form-group label_color_2">
+                            <label>Other Charges</label>
+                            <input type="number" class="form-control" name="additional_charges_for_owner"
+                                   id="other_charges" placeholder="Other Charges"
+                                   value="{{ additional_charges_for_owner|floatformat }}" data-parsley-min="0"
+                                   data-parsley-max="999999" data-parsley-type="number" required>
+                        </div>
+                        <div class="item form-group label_color_2">
+                            <label>Remarks about additional charges</label>
+                            <textarea class="form-control" rows="2" name="note_for_additional_owner_charges"
+                                      id="remarks_about_additional_charges" data-parsley-minlength="3"
+                                      data-parsley-maxlength="200"
+                                      placeholder="Remarks about additional charges">{{ note_for_additional_owner_charges|default_if_none:'' }}</textarea>
+                        </div>
+                        <h4 class="label_color_3">Deductions for Vendor(-)</h4>
+                        <hr>
+                        <div class="item form-group label_color_3">
+                            <label>Commission</label>
+                            <input type="number" class="form-control" name="commission"
+                                   id="commission" placeholder="Commission"
+                                   value="{{ commission|default_if_none:0 }}"
+                                   data-parsley-min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" required>
+                        </div>
+                        <div class="item form-group label_color_3">
+                            <label>LR Cost</label>
+                            <input type="number" class="form-control" name="lr_cost" id="lr_cost"
+                                   placeholder="LR Cost"
+                                   value="{{ lr_cost|default_if_none:0 }}"
+                                   data-parsley-min="0" min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" required>
+                        </div>
+                        <div class="item form-group label_color_3">
+                            <label>Deduction for Advance</label>
+                            <input type="number" class="form-control" name="deduction_for_advance"
+                                   id="deduction_for_advance" placeholder="Deduction for Advance"
+                                   value="{{ deduction_for_advance|default_if_none:0 }}"
+                                   data-parsley-min="0" min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" required>
+                        </div>
+                        <div class="item form-group label_color_3">
+                            <label>Deduction for Balance</label>
+                            <input type="number" class="form-control" name="deduction_for_balance"
+                                   id="deduction_for_balance" placeholder="Deduction for Balance"
+                                   value="{{ deduction_for_balance|default_if_none:0 }}"
+                                   data-parsley-min="0" min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" required>
+                        </div>
+                        <div class="item form-group label_color_3">
+                            <label>Any Other Deductions</label>
+                            <input type="number" class="form-control" name="other_deduction"
+                                   id="any_other_deduction" placeholder="Any Other Deductions"
+                                   value="{{ other_deduction|default_if_none:0 }}"
+                                   data-parsley-min="0" min="0" data-parsley-max="999999"
+                                   data-parsley-type="number" required>
+                        </div>
+                        <div class="item form-group label_color_3">
+                            <label>Remarks about deductions</label>
+                            <textarea class="form-control" rows="1" name="remarks_about_deduction"
+                                      id="remarks_about_deduction"
+                                      data-parsley-minlength="3" data-parsley-maxlength="100"
+                                      placeholder="Remarks about deductions">{{ remarks_about_deduction|default_if_none:'' }}</textarea>
+                        </div>
+                        <div class="item form-group label_color_3">
+                            <label>Total Amount to Owner:</label>
+                        </div>
+                        <div class="item form-group">
+
+                            <input type="number" class="form-control" name="total_amount_to_owner"
+                                   id="total_amount_to_owner" placeholder="=Freight+Additional-Deduction"
+                                   value="{{ total_amount_to_owner|default_if_none:0 }}" step="0.001" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .label_color_1, .label_color_1 label, .label_color_1 h4, .label_color_1 h3, .label_color_1 input, .label_color_1 textarea {
+        color: darkblue;
+    }
+
+    .label_color_2, .label_color_2 label, .label_color_2 h4, .label_color_2 h3, .label_color_2 input, .label_color_2 textarea {
+        color: red;
+    }
+
+    .label_color_3, .label_color_3 label, .label_color_3 h4, .label_color_3 h3, .label_color_3 input, .label_color_3 textarea {
+        color: darkgreen;
+    }
+
+    .verticalLine:after {
+        content: "";
+        background-color: grey;
+        position: absolute;
+        width: 5px;
+        height: 122rem;
+        top: 10px;
+        left: 50%;
+        display: block;
+    }
+</style>

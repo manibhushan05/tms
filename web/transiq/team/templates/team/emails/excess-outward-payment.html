@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+{#    <h4>{{ email_list }}</h4>#}
+    <h4>
+        Following are the bookings where outward payment is excess. No. of bookings: {{ bookings|length }}.
+    </h4>
+</div>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Booking ID</th>
+        <th>LR Number</th>
+        <th>Supplier</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Vehicle</th>
+        <th>Total Amount</th>
+        <th>Paid Amount</th>
+        <th>Balance Amount</th>
+
+    </tr>
+    {% for booking in bookings %}
+        <tr>
+
+            <td>{{ booking.shipment_date }}</td>
+            <td>{{ booking.booking_id }}</td>
+            <td>{{ booking.lr_numbers }}</td>
+            <td>{{ booking.supplier_name }}</td>
+            <td>{{ booking.from_city }}</td>
+            <td>{{ booking.to_city }}</td>
+            <td>{{ booking.vehicle_number }}</td>
+            <td>{{ booking.total_amount }}</td>
+            <td>{{ booking.paid_amount }}</td>
+            <td>{{ booking.balance }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

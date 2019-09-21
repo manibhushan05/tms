@@ -1,0 +1,188 @@
+{% load staticfiles %}
+{% load team_tags.validators_tags %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Register Beneficiary</h3>
+{% endblock %}
+{% block content %}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="register-bank-form"
+                              enctype="multipart/form-data" data-parsley-trigger="input" novalidate>
+                            <div class=" item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Bank Name <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="bank" id="bank_name"
+                                            required="required">
+                                        {% if id %}
+                                            <option selected>{{ bank.name }}</option>
+                                        {% endif %}
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class=" item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Registered User
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="user" id="registered_user"
+                                            required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="beneficiary_code">Beneficiary
+                                    Code <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="beneficiary_code"
+                                           class="form-control col-md-7 col-xs-12" name="beneficiary_code"
+                                           data-parsley-required-message="Enter min 3 and max 14 letter alphanumeric beneficiary code"
+                                           data-parsley-pattern="^[A-Z0-9]{3,14}$" oninput="this.value = this.value.toUpperCase()"
+                                           required="required">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                       for="account_holder_name">Account
+                                    Holder name <span
+                                            class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="account_holder_name"
+                                           class="form-control col-md-7 col-xs-12"
+                                           data-parsley-required-message="Enter valid account holder name"
+                                           name="account_holder_name" required="required"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="70"
+                                           data-parsley-pattern="^([a-zA-Z0-9]*\s*)+$"
+                                           data-parsley-pattern-message="Only Alphanumeric and space allowed and first letter of each word should be capital">
+                                </div>
+                            </div>
+
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="account_number">Account
+                                    Number
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="account_number" name="account_number"
+                                           required="required"
+                                           value="" class="form-control col-md-7 col-xs-12"
+                                           data-parsley-pattern="^[a-zA-Z0-9]{9,18}$">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ifsc">IFSC
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="ifsc" {% if read_only %}readonly{% endif %}
+                                           class="form-control col-md-7 col-xs-12" value="{{ ifsc_code }}"
+                                           name="ifsc" required="required"
+                                           data-parsley-required-message="Enter valid IFSC Code"
+                                           data-parsley-minlength="11"
+                                           data-parsley-maxlength="11"
+                                           data-parsley-pattern="^[a-zA-Z0-9]+$"
+                                           data-parsley-pattern-message="Only Alphanumeric are allowed"
+                                           style="text-transform:uppercase">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="ifsc" {% if read_only %}readonly{% endif %}
+                                           class="form-control col-md-7 col-xs-12"
+                                           value="{{ address }}"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="200"
+                                           data-parsley-required-message="Enter valid branch address"
+                                           name="address" required="required">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">City
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="ifsc" {% if read_only %}readonly{% endif %}
+                                           class="form-control col-md-7 col-xs-12" value="{{ centre }}"
+                                           data-parsley-required-message="Enter valid branch city"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           name="city" required="required">
+                                </div>
+                            </div>
+
+
+                            <div class=" item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span>Transaction Type</span></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select class="transaction_type form-control" name="transaction_type"
+                                            id="transaction_type"
+                                            data-parsley-required-message="Select Transaction type"
+                                            style="width: 100%" required>
+                                        <option></option>
+                                        <option value="neft">NEFT</option>
+                                        <option value="rtgs">RTGS</option>
+                                        <option value="both">BOTH</option>
+                                        <option value="hdfc_internal_account">HDFC Internal Account</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class=" item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">Account Type *</span></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <select class="account_type form-control" name="account_type"
+                                            id="account_type"
+                                            data-parsley-required-message="Select Account type"
+                                            style="width: 100%" required>
+                                        <option></option>
+                                        <option value="SA">Saving Account</option>
+                                        <option value="CA">Current Account</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class=" item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">Documents</span></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <input type="file" name="account_document">
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button type="reset" class="btn btn-danger btn-lg">Reset Entry</button>
+                                    <button id="register-bank-account-button" class="btn btn-success btn-lg">
+                                        Register Account
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/register-beneficiary-bank-account.js" %}?v={% now 'U' %}"
+            type="text/javascript"></script>
+{% endblock %}

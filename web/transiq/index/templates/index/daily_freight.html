@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/aaho/images/logo/logo.png" type="image/x-icon"/>
+    <title>Aaho - Online Truck Booking</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet"   >
+    <!-- Font Awesome -->
+
+    {% block css %}{% endblock %}
+    <!-- Custom Theme Style -->
+    <link href="{% static "vendor/gentelella/css/custom.min.css" %}" rel="stylesheet">
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css" %}" rel="stylesheet">
+    <style>
+        .titleTop {
+            margin-top: 15px;
+            position: absolute;
+            margin-left: 50px;
+        }
+
+        body {
+            background: white;
+            margin-left: 10em;
+            margin-right: 10em;
+        }
+    </style>
+</head>
+
+<body>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="row">
+        <h3>Current Freight Rate</h3>
+        <div class="x_panel">
+
+            <div class="x_content">
+                <table id="datatable-responsive"
+                       class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                       width="100%">
+                    <caption></caption>
+                    <thead>
+                    <tr>
+                        <th>SOURCE</th>
+                        <th>DESTINATION</th>
+                        <th>MATERIAL</th>
+                        <th>RATE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for value in route %}
+                        {% is_latest_freight value.updated_on as latest_route %}
+                        {% if latest_route %}
+                            <tr>
+                                <td colspan="4" style="text-align:center;">
+                                    <h4>{{ value.source }}-{{ value.destination }}</h4></td>
+                            </tr>
+                            {% for sub_route in value.index_route_rate.all %}
+                                {% is_latest_freight sub_route.updated_on as latest_freight %}
+                                {% if latest_freight %}
+                                    <tr>
+                                        <td>{{ sub_route.loading_point }}</td>
+                                        <td>{{ sub_route.unloading_point }}</td>
+                                        <td>{{ sub_route.index_sub_route_rate.last.material }}</td>
+                                        <td>{{ sub_route.index_sub_route_rate.last.freight }}</td>
+                                    </tr>
+                                {% endif %}
+
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<!-- jQuery -->
+<script src="{% static "vendor/jQuery/js/jquery.min.js" %}"></script>
+<!-- Bootstrap -->
+<script src="{% static "vendor/bootstrap/3.3.6/js/bootstrap.min.js" %}"></script>
+<script src="{% static "vendor/gentelella/js/custom.min.js" %}"></script>
+<script src="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js" %}"></script>
+</html>

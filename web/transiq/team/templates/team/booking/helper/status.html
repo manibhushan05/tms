@@ -1,0 +1,107 @@
+<div class="row status_updates">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Status Tracking </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content status-details-content">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                        <div class="item form-group">
+                            <label for="pod_status">POD Status</label>
+                            <select class="pod_status form-control" name="pod_status"
+                                    id="pod_status">
+                                <option></option>
+                                {% if pod_status == 'completed' %}
+                                    <option selected
+                                            value="{{ pod_status|default_if_none:'' }}">
+                                        {{ pod_status|default_if_none:'' }}</option>
+                                {% else %}
+                                    <option></option>
+                                    <option selected
+                                            value="{{ pod_status|default_if_none:'' }}">
+                                        {{ pod_status|default_if_none:'' }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                        <div class="item form-group">
+                            <label for="invoice_status">Invoice Status</label>
+                            <select class="invoice_status form-control"
+                                    name="invoice_status"
+                                    id="invoice_status">
+                                <option></option>
+                                {% if invoice_status == 'invoice_raised' %}
+                                    <option value="{{ invoice_status|default_if_none:'' }}"
+                                            selected>
+                                        {{ invoice_status|default_if_none:'' }}</option>
+                                    <option value="invoice_sent">InvoiceSent</option>
+                                {% elif invoice_status == 'invoice_sent' %}
+                                    <option value="{{ invoice_status|default_if_none:'' }}"
+                                            selected>
+                                        {{ invoice_status|default_if_none:'' }}</option>
+                                    <option value="invoice_confirmed">InvoiceConfirm</option>
+                                {% else %}
+                                    <option></option>
+                                    <option value="{{ invoice_status|default_if_none:'' }}"
+                                            selected>
+                                        {{ invoice_status|default_if_none:'' }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                        <div class="item form-group">
+                            <label>POD Date</label>
+                            <input type="text" class="form-control" name="pod_date"
+                                   value="{{ pod_date|default_if_none:'' }}"
+                                   readonly
+                                   style="background-color: white">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                        <div class="item form-group">
+                            <label>Delivered Date</label>
+                            <input type="text" class="form-control" name="delivered_date"
+                                   value="{{ delivery_datetime|default_if_none:'' }}"
+                                   readonly
+                                   style="background-color: white">
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                        <div class="item form-group">
+                            <label>Delivered Weight</label>
+                            <input type="text" class="form-control" name="delivered_weight"
+                                   value="{{ delivered_weight }}"
+                                   readonly
+                                   style="background-color: white">
+                        </div>
+                    </div>
+                    <div class="item form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <label for="gps_device">GPS Device <span class="required"></span></label>
+                        <select class="gps_device form-control" name="gps_device">
+                            <option></option>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                        <div class="item form-group">
+                            <label>Comments</label>
+                            <textarea class="form-control" rows="2" name="comments" id="comments"
+                                      data-parsley-minlength="3"
+                                      data-parsley-maxlength="255"
+                                      placeholder="Write Special Notes ...">{{ comments|default_if_none:'' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

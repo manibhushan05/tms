@@ -1,0 +1,194 @@
+div.bottom_text div {
+    height: auto;
+    margin-top: 2px;
+    font-size: 14px;
+    font-style: italic;
+}
+div.footer div.left_col {
+    width: 45%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+div.footer div.right_col {
+    width: 55%;
+    height: 100%;
+    display: inline-block;
+    float: right;
+}
+table.consignor_table {
+    width: 100%;
+}
+table.consignor_table td {
+    width: 49%;
+    padding: 0.5%;
+}
+table.consignor_table th {
+    width: 50%;
+    font-size: 16px;
+    height: 30px;
+}
+div.form_row {
+    margin: 3px 3px 3px 3px;
+    height: 28px;
+    position: relative;
+}
+div.form_row div {
+    position: absolute;
+    bottom: 0;
+}
+div.form_row div.underline {
+    margin: 1px;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    font-size: 18px;
+}
+div.form_row div.left_form_side {
+    width: 60%;
+    display: inline-block;
+    float: left;
+}
+div.form_row div.right_form_side {
+    width: 39%;
+    display: inline-block;
+    float: left;
+    right: 0;
+}
+div.form_row span {
+    font-size: 14px;
+    margin-right: 3px;
+    float: left;
+    position: absolute;
+    bottom: 0;
+}
+div.span-underline {
+    left: 15%;
+    right: 1px;
+    padding-left: 5px;
+    border-bottom: 1px solid grey;
+    font-size: 18px;
+}
+table.pod_table {
+    font-size: 14px;
+    width: 99%;
+    margin-left: 1%;
+    height: 100%;
+}
+table.pod_table tr th {
+    font-weight: normal;
+    padding: 5px;
+    height: 20px;
+}
+table.pod_table tr td {
+    padding: 0 10px;
+    height: 100%;
+}
+div.receiver_sign {
+    position: relative;
+}
+div.receiver_sign span.receiver_sign {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    left: 250px;
+}
+div.underline_short {
+    height: 35px;
+    padding-top: 10px;
+    font-size: 16px;
+    color: #444444;
+    border-bottom: 1px solid grey;
+    display: inline-block;
+    width: 200px;
+    margin-right: 70px;
+    margin-bottom: 10px;
+}
+div.insurance {
+    font-size: 14px;
+    padding: 0 10px 7px 5px;
+    border: 1px solid black;
+    height: 95%;
+}
+div.insurance_title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px;
+}
+div.insurance_dec {
+    margin: 1px 0 7px 18px;
+}
+div.form_row_ins {
+    margin: 3px 3px 3px 3px;
+    height: 24px;
+    position: relative;
+}
+div.form_row_ins div {
+    position: absolute;
+    bottom: 0;
+}
+div.form_row_ins div.left_form_side_ins {
+    width: 60%;
+    display: inline-block;
+    float: left;
+}
+div.form_row_ins div.right_form_side_ins {
+    width: 39%;
+    display: inline-block;
+    float: left;
+    right: 0;
+}
+span.span-underline-ins {
+    font-size: 14px;
+    width: 32%;
+    position: absolute;
+    bottom: 0;
+}
+div.span-underline-ins {
+    width: 68%;
+    position: absolute;
+    right: 0;
+    border-bottom: 1px solid grey;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+span.span-underline-ins-full {
+    font-size: 14px;
+    width: 25%;
+    position: absolute;
+    bottom: 0;
+}
+div.span-underline-ins-full {
+    width: 75%;
+    position: absolute;
+    right: 0;
+    border-bottom: 1px solid grey;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+div.relative {
+    position: relative;
+}
+div.relative span.pay_msg {
+    position: absolute;
+    font-size: 32px;
+    font-weight: bold;
+    color: lightgray;
+    left: 895px;
+    top: 550px;
+    -ms-transform: rotate(-45deg); /* IE 9 */
+    -webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+    transform: rotate(-45deg);
+}
+div.address {
+    position: relative;
+}
+div.address span {
+    position: absolute;
+    font-size: 18px;
+    line-height: 1.8;
+    bottom: -5px;
+    left: 5px;
+}

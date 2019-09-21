@@ -1,0 +1,167 @@
+
+div.complex_table {
+    width: 1026px;
+    height: 248px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    border: 1px solid black;
+}
+div.complex_table div {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+div.complex_table div.header_row {
+    height: 50px;
+    border-bottom: 1px solid black;
+}
+div.complex_table div.body_row {
+    height: 197px;
+}
+
+div.header_row div.data_pkgs {
+    width: 60px;
+    height: 40px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.header_row div.data_desc {
+    width: 375px;
+    height: 40px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.header_row div.data_weight {
+    width: 163px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.header_row div.data_rate {
+    width: 134px;
+    height: 40px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.header_row div.data_charges {
+    width: 115px;
+    height: 40px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.header_row div.data_tp {
+    width: 174px;
+    height: 40px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+}
+div.body_row div.data_pkgs {
+    width: 60px;
+    height: 187px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.body_row div.data_desc {
+    width: 375px;
+    height: 187px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.body_row div.data_weight {
+    width: 163px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.body_row div.data_rate {
+    width: 134px;
+    height: 187px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.body_row div.data_charges {
+    width: 115px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.body_row div.data_tp {
+    width: 174px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+
+div.header_row div.data_weight div.top {
+    height: 21px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-top: 5px;
+}
+div.header_row div.data_weight div.bottom-left {
+    width: 81px;
+    height: 22px;
+    display: inline-block;
+    float: left;
+    padding-top: 3px;
+    border-right: 1px solid black;
+}
+div.header_row div.data_weight div.bottom-right {
+    width: 81px;
+    height: 22px;
+    display: inline-block;
+    float: right;
+    padding-top: 3px;
+}
+div.body_row div.data_weight div.bottom-left {
+    width: 81px;
+    height: 187px;
+    padding-top: 10px;
+    display: inline-block;
+    float: left;
+    border-right: 1px solid black;
+}
+div.body_row div.data_weight div.bottom-right {
+    width: 81px;
+    height: 187px;
+    padding-top: 10px;
+    display: inline-block;
+    float: right;
+}
+div.data_charges div.cell {
+    padding-top: 5px;
+    height: 23px;
+}
+div.data_tp div.cell {
+    height: 168px;
+}
+div.data_charges div.top_border {
+    width: 100%;
+    padding-top: 5px;
+    height: 23px;
+    border-top: 1px solid black;
+}
+div.data_tp div.top_border {
+    width: 100%;
+    height: 28px;
+    border-top: 1px solid black;
+}

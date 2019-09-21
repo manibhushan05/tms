@@ -1,0 +1,234 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Register Vehicle</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="register-vehicle-form"
+                              data-parsley-trigger="input">
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group ">
+                                    <label class="control-label" for="vehicle_number">Vehicle Number <span
+                                            class="required">*</span></label>
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="vehicle_number" id="vehicle_number"
+                                           placeholder="Enter Vehicle Number"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="15"
+                                           data-parsley-pattern="/^[A-Z]{2}[ -.]*\d{1,2}[ -.]*[A-Z]{0,3}[ -.]*\d{4}$/i"
+                                           data-parsley-error-message="Please Enter Valid Vehicle Number"
+                                           required>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label for="owner_id">Owner<span class="required">*</span></label>
+                                    <select class="form-control" name="owner" id="supplier_id" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">RC Number </label>
+                                    <input type="text" class="form-control" name="rc_number"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="18"
+                                           placeholder="Enter RC Number">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Permit Number </label>
+                                    <input type="text" class="form-control" name="permit"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="30"
+                                           placeholder="Enter Permit Number">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Vehicle Model</label>
+                                    <input type="text" class="form-control" name="vehicle_model"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="50"
+                                           placeholder="Enter Vehicle Model">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Insurer</label>
+                                    <input type="text" class="form-control" name="insurer"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           placeholder="Enter Insurer">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Fitness Certificate Number</label>
+                                    <input type="text" class="form-control" name="fitness_certificate_number"
+                                           data-parsley-minlength="3" data-parsley-maxlength="30"
+                                           placeholder="Enter Fitness Certificate Number">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">PUC Certificate Number</label>
+                                    <input type="text" class="form-control" name="puc_certificate_number"
+                                           data-parsley-minlength="3" data-parsley-maxlength="30"
+                                           placeholder="Enter PUC Certificate Number">
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group">
+                                    <label for="vehicle_category">Vehicle Category <span
+                                            class="required">*</span></label>
+                                    <select class="truck-category form-control" name="vehicle_type"
+                                            required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label for="vehicle_category">GPS Device Status <span
+                                            class="required">*</span></label>
+                                    <select class="form-control" name="gps_enabled" id="gps_enable"
+                                            required>
+                                        <option></option>
+                                        <option value=true>Yes</option>
+                                        <option value=false>No</option>
+                                    </select>
+                                </div>
+
+                                <div class="item form-group ">
+                                    <label class="control-label">Registration Validity</label>
+                                    <input type="text" class="date form-control" readonly
+                                           style="background-color: white" name="registration_validity"
+                                           placeholder="Select Registration Year">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Permit Type </label>
+                                    <input type="text" class="form-control" name="permit_type"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           placeholder="Enter Permit Type">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Engine Number</label>
+                                    <input type="text" class="form-control" name="engine_number"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           placeholder="Enter Engine Number">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Insurance Number</label>
+                                    <input type="text" class="form-control" name="insurance_number"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           placeholder="Enter Insurance Number">
+                                </div>
+
+
+                                <div class="item form-group ">
+                                    <label class="control-label">Fitness Certificate Issued on</label>
+                                    <input type="text" class="past-date form-control" readonly
+                                           style="background-color: white" name="fitness_certificate_issued_on"
+                                           id="fitness_certificate_issued_on"
+                                           placeholder="Select Fitness Certificate Issued on">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">PUC Certificate Issued on</label>
+                                    <input type="text" class="past-date form-control" readonly
+                                           style="background-color: white" name="puc_certificate_issued_on"
+                                           id="fitness_certificate_issued_on"
+                                           placeholder="Select PUC Certificate Issued on">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+
+                                <div class="item form-group">
+                                    <label for="vehicle_body_type">Body Type <span
+                                            class="required">*</span></label>
+                                    <select class="form-control" name="body_type" id="vehicle_body_type"
+                                            required>
+                                    </select>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Exact Vehicle Capacity in Kg </label>
+                                    <input type="text" class="form-control" name="vehicle_capacity"
+                                           placeholder="Enter Exact Vehicle Capacity in Kg"
+                                           data-parsley-pattern="/^[+-]?([0-9]*[.])?[0-9]+$/i"
+                                           data-parsley-error-message="Please Enter Numeric Value Only">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Registration Year</label>
+                                    <input type="text" class="year form-control" readonly
+                                           style="background-color: white" name="registration_year"
+                                           id="registration_year"
+                                           placeholder="Select Registration Year">
+                                </div>
+
+                                <div class="item form-group ">
+                                    <label class="control-label">Permit Validity </label>
+                                    <input type="text" class="date form-control" readonly
+                                           style="background-color: white" name="permit_validity"
+                                           id="permit_validity" placeholder="Select Permit Validity">
+                                </div>
+
+
+                                <div class="item form-group ">
+                                    <label class="control-label">Chassis Number</label>
+                                    <input type="text" class="form-control" name="chassis_number"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           placeholder="Enter Chassis Number">
+                                </div>
+
+
+                                <div class="item form-group ">
+                                    <label class="control-label">Insurance Validity</label>
+                                    <input type="text" class="date form-control" readonly
+                                           style="background-color: white" name="insurance_validity"
+                                           placeholder="Enter Insurance Validity">
+                                </div>
+
+
+                                <div class="item form-group ">
+                                    <label class="control-label">Fitness Certificate Validity</label>
+                                    <input type="text" class="date form-control" readonly
+                                           style="background-color: white" name="fitness_certificate_validity_date"
+                                           id="fitness_certificate_validity"
+                                           placeholder="Enter Fitness Certificate Validity ">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">PUC Certificate Validity</label>
+                                    <input type="text" class="date form-control" readonly
+                                           style="background-color: white" name="puc_certificate_validity_date"
+                                           placeholder="Enter PUC Certificate Validity ">
+                                </div>
+                            </div>
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            <div class="form-group col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                                <button id="resetRegisterVehicle" class="btn btn-lg btn-danger">Reset Entry</button>
+                                <button id="btn-register-vehicle" class="btn btn-lg btn-success">Register Vehicle
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/common-new.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/supplier/vehicle.js" %}" type="text/javascript"></script>
+{% endblock %}

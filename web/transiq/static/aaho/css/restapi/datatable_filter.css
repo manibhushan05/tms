@@ -1,0 +1,46 @@
+.filterDiv{
+    border: 1px solid transparent;
+border-radius: 4px;
+/* border-color: #bce8f1; */
+word-break: break-word ;
+}
+
+.wrapper {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-gap: 5px;
+}
+.daterangepicker .ranges li:hover {
+background: #d8dcec;
+/* border: 1px solid #536A7F; */
+color: #3e4058;
+}
+.removeFilteredData{
+float: left;
+margin-right: 5px;
+}
+.clearAll{
+font-size: 14px;
+display: none;
+font-weight: 600;
+}
+.filterText{
+font-size: 14px;
+font-weight: 600;
+}
+
+.datatable_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index : 100; 
+    background-color: rgba(144, 141, 141, 0.5);
+    opacity: 0.6;
+}
+.datatable_overlay > img{
+    margin-top: 15%;
+    margin-left: 15%;
+    width: 7%;
+}

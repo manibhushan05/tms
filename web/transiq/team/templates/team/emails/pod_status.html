@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load helper_tags_team %}
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>
+        POD for the following bookings has not been delivered.<br/> Number of Bookings: {{ mb.count }}
+    </h4>
+</div>
+<table>
+    <tr>
+        <th>Shipment Date</th>
+        <th>No. of days</th>
+        <th>Company</th>
+        <th>LR Number</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Lorry Number</th>
+        <th>Driver Phone</th>
+        <th>Broker phone</th>
+    </tr>
+    {% for booking in mb %}
+        <tr>
+
+            <td>{{ booking.shipment_date|date:'d-M-Y' }}</td>
+            <td>{% number_days_old booking.shipment_date %}</td>
+
+            <td>{{ booking.company.get_name }}</td>
+            <td>
+                {% if booking.booking_id|slice:'0:3' == 'BRO' %}
+                    {{ booking.booking_id }}
+                {% else %}
+                    {% for lr in booking.lr_numbers.all %}
+                        <p>{{ lr.lr_number }}</p>
+                    {% endfor %}
+                {% endif %}
+            </td>
+            <td>{{ booking.from_city }}</td>
+            <td>{{ booking.to_city }}</td>
+            <td>{{ booking.lorry_number }}</td>
+            <td>{{ booking.driver_phone }}</td>
+            <td>{{ booking.truck_broker_owner_phone }}</td>
+
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

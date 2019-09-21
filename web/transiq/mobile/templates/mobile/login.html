@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/aaho/images/logo/logo.png" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/aaho/images/logo/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/aaho/images/logo/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/aaho/images/logo/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/aaho/images/logo/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/aaho/images/logo/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/aaho/images/logo/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/aaho/images/logo/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/aaho/images/logo/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/aaho/images/logo/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/aaho/images/logo/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/aaho/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/aaho/images/logo/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/aaho/images/logo/favicon-16x16.png">
+    <link rel="manifest" href="/static/aaho/images/logo/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>Aaho - Online Truck Booking</title>
+    <!-- Bootstrap -->
+    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "vendor/gentelella/css/custom.min.css" %}" rel="stylesheet">
+    <style>
+        #btn-mobile-login {
+            margin-bottom: 100rem;
+        }
+    </style>
+</head>
+<body>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <h3 align="center">Aaho Mobile Login</h3>
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="mobile_login_form"
+                              data-parsley-trigger="input">
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+
+                                <div class="item form-group ">
+                                    <label class="control-label" for="received_from">Username
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="username" placeholder="Username"
+                                           data-parsley-error-message="Please Enter correct username"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Password
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="password" class="form-control"
+                                           name="password" id="password"
+                                           placeholder="Password"
+                                           required="required">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                                <button id="btn-mobile-login"
+                                        class="btn btn-lg btn-primary col-md-12 col-xs-12 col-sm-12 col-lg-12">Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static "vendor/jQuery/js/jquery.min.js" %}"></script>
+<script src="{% static "vendor/bootstrap/3.3.6/js/bootstrap.min.js" %}"></script>
+<script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/nprogress/js/nprogress.min.js" %}"></script>
+<script src="{% static "vendor/gentelella/js/custom.min.js" %}"></script>
+<script src="{% static "aaho/jquery.serializejson.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+
+<script>
+    $(function () {
+        $('form').parsley('validate');
+    });
+
+    $('#btn-mobile-login').click(function (e) {
+        var mobile_login_form = $('#mobile_login_form');
+        if (!mobile_login_form.parsley().isValid()) {
+            return true;
+        }
+        var data = mobile_login_form.serializeJSON();
+        console.log(data);
+        NProgress.start();
+        $.ajax({
+            url: "/api/login/",
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data)
+        }).done(function (response, status, request) {
+            NProgress.done();
+            window.localStorage.setItem("token", 'Token ' + response['token']);
+            window.localStorage.setItem("auth_token", response['token']);
+            {#request.setRequestHeader("Content-Type", "application/json");#}
+            request.setRequestHeader("Authorization", localStorage.getItem('token'));
+            var groups = response['data']['group_list'].split(',');
+            var i;
+            for (i = 0; i < groups.length; i++) {
+                if (groups[i].startsWith('emp_group')) {
+                    window.localStorage.setItem("emp_group", groups[i]);
+                    location.href = '/api/mobile-dashboard/';
+                    $('<form action="/api/mobile-dashboard/" method="POST">' +
+                        '<input type="hidden" name="token" value="' + localStorage.getItem('auth_token') + '"/> ' +
+                        '</form>').appendTo($(document.body)).submit();
+                }
+            }
+        }).fail(function (jqXHR, status) {
+            $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+            NProgress.done();
+        });
+        return false;
+    });
+
+</script>
+</body>
+</html>

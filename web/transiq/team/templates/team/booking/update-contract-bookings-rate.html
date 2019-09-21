@@ -1,0 +1,111 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% block css %}
+    <style>
+        h5 {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Contract Rate Update</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+
+        <form class="form-horizontal form-label-left" id="update_contract_booking_rate_form"
+              data-parsley-trigger="input" enctype="multipart/form-data"
+              autocomplete="off">
+            {#                <input type="hidden" value="{{ id }}" name="id">#}
+            <div class="scroller_anchor"></div>
+            {% for booking in bookings %}
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+
+                            <div class="x_content">
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Booking ID</h5>
+                                    <input type="hidden" name="data[][id]" value="{{ booking.id }}">
+                                    <h5><b>{{ booking.booking_id }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Date</h5>
+                                    <h5><b>{{ booking.shipment_date }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Lr Numbers</h5>
+                                    <h5><b>{{ booking.lr_numbers }}</b></h5>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                    <h5>Customer Name</h5>
+                                    <h5><b>{{ booking.customer_name }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Origin</h5>
+                                    <h5><b>{{ booking.origin }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Destination</h5>
+                                    <h5><b>{{ booking.destination }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Weight</h5>
+                                    <h5><b>{{ booking.weight }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <label for="{{ booking.rate_id }}">Rate</label>
+                                    <input type="number"class="updateRate"
+                                           value="{{ booking.received_amount|floatformat|default:0 }}"
+                                           style="width:100%" data-parsley-min="0" min="0"
+                                           name="data[][rate]" id="{{ booking.rate_id }}"
+                                           required>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Amount</h5>
+                                    <h5 id="{{ booking.amount_id }}">0</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if bookings %}
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 pull-right">
+                    <button type="submit" id="btn-update-contract-booking"
+                            class="btn btn-lg btn-primary pull-right" style="width: 20rem">Save Rate
+                    </button>
+                    <button  class="btn btn-lg btn-danger pull-right" style="width: 20rem"
+                            id="btn-reset">Reset
+                    </button>
+                </div>
+            {% else %}
+                <h4>All contract bookings are up to date</h4>
+            {% endif %}
+        </form>
+
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/lr/nprogress.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/contract_booking_rate_update.js" %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $("input").change(function () {
+            {% for booking in bookings %}
+                $('#{{ booking.amount_id }}').text(Math.round({{ booking.weight }}) * Math.round($('#{{ booking.rate_id }}').val()));
+            {% endfor %}
+        });
+        $('#btn-reset').click(function () {
+            {% for booking in bookings %}
+                $('#{{ booking.amount_id }}').text(0);
+            {% endfor %}
+        });
+    </script>
+{% endblock %}

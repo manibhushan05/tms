@@ -1,0 +1,761 @@
+  <!doctype html>
+<html lang="en">
+{% load staticfiles %}
+<!--
+Page    : index / AAHO
+Version : 1.0
+Author  : Trans IQ Technologies Pvt. Ltd
+URI     : https://aaho.in/
+ -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/aaho/images/logo/favicon.ico" rel="icon" type="image/x-icon">
+    <meta name="theme-color" content="#ffffff">
+    <title>Aaho - Online Truck Booking</title>
+    <!-- Font -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link href="{% static "index/fonts/styles.css" %}" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static "index/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Themify Icons -->
+    <link rel="stylesheet" href="{% static "index/css/themify-icons.css" %}">
+    <!-- Owl carousel -->
+
+    <link rel="stylesheet" href="{% static "index/css/owl.carousel.min.css" %}">
+    <!-- Main css -->
+    <link href="{% static "index/css/style.css" %}" rel="stylesheet">
+    <!-- Font awesome CSS-->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+
+</head>
+
+<body data-spy="scroll" data-target="#navbar" data-offset="30">
+<!-- Nav Menu -->
+
+<div class="nav-menu fixed-top">
+    <nav class="navbar navbar-dark navbar-expand-lg spaceLeft">
+        <a class="navbar-brand" href="/">
+            <img src="{% static "aaho/images/index/gloify/logowhite.png" %}" height="40px" width="80px"
+                 class="img-fluid" alt="logo">
+            <div class="d-inline-block ml-3">
+                <h4 class="m-0">AAHO!</h4>
+                <!-- <p class="text-white tag">Your One-Stop Solution</p> -->
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#howc">CUSTOMERS </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#howf">FLEET OWNERS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#why">WHY US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#number">AAHO IN NUMBERS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#testimonial">TESTIMONIALS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">CONTACT US</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+<!-- Header Background -->
+<header id="home">
+    <div class="image">
+        <div class="headtext">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 p-0">
+                        <div class="tagline">
+                            <p>SIMPLIFYING
+                                <br/> TRUCKING WITH TECHNOLOGY</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-inline-flex p-0 rowMargin">
+                        <div class="trackid">
+                            <img src="{% static "aaho/images/index/gloify/Track_Id_Icon.svg" %}" class="img-fluid mb-4"
+                                 alt="header">                            <h4 class="font-weight-bold">TRACK YOUR
+                            SHIPMENT</h4>
+                            <small class="text-light">Enter Your LR Number For Instant Search</small>
+                            <form id="track-shipment-form" method="GET" action="/track-shipment/">
+                                <div class="input-size input-effect">
+                                    <input type="text" class="effect"
+                                           name="shipment_id" id="shipment_id" data-parsley-length="[12,12]"
+                                           placeholder="Enter LR NO."
+                                           required="required">
+                                    <span class="focus-border">
+                                        <button class="btn btn-link btn-sm" type="submit" name="submit"
+                                                style="color: #0b0b0b;margin-bottom:-30px;">
+                                        <i class="fa fa-search iconPosition"></i>
+                                    </button>
+                                    </span>
+                                </div>
+                                {% for message in messages %}
+                                    <div class="{{ message.error }}">
+                                        <p class="error-response">* {{ message }}</p>
+                                    </div>
+                                {% endfor %}
+                            </form>
+                        </div>
+                        <div class="whitebox"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Our System -->
+<div class="light-bg">
+
+    <div class="section" id="about">
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <p class="font25">About Aaho</p>
+                    </div>
+                    <div class="subtext">TRUCKING, MEET TECHNOLOGY</div>
+                    <div class="rectangle"></div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="section-title">
+                        <p class="font15">Aaho was founded in 2016 with a vision of simplifying long haul trucking by
+                            leveraging technology and analytics. Today, hundreds of trucks across the nation move
+                            everyday on our platform, delivering enhanced value to shippers, fleet owners and drivers.
+                            Our products are designed to solve the age old problems related to sourcing, tracking,
+                            payments and asset utilization in trucking, thereby achieving better realizations for
+                            businesses as well as fleet owners.
+                        </p>
+                    </div>
+                    <div class="rectangle"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- // end .section -->
+
+
+<!-- // end .section -->
+
+<!--HOW CAN WE HELP YOU SOLVE YOUR PROBLEMS-->
+
+<div class="section" id="howc">
+    <!-- Tracking App -->
+    <div class="container-fluid mb-5">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="section-title">
+                    <b> Benefits for Customers</b>
+                </h3>
+                <div class="subtext">QUICK, SIMPLE AND COST-EFFECTIVE</div>
+                <div class="rectangle"></div>
+            </div>
+        </div>
+        <div class="row mt-md-4">
+            <div class="col-md-5 col-lg-5 col-sm-5 col-xs-12 mobCenter text-center">
+                <div>
+                    <img src="{% static "aaho/images/index/gloify/benefits_customers.jpeg" %}"
+                         alt="dual phone"
+                         class="w-75 margin-left-tracking">
+                </div>
+                <div class="applink">
+                    <a href="https://play.google.com/store/apps/details?id=in.aaho.android.aahocustomers"
+                       target="_blank">
+                        <div class="google">
+                            <img src="{% static "aaho/images/index/gloify/google.svg" %}" alt="app logo"
+                                 class="logosize">
+                            <div class="d-inline-block pt-2">
+                                <p class="font12 text-primary m-0">available on</p>
+                                <p class="text-primary">Google Store</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="apple">
+                        <img src="{% static "aaho/images/index/gloify/apple.svg" %}" alt="app logo"
+                             class="logosize">
+                        <div class="d-inline-block pt-2">
+                            <p class="font12 text-primary m-0">coming soon</p>
+                            <p class="text-primary d-inline">Apple Store</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-7 col-xs-12 topSpace1">
+                <ul class="list-unstyled ui-steps">
+                    <li class="media padding-bottom">
+                        <div class="col-lg-2 col-xs-12 text-center ">
+                            <img src="{% static "aaho/images/index/gloify/truck_icon_1.svg" %}"
+                                 class="img-fluid" alt="requirements">
+                        </div>
+                        <div class="col-lg-10 col-xs-12 pt-2 mobHowText">
+                            <h4 class="mb-3 font-weight-bold textHow">Submit Your Requirements</h4>
+                            <p class="text-light font13">Let us know your truck needs on our
+                                app, by email, or simply give us a call. Reach out to us now.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="col-lg-2 col-xs-12 text-center ">
+                            <img src="{% static "aaho/images/index/gloify/Handshake.svg" %}"
+                                 class="img-fluid" alt="payment">
+
+                        </div>
+                        <div class="col-lg-10 pt-2 mobHowText">
+                            <h4 class="mb-3 font-weight-bold textHow">We Find the Right Match for
+                                You</h4>
+                            <p class="text-light mb-5 font13">Our platform sources the right trucks
+                                for you from an extensive
+                                network of verified partners, at the best price the market has to
+                                offer.
+                            </p>
+                        </div>
+                        {#                                        </div>#}
+                    </li>
+                    <li class="media">
+                        {#                                        <div class="row ml-md-4">#}
+                        <div class="col-lg-2 col-xs-12 text-center ">
+                            <img src="{% static "aaho/images/index/gloify/Shipment_Track_Icon.svg" %}"
+                                 class="img-fluid" alt="shipment"></div>
+                        <div class="col-lg-10 pt-2 mobHowText">
+                            <h4 class="mb-3 font-weight-bold">Track Your Shipment</h4>
+                            <p class="text-light mb-5 font13">You can track the location of all your
+                                shipments on our mobile
+                                application or on this website. We monitor all shipments to ensure
+                                that your deliveries are always on time without a need for you to
+                                follow-up.
+                            </p>
+                        </div>
+                        {#                                        </div>#}
+                    </li>
+                    <li class="media">
+                        {#                                        <div class="row mr-md-4">#}
+                        <div class="col-lg-2 col-xs-12 text-center ">
+                            <img src="{% static "aaho/images/index/gloify/Requirements_icon.svg" %}"
+                                 class="img-fluid" alt="requirements"></div>
+                        <div class="col-lg-10 pt-2 mobHowText">
+                            <h4 class="mb-3 font-weight-bold">Documentation and Payments</h4>
+                            <p class="text-light mb-5 font13">Consignment Notes, E-Waybills, PODs
+                                and Freight Invoices are electronically
+                                generated and accessible at the tap of a finger. You can also pay us
+                                electronically and reconcile all your
+                                orders and payments on our customer app. We guarantee your dispatch
+                                department will love us!
+                            </p>
+                        </div>
+                        {#                                        </div>#}
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <div class="section" id="howf">
+        <!-- Tracking App -->
+        <!-- Fleet Management -->
+        <div class=" light-bg">
+            <div class="container-fluid py-5">
+                <div>
+                    <h3 class="section-title">
+                        <b> Benefits for Fleet Owners</b>
+                    </h3>
+                    <div class="subtext"> MAKE YOUR FLEET WORK HARD, SO YOU DON'T HAVE TO</div>
+                    <div class="rectangle"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7 col-lg-7 col-sm-7 col-xs-12">
+                        <ul class="list-unstyled ui-steps">
+                            <li class="media">
+                                <div class="col-lg-2 col-xs-12 text-center ">
+                                   <img src="{% static "aaho/images/index/gloify/truck_icon_1.svg" %}"
+                                 class="img-fluid" alt="requirements"></div>
+                                <div class="col-lg-10 pt-2 mobHowText">
+                                    <h4 class="mb-3 font-weight-bold textHow">No More Empty Runs</h4>
+                                    <p class="text-light mb-5 font13">Wherever your truck is, Aaho's
+                                        network ensures it can find its
+                                        next cargo easily. Just browse our list of available loads and
+                                        find the one most suited for you.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="col-lg-2 col-xs-12 text-center ">
+
+                                    <img src="{% static "aaho/images/index/gloify/EasyPayment_Icon.svg" %}"
+                                         class="img-fluid" alt="payment">
+
+                                </div>
+                                <div class="col-lg-10 pt-2 mobHowText">
+                                    <h4 class="mb-3 font-weight-bold textHow">Transparent and Timely
+                                        Payments</h4>
+                                    <p class="text-light mb-5 font13">What you earn is what you keep.
+                                        Aaho
+                                        pays the
+                                        full freight for
+                                        your trips immediately after delivery. All payments are made
+                                        directly to you
+                                        with no leakages and can be
+                                        easily monitored on our Fleet Partner app.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="col-lg-2 col-xs-12 text-center ">
+                                    <img src="{% static "aaho/images/index/gloify/Shipment_Track_Icon.svg" %}"
+                                         class="img-fluid" alt="shipment">
+                                </div>
+                                <div class="col-lg-10 pt-2 mobHowText">
+                                    <h4 class="mb-3 font-weight-bold">Monitor Your Fleet</h4>
+                                    <p class="text-light mb-5 font13">We provide the latest vehicle
+                                        monitoring
+                                        solutions including GPS,
+                                        Fuel Monitoring and Vehicle Health Monitoring to ensure your
+                                        trucks
+                                        stay
+                                        safe and fighting-fit at all times.
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <div class="col-lg-2 col-xs-12 text-center ">
+                                    <img src="{% static "aaho/images/index/gloify/Best_Rates_Icon.svg" %}"
+                                         class="img-fluid" alt="rates">
+                                </div>
+                                <div class="col-lg-10 pt-2 mobHowText">
+                                    <h4 class="mb-3 font-weight-bold">The Aaho Advantage</h4>
+                                    <p class="text-light mb-5 font13">Aaho fleet partners enjoy higher
+                                        run-time and
+                                        better incomes through
+                                        intelligent route optimization and analytics. You will also get
+                                        the
+                                        benefits
+                                        of discounts on fuel and
+                                        maintenance through our platform.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-5 col-lg-5 col-sm-5 col-xs-12 mobCenter">
+                        <div>
+                            <img src="{% static "aaho/images/index/gloify/benefits_fleet_owner.jpeg" %}"
+                                 alt="dual phone"
+                                 class="w-75 margin-left-fleet">
+                        </div>
+
+                        <div class="applink ">
+                            <a href="https://play.google.com/store/apps/details?id=in.aaho.android.ownr"
+                               target="_blank">
+                                <div class="google">
+                                    <img src="{% static "aaho/images/index/gloify/google.svg" %}"
+                                         alt="app logo"
+                                         class="logosize">
+                                    <div class="d-inline-block pt-2">
+                                        <p class="font12 text-primary m-0">available on</p>
+                                        <p class="text-primary">Google Store</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="apple">
+                                <img src="{% static "aaho/images/index/gloify/apple.svg" %}"
+                                     alt="app logo"
+                                     class="logosize">
+                                <div class="d-inline-block pt-2">
+                                    <p class="font12 text-primary m-0">coming soon</p>
+                                    <p class="text-primary d-inline">Apple Store</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // end .section -->
+
+<!--WHY CHOOSE US-->
+
+
+<div class="section" id="why">
+    <div class="container-fluid">
+        <div class="row" style="position: relative;">
+            <div class="col-lg-7 col-xs-12 black-bg">
+                <div class="text-white pl-70">
+                    <h3 class="mt-5 mb-0">Why Us?</h3>
+                    <h4>Technology at the Core</h4>
+
+                </div>
+                <div class="m-text">
+                    <p class="font14 colorWhyFont">No single platform provides such end to end
+                        capability as Aaho does.
+                        From the time customer submits requirement till delivery and POD upload all
+                        shipments are managed digitally.
+                    </p>
+                    <div class="row pt-3">
+                        <div class="col-md-3">
+
+                            <img src="{% static "aaho/images/index/gloify/Magnifier.svg" %}" alt=""
+                                 class="img-fluid mobSize">
+                        </div>
+                        <div class="col-md-9 itemPosition">
+                            <h6 class="text-white pl-xs-4 font14">TRANSPARENCY</h6>
+                            <p class="textWhy font14">Shippers face difficulties in finding trucks at
+                                the right price, and
+                                sometimes at all, due to being restricted to a few trusted suppliers.
+                                Aaho taps a wide network of
+                                suppliers at the same time via automated processes to ensure speed of
+                                sourcing and rationalization of
+                                costs.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row my-md-4">
+                        <div class="col-md-3">
+                            <img src="{% static "aaho/images/index/gloify/Icon_1.svg" %}" alt=""
+                                 class="img-fluid mobSize"></div>
+                        <div class="col-md-9 itemPosition">
+                            <h6 class="text-white pl-xs-4 font14">EFFICIENCY</h6>
+                            <p class="textWhy font14">Digitization and automation of documentation,
+                                payments and
+                                related processes cuts costs and ensures your cargo is not held up for
+                                trivial reasons.
+                                Shipment monitoring improves driver performance.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{% static "aaho/images/index/gloify/Gear.svg" %}" alt=""
+                                 class="img-fluid mobSize"></div>
+                        <div class="col-md-9 itemPosition">
+                            <h6 class="text-white pl-xs-4 font14">OPTIMIZATION </h6>
+                            <p class="textWhy font14">We analyze our data constantly to optimize routes,
+                                monitor supplier
+                                performance and manage operational parameters to improve outcomes for
+                                customers and
+                                fleet partners.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="truckPosition"></div>
+        </div>
+    </div>
+</div>
+
+<!-- // end .section -->
+
+
+<!--WHAT WE HAVE TO SAY-->
+
+<div class="section numberBg" id="number">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="section-title">
+                    <b>AAHO in Numbers</b>
+                </h3>
+                <div class="subtext">NUMBERS SPEAK LOUDER THAN WORDS</div>
+                <div class="rectangle"></div>
+            </div>
+        </div>
+        <div class="row pt-4">
+            <div class="col-lg-3 pb-3">
+                <div class="numberBorder">
+                    <div class="numberItems mt-md-5 pt-4">
+                        <img src="{% static "aaho/images/index/gloify/Handshake_Icon.svg" %}"
+                             alt="dual phone" class="img-fluid">
+                        <div class="data" style="padding-top: 1rem">
+                            <h5 class="pt-4 numbers">225+</h5>
+                            <p class="font13">Customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 pb-3">
+                <div class="numberBorder">
+                    <div class="numberItems mt-md-5 pt-4">
+                        <img src="{% static "aaho/images/index/gloify/delivery_truck_icon.svg" %}"
+                             alt="dual phone" class="img-fluid">
+                        <div class="data" style="padding-top: 2.4rem">
+                            <h5 class="pt-4 numbers">4000+</h5>
+                            <p class="font13">Trucks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 pb-3">
+                <div class="numberBorder">
+                    <div class="numberItems mt-md-5 pt-4">
+                        <img src="{% static "aaho/images/index/gloify/Routes_Icon.svg" %}"
+                             alt="dual phone" class="img-fluid">
+                        <div class="data" style="padding-top: 2rem">
+                            <h5 class="pt-4 numbers">100+</h5>
+                            <p class="font13">Routes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 pb-3">
+                <div class="numberBorder">
+                    <div class="numberItems mt-md-5 pt-4">
+                        <img src="{% static "aaho/images/index/gloify/Sign_Icon.svg" %}"
+                             alt="dual phone" class="img-fluid">
+                        <div class="data" style="padding-top: 3rem">
+                            <h5 style="font-size: 28px" class=" numbers">105Mn+ Ton Kms </h5>
+                            <p class="font13">Cargo Moved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // end .section -->
+
+
+<!--SEE WHAT OUR CLIENTS HAVE TO SAY-->
+<div class="section container-fluid" id="testimonial">
+    <div class="row mx-0">
+        <div class="col-12">
+            <h3 class="section-title">
+                <b>Testimonials</b>
+            </h3>
+            <div class="subtext">PARTNER SPEAK</div>
+            <div class="rectangle"></div>
+        </div>
+    </div>
+    <div class="row m-0 justify-content-center">
+        <div class="col-lg-9">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="testimonial-card">
+                            <div class="text-center">
+                                <img src="{% static "aaho/images/index/gloify/ClientMahavirJi.png" %}"
+                                     alt="client" class="clientImg"></div>
+                            <blockquote class="blockquote">
+                                Aaho's service has been highly professional and consistent, at
+                                competitive pricing. Their team's approach to solve the
+                                problems related to trucking using technology is very practical and
+                                effective and will add a lot of value for their customers.
+                            </blockquote>
+                            <div class="text-center">
+                                <p class="designation"><b>Mr. Mahavir Jhanwar</b></p>
+                                <p class="designation">Purchase Division (SAF)</p>
+                                <p class="designation">Prakash Industries Limited</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="testimonial-card">
+                            <div class="text-center">
+                                <img src="{% static "aaho/images/index/gloify/AjayChaudhary.png" %}"
+                                     alt="client" class="clientImg">
+                            </div>
+                            <blockquote class="blockquote">
+                                We congratulate Aaho and their entire team for the technology driven
+                                initiatives being taken in the logistics ecosystem.
+                                Their support and initiative in meeting our domestic logistics
+                                requirements has been great and we wish them continued success.
+                                <div class="text-center">
+                                    <p class="designation"><b>Mr S M Taneja</b></p>
+                                    <p class="designation">General Manager</p>
+                                    <p class="designation">Hi-Tech Radiators</p>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-card">
+                            <div class="text-center">
+                                <img src="{% static "aaho/images/index/gloify/AshokBhai1.png" %}"
+                                     alt="Fleet Owner" class="clientImg"></div>
+                            <blockquote class="blockquote">
+                                With Aaho, there is no hassle of payment, whether advance or balance.
+                                Their fast and transparent practices are the best in this market.
+                            </blockquote>
+                            <div class="text-center">
+                                <p class="designation"><b>Ashok Bhai</b></p>
+                                <p class="designation">Fleet Owner & Broker</p>
+                                <p class="designation">Ahmedabad</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-card">
+                            <div class="text-center">
+                                <img src="{% static "aaho/images/index/gloify/HarpalSingh.jpeg" %}"
+                                     alt="client" class="clientImg"></div>
+                            <blockquote class="blockquote">
+                                Our fleet of 7 trucks now runs exclusively with Aaho. I make more trips
+                                and higher income with them and
+                                can keep track of all my trucks and my payments on the Aaho app. It is
+                                the best possible solution for owners like us.
+                            </blockquote>
+                            <div class="text-center">
+                                <p class="designation"><b>Mr. Harpal Singh</b></p>
+                                <p class="designation">Fleet Owner</p>
+                                <p class="designation">Raipur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" data-target="#carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" data-target="#carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- // end .section -->
+
+<!--YOUR ONE-STEP SOLUTION - CONTACT US -->
+<div class="section pb-0" id="contact">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="section-title">
+                    <b>Contact Us</b>
+                </h3>
+                <div class="subtext">GIVE US A SHOUT</div>
+                <div class="rectangle"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 p-0">
+                <div id="map_canvas" style="width:100%;height:500px"></div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12 p-0">
+                <div>
+                    <h4 align="center">
+                        <b>WE’RE HAPPY TO HEAR FROM YOU</b>
+                    </h4>
+                    <div class="rectangle"></div>
+                </div>
+                <div class="m-3">
+                    <form id="enquiry_form">{% csrf_token %}
+                        <div class="row mr-md-0">
+                            <div class="col-md-2 offset-md-1 col-xs-2">
+                                <label class="title" id="name" for="fname">Name</label>
+                            </div>
+                            <div class="col-md-7 col-xs-9">
+                                <input type="text" id="name" name="name" class="inputStyle"
+                                       placeholder="Your Name.." required>
+                            </div>
+                        </div>
+                        <div class="row mr-md-0 my-4">
+                            <div class="col-md-2 offset-md-1 col-xs-2">
+                                <label class="title" id="phone" for="phone">Mobile</label>
+                            </div>
+                            <div class="col-md-7 col-xs-9">
+                                <input type="text" id="phone" name="phone" class="inputStyle"
+                                       placeholder="Your Mobile.." required>
+                            </div>
+                        </div>
+                        <div class="row mr-md-0 mb-4">
+                            <div class="col-md-2 offset-md-1 col-xs-2">
+                                <label class="title" id="email" for="email">Email</label>
+                            </div>
+                            <div class="col-md-7 col-xs-9">
+                                <input type="email" class="w-100 inputStyle" id="email" name="email"
+                                       placeholder="Your Email.." required>
+                            </div>
+                        </div>
+                        <div class="row mr-md-0">
+                            <div class="col-md-2 offset-md-1 col-xs-2">
+                                <label class="title" id="message" for="message">Message</label>
+                            </div>
+                            <div class="col-md-7 col-xs-9">
+                                                    <textarea id="message" class="w-100 inputStyle" name="message"
+                                                              placeholder="Your Message goes here…" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row mr-md-0">
+                            <div class="col-md-10 col-xs-10 mt-2">
+                                <input type="submit" class="submitButton" id="btn-enquiry">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- // end .section -->
+
+
+<!--Footer-->
+<footer class="py-5 light-bg">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-xs-12 text-center font-weight-bold pt-3"></div>
+            <div class="col-md-6 col-xs-12 text-center font-weight-bold pt-3">
+                <h5 style="text-align: center">&copy; All Rights Reserved Trans IQ Technologies Pvt. Ltd.</h5>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery and Bootstrap -->
+<script src="{% static "vendor/jQuery/js/jquery.min.js" %}"></script>
+<script src="{% static "vendor/bootstrap/4.1.0/js/bootstrap.min.js" %}"></script>
+
+<!-- Custom JS -->
+<script src="{% static "aaho/js/index/index-gloify.js" %}"></script>
+<script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+<script src="{% static  'vendor/nprogress/js/nprogress.min.js' %}" type="text/javascript"></script>
+
+<script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+
+
+<script src="{% static 'aaho/js/index/index.js' %}?v={% now 'U' %}"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATPbYqRVUt6whnofEU7fHrSILZBooy6Hk&callback=initialize">
+</script>
+</body>
+
+</html>

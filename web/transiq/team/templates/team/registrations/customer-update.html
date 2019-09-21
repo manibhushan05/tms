@@ -1,0 +1,235 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Update Customer</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+
+                    <h3>Instructions:-</h3>
+                    <ol type="1">
+                        <b>
+                            <li>GSTIN is mandatory for all customers unless they are specifically exempt from paying
+                                GST (like rice and pulse traders)
+                            </li>
+                            <li>Please use the exact legal name of the customer on which GSTIN has been issued</li>
+                        </b>
+                    </ol>
+
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="update-customer-form"
+                              data-parsley-trigger="input">
+                            <input type="hidden" name="customer_id" id="customerId" value="{{ id }}">
+                            <input type="hidden" name="address_id" value="{{ customer.address.id }}">
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group ">
+                                    <label class="control-label" for="truck_owner">Is GST Applicable to
+                                        Customer<span
+                                                class="required">*</span></label>
+                                    <select class="form-control" name="is_gst_applicable" id="is_gst_applicable"
+                                            required>
+                                        <option></option>
+                                        {% if is_gst_applicable == 'yes' %}
+                                            <option value="yes" selected>YES</option>
+                                            <option value="no">Exempted</option>
+                                            <option value="u">Unknown</option>
+                                        {% elif is_gst_applicable == 'no' %}
+                                            <option value="no" selected>Exempted</option>
+                                            <option value="yes">YES</option>
+                                            <option value="unknown">Unknown</option>
+                                        {% elif is_gst_applicable == 'unknown' %}
+                                            <option value="no">Exempted</option>
+                                            <option value="yes">YES</option>
+                                            <option value="unknown" selected>Unknown</option>
+                                        {% endif %}
+
+                                    </select>
+                                </div>
+                                <div class="item form-group gstin-div">
+                                    <label class="control-label">GSTIN<span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="gstin" id="gstin-input"
+                                           data-parsley-minlength="15"
+                                           data-parsley-maxlength="15"
+                                           placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                           data-parsley-type="alphanum"
+                                           value="{{ gstin|default_if_none:'' }}">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="received_from">Company
+                                        Name<span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="company_name" placeholder="Enter Company Name"
+                                           data-parsley-error-message="Please Enter Full Company Name"
+                                           value="{{ sme_profile.name|default_if_none:'' }}"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Company
+                                        Code<span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="company_code" id="company_code"
+                                           placeholder="Enter Three Letter Company Code"
+                                           data-parsley-length="[3, 3]"
+                                           data-parsley-pattern="^[A-Za-z]+$"
+                                           data-parsley-error-message="Please Enter Three Letter Company Code "
+                                           value="{{ company_code|default_if_none:'' }}"
+                                           readonly>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Credit Period(days)<span class="required">*</span>
+                                    </label>
+                                    <input type="number" class="form-control col-md-7 col-xs-12"
+                                           name="credit_period" id="credit_period"
+                                           placeholder="Enter Credit Period Days"
+                                           data-parsley-type="integer"
+                                           data-parsley-min="1"
+                                           data-parsley-max="180"
+                                           value="{{ credit_period|default_if_none:'' }}"
+                                           required="required">
+                                </div>
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group">
+                                    <label>Aaho POC<span
+                                            class="required">*</span></label>
+                                    <select class="form-control" name="aaho_poc" id="aaho_poc" required>
+                                        <option></option>
+                                        {% if  aaho_poc_data.id != -1 %}
+                                            <option value="{{ aaho_poc_data.id }}"
+                                                    selected>{{ aaho_poc_data.name|default_if_none:"" }}, {{aaho_poc_data.phone }}</option>
+                                        {% endif %}
+
+                                    </select>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="received_from">Contact
+                                        Person Name<span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="contact_person_name" data-parsley-length="[3, 40]"
+                                           placeholder="Enter Contact Person Name"
+                                           value="{{ sme_profile.contact_person_name|default_if_none:'' }}"
+                                           data-parsley-minlength="3"
+                                               data-parsley-maxlength="100"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Contact Person Number<span
+                                            class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="contact_person_number" data-parsley-type="digits"
+                                           data-parsley-minlength="10"
+                                           data-parsley-maxlength="10"
+                                           placeholder="Enter Contact Person Number "
+                                           value="{{ sme_profile.phone|default_if_none:'' }}"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Alternate Number </label>
+                                    <input type="text" class="form-control"
+                                           name="alternate_number" data-parsley-type="digits"
+                                           data-parsley-minlength="10"
+                                           data-parsley-maxlength="10"
+                                           placeholder="Enter Alternate Contact Number"
+                                           value="{{ sme_profile.alternate_phone|default_if_none:'' }}">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Email </label>
+                                    <input type="email" class="form-control"
+                                    data-parsley-minlength="3"
+                                    data-parsley-maxlength="100"
+                                           name="email_id" id="sme-email-id" placeholder="Enter Company's Email ID"
+                                           value="{{ sme_profile.email|default_if_none:'' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+
+                                <div class="item form-group ">
+                                    <label class="control-label" for="received_from">Company Address
+                                    </label>
+                                    <input type="text" class="form-control"
+                                    data-parsley-minlength="3"
+                                    data-parsley-maxlength="100"
+                                           name="customer_address" placeholder="Enter Company Address"
+                                           value="{{ customer_address|default_if_none:'' }}">
+                                </div>
+                                <div class="item form-group">
+                                    <label for="customer_city">City<span
+                                            class="required">*</span></label>
+                                    <select class="form-control" name="city" id="city" required>
+                                        <option></option>
+                                        {% if city_data.id != -1 %}
+                                            <option value="{{ city_data.id }}"
+                                                    selected>{{ city_data.city }}, {{ city_name.state }}</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label for="customer_city">Aaho Office<span
+                                            class="required">*</span></label>
+                                    <select class="form-control" name="aaho_office" id="aaho_office" required>
+                                        <option></option>
+                                        {% if aaho_office_branch.id != -1 %}
+                                            <option value="{{ aaho_office_branch.id }}"
+                                                    selected>{{ aaho_office_branch.branch_name }} </option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label>PIN Code</label>
+                                    <input type="text" class="form-control" name="pin"
+                                           placeholder="PIN Code" value="{{ pin|default_if_none:'' }}">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="textarea">Remarks
+                                    </label>
+                                    <textarea id="textarea" name="remarks"
+                                    data-parsley-minlength="3"
+                                    data-parsley-maxlength="100"
+                                              placeholder="Please provide Any Extra Information"
+                                              class="form-control">{{ sme_profile.comment|default_if_none:'' }}</textarea>
+                                </div>
+                            </div>
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            <div class="form-group col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                                <button id="btn-update-customer" class="btn btn-lg btn-success">UPDATE CUSTOMER
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script>
+        {% if  is_gst_applicable != 'yes'%}
+            $('.gstin-div').hide();
+        {% endif %}
+    </script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/update-sme.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/common-new.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+{% endblock %}

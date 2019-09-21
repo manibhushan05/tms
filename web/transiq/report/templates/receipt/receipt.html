@@ -1,0 +1,113 @@
+            <div class="receipt_title">FLEET BILL: {{ lr_number }}</div>
+            <div class="owner_name">Owner Name: {{ owner_name }}</div>
+            <div class="owner_pan">Owner PAN: {{ owner_pan }}</div>
+            <div class="underline"></div>
+            <div class="receipt_details">
+                <div class="col1">
+                    <div class="row1">Bill No.</div>
+                    <div class="row2">Vehicle No.</div>
+                    <div class="row3">From</div>
+                    <div class="row4">To</div>
+                    <div class="row5">Loading Date</div>
+                    <div class="row6">Weight</div>
+                    <div class="row7">Rate</div>
+                </div>
+                <div class="col2">
+                    <div class="row1">{{ bill_number }}</div>
+                    <div class="row2">{{ vehicle_number }}</div>
+                    <div class="row3">{{ from_city }}</div>
+                    <div class="row4">{{ to_city }}</div>
+                    <div class="row5">{{ loading_date }}</div>
+                    <div class="row6">{{ quantity }}</div>
+                    <div class="row7">{{ rate }}</div>
+                </div>
+                <div class="col3">
+                    <div class="row1">Bill Date</div>
+                    <div class="row2">Freight</div>
+                    {% if loading_charge %}
+                        <div class="row3">(+) Loading Charge</div>
+                    {% endif %}
+                    {% if unloading_charge %}
+                        <div class="row4">(+) Unloading Charge</div>
+                    {% endif %}
+                    {% if detention_charge %}
+                        <div class="row5">(+) Detention</div>
+                    {% endif %}
+                    {% if additional_charges_for_owner %}
+                        <div class="row6">(+) {{ note_for_additional_owner_charges }}</div>
+                    {% endif %}
+                    {% if commission %}
+                        <div class="row7">(-) Commission</div>
+                    {% endif %}
+                    {% if lr_charge %}
+                        <div class="row8">(-) LR Charge</div>
+                    {% endif %}
+                    {% if deduction_for_advance %}
+                        <div class="row9">(-) Deduction for Advance</div>
+                    {% endif %}
+                    {% if deduction_for_balance %}
+                        <div class="row10">(-) Deduction for Balance</div>
+                    {% endif %}
+                    {% if other_deduction %}
+                        <div class="row11">(-) {{ remarks_about_deduction }}</div>
+                    {% endif %}
+                    <div class="row12">Total Payable Amount</div>
+                </div>
+                <div class="col4">
+
+                    <div class="row1">{{ bill_date }}</div>
+                    <div class="row2">Rs. {{ freight|floatformat:2 }}</div>
+                    {% if loading_charge %}
+                        <div class="row3">Rs. {{ loading_charge|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if unloading_charge %}
+                        <div class="row4">Rs. {{ unloading_charge|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if detention_charge %}
+                        <div class="row5">Rs. {{ detention_charge|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if additional_charges_for_owner %}
+                        <div class="row6">Rs. {{ additional_charges_for_owner|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if commission %}
+                        <div class="row7">Rs. {{ commission|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if lr_charge %}
+                        <div class="row8">Rs. {{ lr_charge|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if deduction_for_advance %}
+                        <div class="row9">Rs. {{ deduction_for_advance|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if deduction_for_balance %}
+                        <div class="row10">Rs. {{ deduction_for_balance|floatformat:2 }}</div>
+                    {% endif %}
+                    {% if other_deduction %}
+                        <div class="row11">Rs. {{ other_deduction|floatformat:2 }}</div>
+                    {% endif %}
+                    <div class="row12">Rs. {{ total_payable_amount|floatformat:2 }}</div>
+                </div>
+            </div>
+
+            <div class="receipt_table">
+                <div class="col1">
+                    <div class="row_head">Date</div>
+                    {% for p_row in payment_data.payment_list %}
+                        <div class="row_data">{{ p_row.payment_date }}</div>
+                    {% endfor %}
+                    <div class="row_total">&nbsp;</div>
+                </div>
+                <div class="col2">
+                    <div class="row_head">Particulars</div>
+                    {% for p_row in payment_data.payment_list %}
+                        <div class="row_data">{{ p_row.remarks }}</div>
+                    {% endfor %}
+                    <div class="row_total">Total</div>
+                </div>
+                <div class="col3">
+                    <div class="row_head">Amount</div>
+                   {% for p_row in payment_data.payment_list %}
+                        <div class="row_data">Rs. {{ p_row.amount|floatformat:2 }}</div>
+                    {% endfor %}
+                    <div class="row_total">Rs. {{ payment_data.total_amount|floatformat:2 }}</div>
+                </div>
+            </div>

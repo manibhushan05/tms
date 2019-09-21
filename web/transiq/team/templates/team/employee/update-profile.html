@@ -1,0 +1,111 @@
+{% load staticfiles %}
+{% block css %}
+
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Update Profile</h3>
+{% endblock %}
+{% block content %}
+
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="update-profile-form"
+                              data-parsley-trigger="input">
+                            <input type="hidden" id="employee_id" value="{{ id }}">
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Username
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="username" placeholder="Enter Username"
+                                           data-parsley-error-message="Please Enter Username"
+                                           value="{{ username|default_if_none:'' }}"
+                                           required="required" readonly>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Name
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="name" placeholder="Enter Name"
+                                           data-parsley-error-message="Please Enter Name"
+                                           value="{{ emp_name|default_if_none:'' }}"
+                                           required="required">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Phone
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="phone" placeholder="Enter Phone"
+                                           data-parsley-error-message="Please Enter Phone"
+                                           value="{{ emp_phone|default_if_none:'' }}"
+                                           required="required">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Alt
+                                    Phone
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="alt_phone" placeholder="Enter Alt Phone"
+                                           value="{{ employee.username.profile.alternate_phone|default_if_none:'' }}"
+                                           data-parsley-error-message="Please Enter Alt Phone">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Email
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="email" placeholder="Enter Email"
+                                           data-parsley-error-message="Please Enter Email"
+                                           value="{{ emp_email|default_if_none:'' }}"
+                                           required="required">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">PAN
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="pan" placeholder="Enter PAN"
+                                           data-parsley-error-message="Please Enter PAN"
+                                           value="{{ pan|default_if_none:'' }}" required>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button id="btn-update-profile" class="btn btn-lg btn-success">Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/nprogress/js/nprogress.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/update-profile.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+{% endblock %}

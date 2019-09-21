@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>time</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="NEW" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-189.000000, -1582.000000)">
+        <g id="Group-12" transform="translate(167.000000, 1377.000000)" fill="#152B58" fill-rule="nonzero">
+            <g id="Group-11" transform="translate(0.000000, 111.000000)">
+                <g id="Group-10" transform="translate(0.000000, 71.000000)">
+                    <g id="Group-7">
+                        <g id="Group-3" transform="translate(0.000000, 1.000000)">
+                            <g id="time" transform="translate(23.000000, 23.000000)">
+                                <path d="M11.5,0 C5.1589,0 0,5.1589 0,11.5 C0,17.8411 5.1589,23 11.5,23 C17.8411,23 23,17.8411 23,11.5 C23,5.1589 17.8411,0 11.5,0 Z M11.5,22.2333333 C5.58171667,22.2333333 0.766666667,17.4182833 0.766666667,11.5 C0.766666667,5.58171667 5.58171667,0.766666667 11.5,0.766666667 C17.4182833,0.766666667 22.2333333,5.58171667 22.2333333,11.5 C22.2333333,17.4182833 17.4182833,22.2333333 11.5,22.2333333 Z" id="Shape" stroke="#152B58"></path>
+                                <path d="M11.6111111,4 C11.3964444,4 11.2222222,4.15473077 11.2222222,4.34615385 L11.2222222,12.3076923 L5.38888889,12.3076923 C5.17422222,12.3076923 5,12.4624231 5,12.6538462 C5,12.8452692 5.17422222,13 5.38888889,13 L11.6111111,13 C11.8257778,13 12,12.8452692 12,12.6538462 L12,4.34615385 C12,4.15473077 11.8257778,4 11.6111111,4 Z" id="Shape"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

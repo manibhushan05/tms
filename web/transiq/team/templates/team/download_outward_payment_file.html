@@ -1,0 +1,134 @@
+{% load staticfiles %}
+{% block pageTitle %}
+    <h3 class="titleTop">Download Payments</h3>
+{% endblock %}
+{% block content %}
+    <!-- page content -->
+    <div class="page-title">
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <button type="button" class="btn btn-lg btn-success" id="download_payment_file">Download file</button>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <button type="button" class="btn btn-lg btn-success" id="send_payment_file">Send file</button>
+        </div>
+        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+            <button type="button" class="btn btn-lg btn-success" id="send_sales_report">Sales Report</button>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+
+    <script>
+
+        $(document).off('click', '#download_payment_file').on('click', '#download_payment_file', function (e) {
+            NProgress.start();
+            $.ajax({
+                url: '/api/download-today-payment-file/',
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+                if (response.msg) {
+                    window.open(response.msg, "_self", "");
+                }
+                $.notify('File sent successfully', {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                NProgress.done();
+            }).fail(function (jqXHR, status, error) {
+                if (jqXHR.status === "401") {
+                    redirectToLogin(error);
+                }
+                else {
+                    $.notify(JSON.parse(jqXHR.responseText)['msg'], {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'error'
+                    });
+                }
+                NProgress.done();
+            });
+        });
+        $(document).off('click', '#send_payment_file').on('click', '#send_payment_file', function (e) {
+            NProgress.start();
+            $.ajax({
+                url: '/api/send-today-payment-file/',
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+                if (response.msg) {
+                    window.open(response.msg, "_self", "");
+                }
+                $.notify('File sent successfully', {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                NProgress.done();
+            }).fail(function (jqXHR, status, error) {
+                if (jqXHR.status === "401") {
+                    redirectToLogin(error);
+                }
+                else {
+                    $.notify(JSON.parse(jqXHR.responseText)['msg'], {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'error'
+                    });
+                }
+                NProgress.done();
+            });
+        });
+        $(document).off('click', '#send_sales_report').on('click', '#send_sales_report', function (e) {
+            NProgress.start();
+            $.ajax({
+                url: '/api/send-previous-day-sales-report/',
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+                if (response.msg) {
+                    window.open(response.msg, "_self", "");
+                }
+                $.notify('File sent successfully', {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                NProgress.done();
+            }).fail(function (jqXHR, status, error) {
+                if (jqXHR.status === "401") {
+                    redirectToLogin(error);
+                }
+                else {
+                    $.notify(JSON.parse(jqXHR.responseText)['msg'], {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'error'
+                    });
+                }
+                NProgress.done();
+            });
+        });
+    </script>
+{% endblock %}

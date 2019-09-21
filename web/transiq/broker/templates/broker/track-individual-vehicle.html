@@ -1,0 +1,202 @@
+{% extends "broker/base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <!-- Datatables -->
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/css/dataTables.bootstrap.min.css" %}"
+          rel="stylesheet">
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/Buttons-1.5.1/css/buttons.bootstrap.min.css" %}"
+          rel="stylesheet">
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/FixedHeader-3.1.3/css/fixedHeader.bootstrap.min.css" %}"
+          rel="stylesheet">
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/Responsive-2.2.1/css/responsive.bootstrap.min.css" %}"
+          rel="stylesheet">
+    <link href="{% static "vendor/datatable/Bootstrap3/DataTables/Scroller-1.4.4/css/scroller.bootstrap.min.css" %}"
+          rel="stylesheet">     <!-- Datatables -->
+{% endblock %}
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div id="map_wrapper">
+                            <div id="map-canvas" class="mapping"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #zoom-single-map {
+            color: brown;
+            font-size: 18px;
+            background-color: Transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+        }
+    </style>
+{% endblock %}
+{% block js %}
+    <style type="text/css">
+        #map_wrapper {
+            height: 45vw;
+        }
+
+        #map-canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATPbYqRVUt6whnofEU7fHrSILZBooy6Hk&callback=initialize">
+    </script>
+    <script>
+        function initialize() {
+            var map;
+            var bounds = new google.maps.LatLngBounds();
+            var mapOptions = {
+                mapTypeId: 'roadmap',
+                maxZoom: 12,
+                minZoom: 5,
+                zoom: 10,
+            };
+            // Display a map on the page
+            map = new google.maps.Map(document.getElementById("map-canvas"),
+                mapOptions);
+            map.setTilt(45);
+            var markers = [['{{ gps.latitude }}', '{{ gps.longitude }}', '{{ gps.vehicle_number }}', '{{ gps.vehicle_type }}', ' {{ gps.driver_name }}', '{{ gps.driver_number }}', '{{ gps.datetime }}', '{{ gps.vehicle_status }}']];
+            // Info Window Content
+            var infoWindowContent = new Array(markers.length)
+            infoWindowContent[0] = ['<div class="info_content">' +
+            "<h3>" + markers[0][2] + "</h3>" +
+            "<p> <b> Driver Name: " + markers[0][4] + "</b></p>" +
+            "<p> <b> Driver Phone: " + markers[0][5] + "</b></p>" +
+            "<p> <b> Vehicle Type: " + markers[0][3] + "</b></p>" +
+            "<p> <b> Status: " + markers[0][7] + "</b></p>" +
+            "<p> <b> Last Updated: " + markers[0][6] + "</b></p>" +
+            "</div>"
+            ]
+
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+            // Loop through our array of markers & place each one on the map
+            for (i = 0; i < markers.length; i++) {
+                var position = new google.maps.LatLng(markers[i][0], markers[i][1]);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0],
+                    icon: '/static/aaho/images/map_icon.png',
+                });
+                // Allow each marker to have an info window
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                        map.setZoom(12);
+                        map.setCenter(marker.getPosition());
+                    }
+                })(marker, i));
+                google.maps.event.addListener(marker, "click", function () {
+                    map.panTo(marker.center);
+                    map.setZoom(2);
+                    infoWindow.close();
+                });
+                // Automatically center the map fitting all markers on the screen
+                map.fitBounds(bounds);
+            }
+            // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
+                google.maps.event.removeListener(boundsListener);
+            });
+        }
+    </script>
+    <!-- Datatables -->
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/DataTables-1.10.16/js/dataTables.bootstrap.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Buttons-1.5.1/js/dataTables.buttons.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Buttons-1.5.1/js/buttons.bootstrap.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Buttons-1.5.1/js/buttons.flash.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Buttons-1.5.1/js/buttons.html5.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Buttons-1.5.1/js/buttons.print.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/FixedHeader-3.1.3/js/dataTables.fixedHeader.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/KeyTable-2.3.2/js/dataTables.keyTable.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Responsive-2.2.1/js/dataTables.responsive.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Responsive-2.2.1/js/responsive.bootstrap.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/Scroller-1.4.4/js/dataTables.scroller.min.js" %}"></script>
+    <script src="{% static "vendor/datatable/Bootstrap3/DataTables/JSZip-2.5.0/jszip.min.js" %}"></script>
+    <!-- Datatables -->
+    <script>
+        $(document).ready(function () {
+            var handleDataTableButtons = function () {
+                if ($("#datatable-buttons").length) {
+                    $("#datatable-buttons").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            {
+                                extend: "copy",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "csv",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "excel",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "pdfHtml5",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "print",
+                                className: "btn-sm"
+                            },
+                        ],
+                        responsive: true
+                    });
+                }
+            };
+
+            TableManageButtons = function () {
+                "use strict";
+                return {
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            $('#track-individual-vehicle-table').dataTable({
+                "aaSorting": [[3, "desc"]]
+            });
+            $('#datatable-keytable').DataTable({
+                keys: true
+            });
+
+            $('#out-ward-payment-table').DataTable();
+            $('#in-ward-payment-table').DataTable();
+
+            $('#datatable-scroller').DataTable({
+                ajax: "js/datatables/json/scroller-demo.json",
+                deferRender: true,
+                scrollY: 380,
+                scrollCollapse: true,
+                scroller: true
+            });
+
+            var table = $('#datatable-fixed-header').DataTable({
+                fixedHeader: true
+            });
+
+            TableManageButtons.init();
+        });
+    </script>
+    <!-- /Datatables -->
+{% endblock %}
+

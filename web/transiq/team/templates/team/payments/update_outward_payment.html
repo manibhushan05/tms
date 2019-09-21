@@ -1,0 +1,215 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/js/bootstrap-datepicker.min.js' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Out-Ward Payment</h3>
+{% endblock %}
+{% block content %}
+{#    <div class="right_col" role="main">#}
+        <div class="">
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+
+                        <div class="x_content">
+
+                            <form class="form-horizontal form-label-left" method="POST"
+                                  action="/team/save-updated-out-ward-payment/" novalidate>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">LR Number(s)</label>
+                                    <input type="hidden" name="payment_id" value="{{ payment_id.id }}">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="select2_multiple form-control" multiple="multiple"
+                                                name="booking_id[]" style="width: 100%">
+                                            <option value="{{ booking_id.id }}"
+                                                    selected>{{ booking_id.booking_id }}
+                                                ({% for lr in booking_id.lr_numbers.all %}{{ lr.lr_number }}
+                                                    &nbsp;{% endfor %})
+                                            </option>
+                                            {% for value in booking_data %}
+                                                <option value="{{ value.id }}">{{ value.booking_id }}
+                                                    ({% for lr in value.lr_numbers.all %}{{ lr.lr_number }}
+                                                        &nbsp;{% endfor %})
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="paid_to">Paid To <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="paid_to" class="form-control col-md-7 col-xs-12"
+                                        data-parsley-minlength="3"
+                                        data-parsley-maxlength="70"
+                                               name="paid_to" required="required" value="{{ payment_id.paid_to }}">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="actual_amount">Amount
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" id="actual_amount" name="actual_amount" required="required"
+                                        data-parsley-min="0"
+                                        data-parsley-max="999999"
+                                        data-parsley-type="number"
+                                               class="form-control col-md-7 col-xs-12"
+                                               value="{{ payment_id.actual_amount }}">
+                                    </div>
+                                </div>
+                                <div class=" item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode <span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="outward_payment_mode form-control" name="outward_payment_mode"
+                                                required="required">
+                                            <option value="{{ payment_id.payment_mode }}">{{ payment_id.get_payment_mode_display }}</option>
+                                            <option value="cash">Cash</option>
+                                            <option value="cheque">Cheque</option>
+                                            <option value="imps">IMPS</option>
+                                            <option value="happay">Happay</option>
+                                            <option value="fuel_card">Fuel Card</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class=" item form-group" id="fuel_card_area">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"><span>Fuel Card Number</span></label>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <select class="fuel_card_number form-control" name="fuel_card_number"
+                                                style="width: 100%">
+                                            {% if payment_id.fuel_card != None %}
+                                                <option value="{{ payment_id.fuel_card_id }}">{{ payment_id.fuel_card.card_number }}</option>
+                                            {% else %}
+                                                <option></option>
+                                            {% endif %}
+                                            {% for value in fuel_card %}
+                                                <option value="{{ value.id }}">{{ value.card_number }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class=" item form-group" id="bank_account_area">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">Account Number *</span></label>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <select class="bank_account_number form-control" name="bank_account_number"
+                                                style="width: 100%">
+                                            {% if payment_id.bank_account != None %}
+                                                <option value="{{ payment_id.bank_account_id }}">{{ payment_id.bank_account.account_holder_name }}, {{ payment_id.bank_account.account_number }}</option>
+                                            {% else %}
+                                                <option></option>
+                                            {% endif %}
+                                            {% for value in bank_account %}
+                                                <option value="{{ value.id }}">{{ value.beneficiary_code }}, {{ value.account_holder_name }}, {{ value.account_number }}, {{ value.ifsc }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Payment <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="payment_date" name="outward_payment_date"
+                                               class="date-picker form-control col-md-7 col-xs-12"
+                                               placeholder="Pick Date of Payment" required="required" type="text"
+                                               value="{{ payment_id.payment_date }}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Remarks
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea id="textarea" required="required" name="remarks"
+                                                  placeholder="Please provide explanations"
+                                                  data-parsley-minlength="3"
+                                                  data-parsley-maxlength="200"
+                                                  class="form-control col-md-7 col-xs-12">{{ payment_id.remarks }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button type="reset" class="btn btn-primary">Reset</button>
+                                        <button id="send" type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{#    </div>#}
+
+{% endblock %}
+{% block js %}
+
+    <script src="{% static "aaho/js/lr/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+
+    <script>
+        $(".select2_multiple").select2({
+            maximumSelectionLength: 1,
+            placeholder: "Please add all associated LR(s)",
+            allowClear: true
+        });
+        $(".outward_payment_mode").select2({
+            placeholder: "Select a Account Number",
+            allowClear: true
+        });
+        $(".fuel_card_number").select2({
+            placeholder: "Select a Fuel Card Number",
+            allowClear: true
+        });
+        $(".bank_account_number").select2({
+            placeholder: "Select a Account Number",
+            allowClear: true
+        });
+        {% if payment_id.payment_mode == 'fuel_card'%}
+            $("#fuel_card_area").show();
+        {% else %}
+            $("#fuel_card_area").hide();
+        {% endif %}
+        {% if payment_id.payment_mode == 'neft' or payment_id.payment_mode == 'rtgs' or payment_id.payment_mode == 'hdfc_internal_account' %}
+            $("#bank_account_area").show();
+        {% else %}
+            $("#bank_account_area").hide();
+        {% endif %}
+        $(".outward_payment_mode").select2().on('change', function () {
+            if ($(this).val() == "fuel_card") {
+                $("#bank_account_area").hide().prop(('required', false));
+                $("#fuel_card_area").show().prop(('required', true));
+            }
+            else if ($(this).val() == "neft" || $(this).val() == "rtgs" || $(this).val() == "hdfc_internal_account") {
+                $("#bank_account_area").show().prop(('required', true));
+                $("#fuel_card_area").hide().prop(('required', false));
+            }
+            else {
+                $("#fuel_card_area").hide().prop(('required', false));
+                $("#bank_account_area").hide().prop(('required', false));
+            }
+        });
+        var dateFormat = {
+            format: "dd-M-yyyy",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        };
+        $('#payment_date').datepicker(dateFormat);
+    </script>
+    <!-- /validator -->
+{% endblock %}

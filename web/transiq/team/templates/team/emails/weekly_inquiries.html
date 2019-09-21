@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+{% load helper_tags_team %}
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>
+        Number of Inquiries: {{ inq_counts }}
+    </h4>
+    <h4><a href="{{ s3_url }}"> Click to download File</a></h4>
+</div>
+<table>
+    <tr>
+        <th>City</th>
+        <th>Open</th>
+        <th>Cancelled</th>
+        <th>Fulfilled</th>
+        <th>Unverified</th>
+        <th>Lapsed</th>
+    </tr>
+    {% for inq in inquiries %}
+        <tr>
+
+            <td>{{ inq.0 }}</td>
+            <td>{{ inq.1 }}</td>
+            <td>{{ inq.2 }}</td>
+            <td>{{ inq.3 }}</td>
+            <td>{{ inq.4 }}</td>
+            <td>{{ inq.5 }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

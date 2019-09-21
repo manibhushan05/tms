@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/aaho/images/logo/logo.png" type="image/x-icon"/>
+    <title>Aaho - Online Truck Booking</title>
+
+    <!-- Bootstrap -->
+
+    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet"   >
+    <!-- Font Awesome -->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="{% static "vendor/mCustomScrollbar/jquery.mCustomScrollbar.min.css" %}" rel="stylesheet">
+    <link href="{% static "vendor/icheck-1/skins/flat/green.css" %}" rel="stylesheet">
+
+    {% block css %}{% endblock %}
+    <!-- Custom Theme Style -->
+    <link href="{% static "vendor/gentelella/css/custom.min.css" %}" rel="stylesheet">
+    <style>
+        .titleTop {
+            margin-top: 15px;
+            position: absolute;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col menu_fixed">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="" class="site_title"><img height="22vw"
+                                                       src="{% static "aaho/images/logo/logo-transparent.png" %}"
+                                                       alt="...">
+                        <span>Aaho</span></a>
+                </div>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section" style="padding-top: 80px">
+                        <ul class="nav side-menu">
+                            <li><a href="/supplier/new-booking-page/"><i class="fa fa-home"></i> New Booking</a></li>
+                            <li><a href="/supplier/booking-record/"><i class="fa fa-history"></i>Booking Table</a></li>
+                            <li><a><i class="fa fa-inr"></i> Payments <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/supplier/outward-payment-page/">Make Outward Payment</a></li>
+                                    <li><a href="/supplier/outward-payment-record/">Outward Payment Record</a></li>
+                                    <li><a href="/supplier/inward-payment-page/">Make Inward Payment</a></li>
+                                    <li><a href="/supplier/inward-payment-record/">Inward Payment Record</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-registered"></i> Registration <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/supplier/register-transporter-page/">Register Transporter</a></li>
+                                    <li><a href="/supplier/register-vehicle-page/">Register Vehicle</a></li>
+                                    <li><a href="/supplier/register-driver-page/">Register Driver</a></li>
+                                    <li><a href="/supplier/register-owner-page/">Register Owner</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a><i class="fa fa-database"></i> Records <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/supplier/transporter-records/">Transporter</a></li>
+                                    <li><a href="/supplier/vehicle-records/">Vehicle</a></li>
+                                    <li><a href="/supplier/driver-records/">Driver</a></li>
+                                    <li><a href="/supplier/truck-owner-records/">Owner</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small" style="background-color: #172D44">
+                    <h5 align="center">Trans IQ Technologies Pvt. Ltd.</h5>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+
+            <div class="nav_menu">
+                <nav class="" role="navigation">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    {% block pageTitle %}
+                    {% endblock %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="{% static "aaho/images/img.png" %}" alt="">
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="#"> Profile</a>
+                                </li>
+
+                                <li>
+                                    <a href="#">Help</a>
+                                </li>
+                                <li><a href="/authentication/logout/"><i class="fa fa-sign-out pull-right"></i>
+                                    Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li role="presentation" class="dropdown">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa fa-bell"></i>
+                                <span class="badge bg-green">0</span>
+                            </a>
+                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                <li>
+                                    <div class="text-center">
+                                        <a>
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="{% static "vendor/jQuery/js/jquery.min.js" %}"></script>
+<!-- Bootstrap -->
+<script src="{% static "vendor/bootstrap/3.3.6/js/bootstrap.min.js" %}"></script>
+<!-- FastClick -->
+<script src="{% static "vendor/fastclick/fastclick.min.js" %}"></script>
+<!-- NProgress -->
+<script src="{% static "vendor/nprogress/js/nprogress.min.js" %}"></script>
+{% block js %}{% endblock %}
+<!-- jQuery custom content scroller -->
+<script src="{% static "vendor/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js" %}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{% static "vendor/gentelella/js/custom.min.js" %}"></script>
+</body>
+</html>

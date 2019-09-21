@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+
+        /* Global Defaults */
+        html {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: grey;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, li, ul, ol {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            border: none;
+        }
+
+        /* Specifics */
+        body {
+            font-family: "DejaVu Sans", Calibri;
+            font-size: 16px;
+            width: 1048px;
+            height: 1481px;
+            margin: 0 auto;
+            padding: 0;
+            border: 0;
+            background: white;
+        }
+
+        b {
+            font-weight: bold;
+        }
+
+        div.page {
+            padding: 0px 0px;
+            width: 1048px;
+            height: 1481px;
+            page-break-after: always;
+        }
+
+        table, tr, th, td {
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        div.underline {
+            border-bottom: 3px solid #0c199c;
+        }
+
+        div.header {
+            padding: 4% 8% 1% 8%;
+            overflow: hidden;
+        }
+
+        div.header div.left {
+            display: inline-block;
+            float: left;
+            width: 20%;
+        }
+
+        div.header div.right {
+            display: inline-block;
+            float: left;
+            width: 80%;
+            text-align: right;
+        }
+
+        div.header div.title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0c199c;
+        }
+
+        div.header div.website {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        div.header div.cin {
+            margin-bottom: 3px;
+        }
+
+        div.body {
+            padding: 2% 8% 2% 8%;
+            overflow: hidden;
+            font-size: 18px;
+        }
+
+        img.logo_img {
+            margin: 10px 0;
+        }
+
+        div.body div.company_name {
+            font-weight: bold;
+        }
+
+        div.body div.invoice_number {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        div.body div.invoice_date {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        div.body div.to {
+            margin: 10px 0;
+        }
+
+        div.body div.address {
+            width: 50%;
+        }
+
+        div.body div.subject {
+            margin: 40px 0;
+        }
+
+        th, td {
+            padding: 5px 2px;
+
+        }
+
+        div.table {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        div.table table {
+            width: 100%;
+        }
+
+        div.charges_remark {
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        div.remark {
+            padding: 30px 0 40px;
+        }
+
+        div.regards {
+            padding: 30px 0 10px;
+        }
+
+        div.total_amount {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        div.page {
+            position: relative;
+        }
+
+        div.page div.footer {
+            position: absolute;
+            bottom: 0;
+            font-size: 16px;
+        }
+
+        div.footer div.address {
+            text-align: center;
+            padding: 10px 0 2px;
+        }
+
+        div.footer div.info {
+            text-align: center;
+            padding: 1px 0 20px;
+        }
+
+        div.footer div.bottom {
+            text-align: center;
+            padding: 5px 0;
+            font-style: italic;
+        }
+
+        div.payment_modes {
+            margin: 10px 80px 10px 80px;
+            border: 2px solid #0c199c;
+            padding: 15px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        div.payment_modes > div.title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        div.payment_modes > div > div.title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        div.payment_modes > div.left {
+            width: 40%;
+            display: inline-block;
+            float: left;
+        }
+
+        div.payment_modes > div.right {
+            padding-left: 16%;
+            width: 44%;
+            display: inline-block;
+            float: left;
+        }
+
+        #particular {
+            padding-left: 12px;
+            font-size: 16px;
+        }
+
+        .lr_div div {
+            display: inline-grid;
+        }
+
+        .signature {
+            text-align: right;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <div class="left">
+            <img class="logo_img" width="145px" height="90px" src="{{ transiq.logo_data }}" alt="logo.png">
+        </div>
+        <div class="right">
+            <div class="title">TRANS IQ TECHNOLOGIES PVT. LTD.</div>
+            <div class="cin">Regd Office: 1404/1405, Panchvati, A-Wing, Panch Shrishti Complex</div>
+            <div class="cin">Chandivali, Powai, Behind S M Shetty School, Mumbai - 400072</div>
+            <div class="cin">CIN: U74999MH2016PTC273893, PAN: AAFCT6897A</div>
+            <div class="cin">MSME Udyog Aadhaar No.: MH33D0017022</div>
+        </div>
+    </div>
+    <div class="underline"></div>
+    <div class="body">
+        <div class="invoice_number">Invoice No.: {{ invoice_number }}</div>
+        <div class="invoice_date">Invoice Date: {{ invoice_date|date:'d-M-Y' }}</div>
+        <br/>
+        <div class="to">To,</div>
+        <div class="company_name">{{ company_name }}</div>
+        <div class="address">{{ address }}</div>
+        {% if gstin %}
+            <div class="address">GSTIN : {{ gstin }}</div>
+        {% endif %}
+        <br/>
+        <h2 align="center">INVOICE</h2>
+        <br/>
+        <br/>
+        <div class="table">
+            <table>
+                <tr>
+                    <th>Particulars</th>
+                    <th>Quantity</th>
+                    <th>Rate</th>
+                    <th>Freight<br/>Charges</th>
+                    <th>Other<br/>Charges</th>
+                    <th>Total<br/>Amount</th>
+                </tr>
+                <tr>
+                    <td align="left" id="particular">
+                        {% if lr_number %}
+                            <br/>
+                            <div class="lr_div">
+                                <div align="top">LR No:</div>
+                                <div>{{ lr_number|linebreaks }} </div>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <br/>
+                            Shipment Date: {{ date|date:'d-M-Y' }}<br/><br/>
+                            Source: {{ from_city }}<br/>
+                            Destination: {{ to_city }}<br/><br/>
+                            Vehicle No.: {{ lorry_number }}<br/><br/><br/>
+                        </div>
+                    </td>
+                    <td align="center">{{ charged_weight|floatformat:'3' }}</td>
+                    <td align="center">{{ party_rate }}</td>
+                    <td align="center">{{ freight }}</td>
+                    <td align="center">{{ other_charge }} {% if remarks %}*{% endif %}</td>
+                    <td align="center">{{ total_amount }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" align="right"><b>Total</b></td>
+                    <td align="center"><b>{{ total_amount }}</b></td>
+                </tr>
+                {% if advance_to_transiq > 0 %}
+                    <tr>
+                        <td colspan="5" align="right"><b>Advance Paid</b></td>
+                        <td align="center"><b>{{ advance_to_transiq_inr }}</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="right"><b>Balance Amount</b></td>
+                        <td align="center"><b>{{ balance_amount }}</b></td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td colspan="6" align="right"><b>Rupees {{ total_amount_in_rupee|title }} only</b></td>
+                </tr>
+            </table>
+
+        </div>
+
+        {% for remark in remarks %}
+            <div class="charges_remark">* {{ remark }}</div>
+        {% endfor %}
+        <dl>
+            <dt>Note:</dt>
+            <dd>
+                <ol style="list-style-type:disc">
+                    <li>{{ gst_liability_remarks }}</li>
+                    <li>Interest @18% p.a. will be charged on overdue invoices</li>
+                    <li>In case of any discrepancy in this invoice please inform us within 7 days of the receipt of the
+                        invoice
+                    </li>
+                </ol>
+            </dd>
+        </dl>
+
+        <br/>
+
+
+    </div>
+
+
+    <div class="footer">
+        <div class="signature">For Trans IQ Technologies Pvt. Ltd.</div>
+        <div class="signature"><img class="logo_img" width="70px" height="70px" style="margin-right: 40px"
+                                    src="{{ authorized_signature }}" alt="logo.png"></div>
+
+        <div class="signature">Authorized Signatory</div>
+
+        <br/>
+
+        <div class="payment_modes">
+            <div class="title">PAYMENT MODES</div>
+            <div class="left">
+                <div class="title">Through Cheque</div>
+                <div class="details">
+                    Draw Cheque in favour of <b>Trans IQ Technologies Pvt. Ltd.</b>
+                    and post/courier it to <i>"610-611, Shivai Plaza Premises Co-Operative Society Limited, Marol Industrial Estate, Marol, Andheri East, Mumbai - 400059"<br/>Phone: 022-67424119
+                </i>
+                </div>
+            </div>
+            <div class="right">
+                <div class="title">Through NEFT/RTGS</div>
+                <div class="details">
+                    Name: Trans IQ Technologies Pvt Ltd<br/>
+                    Account Number: <b>352205100000101</b><br/>
+                    IFS Code: <b>UBIN0535222</b><br/>
+                    Bank and Branch: Union Bank of India<br/>Gowalia Tank, Mumbai - 400036
+                    <br/>
+                </div>
+            </div>
+        </div>
+
+        <div class="underline"></div>
+
+        <div class="info">Website: <a href="https://www.aaho.in/">www.aaho.in</a>, Email: info@aaho.in, Phone:
+            022-67424119
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

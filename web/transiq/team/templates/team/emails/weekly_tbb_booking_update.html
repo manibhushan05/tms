@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+{% load helper_tags_team %}
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>Total open bookings: {{ number_of_open_booking }}</h4>
+    <h4>POD Pending: {{ number_of_pod_pending }}</h4>
+    <h4>POD received but invoice not raised: {{ number_of_pod_received_invoice_not_raised }}</h4>
+    <h4>POD received but outward payment pending: {{ number_of_pod_received_outward_payment_pending }}</h4>
+    <h4>Invoice raised and inward payment pending: {{ number_of_pod_received_inward_payment_pending }}</h4>
+</div>
+<div>
+
+
+    <table>
+        <tr>
+            <th>Shipment Date</th>
+            <th>Invoice Date</th>
+            <th>No. of days(Inv Old)</th>
+            <th>LR Number</th>
+            <th>Company</th>
+            <th>Supplier</th>
+            <th>POD Status</th>
+            <th>Invoice Status</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Lorry Number</th>
+        </tr>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.shipment_date }}</td>
+                <td>{{ booking.billing_invoice_date }}</td>
+                <td>{{ booking.invoice_age }} </td>
+                <td>{{ booking.lr_number|linebreaks}}</td>
+                <td>{{ booking.customer_placed_order }}</td>
+                <td>{{ booking.supplier }}</td>
+                <td>{{ booking.pod_status }}</td>
+                <td>{{ booking.invoice_status }}</td>
+                <td>{{ booking.from_city }}</td>
+                <td>{{ booking.to_city }}</td>
+                <td>{{ booking.vehicle_number }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+</body>
+</html>

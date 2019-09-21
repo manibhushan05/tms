@@ -1,0 +1,59 @@
+{# {% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Issue Credit Debit Note</h3>
+{% endblock %}
+{% block content %}
+{#    <div class="right_col" role="main">#}
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12 item form-group ">
+                                <label for="cdn">Select Category</label>
+                                <select class=" form-control" id="cdn" onChange="getAjaxCallFunction(this.value)">
+                                    <option></option>
+                                    <option value="/page/issue-credit-note-customer-page/"> Credit Note for
+                                        Customer (CNC)
+                                    </option>
+                                    <option value="/page/issue-credit-note-supplier-page/"> Credit Note for
+                                        Supplier (CNS)
+                                    </option>
+                                    <option value="/page/issue-debit-note-customer-page/"> Debit Note for Customer
+                                        (DNC)
+                                    </option>
+                                    <option value="/page/issue-debit-note-supplier-page/"> Debit Note for Supplier
+                                        (DNS)
+                                    </option>
+                                    <option value="/page/issue-credit-note-customer-direct-advance-page/"> Credit
+                                        Note for Customer Advance Payment (CNCA)
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script>
+        $("#cdn").select2({
+            placeholder: "Please Select Category",
+            allowClear: true
+        }).change(function () {
+
+        });
+    </script>
+
+{% endblock %}

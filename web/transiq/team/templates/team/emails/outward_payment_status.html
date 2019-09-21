@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>
+        Following are the bookings where POD has been received but outward payment is incomplete. No. of bookings: {{ mb.count }}.
+    </h4>
+</div>
+<table>
+    <tr>
+        <th>Shipment Date</th>
+        <th>LR Number</th>
+        <th>Supplier</th>
+        <th>POD date</th>
+        <th>Amount</th>
+        <th>Paid</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Lorry Number</th>
+
+    </tr>
+    {% for booking in mb %}
+        <tr>
+
+            <td>{{ booking.shipment_date|date:'d-M-Y' }}</td>
+            <td>
+                {% if booking.booking_id|slice:'0:3' == 'BRO' %}
+                    {{ booking.booking_id }}
+                {% else %}
+                    {% for lr in booking.lr_numbers.all %}
+                        <p>{{ lr.lr_number }}</p>
+                    {% endfor %}
+                {% endif %}
+            </td>
+
+            <td>{{ booking.truck_broker_owner_name }}</td>
+            <td>{{ booking.pod_date|date:'d-M-Y' }}</td>
+            <td>{{ booking.total_amount_to_owner }}</td>
+            <td>{{ booking.total_out_ward_amount }}</td>
+            <td>{{ booking.from_city }}</td>
+            <td>{{ booking.to_city }}</td>
+            <td>{{ booking.lorry_number }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

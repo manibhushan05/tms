@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load helper_tags_team %}
+
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #FFFFFF;
+            text-align: left;
+            padding: 8px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <p>Dear Customer,</p>
+    <p>Please find attached freight invoices for {{ number_of_shipment }} shipment(s){% if pod_files %}, along with Proofs of Delivery.{% else %}.{% endif %}</p>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Invoice No.</th>
+            <th>Invoice Date</th>
+            <th>Invoice Amount</th>
+            {% if credit_period > 0 %}
+                <th>Due Date</th>
+            {% endif %}
+        </tr>
+        {% for invoice in invoices_data %}
+            <tr>
+                <td>{{ invoice.invoice_number }}</td>
+                <td>{{ invoice.invoice_date }}</td>
+                <td>{{ invoice.invoice_amount }}</td>
+                {% if credit_period > 0 %}
+                    <td>{{ invoice.due_date }}</td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+    </table>
+    {% if additional_charge_remarks %}
+        <p><sup>* </sup>Remarks</p>
+    {% endif %}
+
+    <ol type="1">
+        {% for remark in additional_charge_remarks %}
+            <li>{{ remark.message }}</li>
+        {% endfor %}
+    </ol>
+    <p>Terms & Conditions:</p>
+    <ol type="1">
+        <li>In case of any discrepancy in these invoices please inform us within 7 days
+        </li>
+        <li>Payment to be made by cheque / bank transfer within {{ credit_period }} days of receipt of invoice. Interest
+            @18% p.a. will be charged on overdue invoices.
+
+        </li>
+    </ol>
+    {% if credit_period >= 30 %}
+        <h3>Aaho offers attractive discounts for advance payment of invoices. Reply to this mail now to save your
+            freight costs! </h3>
+    {% endif %}
+
+    <br/>
+    <p>Thanks and Regards</p>
+    <p>Team Aaho</p>
+    <p>Trans IQ Technologies Pvt Ltd</p>
+
+{#    <h3>Email ID List: </h3>#}
+{#    <ol>#}
+{#        {% for email in email_id_list %}#}
+{#            <li>{{ email }}</li>#}
+{#        {% endfor %}#}
+{#    </ol>#}
+</div>
+</body>
+</html>

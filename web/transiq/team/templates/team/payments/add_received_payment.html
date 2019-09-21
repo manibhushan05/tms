@@ -1,0 +1,202 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load humanize %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <style>
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Add Received Payments</h3>
+{% endblock %}
+{% block content %}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    {% if upload_file %}
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="error-message">
+                                {% if invalid_format_error|length > 0 %}
+                                    <h4>*Entire Payment is rejected due to following error, Please correct and
+                                        upload entire file again</h4>{% endif %}
+                                {% for error in invalid_format_error %}
+                                    <h5>{{ error }}</h5>
+                                {% endfor %}
+                            </div>
+                            {% if success_payments|length > 0 %}
+                                <div class="success-message">
+                                    <table class="table table-striped">
+                                        <caption>Accepted Payments</caption>
+                                        <thead>
+                                        <tr>
+                                            <th>Payment Date</th>
+                                            <th>CHQ/UTR No</th>
+                                            <th>Mode</th>
+                                            <th>Received From</th>
+                                            <th>Amount</th>
+                                            <th>Remarks</th>
+                                            <th>Uploaded On</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for payment in success_payments %}
+                                            <tr>
+                                                <td>{{ payment.payment_date }}</td>
+                                                <td>{{ payment.trn }}</td>
+                                                <td>{{ payment.payment_mode }}</td>
+                                                <td>{{ payment.customer_name }}</td>
+                                                <td>{{ payment.amount }}</td>
+                                                <td>{{ payment.additional_remark }}</td>
+                                                <td>{{ payment.uploaded_datetime }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
+
+                            {% if duplicate_payments|length > 0 %}
+                                <div class="error-message">
+                                    <table class="table table-striped">
+                                        <caption>Duplicate Payments rejected by system</caption>
+                                        <thead>
+                                        <tr>
+                                            <th>Payment Date</th>
+                                            <th>CHQ/UTR No</th>
+                                            <th>Mode</th>
+                                            <th>Received From</th>
+                                            <th>Amount</th>
+                                            <th>Remarks</th>
+                                            <th>Uploaded On</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for payment in duplicate_payments %}
+                                            <tr>
+                                                <td>{{ payment.payment_date }}</td>
+                                                <td>{{ payment.trn }}</td>
+                                                <td>{{ payment.payment_mode }}</td>
+                                                <td>{{ payment.customer_name }}</td>
+                                                <td>{{ payment.amount }}</td>
+                                                <td>{{ payment.additional_remark }}</td>
+                                                <td>{{ payment.uploaded_datetime}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
+
+                            <button type="button" id="btn-add-receive-payments" class="btn btn-lg btn-primary">Back
+                                To Add Payments
+                            </button>
+                        </div>
+                    {% else %}
+                        <form class="form-horizontal form-label-left"
+                              id="credited-inward-payments"
+                              enctype="multipart/form-data"
+                              novalidate>
+                            <div class="item form-group col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                <input type="file" name="payment_file"
+                                    accept=".xlsx"
+                                       required/>
+                            </div>
+                            <div class="item form-group col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                <button id="btn-credited-inward-payments" class="btn btn-success">Upload Credited
+                                    Payments
+                                </button>
+                            </div>
+                        </form>
+                        <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="pending-inward-payment-form"
+                              data-parsley-validate data-parsley-trigger="keyup"
+                              enctype="multipart/form-data">
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                <div class="item form-group">
+                                    <label for="customer">Customer *</label>
+                                    <select class="form-control" name="customer" id="customer" style="width: 100%;"
+                                            tabindex="-1" required>
+                                        <option></option>
+                                        {% for customer in customers %}
+                                            <option value="{{ customer.id }}">
+                                                {{ customer.get_name|default_if_none:"" }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="item form-group ">
+                                    <label> <span class="required">Payment Mode *</span></label>
+                                    <select class="form-control"
+                                            name="payment_mode" id="payment_mode" required style="width: 100%;">
+                                        <option value="">Choose Payment Mode</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="cheque">Cheque</option>
+                                        <option value="neft">NEFT</option>
+                                        <option value="rtgs">RTGS</option>
+                                        <option value="cash_deposit">Cash Deposit</option>
+                                        <option value="hdfc_internal_account">HDFC Internal Account</option>
+                                    </select>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" id="trn-label">CHQ/UTR No</label>
+                                    <input type="text" class="form-control" name="trn" id="trn"
+                                           placeholder="Enter CHQ/UTR No."  data-parsley-maxlength="100" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                <div class="item form-group ">
+                                    <label class="control-label"><span
+                                            class="required">Payment Date *</span></label>
+                                    <input type="text" class="date form-control" readonly
+                                           style="background-color: white" name="payment_date"
+                                           placeholder="Choose Date" required>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Amount<span class="required">*</span></label>
+                                    <input type="number" class="form-control" data-parsley-type="number" step="0.01"
+                                           data-parsley-min="0"
+                                           data-parsley-max="9999999"
+                                           name="amount" placeholder="Amount" required>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Narration</label>
+                                    <input type="text" class="form-control" name="additional_remark"
+                                           data-parsley-minlength="0"
+                                           data-parsley-maxlength="200"
+                                           placeholder="Enter Add. Remarks">
+                                </div>
+                            </div>
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            <div class="form-group col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                                <button type="reset" class="btn btn-lg btn-danger">Reset Entry</button>
+                                <button id="btn-pending-inward-payment" type="submit"
+                                        class="btn btn-lg btn-success">Make Entry
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/pending-inward-payment.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: config
+    destination: /home/ubuntu/aaho/web/config
+  - source: transiq
+    destination: /home/ubuntu/aaho/web/transiq
+hooks:
+  BeforeInstall:
+    - location: config/beforeinstall.sh
+  AfterInstall:
+    - location: config/afterinstall.sh
+      timeout: 8000
+  ApplicationStart:
+  ValidateService:
+

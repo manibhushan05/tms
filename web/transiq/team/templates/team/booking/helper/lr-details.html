@@ -1,0 +1,318 @@
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+<div class="">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>LR Details</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link "><i
+                                class="fa fa-chevron-down"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content ">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <h4>Consignor Details</h4>
+                        <div class="item form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="consignor_name"
+                                   placeholder="Consignor Name" data-parsley-minlength="3"
+                                   data-parsley-maxlength="100"
+                                   data-parsley-validation-threshold="1"
+                                   value="{{ consignor_name|default_if_none:'' }}">
+                        </div>
+
+                        <div class="item form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="consignor_address"
+                                   placeholder="Address" data-parsley-minlength="3"
+                                   data-parsley-maxlength="255"
+                                   data-parsley-validation-threshold="1"
+                                   value="{{ consignor_address|default_if_none:"" }}">
+                        </div>
+
+                        <div class="item form-group">
+                            <label for="consignor_city">City</label>
+                            <select class="city form-control" name="consignor_city_fk" id="consignor_city">
+                                <option selected>
+                                    {% if consignor_city_fk_data.id != -1 %}
+                                        <option value="{{ consignor_city_fk_data.id }}"
+                                                selected>{{ consignor_city_fk_data.name }}</option>
+                                    {% endif %}
+                            </select>
+                        </div>
+
+                        <div class="item form-group">
+                            <label>PIN Code</label>
+                            <input type="text" class="form-control" name="consignor_pin" data-parsley-type="digits"
+                                   placeholder="PIN Code" data-parsley-minlength="6" data-parsley-maxlength="6"
+                                   value="{{ consignor_pin|default_if_none:"" }}">
+                        </div>
+
+                        <div class="item form-group">
+                            <label>Phone </label>
+                            <input type="text" class="form-control" name="consignor_phone"
+                                   placeholder="Phone" data-parsley-maxlength="10"
+                                   data-parsley-pattern="{% regex_phone %}" data-parsley-type="digits"
+                                   value="{{ consignor_phone|default_if_none:"" }}">
+                        </div>
+
+                        <div class="item form-group">
+                            <label>GSTIN</label>
+                            <input type="text" class="form-control" name="consignor_gstin"
+                                   data-parsley-pattern="{% regex_gstin %}"
+                                   placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                   data-parsley-type="alphanum" data-parsley-maxlength="15"
+                                   value="{{ consignor_gstin|default_if_none:"" }}">
+                        </div>
+
+                        <h4>Description</h4>
+                        <div class="item form-group">
+                            <label>No. of Packages</label>
+                            <input type="text" class="form-control" name="number_of_package"
+                                   placeholder="Number of Package" data-parsley-maxlength="30"
+                                   value="{{ number_of_package|default_if_none:"" }}">
+                        </div>
+
+                        <div class="item form-group">
+                            <label>Material</label>
+                            <textarea class="form-control" rows="2" name="material" id="material"
+                                      data-parsley-minlength="3" data-parsley-maxlength="500"
+                                      placeholder="Write material description in MAX 160 characters...">{{ material|default_if_none:"" }}</textarea>
+                        </div>
+                        <div class="item form-group">
+                            <label>Actual Weight(in Tonnes) *</label>
+                            <input type="number" class="form-control" name="loaded_weight"
+                                   id="loaded_weight" step="0.001" placeholder="Actual weight"
+                                   value="{{ loaded_weight|default_if_none:"" }}" data-parsley-min="0"
+                                   data-parsley-max="10000" data-parsley-type="number" required>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <h4>Consignee details</h4>
+                        <div class="item form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="consignee_name" id="consignee_name"
+                                   placeholder="Consignee Name" data-parsley-minlength="3" data-parsley-maxlength="100"
+                                   value="{{ consignee_name|default_if_none:'' }}">
+                        </div>
+                        <div class="item form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="consignee_address" id="consignee_address"
+                                   placeholder="Address" data-parsley-minlength="3" data-parsley-maxlength="400"
+                                   value="{{ consignee_address|default_if_none:"" }}">
+                        </div>
+                        <div class="item form-group">
+                            <label for="consignee_city">City</label>
+                            <select class="city form-control" name="consignee_city_fk" id="consignee_city_fk"
+                                    tabindex="-1">
+                                {% if consignee_city_fk_data.id != -1 %}
+                                    <option value="{{ consignee_city_fk_data.id }}"
+                                            selected>{{ consignee_city_fk_data.name }} </option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="item form-group">
+                            <label>PIN Code</label>
+                            <input type="text" class="form-control" name="consignee_pin" data-parsley-type="digits"
+                                   placeholder="PIN" data-parsley-maxlength="6" data-parsley-minlength="6"
+                                   value="{{ consignee_pin|default_if_none:'' }}">
+                        </div>
+                        <div class="item form-group">
+                            <label>Phone</label>
+                            <input type="text" class="form-control" name="consignee_phone"
+                                   placeholder="Phone" data-parsley-type="digits"
+                                   data-parsley-pattern="{% regex_phone %}" data-parsley-maxlength="10"
+                                   value="{{ consignee_phone|default_if_none:"" }}">
+                        </div>
+                        <div class="item form-group">
+                            <label>GSTIN</label>
+                            <input type="text" class="form-control" name="consignee_gstin"
+                                   data-parsley-pattern="{% regex_gstin %}" data-parsley-maxlength="15"
+                                   placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                   data-parsley-type="alphanum" value="{{ consignee_gstin|default_if_none:"" }}">
+                        </div>
+                        <h4>Insurance</h4>
+                        <div class="radio">
+                            <label>The Customer has stated that:</label>
+                        </div>
+                        {% if is_insured %}
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="flat" name="insured"
+                                           value="not insured" checked>
+                                    They have insured the
+                                    consignment {{ is_insured }}
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="flat" name="insured"
+                                           value="not insured">
+                                    They have not insured the consignment
+                                </label>
+                            </div>
+
+                        {% else %}
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="flat" name="insured" value="insured">
+                                    They have insured the
+                                    consignment {{ is_insured }}
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" class="flat" name="insured"
+                                           value="not insured">
+                                    They have not insured the consignment
+                                </label>
+                            </div>
+                        {% endif %}
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                            <div class="item form-group">
+                                <label>Insurance Provider</label>
+                                <input type="text" class="form-control" name="insurance_provider" placeholder="Company"
+                                       data-parsley-minlength="3" data-parsley-maxlength="100"
+                                       value="{{ insurance_provider|default_if_none:'' }}">
+                            </div>
+                            <div class="item form-group">
+                                <label>Ins. Policy No.</label>
+                                <input type="text" class="form-control" name="insurance_policy_number"
+                                       placeholder="Policy No." data-parsley-minlength="3" data-parsley-maxlength="35"
+                                       value="{{ insurance_policy_number|default_if_none:"" }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                            <div class="item form-group">
+                                <label>Insured Amount</label>
+                                <input type="number" class="form-control" name="insured_amount" placeholder="Amount"
+                                       data-parsley-min="0" data-parsley-max="9999999" data-parsley-type="number"
+                                       value="{{ insured_amount|default_if_none:0 }}">
+                            </div>
+                            <div class="item form-group">
+                                <label>Insurance Date</label>
+                                <input type="text" class="form-control" id="insurance_date" name="insurance_date"
+                                       placeholder="Date" value="{{ insurance_date|default_if_none:"" }}" readonly
+                                       style="background-color: white">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <h4>Others</h4>
+                        <div class="item form-group">
+                            <label for="billing_type"><span
+                                    class="required">Billing Type * </span></label>
+                            <select class="billing_type form-control" name="billing_type"
+                                    id="billing_type" tabindex="-1" required>
+                                <option value="{{ billing_type|default_if_none:"T.B.B." }}"
+                                        selected>
+                                    {{ billing_type|default_if_none:"T.B.B." }}</option>
+                                <option value="T.B.B.">T.B.B.</option>
+                                <option value="To Pay">To Pay</option>
+                                <option value="Paid">Paid</option>
+
+                            </select>
+                        </div>
+                        <div class="item form-group">
+                            <label for="from_city"><span class="required">From * </span></label>
+                            <select class="city form-control"
+                                    name="from_city_fk" id="from_city">
+                                {% if from_city_fk_data %}
+                                    <option value="{{ from_city_fk_data.id }}"
+                                            selected>{{ from_city_fk_data.name }}</option>
+                                {% endif %}
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group">
+                            <label for="to_city"><span class="required">To * </span></label>
+                            <select class="city form-control"
+                                    name="to_city_fk" id="to_city" required>
+                                {% if to_city_fk_data %}
+                                    <option value="{{ to_city_fk_data.id }}"
+                                            selected>{{ to_city_fk_data.name }}</option>
+                                {% endif %}
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group">
+                            <label><span class="required">Vehicle No. *</span></label>
+                            <input type="text" class="form-control" name="vehicle_number"
+                                   placeholder="Lorry No." autocomplete="off"
+                                   value="{{ vehicle_data.vehicle_number }}"
+                                   readonly>
+                        </div>
+                        <div class="item form-group">
+                            <label for="type_of_vehicle"><span
+                                    class="required">Truck Type * </span></label>
+                            <select class="truck_type form-control" name="vehicle_category_id"
+                                    required>
+                                {% if vehicle_category_data %}
+                                    <option value="{{ vehicle_category_data.id }}"
+                                            selected>
+                                        {{ vehicle_category_data.type }}</option>
+                                {% endif %}
+
+                            </select>
+                        </div>
+                        <div class="item form-group">
+                            <label>Party Invoice No:</label>
+                            <input type="text" class="form-control" name="party_invoice_number"
+                                   placeholder="Party Invoice No." data-parsley-minlength="3"
+                                   data-parsley-maxlength="100" value="{{ party_invoice_number|default_if_none:"" }}">
+                        </div>
+                        <div class="item form-group">
+                            <label>Party Invoice Date</label>
+                            <input type="text" class="date-picker form-control" id="party_invoice_date"
+                                   name="party_invoice_date" placeholder="Select Date" readonly
+                                   style="background-color: white" value="{{ party_invoice_date|default_if_none:'' }}">
+                        </div>
+                        <div class="item form-group">
+                            <label>Party Invoice Amount:</label>
+                            <input type="number" class="form-control" name="party_invoice_amount"
+                                   id="party_invoice_amount" placeholder="Party Amount Amount"
+                                   data-parsley-trigger="keyup" data-parsley-type="digits"
+                                   value="{{ party_invoice_amount|default_if_none:'' }}">
+                        </div>
+                        <div class="item form-group">
+                            <label>Road Permit No.:</label>
+                            <textarea class="form-control" rows="2" name="road_permit_number" id="road_permit_number"
+                                      data-parsley-minlength="3" data-parsley-maxlength="50"
+                                      placeholder="Write Road Permit Number Here ...">{{ road_permit_number|default_if_none:"" }}</textarea>
+                        </div>
+                        {% if source_office.id == 2 or source_office.id == 3 or  destination_office.id == 2 or destination_office.id == 3 %}
+                            <div class="checkbox">
+                                {% if is_advance == 'no' %}
+                                    <label><b>Advance Paid *:</b></label>
+                                    Yes:
+                                    <input type="radio" class="flat"
+                                           name="is_print_payment_mode_instruction" id="genderM"
+                                           value="yes" required/> No:
+                                    <input type="radio" class="flat"
+                                           name="is_print_payment_mode_instruction" id="genderF"
+                                           value="no" checked/>
+                                {% else %}
+                                    <label><b>Advance Paid *:</b></label>
+                                    Yes:
+                                    <input type="radio" class="flat"
+                                           name="is_print_payment_mode_instruction" id="genderM"
+                                           value="yes" checked required/> No:
+                                    <input type="radio" class="flat"
+                                           name="is_print_payment_mode_instruction" id="genderF"
+                                           value="no"/>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

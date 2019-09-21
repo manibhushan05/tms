@@ -1,0 +1,210 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% block css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <style>
+        h5 {
+            text-align: center;
+        }
+        label {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Approve Credit Note Customer</h3>
+{% endblock %}
+{% block content %}
+{#    <div class="right_col" role="main">#}
+        <div class="">
+            {% for row in data %}
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <form class="form-horizontal form-label-left" id="{{ row.approve_cnca_form }}"
+                                      data-parsley-validate data-parsley-trigger="keyup"
+                                      autocomplete="off">
+                                    <div class="scroller_anchor"></div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Date</h5>
+                                        <h5><b>{{ row.created_on }}</b></h5>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Customer</h5>
+                                        <h5><b>{{ row.customer }}</b></h5>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Supplier</h5>
+                                        <h5><b>{{ row.broker }}</b></h5>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Issued By</h5>
+                                        <h5><b>{{ row.created_by }}</b></h5>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Booking</h5>
+                                        <h5><b>{{ row.bookings |safe }}</b></h5>
+                                    </div>
+
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Amount</h5>
+                                        <h5><b>{{ row.amount }}</b></h5>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Reason</h5>
+                                        <h5><b>{{ row.credit_note_reason }}</b></h5>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Remarks</h5>
+                                        <h5><b>{{ row.remarks }}</b></h5>
+                                    </div>
+                                    <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                    <div class="div_rejection_remarks item form-group col-md-6 col-sm-5 col-lg-6 col-xs-12"
+                                         id="{{ row.div_rejection_remarks }}">
+                                        <label for="rejection_remark"><span class="required">Rejection  Remarks*</span></label>
+                                        <input type="text" class="rejection_remark form-control"
+                                               name="rejection_reason" id="{{ row.input_reject_cnca_remarks }}"
+                                               placeholder="Please mention rejection reason">
+                                    </div>
+                                    <div class="ln_solid rejection_line col-md-12 col-xs-12 col-sm-12 col-lg-12"
+                                         id="{{ row.div_rejection_line }}"></div>
+                                    <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                        <input type="hidden" name="status" id="{{ row.btn_status }}">
+                                        <button type="submit" class="btn approve_cnca_btn  btn-sm btn-success"
+                                                id="{{ row.approve_cnca_btn }}"> Approve
+                                        </button>
+                                        <button type="submit" class="btn reject_cnca_btn btn-sm btn-danger"
+                                                id="{{ row.reject_cnca_btn }}"> Reject
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script>
+        $('.div_rejection_remarks').hide();
+            $('.rejection_line').hide();
+            $('.reject_cnca_btn').click(function (e) {
+                var btn_reject_id = $(this).attr('id');
+                var cnca_id = btn_reject_id.slice(16, 21);
+                $("#approve_cnca_btn_" + cnca_id).attr('disabled', true);
+                var approve_cnca_form = $('#approve_cnca_form_' + cnca_id);
+                $('#input_reject_cnca_remarks_' + cnca_id).prop('required', true).prop('disabled', false);
+                $('#div_rejection_remarks_' + cnca_id).show();
+                $('#div_rejection_line_' + cnca_id).show();
+                if (!approve_cnca_form.parsley().isValid()) {
+                    return true;
+                }
+                $('#btn_status_' + cnca_id).val('rejected');
+                e.preventDefault();
+                NProgress.start();
+                var data = approve_cnca_form.serializeJSON();
+                var d = new Date();
+                data['rejected_on'] = d.toISOString();
+                data['rejected_by'] = "{{ request.user.username }}";
+                $.ajax({
+                    url: "/api/team-credit-note-customer-direct-advance-partial-update/" + cnca_id + '/',
+                    type: 'patch',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                    }
+                }).done(function (response, status) {
+                    $.notify("Successfully Rejected", {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'success'
+                    });
+                    NProgress.done();
+                    setTimeout(function () {
+                        getAjaxCallFunction('/page/approve-credit-debit-note-page/');
+                    }, 4000);
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status === "401") {
+                        redirectToLogin(error);
+                    }
+                    else {
+                        $.notify(jqXHR['status'], {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'error'
+                        });
+                    }
+                    NProgress.done();
+                });
+                return false;
+            });
+            $('.approve_cnca_btn').click(function (e) {
+                var btn_approve_id = $(this).attr('id');
+                var cnca_id = btn_approve_id.slice(17, 21);
+                var approve_cnca_form = $('#approve_cnca_form_' + cnca_id);
+                if (!approve_cnca_form.parsley().isValid()) {
+                    return true;
+                }
+                $('#btn_status_' + cnca_id).val('approved');
+                $('#input_reject_cnca_remarks_' + cnca_id).prop('disabled', true);
+                e.preventDefault();
+                NProgress.start();
+                var data = approve_cnca_form.serializeJSON();
+                var d = new Date();
+                data['approved_on'] = d.toISOString();
+                data['approved_by'] = "{{ request.user.username }}";
+                $.ajax({
+                    url: "/api/team-credit-note-customer-direct-advance-partial-update/" + cnca_id + '/',
+                    type: 'patch',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                    }
+                }).done(function (response, status) {
+                    $.notify("Successfull", {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'success'
+                    });
+                    NProgress.done();
+                    setTimeout(function () {
+                        getAjaxCallFunction('/page/approve-credit-debit-note-page/');
+                    }, 4000);
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status === "401") {
+                        redirectToLogin(error);
+                    }
+                    else {
+                        $.notify(jqXHR['status'], {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'error'
+                        });
+                    }
+                    NProgress.done();
+                });
+                return false;
+            });
+    </script>
+{% endblock %}

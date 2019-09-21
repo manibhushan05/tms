@@ -1,0 +1,113 @@
+.titleTop{
+    margin-top: 15px;
+    position: absolute;
+    margin-left: 50px;
+}
+
+.x_content{
+    border-top: none !important;
+}
+
+.field{
+    font-weight: 700;
+}
+
+.edit, .save1, .delete, .edit1, .save, .editPassword{
+    float: right;
+    color: #303F9F;
+    padding: 5px;
+}
+
+.save, .save1{
+    display: none;
+}
+
+.edit1:hover, .delete:hover, .save1:hover, .edit:hover, .save:hover, .editPassword:hover{
+    float: right;
+    color: #303F9F;
+    text-decoration: underline !important;
+}
+
+.add, .update{
+    float: right;
+    background: transparent;
+    border: 1px solid #303F9F;
+    color: #303F9F;
+}
+
+.table-hover{
+    cursor: pointer;
+}
+
+.x_panel{
+    height: auto;
+    /*overflow: scroll;*/
+}
+
+.modal-footer .btn+.btn {
+    margin-bottom: 6px;
+    margin-left: 5px;
+}
+
+.update{
+    float: right;
+}
+
+.x_title {
+    border-bottom: 0px solid #E6E9ED !important;
+    padding: 1px 5px 6px;
+    margin-bottom: 10px;
+}
+
+.size {
+    height: auto !important;
+}
+.error {
+    width:200px;
+    height:20px;
+    height:auto;
+    position:absolute;
+    left:50%;
+    margin-left:-100px;
+    top:10px;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 20px;
+    padding:10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+.success {
+    width:200px;
+    height:20px;
+    height:auto;
+    position:absolute;
+    left:50%;
+    margin-left:-100px;
+    top:10px;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 20px;
+    padding:10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+
+.edit-btn{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    text-decoration:underline;
+    color: #2A3F54;
+}

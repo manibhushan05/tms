@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/aaho/images/logo/favicon.ico" rel="icon" type="image/x-icon">
+    <meta name="theme-color" content="#ffffff">
+    <title>Aaho - Online Truck Booking</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
+    <!-- Font Awesome -->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <!-- Custom Theme Style -->
+    <link href="{% static "vendor/gentelella/css/custom.min.css" %}" rel="stylesheet" type="text/css">
+</head>
+
+<body class="login">
+<div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form class="form-horizontal" id="login-form" data-parsley-validate="">
+                    <h1>Welcome to AAHO</h1>
+                    <div>
+                        <input type="text" class="form-control" placeholder="Username" name="username"
+                               required="required"/>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" placeholder="Password" name="password"
+                               required="required"/>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-default btn-login submit">Log in</button>
+                        <p id="error-response"></p>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <div class="clearfix"></div>
+                        <br/>
+
+                        <div>
+                            <p>©2016 All Rights Reserved.Trans IQ Technologies Pvt Ltd </p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>
+</div>
+<style>
+    #error-response {
+        color: red;
+    }
+</style>
+<script src="{% static 'vendor/jQuery/js/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/nprogress/js/nprogress.min.js" %}" type="text/javascript"></script>
+<script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('form').parsley('validate');
+    });
+
+    $(window).bind("load", function () {
+        if (localStorage.getItem('auth_token')) {
+
+            var formData = {"token": localStorage.getItem('auth_token')};
+            $.ajax({
+                url: "/customer/booking-list/",
+                type: 'get',
+                dataType: 'html',
+                contentType: 'application/json',
+                headers: {"Authorization": localStorage.getItem('token')}
+                // data: JSON.stringify(formData)
+            }).done(function (response, status, request) {
+                var group_name = localStorage.getItem('customer_group_name');
+                if (group_name === 'sme') {
+                    $('<form action="/customer/dashboard/" method="POST">' +
+                        '<input type="hidden" name="token" value="' + localStorage.getItem('auth_token') + '"/> ' +
+                        '</form>').appendTo($(document.body)).submit();
+                }
+            }).fail(function (jqXHR, status) {
+            });
+        }
+    });
+
+    $('.btn-login').click(function () {
+        if (!$('#login-form').parsley().isValid()) {
+            return true;
+        }
+        var data = $('#login-form').serializeJSON();
+        NProgress.start();
+        $.ajax({
+            url: "/api/login/",
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data)
+        }).done(function (response, status, request) {
+            NProgress.done();
+            window.localStorage.setItem("token", 'Token ' + response['token']);
+            window.localStorage.setItem("auth_token", response['token']);
+            {#request.setRequestHeader("Content-Type", "application/json");#}
+            request.setRequestHeader("Authorization", localStorage.getItem('token'));
+            var groups = response['data']['group_list'].split(',');
+            var i;
+            for (i = 0; i < groups.length; i++) {
+                if (groups[i].startsWith('sme')) {
+                    window.localStorage.setItem("customer_group_name", groups[i]);
+                    location.href = '/customer/dashboard/';
+                    $('<form action="/customer/dashboard/" method="POST">' +
+                        '<input type="hidden" name="token" value="' + localStorage.getItem('auth_token') + '"/> ' +
+                        '</form>').appendTo($(document.body)).submit();
+                }else {
+                    $('#error-response').text("Not authorized to login");
+                }
+            }
+        }).fail(function (jqXHR, status) {
+            $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+            NProgress.done();
+        });
+        return false;
+    });
+
+</script>
+
+</body>
+</html>

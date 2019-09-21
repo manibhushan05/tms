@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load helper_tags_team %}
+
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #FFFFFF;
+            text-align: left;
+            padding: 8px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <p>Dear Customer,</p>
+    <p>Please find below the details for vehicles dispatched on {{ dispatch_date }}:</p>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>LR No.</th>
+            <th>Lorry No.</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Charged Weight</th>
+            <th>Rate</th>
+            <th>Addl Charges</th>
+            <th>Freight Amount</th>
+        </tr>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.lr_number }}</td>
+                <td>{{ booking.vehicle_number }}</td>
+                <td>{{ booking.from }}</td>
+                <td>{{ booking.to }}</td>
+                <td>{{ booking.charged_weight }}</td>
+                <td>{{ booking.rate }}</td>
+                <td>{{ booking.additional_charge }} <sup> {{ booking.additional_charge_superscript }}</sup>
+                </td>
+                <td>{{ booking.customer_freight }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if additional_charge_remarks %}
+        <p><sup>* </sup>Remarks</p>
+    {% endif %}
+
+    <ol type="1">
+        {% for remark in additional_charge_remarks %}
+            <li>{{ remark.message }}</li>
+        {% endfor %}
+    </ol>
+    <p>Terms & Conditions:</p>
+    <ol type="1">
+        <li>Additional charges may be added to the above freight rates for halting, border fines, etc. at the time of
+            invoicing.
+        </li>
+        <li>Invoice will be raised post successful delivery of shipment. Payment to be made by cheque / bank transfer
+            within {{ credit_period }} days of receipt of invoice. Interest @18% p.a. will be charged on overdue
+            invoices.
+        </li>
+
+    </ol>
+    {% if credit_period > 30 %}
+        <h3 style="font-size:18px">Aaho offers attractive discounts for advance payment of invoices. Reply to this mail
+            to save your freight
+            costs. </h3>
+    {% endif %}
+    <p>This is for your information and record. Please let us know of any discrepancies in the information above within
+        3 days by replying to this mail.</p>
+    <br/>
+    <p>Thanks and Regards</p>
+    <p>Team Aaho</p>
+    <p>Trans IQ Technologies Pvt Ltd</p>
+
+{#    <h3>Email ID List: </h3>#}
+{#    <ol>#}
+{#        {% for email in email_id_list %}#}
+{#            <li>{{ email }}</li>#}
+{#        {% endfor %}#}
+{#    </ol>#}
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plot</title>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'dateslider/css/iThing.css' %}">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+    <script src="{% static 'dateslider/jQDateRangeSlider-withRuler-min.js' %}"></script>
+</head>
+<body>
+
+<style>
+    body {
+        padding: 3%;
+        overflow: scroll;
+    }
+
+    div.plot canvas {
+        width: 100%;
+    }
+
+    div.plot {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    button#plot_btn {
+        margin: 20px;
+        min-width: 100px;
+    }
+
+</style>
+
+<script>
+    // js variables from django
+    var date_slider_step = parseInt('{{ step }}');
+    var default_start_time = new Date('{{ default_start_time }}');
+    var default_end_time = new Date('{{ default_end_time }}');
+    var max_start_time = new Date('{{ max_start_time }}');
+    var max_end_time = new Date('{{ max_end_time }}');
+    var log_delays = new Date('{{ log_delays }}');
+    var plot_data_url = '/api/driver/plot-data/';
+    // js variables from django
+
+    var color1 = 'rgba(0,0,255,1.0)';
+    var color2 = 'rgba(255,0,255,1.0)';
+    var color3 = 'rgba(0,255,0,1.0)';
+    var color4 = 'rgba(255,0,0,1.0)';
+
+    var charts = {
+        phone_scatter_chart: null,
+        send_scatter_chart: null,
+        send_gap_chart: null,
+        send_gap2_chart: null
+    };
+
+
+    function update_plot(log_delays, battery_data, free_memory_data, send_delays,
+                         max_send_delay, max_log_delay, start_time, end_time) {
+
+        var i;
+        for (i=0; i<log_delays.length; i++) {
+            log_delays[i].x = new Date(log_delays[i].x);
+        }
+        for (i=0; i<battery_data.length; i++) {
+            battery_data[i].x = new Date(battery_data[i].x);
+        }
+        for (i=0; i<free_memory_data.length; i++) {
+            free_memory_data[i].x = new Date(free_memory_data[i].x);
+        }
+        for (i=0; i<send_delays.length; i++) {
+            send_delays[i].x = new Date(send_delays[i].x);
+        }
+
+        var xaxis_config = {
+            type: "time",
+            time: {
+                min: start_time,
+                max: end_time
+            },
+            display: true
+        };
+
+        var phone_data_config = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Battery",
+					data: battery_data,
+                    tension: 0,
+                    backgroundColor: color1,
+                    borderColor: color1,
+                    borderWidth: 0.5,
+                    pointBackgroundColor : color1,
+                    pointBorderColor : "rgba(0,0,0,0.0)",
+                    pointBorderWidth: 0,
+                    pointRadius: 2,
+                    fill: false
+				}, {
+					label: "Free Memory",
+					data: free_memory_data,
+                    tension: 0,
+                    backgroundColor: color2,
+                    borderColor: color2,
+                    borderWidth: 0.5,
+                    pointBackgroundColor : color2,
+                    pointBorderColor : "rgba(0,0,0,0.0)",
+                    pointBorderWidth: 0,
+                    pointRadius: 2,
+                    fill: false
+				}]
+			},
+			options: {
+				responsive: true,
+                title:{
+                    display:true,
+                    text:"Phone Data"
+                },
+				scales: {
+					xAxes: [xaxis_config],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Percentage'
+						},
+                        ticks: {
+                            beginAtZero: true,
+                            max: 120
+                        }
+
+					}]
+				}
+			}
+		};
+
+
+        var delay_config = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Send Delay",
+					data: send_delays,
+                    tension: 0,
+					backgroundColor: color1,
+                    borderColor: color1,
+                    borderWidth: 0.5,
+                    pointBackgroundColor : color1,
+                    pointBorderColor : "rgba(0,0,0,0.0)",
+                    pointBorderWidth: 0,
+                    pointRadius: 2,
+                    fill: false
+				}, {
+					label: "Log Delay",
+					data: log_delays,
+                    tension: 0,
+					backgroundColor: color2,
+                    borderColor: color2,
+                    borderWidth: 0.5,
+                    pointBackgroundColor : color2,
+                    pointBorderColor : "rgba(0,0,0,0.0)",
+                    pointBorderWidth: 0,
+                    pointRadius: 2,
+                    fill: false
+				}]
+			},
+			options: {
+				responsive: true,
+                title:{
+                    display:true,
+                    text:"Delay Data"
+                },
+                scales: {
+					xAxes: [xaxis_config],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Delay (in minutes)',
+                            ticks: {
+                                beginAtZero: true,
+                                max: Math.max(max_send_delay, max_log_delay)
+                            }
+						}
+					}]
+				}
+			}
+		};
+
+        var phone_data_canvas = $('canvas#phone_data_canvas');
+        var send_delays_canvas = $('canvas#send_delays_canvas');
+
+
+        if (charts.phone_scatter_chart) {
+            charts.phone_scatter_chart.destroy();
+        }
+
+        if (charts.send_scatter_chart) {
+            charts.send_scatter_chart.destroy();
+        }
+
+
+        charts.phone_scatter_chart = new Chart(phone_data_canvas, phone_data_config);
+        charts.send_scatter_chart = new Chart(send_delays_canvas, delay_config);
+
+    }
+
+    function add_versions(chart_obj_name, version_changes) {
+        var chart_obj = charts[chart_obj_name];
+        if (!chart_obj) {
+            return;
+        }
+        var ctx = chart_obj.chart.ctx;
+        ctx.font = chart_obj.scale.font;
+        ctx.fillStyle = chart_obj.scale.textColor;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+
+        chart_obj.datasets.forEach(function (dataset) {
+            version_changes.forEach(function (vchange) {
+                var pt =  dataset.points[vchange.i];
+                ctx.fillText(vchange.v, pt.x, pt.y - 10);
+            });
+
+        });
+    }
+
+    function pad(num) {
+        return ('0' + num).substr(-2);
+    }
+
+    function format_date(val) {
+        return val.getFullYear() + "/" + (val.getMonth() + 1) + "/" + val.getDate() + " " +
+                        pad(val.getHours()) + ":" + pad(val.getMinutes()) + ":" + pad(val.getSeconds());
+    }
+
+    $(document).ready(function() {
+
+        $('div#date_range_slider').dateRangeSlider({
+            bounds: {
+                min: max_start_time,
+                max: max_end_time
+            },
+            defaultValues: {
+                min: default_start_time,
+                max: default_end_time
+            },
+            range: {
+                min: {hours: date_slider_step},
+                max: {days: 15}
+            },
+            step: {
+                hours: date_slider_step
+            },
+            formatter: function(val) {
+                return format_date(val);
+            }
+        });
+
+        $('select#device_id_select').on('change', function() {
+            var device_id = $(this).val();
+            if (device_id != "") {
+                $(this).css('background-color', '#FFFFFF');
+            }
+        });
+
+        $('button#plot_btn').click(function() {
+            var plot_btn = $(this);
+            var device_id_select = $('select#device_id_select');
+            var device_id = device_id_select.val();
+            if (device_id == "") {
+                device_id_select.css('background-color', '#ED9BBF');
+                return;
+            }
+
+            var date_values = $('div#date_range_slider').dateRangeSlider("values");
+            var start_time = format_date(date_values.min);
+            var end_time = format_date(date_values.max);
+
+            var post_data = {
+                device_id: device_id,
+                start_time: start_time,
+                end_time: end_time
+            };
+
+            plot_btn.button('loading');
+            $.ajax({
+                type: 'POST',
+                url: plot_data_url,
+                dataType: 'json',
+                data: JSON.stringify(post_data)
+            }).done(function(data, status) {
+                plot_btn.button('reset');
+                console.log("Success: " + status);
+                if (!data.log_delays || !data.battery_percents || !data.free_memory_percents || !data.send_delays) {
+                    return;
+                }
+                update_plot(data.log_delays, data.battery_percents, data.free_memory_percents,
+                        data.send_delays, data.max_send_delay, data.max_log_delay, date_values.min, date_values.max);
+            }).fail(function(data, status) {
+                plot_btn.button('reset');
+            });
+
+        });
+    });
+
+</script>
+
+<div class="form-group">
+    <label for="device_id_select">Device ID:</label>
+    <select id="device_id_select">
+        <option value="" selected="selected">-- select a device id --</option>
+        {% for device_id in device_ids %}
+        <option value="{{ device_id }}">{{ device_id }}</option>
+        {% endfor %}
+    </select>
+
+    <div id="date_range_slider"></div>
+
+    <button type="button" class="btn btn-primary" id="plot_btn"
+            data-loading-text="Plotting...">Plot</button>
+</div>
+
+<div class="plot" id="phone_data_plot_container">
+    <canvas id="phone_data_canvas"></canvas>
+</div>
+<div class="plot" id="send_delay_plot_container">
+    <canvas id="send_delays_canvas"></canvas>
+</div>
+
+</body>
+</html>

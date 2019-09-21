@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load helper_tags_team %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/aaho/images/logo/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="icon" href="/static/aaho/images/logo/logo.png" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="/static/aaho/images/logo/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/static/aaho/images/logo/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/static/aaho/images/logo/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/aaho/images/logo/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/static/aaho/images/logo/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/aaho/images/logo/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/static/aaho/images/logo/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/aaho/images/logo/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/aaho/images/logo/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/aaho/images/logo/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/aaho/images/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/static/aaho/images/logo/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/aaho/images/logo/favicon-16x16.png">
+    <link rel="manifest" href="/static/aaho/images/logo/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>Aaho - Online Truck Booking</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/3.3.6/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'aaho/css/index/agency.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'aaho/css/index/style.css' %}?v={% now 'U' %}">
+    <style>
+        #shipment_id {
+            color: black;
+            font-family: "Brandon Grotesque";
+            text-transform: uppercase;
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="rect">
+                <img id="logo_blue" src="{% static 'aaho/images/index/logo_blue.png' %}">
+            </div>
+            <a class="navbar-brand page-scroll" id="mainnav" href="#header"><span class="brand">aaho<span
+                    class="yellow">!</span></span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a class="page-scroll page-top" href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll about" id="mainnav" href="#about">ABOUT US</a>
+                </li>
+                <li>
+                    <a class="page-scroll howiw" id="mainnav" href="#howiw">HOW IT WORKS</a>
+                </li>
+                {% is_freight_uploaded_today as freight_uploaded_today %}
+                {% if freight_uploaded_today %}
+                    <li>
+                        <a class="page-scroll howiw" id="mainnav" href="/rates/">TODAY'S RATES </a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a class="page-scroll team" id="mainnav" href="#team">TEAM</a>
+                </li>
+                <li>
+                    <a class="page-scroll contactus" id="mainnav" href="#contact">CONTACT US</a>
+                </li>
+                <li>
+                    <a class="login" id="mainnav" data-toggle="modal" data-target="#login" data-backdrop="static"
+                       data-keyboard="false">LOGIN</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+<br><br><br>
+
+<header id="header">
+    <div class="container">
+
+        <img class="truck img-responsive" src="{% static 'aaho/images/index/Truck.png' %}" alt="...">
+        <img class="group img-responsive" src="{% static 'aaho/images/index/group.png' %}" alt="...">
+        <div class="row ">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12 leftmain ">
+                <div class="intro-text1">
+                    <div class="intro-lead-in1">Your One-Stop Solution</div>
+                    <div class="intro-heading1 ">For Inter-City Transportation</div>
+                    <div class="transRule"></div>
+
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12" id="track-shipment">
+                <div class="intro-text1">
+                    <form id="track-shipment-form" method="GET" action="/track-shipment/">
+
+                        <label style="font-size: 22px"
+                               class="control-label"
+                               for="received_from">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> Track Your Aaho Shipment
+                        </label>
+                        <div class="form-horizontal">
+                            <input type="text" class="input-lg col-md-7 col-lg-7 col-sm-7 col-xs-12"
+                                   name="shipment_id" id="shipment_id" data-parsley-length="[12,12]"
+                                   placeholder="Enter LR NO."
+                                   required="required">
+                            <button class="btn btn-success col-md-5 col-lg-5 col-sm-5 col-xs-12 btn-lg" type="submit">
+                                TRACK
+                            </button>
+                        </div>
+                        <div id="error-message col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                            {% for message in messages %}
+                                <div class="{{ message.error }}">
+                                    <p>* {{ message }}</p>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rule0"></div>
+
+</header>
+<section id="about">
+    <img class="landscape img-responsive" src="{% static 'aaho/images/index/Landscape.png' %}" alt="...">
+    {#    <img src="../Landscape.png" class="">#}
+    <div class="container" align="center">
+        <h1 class="aboutHead">About Us</h1><br>
+        <span id="primarytext" class="subtext">
+         <p>The road will never be the same</p><br><br></span>
+        <p>Aaho is working towards simplifying inter-city trucking for shippers as well as transporters. Our platform
+            makes it possible to book, track, and manage all your trucking needs in the quickest, simplest and most
+            cost-effective manner. </p>
+        <p>We strongly believe that relevant technology interventions can make Indian trucking much more efficient and
+            transparent while benefitting all stakeholders. Our platform is an end-to-end solution that works to solve
+            the various problems faced by businesses as well as fleet owners.</p>
+        <p>Need reliability and efficiency in goods transportation? The answer is Aaho!</p>
+        <p><a href="#contact">Reach out</a> today to find out how Aaho can save time, effort and money for you.</p>
+    </div>
+    <div class="rule1"></div>
+
+</section>
+
+
+<section id="howiw">
+    <div class="container" align="center">
+        <div class="row">
+            <h1>How It Works</h1>
+            <span id="primarytext" class="subtext">
+         <p>We work hard, so that you don't have to</p><br><br></span>
+        </div>
+        <div class="row padin">
+            <div class="col-md-3 col-lg-3 require">
+                <div class="imageOuter">
+                    <img class="image" id="require" src="{% static 'aaho/images/index/require.png' %}" alt="...">
+                </div>
+                <div class="imageTxtOuter">
+                    <span class="imgtext">Login and submit your requirements</span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 coffee">
+                <div class="imageOuter">
+                    <img class="image" id="coffee" src="{% static 'aaho/images/index/coffee.png' %}" alt="...">
+                </div>
+                <div class="imageTxtOuter">
+                    <span class="imgtext">Have some coffee while we find the best rates and drivers for you</span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 track">
+                <div class="imageOuter">
+                    <img class="image" id="track" src="{% static 'aaho/images/index/track.png' %}" alt="...">
+                </div>
+                <div class="imageTxtOuter">
+                    <span class="imgtext">Track your shipment on just a tap</span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 pay">
+                <div class="imageOuter">
+                    <img class="image" id="pay" src="{% static 'aaho/images/index/pay.png' %}" alt="...">
+                </div>
+                <div class="imageTxtOuter">
+                    <span class="imgtext">Save time with e-documentation and hassle free payments</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rule2"></div>
+
+</section>
+<section id="team">
+
+    <div class="container" align="center">
+        <div class="row">
+            <h1>A Passionate Team</h1>
+            <span class="primarytext"><p>We love what we do and who we do it with</p></span>
+        </div>
+        <div class="heroOuter row padin">
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="left"></div>
+                    <div class="top"></div>
+                    <img src="{% static "aaho/images/index/profile/pankaj.jpg" %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+
+
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Pankaj Bajaj</span><br>
+                    <span class="subtext">B.Tech. IIT Bombay (2008)</span>
+                    <ul class="social-icons icon-circle list-unstyled list-inline">
+                        {#                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>#}
+                        {#                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>#}
+                        <li><a href="https://in.linkedin.com/in/pankajbajaj" target='_blank'><i
+                                class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="top"></div>
+                    <div class="left"></div>
+                    <img src="{% static "aaho/images/index/profile/rohit.jpg" %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Rohit Kumar</span><br>
+                    <span class="subtext">B.Tech. IIT Bombay (2010)</span>
+                    <ul class="social-icons icon-circle list-unstyled list-inline">
+                        {#                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>#}
+                        {#                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>#}
+                        <li><a href="https://in.linkedin.com/in/rohit-kumar-42808b9" target='_blank'><i
+                                class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="top"></div>
+                    <div class="left"></div>
+                    <img src="{% static "aaho/images/index/profile/harsh.jpg" %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Harsh Bhageria</span><br>
+                    <span class="subtext">B.Tech. IIT Bombay (2010)<br>MBA IIM Bangalore (2014)</span>
+                    <ul class="social-icons icon-circle list-unstyled list-inline">
+                        <li><a href="https://in.linkedin.com/in/harshbhageria" target='_blank'><i
+                                class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="top"></div>
+                    <div class="left"></div>
+                    <img src="{% static "aaho/images/index/profile/mani.jpg" %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Mani Bhushan</span><br>
+                    <span class="subtext">M.Tech. NIT Warangal (2015)</span>
+                    <ul class="social-icons icon-circle list-unstyled list-inline">
+                        <li><a href="https://in.linkedin.com/in/mani-bhushan-kumar-62b38617" target='_blank'><i
+                                class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+            {#            <div class="col-md-4 col-lg-4 col-xs-12">#}
+            {#                <div class="hero">#}
+            {#                    <div class="top"></div>#}
+            {#                    <div class="left"></div>#}
+            {#                    <img src="{% static "aaho/images/index/profile/shobhit.jpg" %}" class="heroImg"/>#}
+            {#                    <div class="right"></div>#}
+            {#                    <div class="bottom"></div>#}
+            {##}
+            {#                </div>#}
+            {#                <br>#}
+            {#                <div class="heroText">#}
+            {#                    <span id="primarytext">Shobhit Vashistha</span><br>#}
+            {#                    <span class="subtext">B.Tech. + M.Tech. IIT Bombay (2010)</span>#}
+            {#                    <ul class="social-icons icon-circle list-unstyled list-inline">#}
+            {#                        <li><a href="https://in.linkedin.com/in/shobhit-vashistha-85532b7" target='_blank'><i#}
+            {#                                class="fa fa-linkedin"></i></a></li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {##}
+            {#            </div>#}
+            {#            <div class="col-md-4 col-lg-4 col-xs-12">#}
+            {#                <div class="hero">#}
+            {#                    <div class="top"></div>#}
+            {#                    <div class="left"></div>#}
+            {#                    <img src="{% static "aaho/images/index/profile/amit.jpg" %}" class="heroImg"/>#}
+            {#                    <div class="right"></div>#}
+            {#                    <div class="bottom"></div>#}
+            {##}
+            {#                </div>#}
+            {#                <br>#}
+            {#                <div class="heroText">#}
+            {#                    <span id="primarytext">Amit Kumar</span><br>#}
+            {#                    <span class="subtext">MBA Xavier Institute of Social Service (2015)</span>#}
+            {#                    <ul class="social-icons icon-circle list-unstyled list-inline">#}
+            {#                        <li><a href="https://www.linkedin.com/in/amit-kumar-b666a265/" target='_blank'><i#}
+            {#                                class="fa fa-linkedin"></i></a></li>#}
+            {#                    </ul>#}
+            {#                </div>#}
+            {##}
+            {#            </div>#}
+
+        </div>
+    </div>
+    <div class="rule3"></div>
+</section>
+<section id="team">
+
+    <div class="container" align="center">
+        <div class="row">
+            <h1>Our Heroes</h1>
+            <span class="primarytext subtext"><p>People who work hardest with us</p></span>
+        </div>
+        <div class="heroOuter row padin">
+
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="top"></div>
+                    <div class="left"></div>
+                    <img src="{% static 'aaho/images/index/abhishek-mishra.jpeg' %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Mr. Abhishek Mishra</span><br>
+                    <span class="subtext">Marketing Executive</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="top"></div>
+                    <div class="left"></div>
+                    <img src="{% static 'aaho/images/index/truckDriver2.jpg' %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Mr. Asim Sheikh</span><br>
+                    <span class="subtext">Operations Executive</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="left"></div>
+                    <div class="top"></div>
+                    <img src="{% static 'aaho/images/index/truckDriver1.jpg' %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Mr. Yasir Mohammed</span><br>
+                    <span class="subtext">Truck driver</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                <div class="hero">
+                    <div class="top"></div>
+                    <div class="left"></div>
+                    <img src="{% static 'aaho/images/index/truckDriver3.jpg' %}" class="heroImg"/>
+                    <div class="right"></div>
+                    <div class="bottom"></div>
+                </div>
+                <br>
+                <div class="heroText">
+                    <span id="primarytext">Mr. Vijay Kashinath Kange</span><br>
+                    <span class="subtext">Truck driver</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rule3"></div>
+</section>
+<section id="contact">
+    <div>
+        <img src="{% static 'aaho/images/index/group3.png' %}" class="group3 img-responsive">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <h1 class="section-heading">Contact Us</h1>
+                </div>
+            </div>
+            <div class="row contactRow">
+                <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12"></div>
+                <div class="col-md-5 col-lg-5 col-sm-5 col-xs-12">
+                    <div class="contact-address">
+                        <h4 id="secondarytext">Head Office</h4>
+                        <p>Trans IQ Technologies Pvt. Ltd.</p>
+                        <p>610-611, Shivai Plaza Premises Co-Operative Society Limited, Marol Industrial Estate, Marol, Andheri East, Mumbai - 400059,</p>
+                        <p>Contact: +91 9969607841 Email: info@aaho.in</p>
+                    </div>
+                    <div id="map_canvas" align="center"></div>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+
+                    <h4 id="secondarytext" class="leave">Leave Us A Message</h4>
+
+                    <form name="sentMessage" id="contactForm" role="form" action="/enquiry/contact-us-landing-page"
+                          method="POST">{% csrf_token %}
+                        <div class="row" align="center">
+                            <div class="form-group">
+                                <input type="text" class="form-control" required placeholder="Name *" name="name"
+                                       id="name">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email *" name="email"
+                                       id="email">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-control" required placeholder="Phone *" name="phone">
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+
+                            <div class="form-group message">
+                                <textarea class="form-control" required placeholder="Write you message here *"
+                                          name="message"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div align="center">
+                            <div id="success"></div>
+                            <button type="submit" class="btn btn-xl">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" align="center">
+        <p>All Rights Reserved Trans IQ Technologies Pvt. Ltd.</p>
+
+        <p class="partText">SMS Partner</p>
+        <a href="https://msg91.com/startups/?utm_source=startup-banner"><img class="msgPart"
+                                                                             src="https://msg91.com/images/startups/msg91Badge.png"
+                                                                             title="MSG91 - SMS for Startups"
+                                                                             alt="Bulk SMS - MSG91"></a>
+    </div>
+</section>
+<div class="modal fade" id="login" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md loginModal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title loginTitle">Login to Aaho!</h4>
+            </div>
+            <div class="modal-body" align="center">
+                <form class="form-horizontal login-form" data-parsley-validate=""> {% csrf_token %}
+                    <div class="form-group" align="center">
+                        <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                            <input type="text" name="username" class="form-control" data-validate-length-range="6"
+                                   id="username" placeholder="Username" data-parsley-trigger="keyup" required>
+                        </div>
+                    </div>
+                    <div class="form-group" align="center">
+                        <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                            <input type="password" name="password" class="form-control" id="password"
+                                   placeholder="Password" data-parsley-trigger="keyup" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer loginFooter">
+                        <button type="button" class="btn btn-primary btn-login submit">Login</button>
+                        <p class="error-response"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .error-response {
+        color: red;
+    }
+</style>
+<script src="{% static 'vendor/jQuery/js/jquery.min.js' %}"></script>
+<script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $('form').parsley('validate');
+    });
+</script>
+<script src="{% static 'aaho/js/index/jquery-ui.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/3.3.6/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'aaho/js/index/agency.js' %}"></script>
+<script src="{% static 'aaho/js/index/jquery.easing.min.js' %}"></script>
+<script src="{% static 'vendor/nprogress/js/nprogress.min.js' %}"></script>
+<script src="{% static 'vendor/gentelella/js/custom.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'aaho/js/index/index.js' %}?v={% now 'U' %}"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATPbYqRVUt6whnofEU7fHrSILZBooy6Hk&callback=initialize">
+</script>
+<script>
+    $("#track-shipment div").removeAttr("style")
+</script>
+</body>
+</html>

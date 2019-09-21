@@ -1,0 +1,204 @@
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+<div class=" x_panel" id="div-outward_payment">
+    <div class="x_title">
+        <div style="clear: both">
+            <h2 style="float: left">Outward Payment</h2>
+
+            <h2 class="payment-lable" style="float: right"> Balance: <i class="fa fa-inr"
+                                                                        aria-hidden="true"></i>
+                <b id="op_balance_display_label"> {{ balance_for_supplier }}</b>
+            </h2>
+            <h2 class="payment-lable" style="float: right"> Paid: <i class="fa fa-inr"
+                                                                     aria-hidden="true"></i>
+                <b id="op_paid_display_label"> {{ outward_amount }} </b>
+            </h2>
+            <h2 class="payment-lable" style="float: right"> DN: <i class="fa fa-inr"
+                                                                   aria-hidden="true"></i>
+                <b id="op_debit_amount_display_label"> -{{ debit_amount_supplier }} </b>
+            </h2>
+            <h2 class="payment-lable" style="float: right"> CN: <i class="fa fa-inr"
+                                                                   aria-hidden="true"></i>
+                <b id="op_credit_amount_display_label"> {{ credit_amount_supplier }} </b>
+            </h2>
+            <h2 class="payment-lable" style="float: right">Total Amount: <i class="fa fa-inr"
+                                                                            aria-hidden="true"></i>
+                <b id="op_total_amount_display_label"> {{ supplier_amount }}</b>
+            </h2>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+        <table id="out-ward-payment-table"
+               class="table table-striped table-bordered dt-responsive nowrap"
+               cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Billing</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Paid To</th>
+                <th>Amount</th>
+                <th>Mode</th>
+                <th>Status</th>
+                <th>UTR</th>
+                <th>Remarks</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for value in outward_payments %}
+                <tr>
+                    {% s3_upload_bill_obj value.id as s3_obj %}
+                    {% if value.is_refund_amount == True or opb_raised %}
+                        <td>Refundable
+                        </td>
+                    {% elif s3_obj %}
+                        <td>
+                            {% for s3 in s3_obj %}
+                                <p><a href="{{ s3.public_url }}">{{ s3.filename }}</a></p>
+                            {% endfor %}
+                        </td>
+                    {% else %}
+                        <td><input type="checkbox" name="bill_ids[]" class="outward-payment-id"
+                                   value="{{ value.id }}">
+                        </td>
+                    {% endif %}
+                    <td>
+                        {{ value.id }}
+                        {#                        <button  data-url="/api/team-outward-payment-retrieve/{{ value.id }}/" class="transaction-button getAjaxPage">{{ value.id }}</button>#}
+                    </td>
+                    <td>{{ value.payment_date }}</td>
+                    <td>{{ value.paid_to }}</td>
+                    <td>{{ value.actual_amount|default_if_none:0 }}</td>
+                    <td>{{ value.payment_mode_display }}</td>
+                    <td>{{ value.status|default_if_none:'' }}</td>
+                    <td>{{ value.utr|default_if_none:'' }}</td>
+                    <td>{{ value.remarks|default_if_none:'' }}</td>
+                    <td>{{ value.details|default_if_none:'' }}</td>
+                </tr>
+            {% endfor %}
+            {% for dns in debit_note_supplier %}
+                {% if  dns.status == 'pending' or dns.status == 'approved' or dns.status == 'partial' or dns.status == 'adjusted' %}
+                    <tr>
+                        <td>{{ dns.debit_note_number }}</td>
+                        <td>-</td>
+                        {% if  dns.status == 'pending' %}
+                            <td>{{ dns.created_on }}</td>
+                        {% else %}
+                            <td>{{ dns.approved_on }}</td>
+                        {% endif %}
+                        <td>{{ dns.supplier_name }}</td>
+                        {% if  dns.status == 'pending' or dns.status == 'approved' %}
+                            <td>{{ dns.debit_amount }}</td>
+                        {% else %}
+                            <td>{{ dns.adjusted_amount }}</td>
+                        {% endif %}
+                        <td>-</td>
+                        <td>{{ dns.status }}</td>
+                        <td></td>
+                        <td>{{ dns.reason.name }}({{ dns.remarks }})</td>
+                        <td>-</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for cns in credit_note_supplier %}
+                {% if cns.status == 'pending' or cns.status == 'approved' or cns.status == 'partial' or cns.status == 'adjusted' %}
+                    <tr>
+                        <td>{{ cns.credit_note_number }}</td>
+                        <td>-</td>
+                        {% if cns.status == 'pending' %}
+                            <td>{{ cns.created_on }}</td>
+                        {% else %}
+                            <td>{{ cns.approved_on }}</td>
+                        {% endif %}
+                        <td>{{ cns.supplier_name }}</td>
+                        {% if cns.status == 'pending' or cns.status == 'approved' %}
+                            <td>-{{ cns.credit_amount }}</td>
+                        {% else %}
+                            <td>-{{ cns.adjusted_amount }}</td>
+                        {% endif %}
+                        <td>-</td>
+                        <td>{{ cns.status }}</td>
+                        <td></td>
+                        <td>{{ cns.reason.name }}({{ cns.remarks }})</td>
+                        <td>-</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+            {% for cnca in credit_note_for_direct_advance %}
+                {% if cnca.status == 'pending' or cnca.status == 'approved' or cnca.status == 'partial' or cnca.status == 'adjusted' %}
+                    <tr>
+                        <td>{{ cnca.credit_note_number }}</td>
+                        <td>-</td>
+                        {% if cnca.status == 'pending' %}
+                            <td>{{ cnca.created_on }}</td>
+                        {% else %}
+                            <td>{{ cnca.approved_on }}</td>
+                        {% endif %}
+                        <td>{{ cnca.supplier_name }}</td>
+                        {% if cnca.status == 'pending' or  cnca.status == 'approved' %}
+                            <td>{{ cnca.credit_amount }}</td>
+                        {% else %}
+                            <td>{{ cnca.adjusted_amount }}</td>
+                        {% endif %}
+                        <td>-</td>
+                        <td>{{ cnca.status }}</td>
+                        <td></td>
+                        <td>{{ cnca.reason.name }}({{ cnca.remarks }})</td>
+                        <td>-</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+        {% if not user|has_group:"emp_group4" %}
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                {#                <button type="button" class="btn btn-primary" data-toggle="modal"#}
+                {#                        data-target="#outward-payment-modal">Add New#}
+                {#                </button>#}
+                <button type="button" class="btn btn-primary" data-toggle="modal" id="openOutwardPaymentModal"
+                >Add New
+                </button>
+            </div>
+        {% endif %}
+        {% is_opb_enabled id as opb_enabled %}
+        {% is_opb_reprint_enabled id as opb_reprint_enabled %}
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="item form-group">
+
+                <form id="outward-payment-bill">
+                    <input type="hidden" name="booking_id"
+                           value="{{ id }}">
+                    <input type="hidden" name="bill_nums" id="bill-numbers">
+
+                    {% if opb_enabled %}
+                        <button type="submit" class="btn btn-primary" id="btn-outward-bill" disabled>Generate Bill
+                        </button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary" id="btn-outward-bill" disabled
+                                title="Bill is already generated"> Generate Bill
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .button {
+        display: block;
+        width: 115px;
+        height: 25px;
+        background: #4E9CAF;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+    }
+</style>

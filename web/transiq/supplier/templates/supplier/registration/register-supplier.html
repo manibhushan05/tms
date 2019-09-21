@@ -1,0 +1,233 @@
+{% load staticfiles %}
+{% load team_tags.validators_tags %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Register Supplier</h3>
+{% endblock %}
+{% block content %}
+    <form class="form-horizontal form-label-left" id="register-supplier-form"
+          data-parsley-trigger="input">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="supplier_name" class="control-label"> Name<span class="required">*</span>
+                            </label>
+                            <input type="text" class="validate_data form-control" data-parsley-length="[3, 50]"
+                                   name="supplier_name" id="supplier_name" placeholder="Enter Supplier Name"
+                                   required="required" autocomplete="off">
+                        </div>
+
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="primary_phone" class="control-label">Primary Phone</label>
+                            <input type="text" class="validate_data form-control" data-parsley-group="block1"
+                                   name="phone" id="phone-primary" minlength="10" maxlength="10" autocomplete="off"
+                                   data-parsley-error-message="Please enter valid phone number or pan number"
+                                   placeholder="Enter Supplier's Primary Phone" required>
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="primary_email" class="control-label">Primary Email</label>
+                            <input type="email" class="validate_data form-control"
+                                   name="email" id="email-primary"
+                                   placeholder="Enter Supplier's Primary Email">
+                        </div>
+
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="primary_phone" class="control-label">Address</label>
+                            <input type="text" class="form-control" autocomplete="off"
+                                   name="address" id="primary_phone"
+                                   placeholder="Enter Supplier's Address">
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+
+                            <label for="city" class="control-label">City<span
+                                    class="required">*</span></label>
+                            <select class="city form-control" name="supplier_city" id="city" required>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="pin" class="control-label">PIN</label>
+                            <input type="text" class="form-control" data-parsley-minlength="6" data-parsley-maxlength="6"
+                                   name="pin" id="pin" autocomplete="off" data-parsley-type="number"
+                                   placeholder="Enter Supplier's PIN">
+                        </div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="aaho_office" class="control-label">Aaho Office<span
+                                    class="required">*</span></label>
+                            <select class="form-control" id="aaho_office" name="aaho_office" required>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="aaho_poc" class="control-label">Aaho POC<span
+                                    class="required">*</span></label>
+                            <select class="employee form-control" name="aaho_poc" id="aaho_poc" required>
+                            </select>
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="states" class="multiple control-label">Serving States<span
+                                    class="required">*</span></label>
+                            <select class=" state form-control" name="serving_states[]" multiple="multiple"
+                                    id="states" required>
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label class="control-label">PAN</label>
+                            <input type="text" class="form-control validate_data" id="pan" autocomplete="off"
+                                   data-parsley-pattern="{% regex_pan %}" data-parsley-group="block2"
+                                   name="pan" placeholder="Enter PAN Number">
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="vehicle-number" class="multiple control-label">Owned Trucks<span
+                                    class="required"></span></label>
+                            <select class="validate_data form-control" multiple="multiple" name="owned_trucks[]"
+                                    id="vehicle-number">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                            <h4>ALTERNATE CONTACTS</h4>
+                        </div>
+                        <div class="clear"></div>
+
+                        <div id="InputsWrapper">
+                            <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <label for="primary_phone" class="control-label">Person Name</label>
+                                <input type="text" class="form-control" data-parsley-length="[3, 50]"
+                                       name="contact_person[][name]" id="person_name" autocomplete="off"
+                                       placeholder="Enter Supplier's Contact Person Name">
+                            </div>
+                            <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <label for="person_phone" class="control-label">phone</label>
+                                <input type="text" class="form-control validate_data" data-parsley-minlength="10" data-parsley-maxlength="10"
+                                       name="contact_person[][phone]" id="phone-0" autocomplete="off" data-parsley-type="number"
+                                       placeholder="Enter Supplier's Contact Person Phone">
+                            </div>
+                            <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <label for="person_email" class="control-label">Email</label>
+
+                                <div class="input-group">
+                                    <input type="text" class="validate_data form-control" autocomplete="off"
+                                           name="contact_person[][email]" id="email-0"
+                                           placeholder="Enter Supplier's Contact Person Email">
+                                    {#                                    <div id="AddMoreFileId">#}
+                                    <span
+                                            class="input-group-btn" id="AddMoreFileId">
+
+                                         <button class="AddMoreFileBox btn btn-success" type="button"
+                                                 id="AddMoreFileBox"> <span
+                                                 class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+                                          </span>
+                                    {#                                    </div>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-lg btn-danger">Reset Entry</button>
+                            <button id="btn-register-supplier" class="btn btn-lg btn-success">Register
+                                Supplier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+
+            var MaxInputs = 10; //maximum extra input boxes allowed
+            var InputsWrapper = $("#InputsWrapper"); //Input boxes wrapper ID
+            var AddButton = $("#AddMoreFileBox"); //Add button ID
+
+            var x = InputsWrapper.length; //initlal text box count
+            var FieldCount = 1; //to keep track of text box added
+
+//on add input button click
+            $(AddButton).click(function (e) {
+                //max input box allowed
+                if (x <= MaxInputs) {
+                    FieldCount++; //text box added ncrement
+                    //add input box
+                    $(InputsWrapper).append('<div id="remove-div-' + x + '"><div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div><div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">\n' +
+                        '                            <label for="primary_phone" class="control-label">Person Name</label>\n' +
+                        '                            <input type="text" class="form-control" data-parsley-length="[3, 50]"\n' +
+                        '                                   name="contact_person[][name]" id="person_name" autocomplete="off"\n' +
+                        '                                   placeholder="Enter Supplier\'s Contact Person Name">\n' +
+                        '                        </div>\n' +
+                        '                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">\n' +
+                        '                            <label for="person_phone" class="control-label">phone</label>\n' +
+                        '                            <input type="text" class="form-control validate_data" data-parsley-minlength="10" data-parsley-maxlength="10"\n' +
+                        '                                   name="contact_person[][phone]"  data-parsley-type="number" id="phone-' + x + '" autocomplete="off"\n' +
+                        '                                   placeholder="Enter Supplier\'s Contact Person Phone">\n' +
+                        '                        </div>\n' +
+                        '                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">\n' +
+                        '                            <label for="person_email" class="control-label">Email</label>\n' +
+                        '\n' +
+                        '                            <div class="input-group">\n' +
+                        '                                <input type="text" class="validate_data form-control" autocomplete="off"\n' +
+                        '                                       name="contact_person[][email]" id="email-' + x + '"\n' +
+                        '                                       placeholder="Enter Supplier\'s Contact Person Email"> <span\n' +
+                        '                                    class="input-group-btn">\n' +
+                        '                                         <button class="removeclass btn btn-danger" type="button"> <span\n' +
+                        '                                                 class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>\n' +
+                        '                                          </span>\n' +
+                        '                            </div>\n' +
+                        '                        </div></div>');
+                    x++; //text box increment
+
+                    $("#AddMoreFileId").show();
+
+                    {#$('AddMoreFileBox').html("Add field");#}
+                }
+                return false;
+            });
+
+            $("body").on("click", ".removeclass", function (e) { //user click on remove text
+                if (x > 1) {
+
+                    x--; //decrement textbox
+                    $('#remove-div-' + x).remove(); //remove text box
+
+
+                    $("#AddMoreFileId").show();
+                }
+                return false;
+            })
+
+        });
+    </script>
+
+    <script src="{% static "aaho/js/team/common-new.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/supplier/supplier.js" %}" type="text/javascript"></script>
+
+{% endblock %}

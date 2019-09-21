@@ -1,0 +1,50 @@
+body{
+    background-color: #FFFFFF !important;
+}
+
+html{
+    background-color: #FFFFFF;
+}
+
+.x_panel{
+    border: 0px !important;
+}
+
+.validate-form input.ng-invalid.ng-touched {
+    border: 2px solid #FA787E;
+}
+
+.validate-form input.ng-valid.ng-touched {
+    border: 2px solid green;
+}
+
+.truckPanel{
+    position: relative;
+    margin-bottom: 10px;
+    width: 33.3333%;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    transition: all .2s ease;
+}
+
+.allocate{
+    float: right;
+}
+
+.dummyDiv{
+    display: none;
+}
+
+.transactionId{
+    float: left;
+}
+/*
+.allocateRow{
+    background-color: transparent;
+}*/

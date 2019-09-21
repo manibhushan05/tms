@@ -1,0 +1,463 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% block css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/image-viewer/css/viewer.min.css' %}">
+
+    <style>
+        h5{
+            font-weight:bold;
+        }
+        .overdueStyle{
+            color:red;
+        }
+        h5 b{
+            word-wrap: break-word;
+        }
+        label {
+            text-align: center;
+        }
+        .img_thumbnail{
+            display: inline-block;
+            max-width: 100%;
+            height: 7em;
+            width: 8em;
+            padding: 4px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="container">
+            {% if bookings_data %}
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                    <h5 class="overdueStyle">OVERDUE: <span class="overdue">0</span></h5>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                    <h5 class="pendingStyle">PENDING: <span class="pending">0</span></h5>
+            </div>
+            
+        {% for booking in bookings_data %}
+            <div class="clearfix rowBooking_{{booking.id}}"></div>
+            <div class="row rowBooking_{{booking.id}}">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel panelCss_{{booking.id}}">
+                        <div class="x_content">
+                            <form class="form-horizontal form-label-left" id="{{ booking.form_verify_pod }}"
+                                  data-parsley-validate data-parsley-trigger="keyup"
+                                  autocomplete="off">
+                                  <input type='hidden' data-pod="{{booking.pod_verify_time_limit}}"/>
+                                  <input type='hidden' data-pod="{{booking}}"/>
+                                <div class="scroller_anchor"></div>
+                                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Booking ID</h5>
+                                    <h5><b>
+                                        <a href="javascript:;" data-url="/api/manual-booking-retrieve/{{ booking.id }}/" class="getAjaxPage" id="booking_id_{{booking.booking_id}}"> {{ booking.booking_id }}</a>
+                                    </b></h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Date</h5>
+                                    <h5><b class="bookingDate">{{ booking.shipment_date }}</b></h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Source</h5>
+                                    <h5><b>{{ booking.from_city }}</b></h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Destination</h5>
+                                    <h5><b>{{ booking.to_city }}</b></h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Vehicle</h5>
+                                    <h5><b>{{ booking.vehicle_number }}</b></h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Supplier Name</h5>
+                                    <h5><b>{{ booking.supplier_name }}</b></h5>
+                                </div>
+                                <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <label for="loaded_weight"><span class="required">Loaded Weight*</span></label>
+                                    <input type="number" class="form-control" name="loaded_weight"
+                                           id="{{ booking.input_loaded_weight }}" placeholder="Loaded Weight"
+                                           required
+                                           step="0.001" data-parsley-min="0" min="0"
+                                           value="{{ booking.loaded_weight|default:0 }}">
+                                </div>
+                                <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <label><span class="required">Delivered Weight*</span></label>
+                                    <input type="number" class="form-control" name="delivered_weight"
+                                           id="{{ booking.input_delivered_weight }}" placeholder="Delivered Weight"
+                                           required
+                                           step="0.001" data-parsley-min="0" data-parsley-max="10000000" min="0">
+                                </div>
+                                <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <label><span class="required">Customer Weight *</span></label>
+                                    <input type="number" class="form-control" name="party_weight"
+                                           id="{{ booking.input_party_weight }}" placeholder="Party Weight" required
+                                           step="0.001" data-parsley-min="0" min="0"
+                                           value="{{ booking.party_weight|default:0 }}" readonly>
+                                </div>
+                                <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <label><span class="required">Supplier Weight *</span></label>
+                                    <input type="number" class="form-control" name="supplier_weight"
+                                           id="{{ booking.input_supplier_weight }}" placeholder="Supplier Weight"
+                                           required
+                                           step="0.001" data-parsley-min="0" min="0"
+                                           value="{{ booking.supplier_weight|default:0 }}" readonly>
+                                </div>
+                                <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <label><span class="required">Delivered  Date*</span></label>
+                                    <input type="text" class="date form-control"
+                                           name="delivery_datetime" id="{{ booking.input_delivered_date }}"
+                                           placeholder="Delivered Date" required
+                                           readonly style="background-color: white">
+                                </div>
+                                {% for pod in booking.pod_data %}
+                                    <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                    <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Lr Number</h5>
+                                        <h5><b>{{ pod.lr_number }}</b></h5>
+                                    </div>
+                                    <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Upload Date</h5>
+                                        <h5><b>{{ pod.uploaded_on }}</b></h5>
+                                    </div>
+                                    <div class="item form-group col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Uploaded By</h5>
+                                        <h5><b>{{ pod.uploaded_by }}</b></h5>
+                                    </div>
+                                    <div id="{{ pod.gallery }}">
+                                        <ul class="pictures">
+                                            {% for value in pod.docs|slice:":3" %}
+                                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
+                                                    <img data-original="{{ value.url }}" src="{{ value.url }}"
+                                                         alt="{{ value.filename }}"
+                                                         title="{{ value.filename }}"  class="img_thumbnail"/>
+                                                    <h6 style="width: 10rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ value.filename }}</h6>
+                                                </div>
+                                            {% endfor %}
+                                            <div class="item form-group col-md-12 col-sm-12 col-lg-12 col-xs-12">
+
+                                            </div>
+                                            {% for value in pod.docs|slice:"3:" %}
+                                                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
+                                                    <img data-original="{{ value.url }}" src="{{ value.url }}"
+                                                         alt="{{ value.filename }}"
+                                                         title="{{ value.filename }}"  class="img_thumbnail"/>
+                                                    <h6 style="width: 10rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ value.filename }}</h6>
+                                                </div>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                {% endfor %}
+                                <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                <div class="div_rejection_remarks item form-group col-md-6 col-sm-5 col-lg-6 col-xs-12"
+                                     id="{{ booking.div_rejection_remarks }}">
+                                    <label for="rejection_remark"><span
+                                            class="required">Rejection  Remarks*</span></label>
+                                    <input type="text" class="rejection_remark form-control"
+                                           name="rejection_remark" id="{{ booking.input_rejection_remarks }}"
+                                           placeholder="Please mention rejection reason">
+                                </div>
+                                <div class="ln_solid rejection_line col-md-12 col-xs-12 col-sm-12 col-lg-12"
+                                     id="{{ booking.div_rejection_line }}"></div>
+                                <div class="item form-group col-md-9 col-sm-9 col-lg-9 col-xs-12">
+                                    <input type="hidden" name="accept_choice" id="{{ booking.btn_accept_choice }}">
+                                   
+                                    <button class="btn btn_accept_pod  btn-lg btn-success" id="{{ booking.btn_accept_id }}" data-id="{{ booking.id }}">
+                                        Accept
+                                    </button>
+                                    <button class="btn btn-reject-pod btn-lg btn-danger" id="{{ booking.btn_reject_id }}" data-id="{{ booking.id }}">
+                                        Reject
+                                    </button>
+                                    <button type="button" class="btn btn-lg btn-danger btn_escalate_pod" id="escalate_{{ booking.id }}" style="display:none;"
+                                      data-bookingmappingid="{{booking.booking_status_mapping_id}}" data-bookingchainid="{{booking.booking_status_chain_id}}" data-id="{{ booking.id }}">
+                                        Escalate
+                                    </button>
+                                    <span class="escalated_{{ booking.id }}" style="display:none;font-size: 18px;color:red;">Escalated</span>
+                                    
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+        <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12" style="font-size: 16px;text-align: center;">
+                                    No data found...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endif %}
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script src="{% static "vendor/image-viewer/js/viewer.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/verify-docs/verify-pod.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script id="myScript">
+            $('.div_rejection_remarks').hide();
+            $('.rejection_line').hide();
+            $('.btn-reject-pod').click(function (e) {
+                var id = $(this).attr('data-id');
+                var btn_reject_id = $(this).attr('id');
+                var booking_id = btn_reject_id.slice(14, 23);
+                var form_verify_pod = $('#form_verify_pod_' + booking_id);
+                $('#input_delivered_weight_' + booking_id).prop('required', false);
+                $('#input_delivered_date_' + booking_id).prop('required', false);
+                $('#input_rejection_remarks_' + booking_id).prop('required', true);
+                $('#div_rejection_remarks_' + booking_id).show();
+                $('#div_rejection_line_' + booking_id).show();
+                if (!form_verify_pod.parsley().isValid()) {
+                    return true;
+                }
+                $('#btn_accept_choice_' + booking_id).val('reject');
+                e.preventDefault();
+                NProgress.start();
+                var data = form_verify_pod.find(':input').filter(function () {
+                    return $.trim(this.value).length > 0
+                }).serializeJSON();
+                $.ajax({
+                    url: "/api/fileupload-pod-reject/",
+                    type: 'PATCH',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                    }
+                }).done(function (response, status) {
+                    $.notify(response['msg'], {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'success'
+                    });
+                    NProgress.done();
+                    setTimeout(function () {
+                        $('.rowBooking_' + id).remove();
+                    }, 1000);
+                    var verifyPODCount = $("#verify_pod_badge").text();
+                    if (parseInt(verifyPODCount) == 1) {
+                        $("#verify_pod_badge").text('');
+                    }
+                    else {
+                        verifyPODCount = parseInt(verifyPODCount) - 1;
+                        $("#verify_pod_badge").text(verifyPODCount);
+                    }
+                    dashboardAjaxPageCall('/page/bookings-verify-pod-page/', 'verify_pod');
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status === "401") {
+                        redirectToLogin(error);
+                    }
+                    else {
+                        $.notify('Failed', {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'error'
+                        });
+                    }
+                    NProgress.done();
+                });
+                return false;
+            });
+            $('.btn_accept_pod').click(function (e) {
+                var id = $(this).attr('data-id');
+                var btn_accept_id = $(this).attr('id');
+                var booking_id = btn_accept_id.slice(14, 23);
+                var form_verify_pod = $('#form_verify_pod_' + booking_id);
+                $('#input_delivered_weight_' + booking_id).prop('required', true);
+                $('#input_delivered_date_' + booking_id).prop('required', true);
+                $('#input_rejection_remarks_' + booking_id).prop('required', false);
+                $('#div_rejection_remarks_' + booking_id).hide();
+                $('#div_rejection_line_' + booking_id).hide();
+                if (!form_verify_pod.parsley().isValid()) {
+                    return true;
+                }
+                $('#btn_accept_choice_' + booking_id).val('accept');
+                NProgress.start();
+                var data = form_verify_pod.find(':input').filter(function () {
+                    return $.trim(this.value).length > 0
+                }).serializeJSON();
+                $.ajax({
+                    url: "/api/fileupload-pod-approve/",
+                    type: 'PATCH',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                    }
+                }).done(function (response, status) {
+                    $.notify(response['msg'], {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'success'
+                    });
+                    NProgress.done();
+                    setTimeout(function () {
+                        $('.rowBooking_' + id).remove();
+                    }, 1000);
+                    var verifyPODCount = $("#verify_pod_badge").text();
+                    if (parseInt(verifyPODCount) == 1) {
+                        $("#verify_pod_badge").text('');
+                    }
+                    else {
+                        verifyPODCount = parseInt(verifyPODCount) - 1;
+                        $("#verify_pod_badge").text(verifyPODCount);
+                    }
+                    dashboardAjaxPageCall('/page/bookings-verify-pod-page/', 'verify_pod');
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status === "401") {
+                        redirectToLogin(error);
+                    }
+                    else {
+                        $.notify('Failed', {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'error'
+                        });
+                    }
+                    NProgress.done();
+                });
+                return false;
+            });
+            $('.btn_escalate_pod').click(function (e) {
+                var id = $(this).attr('data-id');
+                var booking_status_chain_id = $(this).attr('data-bookingchainid');
+                var booking_statuses_mapping_id = $(this).attr('data-bookingmappingid');
+                NProgress.start();
+                var data = { "booking_status_chain_id": booking_status_chain_id, "manual_booking_id": id, "booking_stage": "escalated" };
+                $.ajax({
+                    url: '/api/booking-statuses-mapping-update/' + booking_statuses_mapping_id + '/',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                    }
+                }).done(function (response, status) {
+                    $.notify(response['msg'], {
+                        position: "top center",
+                        autoHideDelay: 1000,
+                        clickToHide: true,
+                        className: 'success'
+                    });
+                    NProgress.done();
+                    $("#escalate_" + id).hide();
+                    $(".escalated_" + id).show();
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status === "401") {
+                        redirectToLogin(error);
+                    }
+                    else {
+                        $.notify('Failed', {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'error'
+                        });
+                    }
+                    NProgress.done();
+                });
+                return false;
+            });
+            {% for booking in bookings_data %}
+            $('#{{booking.input_delivered_date}}').datepicker({
+                format: "dd-M-yyyy",
+                todayBtn: "linked",
+                autoclose: true,
+                todayHighlight: true,
+                startDate: '{{booking.shipment_date}}',
+                endDate: moment().add(0, 'days').format("DD-MMM-YYYY"),
+            }).change(function () {
+                $(this).parsley().validate();
+            });
+            {% if booking.booking_status_mapping_booking_stage == "in_progress" %}
+            $("#escalate_{{booking.id}}").show();
+            $(".escalated_{{booking.id}}").hide();
+            {% else %}
+            $("#escalate_{{booking.id}}").hide();
+            $(".escalated_{{booking.id}}").show();
+            {% endif %}
+            {% for pod in booking.pod_data %}
+            var viewer = new Viewer($('#{{ pod.gallery }}')[0], {
+                url: 'data-original',
+                toolbar: {
+                    zoomIn: true,
+                    zoomOut: true,
+                    reset: true,
+                    prev: function () {
+                        viewer.prev(true);
+                    },
+                    play: true,
+                    next: function () {
+                        viewer.next(true);
+                    },
+                    rotateLeft: true,
+                    rotateRight: true,
+                    download: function () {
+                        const a = document.createElement('a');
+                        a.href = viewer.image.src;
+                        a.download = viewer.image.alt;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
+                }
+            });
+            {% endfor %}
+            {% endfor %}
+            //function for calculating overdue booking status
+            overduePendingCount();
+            function overduePendingCount() {
+                var overdueCount = 0;
+                var pendingCount = 0;
+                var currentDate = moment(new Date());
+                {% for booking in bookings_data %}
+                var podUploadDate = '{{booking.booking_status_mapping_pod_uploaded_date}}';
+                {%if  booking.booking_status_mapping_pod_uploaded_date %}
+                var newPodUploadDate = moment(podUploadDate.split("-")[0] + '/' + podUploadDate.split("-")[1] + '/' + podUploadDate.split("-")[2]);
+                newPodUploadDate.add('{{booking.pod_verify_time_limit}}', 'minutes');//add given minutes to pod date and check with current date
+                if (newPodUploadDate < currentDate) {
+                    overdueCount += 1;
+                    $('.overdue').text(overdueCount);
+                    $('#booking_id_{{booking.booking_id}}').css('color', 'red');
+                    $('.panelCss_{{booking.id}}').css('background-color', 'antiquewhite');
+                }
+                else {
+                    pendingCount += 1;
+                    $('.pending').text(pendingCount);
+                }
+                {%else%}
+                pendingCount += 1;
+                $('.pending').text(pendingCount);
+                {% endif %}
+                {% endfor %}
+            }
+    </script>
+{% endblock %}

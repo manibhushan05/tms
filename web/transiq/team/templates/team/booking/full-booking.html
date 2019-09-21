@@ -1,0 +1,705 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load user_tags %}
+{% load team_tags.validators_tags %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/parsley/css/parsley.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <style>input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        margin: 0;
+    }
+
+    .notifyjs-foo-base {
+        opacity: 0.85;
+        width: 100%;
+        background: #F5F5F5;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    .notifyjs-foo-base .title {
+        width: 100%;
+        float: left;
+        margin: 10px 0 0 10px;
+        color: #00A000;
+    }
+
+    .notifyjs-foo-base .buttons {
+        width: 100%;
+        font-size: 9px;
+        padding: 5px;
+        margin: 2px;
+    }
+
+    .notifyjs-foo-base button {
+        position: center;
+        font-size: 12px;
+        padding: 5px;
+        margin: 2px;
+    }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Manual Booking</h3>
+{% endblock %}
+{% block content %}
+{#    <div class="right_col" role="main">#}
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <h3 style="color: red">{{ error_msg }}</h3>
+                            <h4 style="text-align: center">{{ customer_placed_order.name }}, {{ shipment_datetime }}
+                            </h4>
+                            <hr>
+                        </div>
+                        <form class="form-horizontal form-label-left"
+                              data-parsley-trigger="input" data-parsley-validate=""
+                              data-parsley-validation-threshold="1" id="detailed-booking-form"
+                              novalidate>
+                            <input type="hidden" name="customer_placed_order" value="{{ customer_placed_order.id }}">
+                            <input type="hidden" name="customer_to_be_billed"
+                                   value="{{ customer_to_be_billed }}">
+                            <input type="hidden" name="shipment_datetime" value="{{ shipment_datetime }}">
+                            <input type="hidden" name="number_of_lr" value="{{ number_of_lr }}">
+                            <input type="hidden" name="source_office" value="{{ source_office }}">
+                            <input type="hidden" name="destination_office" value="{{ destination_office }}">
+                            <input type="hidden" name="billing_type" id="billing_type" value="{{ billing_type }}">
+                            <input type="hidden" name="gst_liability" value="{{ gst_liability }}">
+                            <input type="hidden" name="truck_driver_id" value="{{ truck_driver_id }}">
+                            <input type="hidden" name="supplier_id" value="{{ supplier_id }}">
+                            <input type="hidden" name="loaded_weight" value="{{ loaded_weight }}">
+                            <input type="hidden" name="vehicle_category_id" value="{{ vehicle_category_id }}">
+                            <input type="hidden" name="truck_owner_id" value="{{ truck_owner_id }}">
+                            <input type="hidden" name="is_print_payment_mode_instruction"
+                                   value="{{ is_print_payment_mode_instruction }}">
+                            <input type="hidden" name="generate-booking-and-finish" value="detailed_full_booking">
+
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <h4>Consignor Details</h4>
+                                <div class="item form-group">
+                                    <label>Name</label>
+                                    {% if gst_liability == 'consignor' %}
+                                        <input type="text" class="form-control" name="consignor_name"
+                                               placeholder="Consignor Name"
+                                               value="{{ customer_to_be_billed|default_if_none:'' }}">
+                                    {% else %}
+                                        <input type="text" class="form-control" name="consignor_name"
+                                               placeholder="Consignor Name"
+                                               value="{{ consignor.name |default_if_none:'' }}">
+                                    {% endif %}
+                                </div>
+                                <div class="item form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" name="consignor_address"
+                                           placeholder="Address"
+                                           value="{{ consignor.address|default_if_none:"" }}">
+                                </div>
+                                <div class="item form-group">
+                                    <label for="consignor_city">City</label>
+                                    <select class="city form-control" name="consignor_city"
+                                            id="consignor_city" tabindex="-1">
+                                        {% if consignor.city %}
+                                            <option value="{{ consignor.city.id }}"
+                                                    selected>{{ consignor.city.name|default_if_none:'' }}</option>
+                                        {% endif %}
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label>PIN Code</label>
+                                    <input type="text" class="form-control" name="consignor_pin"
+                                           placeholder="PIN Code" data-parsley-pattern="{% regex_pin %}"
+                                           value="{{ consignor.pin|default_if_none:"" }}">
+                                </div>
+                                <div class="item form-group">
+                                    <label>Phone </label>
+                                    <input type="text" class="form-control" name="consignor_phone"
+                                           placeholder="Phone" data-parsley-pattern="{% regex_phone %}"
+                                           value="{{ consignor.phone|default_if_none:"" }}">
+                                </div>
+                                <div class="item form-group">
+                                    <label>GSTIN</label>
+                                    {% if gst_liability == 'consignor' %}
+                                        <input type="text" class="form-control" name="consignor_gstin"
+                                               data-parsley-pattern="{% regex_gstin %}"
+                                               placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                               data-parsley-type="alphanum"
+                                               value="{{ customer_to_be_billed.gstin|default_if_none:"" }}">
+                                    {% else %}
+                                        <input type="text" class="form-control" name="consignor_gstin"
+                                               data-parsley-pattern="{% regex_gstin %}"
+                                               placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                               data-parsley-type="alphanum"
+                                               value="{{ consignor.tax_id|default_if_none:"" }}">
+                                    {% endif %}
+                                </div>
+                                <h4>Description</h4>
+                                <div class="item form-group">
+                                    <label>No. of Packages</label>
+                                    <input type="number" class="form-control" name="number_of_package"
+                                           data-parsley-min="0" min="0"
+                                           placeholder="Number of Package">
+                                </div>
+                                <div class="item form-group">
+                                    <label>Material</label>
+                                    <textarea class="form-control" rows="2" name="material" id="material"
+                                              placeholder="Write material description in MAX 160 characters..."></textarea>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <h4>Consignee details</h4>
+                                <div class="item form-group">
+                                    <label>Name</label>
+                                    {% if gst_liability == 'consignee' %}
+                                        <input type="text" class="form-control" name="consignee_name"
+                                               placeholder="Consignee Name"
+                                               value="{{ customer_to_be_billed|default_if_none:'' }}">
+                                    {% else %}
+                                        <input type="text" class="form-control" name="consignee_name"
+                                               placeholder="Consignee Name"
+                                               value="{{ consignee.name|default_if_none:'' }}">
+                                    {% endif %}
+                                </div>
+                                <div class="item form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" name="consignee_address"
+                                           placeholder="Address" value="{{ consignee.address|default_if_none:'' }}">
+                                </div>
+                                <div class="item form-group">
+                                    <label>City</label>
+                                    <select class="city form-control" name="consignee_city" tabindex="-1">
+                                        <option></option>
+                                        {% if consignee.city %}
+                                            <option value="{{ consignee.city.id }}"
+                                                    selected>{{ consignee.city.name|default_if_none:'' }}</option>
+                                        {% endif %}
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label>PIN Code</label>
+                                    <input type="text" class="form-control" name="consignee_pin"
+                                           value="{{ consignee.pin|default_if_none:'' }}"
+                                           data-parsley-pattern="{% regex_pin %}"
+                                           placeholder="PIN">
+                                </div>
+                                <div class="item form-group">
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" name="consignee_phone"
+                                           placeholder="Phone" value="{{ consignee.phone|default_if_none:'' }}"
+                                           data-parsley-pattern="{% regex_phone %}">
+                                </div>
+                                <div class="item form-group">
+                                    <label>GSTIN</label>
+                                    {% if gst_liability == 'consignee' %}
+                                        <input type="text" class="form-control" name="consignee_gstin"
+                                               data-parsley-pattern="{% regex_gstin %}"
+                                               placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                               data-parsley-type="alphanum"
+                                               value="{{ customer_to_be_billed.gstin|default_if_none:'' }}">
+                                    {% else %}
+                                        <input type="text" class="form-control" name="consignee_gstin"
+                                               data-parsley-pattern="{% regex_gstin %}"
+                                               placeholder="Enter 15 Letter Alphanumeric GSTIN"
+                                               data-parsley-type="alphanum"
+                                               value="{{ consignee.tax_id|default_if_none:'' }}">
+                                    {% endif %}
+                                </div>
+                                <h4>Insurance</h4>
+                                <div class="radio">
+                                    <label>The Customer has stated that:</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="insured" value="insured">
+                                        They have insured the consignment
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="insured" value="not insured"> They have
+                                        not insured the consignment
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group">
+                                        <label>Insurance Provider</label>
+                                        <input type="text" class="form-control" name="insurance_provider"
+                                               placeholder="Company">
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Insurance Policy No.</label>
+                                        <input type="text" class="form-control" name="insurance_policy_number"
+                                               placeholder="Policy No.">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="item form-group">
+                                        <label>Insured Amount</label>
+                                        <input type="number" class="form-control" name="insurance_amount"
+                                               placeholder="Amount">
+                                    </div>
+                                    <div class="item form-group input-group date">
+                                        <label>Insurance Date</label>
+                                        <input type="text" class="form-control" id="insurance_date"
+                                               name="insurance_date" placeholder="Date" style="background-color: white"
+                                               readonly>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <h4>Others</h4>
+                                <div class="item form-group">
+                                    <label for="from_city"><span class="required">From * </span></label>
+                                    <select class="form-control"
+                                            name="from_city" id="detailed_booking_from_city">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label for="to_city"><span class="required">To * </span></label>
+                                    <select class="form-control"
+                                            name="to_city" id="detailed_booking_to_city" required>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label><span class="required">Vehicle No. * </span></label>
+                                    <input type="text" class="form-control" name="vehicle_number"
+                                           value="{{ vehicle_number|default_if_none:'' }}"
+                                           placeholder="Lorry No." autocomplete="off" readonly>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label>Party Invoice No:</label>
+                                    <input type="text" class="form-control" name="party_invoice_number"
+                                           placeholder="Party Invoice No.">
+                                </div>
+                                <div class="item form-group">
+                                    <label>Party Invoice Date:</label>
+                                    <input type="text" class="form-control" id="party-invoice-date"
+                                           name="party_invoice_date" placeholder="Select Date"
+                                           style="background-color: white" readonly>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                </div>
+                                <div class="item form-group">
+                                    <label>Party Invoice Amount:</label>
+                                    <input type="number" class="form-control" name="party_invoice_amount"
+                                           data-parsley-min="0" min="0"
+                                           id="party_invoice_amount" placeholder="Party Amount Amount">
+                                </div>
+                                <div class="item form-group">
+                                    <label>Road Permit No.:</label>
+                                    <textarea class="form-control" rows="2" name="road_permit_number"
+                                              id="road_permit_number"
+                                              placeholder="Write Road Permit Number Here ..."></textarea>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                <h3>Rate Details</h3>
+                                <hr>
+                            </div>
+                            {% if not user|has_group:"emp_group3" %}
+                                <div class="col-md-5 col-sm-5 col-lg-5 col-xs-12 label_color_1">
+                                    <h4>Party</h4>
+                                    <hr>
+                                    <div class="item form-group">
+                                        <label><span class="required">Party Charged Weight(in Tonnes) *</span></label>
+                                        <input type="number" class="form-control" name="charged_weight"
+                                               data-parsley-min="0" min="0" value="{{ charged_weight }}"
+                                               id="charged_weight" placeholder="Charged Weight" required step="0.001">
+                                    </div>
+                                    <div class="item form-group">
+                                        <label><span class="required">Party Rate *</span></label>
+                                        <input type="number" class="form-control" name="party_rate" data-parsley-min="0"
+                                               min="0" value="{{ party_rate }}"
+                                               id="party_rate" placeholder="Party Rate" required>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Freight from Company:</label>
+                                        <input type="text" class="form-control" name="freight_from_company"
+                                               id="freight_from_company" placeholder="= Party Rate*Charged Wt" readonly>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Loading+Unloading+Det+Other (+)</label>
+                                        <input type="number" class="form-control"
+                                               name="additional_charges_for_company"
+                                               id="additional_charges_for_company"
+                                               placeholder="Loading+Unloading+Det+Other" data-parsley-min="0" min="0"
+                                               value="0" required>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Remarks for additional charges</label>
+                                        <input type="text" class="form-control"
+                                               name="invoice_remarks_for_additional_charges"
+                                               id="invoice_remarks_for_additional_charges"
+                                               placeholder="Invoice remarks for additional charges">
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Deductions / Discounts if any (-):</label>
+                                        <input type="number" class="form-control" name="deductions_for_company"
+                                               data-parsley-min="0" min="0"
+                                               id="deductions_for_company" placeholder="Amount" value="0" required>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Invoice remarks for deductions/discounts</label>
+                                        <input type="text" class="form-control"
+                                               name="invoice_remarks_for_deduction_discount"
+                                               id="invoice_remarks_for_deduction_discount"
+                                               placeholder="Invoice remarks for deductions/discounts">
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Advance to Trans IQ</label>
+                                        <input type="number" class="form-control" name="advance_from_company"
+                                               data-parsley-min="0" min="0"
+                                               id="advance_from_company" placeholder="Amount" value="0" required>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>TDS Deducted:</label>
+                                        <input type="number" class="form-control" name="tds_deducted_amount"
+                                               data-parsley-min="0" min="0"
+                                               placeholder="TDS Deducted:" value="0">
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Total Amount to Party:</label>
+                                        <input type="number" class="form-control" name="total_amount_to_party"
+                                               data-parsley-min="0" min="0"
+                                               id="total_amount_to_party" value="{{ total_amount_to_party }}"
+                                               placeholder="Total Amount to Party:" readonly>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label>Refundable :</label>
+                                        <input type="number" class="form-control" name="refundable_amount"
+                                               data-parsley-min="0" min="0"
+                                               id="refundable_amount" placeholder="Refundable Amount:"
+                                               value="{{ refundable_amount|default_if_none:0 }}" required>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12 verticalLine"></div>
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                <h4 class="label_color_2">Supplier</h4>
+                                <hr>
+                                <div class="item form-group">
+                                    <label><span class="required">Supplier Charged Weight(in Tonnes) *</span></label>
+                                    <input type="number" class="form-control" name="supplier_charged_weight"
+                                           id="supplier_charged_weight" placeholder="Supplier Charged Weight"
+                                           data-parsley-min="0" min="0" value="{{ supplier_charged_weight }}"
+                                           required step="0.001">
+                                </div>
+                                <div class="item form-group">
+                                    <label> <span class="required">Supplier Rate *</span></label>
+                                    <input type="number" class="form-control" name="supplier_rate" data-parsley-min="0"
+                                           min="0" value="{{ supplier_rate }}"
+                                           id="supplier_rate" placeholder="Supplier Rate" required>
+                                </div>
+
+
+                                <div class="item form-group">
+                                    <label>Freight to Owner:</label>
+                                    <input type="number" class="form-control" name="freight_owner" data-parsley-min="0"
+                                           min="0"
+                                           id="freight_owner" placeholder="= Supplier Rate*Charged Wt" readonly>
+                                </div>
+                                <h4 class="label_color_2">Additional Charges for Vendor(+)</h4>
+                                <hr>
+                                <div class="item form-group label_color_2">
+                                    <label>Loading Charges</label>
+                                    <input type="number" class="form-control" name="loading_charge" data-parsley-min="0"
+                                           min="0"
+                                           id="loading_charges" placeholder="Loading Charges" value="0" required>
+                                </div>
+                                <div class="item form-group label_color_2">
+                                    <label>Unloading Charges</label>
+                                    <input type="number" class="form-control" name="unloading_charge"
+                                           data-parsley-min="0" min="0"
+                                           id="unloading_charges" placeholder="Unloading Charges" value="0"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_2">
+                                    <label>Detention Charges</label>
+                                    <input type="number" class="form-control" name="detention_charge"
+                                           data-parsley-min="0" min="0"
+                                           id="detention_charges" placeholder="Detention Charges" value="0"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_2">
+                                    <label>Other Charges</label>
+                                    <input type="number" class="form-control" name="additional_charges_for_owner"
+                                           data-parsley-min="0" min="0"
+                                           id="additional_charges_for_owner" placeholder="Other Charges" value="0"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_2">
+                                    <label>Remarks about additional charges</label>
+                                    <textarea class="form-control" rows="2" name="note_for_additional_owner_charges"
+                                              id="remarks_about_additional_charges"
+                                              placeholder="Remarks about additional charges"></textarea>
+                                </div>
+                                <h4 class="label_color_3">Deductions for Vendor(-)</h4>
+                                <hr>
+                                <div class="item form-group label_color_3">
+                                    <label>Commission</label>
+                                    <input type="number" class="form-control" name="commission" id="commission"
+                                           data-parsley-min="0" min="0"
+                                           {% if not supplier_deductions.commission.editable %}readonly{% endif %}
+                                           placeholder="Commission" value="{{ supplier_deductions.commission.amount }}"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_3">
+                                    <label>LR Cost</label>
+                                    <input type="number" class="form-control" name="lr_cost" id="lr_cost"
+                                           data-parsley-min="0" min="0"
+                                           {% if not supplier_deductions.deduction_for_balance.editable %}readonly{% endif %}
+                                           placeholder="LR Cost" value="{{ supplier_deductions.lr_cost.amount }}"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_3">
+                                    <label>Deduction for Advance</label>
+                                    <input type="number" class="form-control" name="deduction_for_advance"
+                                           data-parsley-min="0" min="0"
+                                           {% if not supplier_deductions.deduction_for_advance.editable %}readonly{% endif %}
+                                           id="deduction_for_advance" placeholder="Deduction for Advance"
+                                           value="{{ supplier_deductions.deduction_for_advance.amount }}"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_3">
+                                    <label>Deduction for Balance</label>
+                                    <input type="number" class="form-control" name="deduction_for_balance"
+                                           data-parsley-min="0" min="0"
+                                           {% if not supplier_deductions.deduction_for_balance.editable %}readonly{% endif %}
+                                           id="deduction_for_balance" placeholder="Deduction for Balance"
+                                           value="{{ supplier_deductions.deduction_for_balance.amount }}"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_3">
+                                    <label>Any Other Deductions</label>
+                                    <input type="number" class="form-control" name="other_deduction"
+                                           data-parsley-min="0" min="0"
+                                           id="any_other_deduction" placeholder="Any Other Deductions" value="0"
+                                           required>
+                                </div>
+                                <div class="item form-group label_color_3">
+                                    <label>Remarks about deductions</label>
+                                    <textarea class="form-control" rows="1" name="remarks_about_deduction"
+                                              id="remarks_about_deduction"
+                                              placeholder="Remarks about deductions"></textarea>
+                                </div>
+                                <div class="item form-group label_color_3">
+                                    <label>Total Amount to Owner:</label>
+                                </div>
+                                <div class="item form-group">
+                                    <input type="number" class="form-control" name="total_amount_to_owner"
+                                           data-parsley-min="0" min="0" value="{{ total_amount_to_owner }}"
+                                           id="total_amount_to_owner" placeholder="=Freight+Additional-Deduction"
+                                           step="0.001"
+                                           readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="item form-group">
+                                    <label>Remarks</label>
+                                    <textarea class="form-control" rows="2" name="comments" id="comments"
+                                              placeholder="Write Special Notes ..."></textarea>
+                                </div>
+                            </div>
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            <div class="pull-right">
+                                <button type="reset" class="btn btn-lg btn-danger">Reset</button>
+                                <button type="submit" class="btn btn-lg btn-success" name="generate_lr_and_add_more"
+                                        id="btn-detailed-lr-finish"
+                                        value="generate_lr">Generate LR
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{#    </div>#}
+    <style>
+        .label_color_1, .label_color_1 label, .label_color_1 h4, .label_color_1 h3, .label_color_1 input, .label_color_1 textarea {
+            color: darkblue;
+        }
+
+        .label_color_2, .label_color_2 label, .label_color_2 h4, .label_color_2 h3, .label_color_2 input, .label_color_2 textarea {
+            color: red;
+        }
+
+        .label_color_3, .label_color_3 label, .label_color_3 h4, .label_color_3 h3, .label_color_3 input, .label_color_3 textarea {
+            color: darkgreen;
+        }
+
+        .verticalLine:after {
+            content: "";
+            background-color: grey;
+            position: absolute;
+            width: 5px;
+            height: 122rem;
+            top: 10px;
+            left: 50%;
+            display: block;
+        }
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/nprogress/js/nprogress.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static 'aaho/js/common.js' %}?v={% now 'U' %}" type="text/javascript"></script>
+
+    <script>
+        $('#detailed_booking_from_city').empty().append('<option value=' + '{{ from_city.id }}' + ' selected>' + '{{ from_city.name }}' + ', ' + '{{ from_city.state }}' + '</option>');
+        $('#detailed_booking_to_city').empty().append('<option value=' + '{{ to_city.id }}' + ' selected>' + '{{ to_city.name }}' + ', ' + '{{ to_city.state }}' + '</option>');
+
+        var party_rate_id = $('#party_rate');
+        if ($('#billing_type').val() === 'contract') {
+            party_rate_id.val(0).prop('readonly', true);
+        }
+        var additional_charges_passed_on = parseInt($('#loading_charges').val()) + parseInt($('#unloading_charges').val()) + parseInt($('#detention_charges').val()) + parseInt($('#additional_charges_for_owner').val());
+        var deductions = parseInt($('#commission').val()) + parseInt($('#lr_cost').val()) + parseInt($('#deduction_for_advance').val()) + parseInt($('#deduction_for_balance').val()) + parseInt($('#any_other_deduction').val());
+        {% if not user|has_group:"emp_group3" %}
+            var party_charged_weight = parseFloat($('#charged_weight').val());
+            var party_rate = parseInt(party_rate_id.val());
+            var freight_from_company = party_rate * party_charged_weight;
+            var additional_charges_for_company = $('#additional_charges_for_company');
+            var deductions_for_company = $('#deductions_for_company');
+            $("#freight_from_company").val(freight_from_company);
+            $("#total_amount_to_party").val(Math.round(freight_from_company + parseInt(additional_charges_for_company.val()) - parseInt(deductions_for_company.val())));
+            if ($.trim(additional_charges_for_company.val()) !== '0') {
+                $("#invoice_remarks_for_additional_charges").prop('required', true);
+            } else {
+                $("#invoice_remarks_for_additional_charges").prop('required', false);
+            }
+            if ($.trim(deductions_for_company.val()) !== '0') {
+                $("#invoice_remarks_for_deduction_discount").prop('required', true);
+            } else {
+                $("#invoice_remarks_for_deduction_discount").prop('required', false);
+            }
+        {% endif %}
+        var supplier_charged_weight = parseFloat($('#supplier_charged_weight').val());
+        var supplier_rate = parseInt($('#supplier_rate').val());
+        var freight_to_owner = supplier_rate * supplier_charged_weight;
+        $("#additional_charge_passed_on").val(additional_charges_passed_on);
+        $("#freight_owner").val(freight_to_owner);
+        $("#total_amount_to_owner").val(freight_to_owner + additional_charges_passed_on - deductions);
+        //Chnages Input Value on Change
+        $("input").change(function () {
+            var additional_charges_passed_on = parseInt($('#loading_charges').val()) + parseInt($('#unloading_charges').val()) + parseInt($('#detention_charges').val()) + parseInt($('#additional_charges_for_owner').val());
+            var deductions = parseInt($('#commission').val()) + parseInt($('#lr_cost').val()) + parseInt($('#deduction_for_advance').val()) + parseInt($('#deduction_for_balance').val()) + parseInt($('#any_other_deduction').val());
+            {% if not user|has_group:"emp_group3" %}
+                var party_charged_weight = parseFloat($('#charged_weight').val());
+                var party_rate = parseInt(party_rate_id.val());
+                var freight_from_company = party_rate * party_charged_weight;
+                var additional_charges_for_company = $('#additional_charges_for_company');
+                var deductions_for_company = $('#deductions_for_company');
+                $("#freight_from_company").val(freight_from_company);
+                $("#total_amount_to_party").val(Math.round(freight_from_company + parseInt(additional_charges_for_company.val()) - parseInt(deductions_for_company.val())));
+                if ($.trim(additional_charges_for_company.val()) !== '0') {
+                    $("#invoice_remarks_for_additional_charges").prop('required', true);
+                } else {
+                    $("#invoice_remarks_for_additional_charges").prop('required', false);
+                }
+                if ($.trim(deductions_for_company.val()) !== '0') {
+                    $("#invoice_remarks_for_deduction_discount").prop('required', true);
+                } else {
+                    $("#invoice_remarks_for_deduction_discount").prop('required', false);
+                }
+            {% endif %}
+            var supplier_charged_weight = parseFloat($('#supplier_charged_weight').val());
+            var supplier_rate = parseInt($('#supplier_rate').val());
+            var freight_to_owner = supplier_rate * supplier_charged_weight;
+            $("#additional_charge_passed_on").val(additional_charges_passed_on);
+            $("#freight_owner").val(freight_to_owner);
+            $("#total_amount_to_owner").val(freight_to_owner + additional_charges_passed_on - deductions);
+        });
+
+        //add a new style 'foo'
+        $.notify.addStyle('foo', {
+            html:
+                "<div>" +
+                "<div class='clearfix'>" +
+                "<div class='title' data-notify-html='title'/>" +
+                "<div class='buttons'>" +
+                "<button class='yes' data-notify-text='button'></button>" +
+                "</div>" +
+                "</div>" +
+                "</div>"
+        });
+
+        $(document).on('click', '.notifyjs-foo-base .yes', function () {
+            //show button text
+            {#window.location.href = '/team/fetch-full-booking-data-page/';#}
+            //hide notification
+            {#$(this).trigger('notify-hide');#}
+        });
+
+        $('#btn-detailed-lr-finish').click(function (e) {
+            var generate_lr_and_finish = $('#detailed-booking-form');
+            if (!generate_lr_and_finish.parsley().isValid()) {
+                return true;
+            }
+            e.preventDefault();
+            NProgress.start();
+            var data = generate_lr_and_finish.find(':input').filter(function () {
+                return $.trim(this.value).length > 0
+            }).serializeJSON();
+            $.ajax({
+                url: "/api/manual-booking-create/",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+               
+                $.notify({
+                    title: response['msg'],
+                    button: 'New Booking'
+                }, {
+                    style: 'foo',
+                    autoHide: false,
+                    clickToHide: false,
+                    position: "top center",
+                    autoHideDelay: 1000
+                });
+                NProgress.done();
+            }).fail(function (jqXHR, status,error) {
+                if(jqXHR.status === "401"){
+                    redirectToLogin(error);
+                  }
+                  else{
+                    $.notify('Failed', {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'error'
+                });
+                  }
+                
+                NProgress.done();
+            });
+            return false;
+        });
+    </script>
+{% endblock %}

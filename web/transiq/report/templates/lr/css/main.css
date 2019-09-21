@@ -1,0 +1,100 @@
+
+/* Global Defaults */
+html {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+h1, h2, h3, h4, h5, h6, p, li, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+img {
+    border: none;
+}
+/* Specifics */
+body {
+    font-family: "DejaVu Sans", sans-serif;
+    font-size: 16px;
+    width: 1483px;
+    height: 8320px;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+}
+b {
+    font-weight: bold;
+}
+div.page {
+    padding: 48px 49px;
+    width: 1385px;
+    height: 950px;
+    page-break-after: always;
+}
+table, tr, th, td {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+}
+table, th, td {
+    border: 1px solid black;
+}
+div.outer_border {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #2B2B2B;
+}
+div.left_side {
+    width: 75%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+div.right_side {
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+    float: right;
+}
+div.header {
+    height: 20%;
+    position: relative;
+    margin-bottom: 0.6%;
+}
+div.info {
+    margin-left: 10px;
+    height: 25%;
+    margin-bottom: 0.7%;
+}
+div.table {
+    margin-left: 10px;
+    margin-bottom: 1.2%;
+    height: 26.5%;
+}
+div.footer {
+    margin-left: 10px;
+    height: 20%;
+}
+div.bottom_text {
+    margin-top: 1%;
+    height: 5%;
+    margin-left: 10px;
+}
+
+div.payment_note {
+    margin: 0;
+    padding: 0;
+    height: 2%;
+}
+div.content_container {
+    margin: 0;
+    padding: 0;
+    height: 98%;
+}
+div.payment_note div {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    padding: 0;
+    margin: -3px 0 0 0;
+}

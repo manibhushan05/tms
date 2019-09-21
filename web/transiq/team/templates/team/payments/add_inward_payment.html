@@ -1,0 +1,166 @@
+{% extends "team/base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Inward Payment</h3>
+{% endblock %}
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <form class="form-horizontal form-label-left" id="inward-payment-only"
+                                  data-parsley-trigger="input">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">LR Number(s)</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="select2_multiple form-control" multiple="multiple"
+                                                name="booking_id[]" style="width: 100%" required>
+                                            {% if request_from == 'edit_booking_history' %}
+                                                <option value="{{ id }}" selected>{{ booking_id }}</option>
+                                            {% endif %}
+                                            {% for value in booking_data %}
+                                                <option value="{{ value.id }}">{{ value.booking_id }}
+                                                    ({% for lr in value.lr_numbers.all %}{{ lr.lr_number }}
+                                                        &nbsp;{% endfor %})
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="invoice_number">Invoice
+                                        Number(s)
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="invoice_number" name="invoice_number"
+                                        data-parsley-minlength="3"
+                                        data-parsley-maxlength="100"
+                                               class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Received
+                                        From <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="received_from" class="form-control col-md-7 col-xs-12"
+                                        data-parsley-minlength="3"
+                                        data-parsley-maxlength="100"
+                                               name="received_from" required="required">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="actual_amount">Amount
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" id="actual_amount" name="actual_amount" required="required"
+                                               data-parsley-min="0" data-parsley-max="999999"
+                                               data-parsley-type="number"
+                                               class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class=" item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode <span
+                                            class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="inward_payment_mode form-control" name="payment_mode"
+                                                required="required">
+                                            <option></option>
+                                            <option value="cash">Cash</option>
+                                            <option value="cheque">Cheque</option>
+                                            <option value="neft">NEFT</option>
+                                            <option value="imps">IMPS</option>
+                                            <option value="rtgs">RTGS</option>
+                                            <option value="hdfc_internal_account">HDFC Internal Account</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="cheque_number_area item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Cheque Number <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input data-parsley-type="digits" id="cheque_number" name="trn"
+                                               class="form-control col-md-7 col-xs-12" 
+                                               data-parsley-min="6"
+                                        data-parsley-max="8"
+                                              >
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Payment <span
+                                            class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="inward_payment_date" name="inward_payment_date"
+                                               class="date-picker form-control col-md-7 col-xs-12" required readonly style="background-color: white">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Remarks
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea id="textarea" required="required" name="remarks"
+                                                  placeholder="Please provide explanations"
+                                                  data-parsley-minlength="3"
+                                        data-parsley-maxlength="100"
+                                                  class="form-control col-md-7 col-xs-12"></textarea>
+                                    </div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button type="reset" class="btn btn-primary">Reset</button>
+                                        <button id="btn-inward-payment-only" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('form').parsley('validate');
+        });
+    </script>
+    <script src="{% static "aaho/js/lr/nprogress.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/lr/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/lr/prettify.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script src="{% static  'aaho/js/team/inward-payments.js' %}" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".select2_multiple").select2({
+                maximumSelectionLength: 1,
+                placeholder: "Please add all associated LR(s)",
+                allowClear: true
+            }).change(function () {
+                $(this).parsley().validate();
+            });
+        });
+    </script>
+{% endblock %}

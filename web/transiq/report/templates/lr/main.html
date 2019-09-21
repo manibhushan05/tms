@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LR</title>
+    <style>
+/* Main css */
+{% include 'lr/css/main.css' %}
+/* header, title, logo, notice etc. styles */
+{% include 'lr/css/header.css' %}
+/* consignor consignee table, pod table, insurance details, footer text styles */
+{% include 'lr/css/content.css' %}
+/* material description table styles */
+{% include 'lr/css/table.css' %}
+/* lr right column styles */
+{% include 'lr/css/right.css' %}
+/* tnc styles */
+{% include 'lr/css/tnc.css' %}
+    </style>
+</head>
+<body>
+    <!-- consignor's copy -->
+    <div class="page">
+        {% include 'lr/lr.html' with copy_for='consignor' %}
+    </div>
+    <div class="page">
+        {% include 'lr/tnc.html' %}
+    </div>
+    <!-- consignee's copy -->
+    <div class="page">
+        {% include 'lr/lr.html' with copy_for='consignee'  %}
+    </div>
+    <div class="page">
+        {% include 'lr/tnc.html' %}
+    </div>
+    <!-- drivers's copy -->
+    <div class="page">
+        {% include 'lr/lr.html' with copy_for='driver' %}
+    </div>
+    <div class="page">
+        {% include 'lr/tnc.html' %}
+    </div>
+    <!-- consignor's copy -->
+    <div class="page">
+        {% include 'lr/lr.html' with copy_for='transporter' %}
+    </div>
+    <div class="page">
+        {% include 'lr/tnc.html' %}
+    </div>
+</body>
+</html>

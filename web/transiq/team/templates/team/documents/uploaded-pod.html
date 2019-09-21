@@ -1,0 +1,304 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% block css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/image-viewer/css/viewer.min.css' %}">
+
+    <style>
+        h5 {
+            text-align: center;
+        }
+
+        h5 b {
+            word-wrap: break-word;
+        }
+
+        label {
+            text-align: center;
+        }
+
+        .notifyjs-foo-base {
+            opacity: 0.85;
+            width: 100%;
+            background: #F5F5F5;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .notifyjs-foo-base .title {
+            width: 100%;
+            float: left;
+            margin: 10px 0 0 10px;
+            color: #00A000;
+        }
+
+        .notifyjs-foo-base .buttons {
+            width: 100%;
+            font-size: 9px;
+            padding: 5px;
+            margin: 2px;
+        }
+
+        .notifyjs-foo-base button {
+            position: center;
+            font-size: 12px;
+            padding: 5px;
+            margin: 2px;
+        }
+        .img_thumbnail{
+            display: inline-block;
+            max-width: 100%;
+            height: 7em;
+            width: 8em;
+            padding: 4px;
+        }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">POD</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+        {% for booking in bookings_data %}
+            <div class="clearfix"></div>
+            <div class="row">
+                <form class="form-horizontal form-label-left" id="{{ booking.form_resubmit_pod }}"
+                      data-parsley-validate data-parsley-trigger="keyup"
+                      autocomplete="off">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="scroller_anchor"></div>
+                                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Booking ID</h5>
+                                    <h5><b>{{ booking.booking_id }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>POD Status</h5>
+                                    <h5 {% if booking.pod_status == 'Rejected' %}style="color: red" {% endif %}>
+                                        <b>{{ booking.pod_status }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Date</h5>
+                                    <h5><b>{{ booking.shipment_date }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Source</h5>
+                                    <h5><b>{{ booking.from_city }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Destination</h5>
+                                    <h5><b>{{ booking.to_city }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Supplier</h5>
+                                    <h5><b>{{ booking.supplier_phone }}</b></h5>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                    <h5>Supplier Name</h5>
+                                    <h5><b>{{ booking.supplier_name }}</b></h5>
+                                </div>
+
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Loaded Wt.</h5>
+                                    <h5><b>{{ booking.loaded_weight|default:0 }}</b></h5>
+                                </div>
+
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Party Wt. </h5>
+                                    <h5><b>{{ booking.party_weight|default:0 }}</b></h5>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                    <h5>Supplier Wt. </h5>
+                                    <h5><b>{{ booking.supplier_weight|default:0 }}</b></h5>
+                                </div>
+                                {% for pod in booking.pod_data %}
+                                    {% if pod.uploaded_on %}
+                                        <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                        <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                            <h5>Lr Number</h5>
+                                            <h5><b>{{ pod.lr_number }}</b></h5>
+                                        </div>
+                                        <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                            <h5>Upload Date</h5>
+                                            <h5><b>{{ pod.uploaded_on }}</b></h5>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                            <h5>Uploaded By</h5>
+                                            <h5><b>{{ pod.uploaded_by }}</b></h5>
+                                        </div>
+                                        <div id="{{ pod.gallery }}">
+                                            <ul class="pictures">
+                                                {% for value in pod.docs|slice:":4" %}
+                                                    <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
+                                                        {% if booking.pod_status == 'Rejected' %}
+                                                            <input type="checkbox" name="resubmitted_pod[]"
+                                                                   id="option{{ value.id }}" value="{{ value.id }}">
+                                                        {% endif %}
+                                                        <img data-original="{{ value.url }}" src="{{ value.url }}"
+                                                             alt="{{ value.filename }}"
+                                                             title="{{ value.filename }}" width="80" height="60" class="img_thumbnail"/>
+                                                        <h6 style="width: 10rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ value.filename }}</h6>
+                                                    </div>
+                                                {% endfor %}
+                                                <div class="item form-group col-md-12 col-sm-12 col-lg-12 col-xs-12">
+
+                                                </div>
+                                                {% for value in pod.docs|slice:"4:" %}
+                                                    <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
+                                                        {% if booking.pod_status == 'Rejected' %}
+                                                            <input type="checkbox" name="resubmitted_pod[]"
+                                                                   id="option{{ value.id }}" value="{{ value.id }}">
+                                                        {% endif %}
+                                                        <img data-original="{{ value.url }}" src="{{ value.url }}"
+                                                             alt="{{ value.filename }}"
+                                                             title="{{ value.filename }}" width="80" height="60" class="img_thumbnail"/>
+                                                        <h6 style="width: 10rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ value.filename }}</h6>
+                                                    </div>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if booking.rejected %}
+                                    <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                    {% for reject in booking.rejected %}
+                                        <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                            <h5 style="text-align: left">Rejected By:
+                                                <b>{{ reject.rejected_by.profile.name }}</b></h5>
+                                        </div>
+                                        <div class=" col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                            <h5 style="text-align: left">Rejected On:
+                                                <b>{{ reject.rejection_datetime }}</b></h5>
+                                        </div>
+                                        <div class=" col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                            <h5 style="text-align: left">Remark: <b>{{ reject.remarks }}</b></h5>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+                                <div class="div_resubmission_remarks item form-group col-md-6 col-sm-5 col-lg-6 col-xs-12"
+                                     id="{{ booking.div_resubmit_remarks }}">
+                                    <input type="hidden" name="booking_id" value="{{ booking.booking_id }}">
+                                    <label for="{{ booking.input_resubmission_remarks }}"><span class="required">Resubmission  Remarks*</span></label>
+                                    <input type="text" class="resubmission_remark form-control"
+                                           name="resubmission_remark" id="{{ booking.input_resubmission_remarks }}"
+                                           placeholder="Please mention resubmission reason">
+                                </div>
+
+                                {% if booking.pod_status == 'Rejected' %}
+                                    <div class="ln_solid resubmission_line col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+                                    <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                        <button type="submit" class="btn btn-resubmit-pod btn-lg btn-success"
+                                                id="{{ booking.btn_resubmit_id }}"> Resubmit
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        {% endfor %}
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/image-viewer/js/viewer.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script>
+        $('.div_resubmission_remarks').hide();
+        $('.btn-resubmit-pod').click(function (e) {
+            var btn_resubmit_id = $(this).attr('id');
+            var booking_id = btn_resubmit_id.slice(16, 25);
+            var form_resubmit_pod = $('#form_resubmit_pod_' + booking_id);
+            $('#input_resubmission_remarks_' + booking_id).prop('required', true);
+            $('#div_resubmit_remarks_' + booking_id).show();
+            if (!form_resubmit_pod.parsley().isValid()) {
+                return true;
+            }
+            NProgress.start();
+            var data = form_resubmit_pod.find(':input').filter(function () {
+                return $.trim(this.value).length > 0
+            }).serializeJSON();
+            e.preventDefault();
+            $.ajax({
+                url: "/api/fileupload-pod-resubmit/",
+                type: 'PATCH',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+                $.notify(response['msg'], {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                NProgress.done();
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            }).fail(function (jqXHR, status,error) {
+                if(jqXHR.status === "401"){
+                    redirectToLogin(error);
+                  }
+                  else{
+                    $.notify('Failed', {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'error'
+                });
+                  }
+               
+                NProgress.done();
+            });
+            return false;
+        });
+        {% for booking in bookings_data %}
+            {% for pod in booking.pod_data %}
+                var viewer = new Viewer($('#{{ pod.gallery }}')[0], {
+                    url: 'data-original',
+                    toolbar: {
+                        zoomIn: true,
+                        zoomOut: true,
+                        reset: true,
+                        prev: function () {
+                            viewer.prev(true);
+                        },
+                        play: true,
+                        next: function () {
+                            viewer.next(true);
+                        },
+                        rotateLeft: true,
+                        rotateRight: true,
+                        download: function () {
+                            const a = document.createElement('a');
+
+                            a.href = viewer.image.src;
+                            a.download = viewer.image.alt;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        }
+                    }
+                });
+            {% endfor %}
+        {% endfor %}
+    </script>
+{% endblock %}

@@ -1,0 +1,27 @@
+
+
+
+@media only screen and (max-width: 766px) {
+    .write{
+        border-left: none;
+        border-top: solid 2px #303F9F;
+    }
+}
+
+#map_canvas {
+    width: 50vw;
+    height: 30vw;
+}
+
+.offices h3{
+    text-align: center;
+    padding: 1vw;
+}
+
+.offices p{
+    text-align: center;
+}
+
+.office_address {
+    width: 10vw;
+}

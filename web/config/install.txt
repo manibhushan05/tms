@@ -1,0 +1,206 @@
+##############################################
+##                                          ##
+##                                          ##
+##       DO NOT EXECUTE MINDLESSLY!!!       ##
+##                                          ##
+##                                          ##
+##############################################
+
+after 12:00 -
+
+- gps devices
+- booking history load slow
+- metabase
+
+
+
+
+# manual installation tit-bits, useful stuff
+
+# update and upgrade packages
+sudo apt-get update --fix-missing
+sudo apt-get upgrade -y --fix-missing
+
+# install python stuff
+sudo apt-get install python python-dev python-pip python-virtualenv ipython
+
+
+sudo apt-get install openssl build-essential libssl-dev libxrender-dev git-core libx11-dev libxext-dev libfontconfig1-dev libfreetype6-dev fontconfig -y
+sudo apt-get install ttf-mscorefonts-installer
+
+
+# update pip
+sudo pip install -U pip
+
+# install git
+sudo apt-get install git
+
+# install apache2
+sudo apt-get install apache2 apache2-dev libapache2-mod-wsgi
+
+# install jenkins
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+# clone the repo
+git clone https://github.com/pankajaaho/web.git
+
+# create new csr
+openssl req -new -newkey rsa:2048 -nodes -keyout aaho.in.key -out aaho.in.csr
+
+# data copy
+create role aaho with password 'whvc.1900' login createdb;
+create role metabase with password 'whvc.1900' login createdb;
+
+CREATE DATABASE "aahodb"
+    WITH OWNER "aaho"
+    ENCODING 'UTF8'
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    TEMPLATE template0;
+
+pg_dump -d aahodb -U aaho -h 'aahodbprod.cow111xuzv8n.ap-south-1.rds.amazonaws.com' -p 5432 -f aahodbprod.sql
+psql -d aahodb -U aaho -h 'aahodbdev.cow111xuzv8n.ap-south-1.rds.amazonaws.com' -p 5432 < aahodbprod.sql
+psql -d aahodb -U aaho -h 'aahodbstage.cow111xuzv8n.ap-south-1.rds.amazonaws.com' -p 5432 < aahodbprod.sql
+psql -d aahodb -U aaho -h 'localhost' -p 5432 < aahodbprod.sql
+
+
+# fix content type issue
+CREATE TABLE "django_content_type_fixed" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "app_label" varchar(100) NOT NULL,
+    "model" varchar(100) NULL
+);
+insert into django_content_type_fixed (id, app_label, model) select id, app_label, model from django_content_type where id is not null;
+ALTER SEQUENCE django_content_type_fixed_id_seq RESTART WITH (?);
+insert into django_content_type_fixed (app_label, model) select app_label, model from django_content_type where id is null;
+
+alter table django_content_type rename to django_content_type_back;
+alter table django_content_type_fixed rename to django_content_type;
+drop table django_content_type_back;
+
+
+
+[program:metabase]
+environment=MB_DB_TYPE=postgres,MB_DB_DBNAME=aahodb,MB_DB_PORT=5432,MB_DB_USER=aaho,MB_DB_PASS="whvc.1900",MB_DB_HOST="aahodbdev.cow111xuzv8n.ap-south-1.rds.amazonaws.com"
+command=/usr/bin/java -jar /home/ubuntu/metabase/metabase.jar
+directory=/home/ubuntu/metabase/
+stdout_logfile=/var/log/metabase/metabase-out.log
+stderr_logfile=/var/log/metabase/metabase-err.log
+autostart=true
+autorestart=true
+user=ubuntu
+startsecs=10
+stopwaitsecs=300
+
+
+
+# ssl setup
+sudo a2enmod wsgi
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod headers
+sudo a2enmod ssl
+sudo a2dissite 000-default
+sudo a2dissite default-ssl
+
+# do ssl setup
+sudo mkdir -p /etc/apache2/ssl/
+sudo cp config/ci/dev/ssl/*.crt /etc/apache2/ssl/
+sudo cp config/ci/dev/ssl/*.csr /etc/apache2/ssl/
+sudo cp config/ci/dev/ssl/private/*.key /etc/ssl/private/
+sudo chmod 600 /etc/apache2/ssl/*.* || echo ""
+sudo chmod 700 /etc/apache2/ssl || echo ""
+sudo chmod 640 /etc/ssl/private/aaho.in.key || echo ""
+
+sudo cp config/ci/dev/apache2/ci.conf /etc/apache2/sites-available/
+
+sudo a2ensite ci
+
+sudo service apache2 restart
+
+
+# postgres
+sudo apt-get install libpq-dev postgresql postgresql-contrib
+
+
+
+#Deploying new ssl certificate
+1. Renew certificate on GoDaddy
+2. Copy and paste aaho.in.csr in godaddy rekey
+3. Download certificate for apache
+4. Use scp to copy file on server home
+5. Copy file on /etc/apache2/ssl/
+6. Change 600 permission
+
+
+
+
+
+
+
+
+
+
+admin
+senior staff
+jr staff
+
+
+
+fms
+
+#fix psql
+
+rm -rf /usr/local/var/postgres  # in case this is not your first try
+mkdir /usr/local/var/postgres
+chmod 0700 /usr/local/var/postgres
+Then run initdb and it will respect the permissions of the data directory.
+
+initdb -D /usr/local/var/postgres
+For grins and giggles, create a test db named after your user:
+
+createdb `whoami`
+Login to test:
+
+psql
+
+
+
+
+
+
+
+
+
+
+Here's what worked best for me.
+
+1. Go to Applications > right click PyCharm > move to trash
+
+2. open a terminal and run the following: find ~/Library/ -iname "*pycharm*"
+
+3. verify that all of the results are in fact related to PyCharm and not something else important you need to keep. Then, remove them all using the command: find ~/Library -iname "*pycharm*" -exec rm -r "{}" \;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

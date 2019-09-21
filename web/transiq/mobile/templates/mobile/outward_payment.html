@@ -1,0 +1,157 @@
+{% extends "mobile/base.html" %}
+{% load staticfiles %}
+{% load team_tags.helper %}
+{% block css %}
+    <link href="{% static "vendor/datepicker/css/bootstrap-datepicker.min.css" %}" rel="stylesheet">
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Outward Payment</h3>
+{% endblock %}
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <form class="form-horizontal form-label-left" id="mobile-outward-payment-form"
+                                  data-parsley-trigger="input">
+
+                                <div class="item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                    <label class="control-label" for="booking_id">Booking<span
+                                            class="required">*</span></label>
+                                    <select class="booking_id form-control" name="booking_id" id="bookings_id" required>
+                                        <option></option>
+                                        {% for value in booking %}
+                                            <option value="{{ value.id }}">{{ value.booking_id }}
+                                                ({% for lr in value.lr_numbers.all %}{{ lr.lr_number }}
+                                                    &nbsp;{% endfor %}), {{ value.lorry_number }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                    <label class="control-label" for="payment_mode">Mode Of Payment<span
+                                            class="required">*</span></label>
+                                    <select class="outward_payment_mode form-control" name="outward_payment_mode"
+                                            id="outward_payment_mode" required>
+                                        <option></option>
+                                        <option value="bank_transfer">Bank Transfer</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="cheque">Cheque</option>
+                                        <option value="happay">Happay</option>
+                                        <option value="fuel_card">Fuel Card</option>
+                                    </select>
+                                </div>
+                                <div class=" item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12" id="fuel_card_area">
+                                    <label class="control-label"><span class="required">Fuel Card Number</span></label>
+                                    <select class="fuel_card_number form-control" name="fuel_card_number"
+                                            id="fuel_card_number"
+                                            style="width: 100%">
+                                        <option></option>
+                                        {% for value in fuel_card %}
+                                            <option value="{{ value.id }}">{{ value.card_number }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class=" item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12"
+                                     id="bank_account_area">
+                                    <label class="control-label"><span class="required">Account Number *</span></label>
+                                    <select class="bank_account_number form-control" name="bank_account_number"
+                                            id="bank_account_number"
+                                            style="width: 100%">
+                                        <option></option>
+                                        {% for value in bank_account %}
+                                            <option value="{{ value.id }}">{{ value.account_number }}, {{ value.ifsc }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+
+                                <div class="item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                    <label class="control-label ">Paid To
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control col-md-7 col-xs-12"
+                                           name="paid_to" placeholder="Enter Paid To"
+                                           data-parsley-error-message="Please Enter Paid To"
+                                           required="required">
+                                </div>
+                                <div class="item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                    <label class="control-label ">Amount
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="number" class="form-control col-md-7 col-xs-12"
+                                           name="actual_amount" placeholder="Enter Amount"
+                                           data-parsley-error-message="Please Enter Amount"
+                                           required="required">
+                                </div>
+
+                                <div class="item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                    <label class="control-label ">Payment Date
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="select-date form-control col-md-7 col-xs-12"
+                                           name="outward_payment_date" id="outward_payment_date"
+                                           placeholder="Click to Select Date"
+                                           data-parsley-error-message="Please Enter Payment Date" required readonly
+                                           style="background-color: white">
+                                </div>
+                                <div class="item form-group col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                    <label>Remarks</label>
+                                    <textarea class="form-control" rows="2" name="remarks"
+                                              id="remarks"
+                                              placeholder="Write Special Notes ..."></textarea>
+                                </div>
+                                <div class="col-md-1 col-sm-1 col-xs-1"
+                                     style="padding-left: 120px;padding-top: 5px">
+                                    <input type="checkbox" name="send_sms_supplier" id="send_sms_supplier"
+                                           value="yes" class="flat"/>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label class="control-label " for="send_sms_supplier">Send SMS to
+                                        Supplier ?
+                                    </label>
+                                </div>
+
+                                <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+                                <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12 pull-right">
+                                    <button class="btn btn-lg btn-danger" type="reset">RESET</button>
+                                    <button id="btn-mobile-outward-payment" class="btn btn-lg btn-success">Make Payment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "vendor/nprogress/js/nprogress.min.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}"></script>
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/outward-payment.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/supplier/common.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script>
+        $(".booking_id").select2({
+            placeholder: "Select Booking",
+            allowClear: true
+        }).change(function () {
+            $(this).parsley().validate();
+        });
+        $(".payment_mode").select2({
+            placeholder: "Select Mode of Payment",
+            allowClear: true
+        }).change(function () {
+            $(this).parsley().validate();
+        });
+    </script>
+{% endblock %}

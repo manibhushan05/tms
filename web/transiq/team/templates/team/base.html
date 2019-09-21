@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load user_tags %}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Aaho is a one-stop solution for online truck booking for inter-city and inter-state road freight. Book, track, pay for and manage all your truck needs here.">
+
+    <meta name="keywords"
+          content="aaho, trans IQ, transiq, trans iq tech, transiq tech, trucks for hire, hire trucks, truck booking, freight booking, online truck booking, book truck online, hire truck online, intercity trucks, inter state trucks, truck transport india, trucking business india, logistics India, logistics technology">
+
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/aaho/images/logo/favicon.ico" rel="icon" type="image/x-icon">
+    <meta name="theme-color" content="#ffffff">
+    <title>Aaho - Online Truck Booking</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static "vendor/switchery/switchery.min.css" %}">
+
+    <!-- Font Awesome -->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <!-- jQuery custom content scroller -->
+    <link href="{% static "vendor/mCustomScrollbar/jquery.mCustomScrollbar.min.css" %}" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap styles -->
+    {#    <link href="{% static "vendor/bootstrap/3.3.6/css/bootstrap.min.css" %}" rel="stylesheet">#}
+    <!-- Generic page styles -->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/fileupload/css/style.css" %}">
+    <!-- blueimp Gallery styles -->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/fileupload/css/blueimp-gallery.min.css" %}">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/fileupload/css/jquery.fileupload-ui.css" %}">
+    <!-- CSS adjustments for browsers with JavaScript disabled -->
+    <noscript>
+        <link rel="stylesheet" type="text/css" href="{% static "vendor/fileupload/css/jquery.fileupload-ui-noscript.css" %}">
+    </noscript>
+    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    {% block css %}{% endblock %}
+    <!-- Custom Theme Style -->
+    <link href="{% static "vendor/gentelella/css/custom.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet">
+  <style>
+        body {
+            padding-top: 0px;
+        }
+
+        .titleTop {
+            margin-top: -50px;
+            position: absolute;
+            margin-left: 50px;
+        }
+
+        .emp_group_1_4, .emp_group_1_2_4, .emp_group_4, .emp_group_1, .emp_group_1_2_3 {
+            display: none !important;
+        }
+
+
+        .left_col .mCSB_scrollTools {
+            width: 20px !important;
+        }
+        .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    position: relative;
+    width: 12px !important;
+    height: 100%;
+    margin: 0 auto;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    text-align: center;
+}
+    </style>
+</head>
+
+<body class="nav-md">
+
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col menu_fixed">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="javascript:;" data-url="/team/dashboard/" class="getAjaxPageDashboard site_title"><img height="22vw"
+                                                       src="{% static "aaho/images/logo/logo.png" %}"
+                                                       alt="..."> <span>Aaho</span></a>
+                </div>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section" style="padding-top: 80px">
+                        <ul class="nav side-menu">
+                            <li id="homeMenu"><a href="javascript:;" data-url="/team/dashboard/" id="homeDashboard" class="getAjaxPageDashboard"><i class="fa fa-home"></i> Home</a></li>
+                            <li><a href="javascript:;" data-url="/page/basic-commission-booking/"
+                                           class="getAjaxPage"><i class="fa fa-shopping-cart"></i> Commision Booking</a></li>
+                            <li><a><i class="fa fa-history"></i> Booking History <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="javascript:;" data-url="/page/full-booking-list-page/"
+                                           class="getAjaxPage">Full Bookings</a></li>
+                                    <li class="emp_group_1_4"><a href="javascript:;"
+                                                                 data-url="/page/update-contract-booking/"
+                                                                 class="getAjaxPage">Contract Bookings Rate</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            <li><a><i class="fa fa-money"></i> Payments <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="emp_group_1_4"><a href="javascript:;"
+                                                                 data-url="/page/add-recieved-payment/"
+                                                                 class="getAjaxPage  ">Add received payments</a></li>
+                                    <li class="emp_group_1_2_4"><a href="javascript:;"
+                                                                   data-url="/page/inward-payment-list/"
+                                                                   class="getAjaxPage">Inward Payments List</a></li>
+                                    <li class="emp_group_1_4"><a href="javascript:;"
+                                                                 data-url="/page/uncredited-cheques/"
+                                                                 class="getAjaxPage  ">Uncredited Cheques</a></li>
+                                    <li class="emp_group_1_2_3"><a href="javascript:;"
+                                                                   data-url="/page/outward-payment-page/"
+                                                                   class="getAjaxPage  ">Make Outward Payments</a></li>
+                                    <li><a href="javascript:;" data-url="/page/outward-payment-list/"
+                                           class="getAjaxPage">Outward Payments List</a></li>
+                                    <li class="emp_group_1_4"><a href="javascript:;"
+                                            data-url="/page/download-payment-file/"
+                                            class="getAjaxPage  ">Download Payment File</a></li>
+                                </ul>
+                            </li>
+                            <li class="emp_group_1_2_4"><a><i class="fa fa-envelope"></i> Invoice <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="javascript:;" data-url="/page/fetch-full-booking-invoie/"
+                                           class="getAjaxPage">Full Booking
+                                        Invoices</a>
+                                    </li>
+                                    <li><a href="javascript:;" data-url="/page/fetch-commission-booking-invoie/"
+                                           class="getAjaxPage">Commission Booking
+                                        Invoices</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-download"></i> Downloads <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="emp_group_1_2_4"><a href="javascript:;" data-url="/page/invoices/"
+                                                                   class="getAjaxPage ">Invoices </a></li>
+                                    <li class="emp_group_1_2_4"><a href="javascript:;"
+                                                                   data-url="/page/invoices-summary/"
+                                                                   class="getAjaxPage ">Invoice Summary </a></li>
+                                    <li class="emp_group_1_2_4"><a href="javascript:;" data-url="/page/pod-list/"
+                                                                   class="getAjaxPage emp_grp3">POD History</a></li>
+                                    <li><a href="javascript:;" data-url="/page/download-lr/" class="getAjaxPage">Lorry
+                                        Receipt</a></li>
+                                    <li><a href="javascript:;" data-url="/page/outward-payment-receipt-list/"
+                                           class="getAjaxPage">Outward Payment Receipt</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-money"></i> Credit Debit Note<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="emp_group_1_2_4"><a href="javascript:;"
+                                                                   data-url="/page/issue-credit-debit-note-page/"
+                                                                   class="getAjaxPage ">Issue Credit Debit Note </a>
+                                    </li>
+                                    <li class="emp_group_1"><a href="javascript:;"
+                                                               data-url="/page/approve-credit-debit-note-page/"
+                                                               class="getAjaxPage ">Approve Credit Debit
+                                        Note </a></li>
+                                </ul>
+                            </li>
+
+                            <li class="emp_group_1_2_4"><a><i class="fa fa-bank"></i>Accounting Summary <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="AccountingSummary"><a href="javascript:;" data-url="/page/placed-order-customer-accounting-summary-page/"
+                                           class="getAjaxPage">Customer Who Placed Order</a></li>
+                                    <li class="AccountingSummary"><a href="javascript:;" data-url="/page/billed-customer-accounting-summary-page/"
+                                           class="getAjaxPage">  Customer To be Billed To</a></li>
+                                    <li class="AccountingSummary"><a href="javascript:;" data-url="/page/supplier-accounting-summary-page/"
+                                           class="getAjaxPage">Supplier</a></li>
+                                    <li class="emp_group_1"><a href="javascript:;" data-url="/page/vehicle-accounting-summary-page/"
+                                           class="getAjaxPage">Vehicle</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a><i class="fa fa-upload"></i> Uploads <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="javascript:;" data-url="/page/pod-upload-page/"
+                                           class="getAjaxPage">POD </a></li>
+                                    <li><a href="javascript:;" data-url="/page/weighing-slip-upload/"
+                                           class="getAjaxPage">Weighing Slip </a></li>
+                                    <li><a href="javascript:;" data-url="/page/cheque-upload/"
+                                           class="getAjaxPage">Cheque </a></li>
+
+                                    <li><a href="javascript:;" data-url="/page/supplier-upload/"
+                                           class="getAjaxPage">Supplier's Doc </a></li>
+                                    <li><a href="javascript:;" data-url="/page/vehicle-upload/"
+                                           class="getAjaxPage">Vehicle's Doc </a></li>
+                                    <li><a href="javascript:;" data-url="/page/driver-upload/"
+                                           class="getAjaxPage">Driver's Doc </a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-check-circle-o"></i> Uploaded Docs <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="javascript:;" data-url="/page/my-uploaded-pod-list/"
+                                           class="getAjaxPage">POD </a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-registered"></i> Registrations <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="javascript:;" data-url="/supplier/vehicle-register-page/"
+                                           class="getAjaxPage">Vehicle</a></li>
+                                    <li class="emp_group_1_2_4 customerToHide"><a href="javascript:;" data-url="/page/register-sme-page/" class="getAjaxPage">Customer</a>
+                                    </li>
+                                    <li class="supplierToHide"><a href="javascript:;" data-url="/supplier/supplier-register-page/"
+                                           class="getAjaxPage">Supplier</a></li>
+                                    <li><a href="javascript:;" data-url="/supplier/driver-register-page/"
+                                           class="getAjaxPage">Driver</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-refresh"></i> Updates <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="javascript:;" data-url="/page/owner-vehicle-list-page/"
+                                           class="getAjaxPage">Vehicles</a></li>
+                                    <li class="emp_group_1_2_4"><a href="javascript:;" data-url="/page/sme-list-page/"
+                                           class="getAjaxPage">Customers</a></li>
+                                    <li><a href="javascript:;" data-url="/page/supplier-list-page/"
+                                           class="getAjaxPage">Suppliers</a></li>
+                                    <li><a href="javascript:;" data-url="/page/driver-list-page/"
+                                           class="getAjaxPage">Drivers</a></li>
+                                </ul>
+                            </li>
+
+                            <li><a><i class="fa fa-bank"></i>Bank Account <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="emp_group_1_2_3"><a href="javascript:;" data-url="/page/fetch-ifsc/"
+                                                                   class="getAjaxPage">Add New Beneficiary</a></li>
+                                    <li><a href="javascript:;" data-url="/page/bank-account-list/" class="getAjaxPage">Beneficiary
+                                        List</a></li>
+                                </ul>
+                            </li>
+                            <li class="emp_group_1_2_3"><a href="javascript:;"
+                                                           data-url="/page/track-vehicles-dashboard/"
+                                                           class="getAjaxPage"><i class="fa fa-map-marker"></i>Track
+                                Vehicles</a>
+                            </li>
+                            <li class="monitoring" style="display: none;"><a><i class="fa fa-desktop fa-lg"></i>Monitoring <span
+                                class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                
+                                <li class=""><a href="javascript:;" data-url="/page/monitoring-web-senior-mgmt-booking-status-page/"
+                                                               class="getAjaxPage">Booking Status</a></li>
+                                <li class="taskStatusLi"><a href="javascript:;" data-url="/page/monitoring-web-senior-mgmt-task-status-page/"
+                                                                class="getAjaxPage">Task Status</a></li>
+                            </ul>
+                        </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+                <!-- /menu footer buttons -->
+                <div class="sidebar-footer hidden-small" style="background-color: #172D44">
+                    <h5 align="center">Trans IQ Technologies Pvt. Ltd.</h5>
+                </div>
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <nav class="" role="navigation">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    {% block pageTitle %}
+                    {% endblock %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            <a href="#" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="{% static "aaho/images/img.png" %}" alt="">
+                                <span class=" fa fa-angle-down"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                <li><a href="javascript:;" data-url="/page/employee-profile/" class="getAjaxPage"> Profile</a></li>
+                                <li><a href="javascript:;">Help</a></li>
+                                <li><a data-url="/api/logout/" href="javascript:;" class="logout"><i class="fa fa-sign-out pull-right"></i>
+                                    Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- /top navigation -->
+        <form id='reloader' method='get' action="/"> </form>
+        <!-- page content -->
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="{% static "vendor/jQuery/js/jquery.min.js" %}" type="text/javascript"></script>
+<script src="{% static 'vendor/switchery/switchery.min.js' %}" type="text/javascript"></script>
+<!-- Bootstrap -->
+<script src="{% static "vendor/bootstrap/3.3.6/js/bootstrap.min.js" %}" type="text/javascript"></script>
+<!-- FastClick -->
+<script src="{% static "vendor/fastclick/fastclick.min.js" %}" type="text/javascript"></script>
+<!-- NProgress -->
+<script src="{% static "vendor/nprogress/js/nprogress.min.js" %}" type="text/javascript"></script>
+{% block js %}{% endblock %}
+<!-- jQuery custom content scroller -->
+<script src="{% static "vendor/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js" %}" type="text/javascript"></script>
+<!-- Custom Theme Scripts -->
+<script src="{% static "vendor/gentelella/js/custom.min.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript" ></script>
+
+<script src="{% static "vendor/firebase/firebase-app.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/firebase/firebase-messaging.js" %}" type="text/javascript" ></script>
+<!-- Google Analytics -->
+<script>
+    $(document).ready(function () {
+
+
+
+            //toggle profile dropdown
+            $(".dropdown-toggle").dropdown();
+            //to show and hide left menu accoerding to employee group
+            var empGroup = localStorage.getItem('emp_group');
+            if (empGroup == 'emp_group1') {
+                $('li').removeClass("emp_group_1_4");
+                $('li').removeClass("emp_group_1_2_4");
+                $('li').removeClass("emp_group_1");
+                $('li').removeClass("emp_group_1_2_3");
+            }
+            if (empGroup == 'emp_group2') {
+                $('li').removeClass("emp_group_1_2_4");
+                $('li').removeClass("emp_group_1_2_3");
+            }
+            if (empGroup == 'emp_group3') {
+                $('li').removeClass("emp_group_1_2_3");
+            }
+            if (empGroup == 'emp_group4') {
+                $('li').removeClass("emp_group_1_4");
+                $('li').removeClass("emp_group_1_2_4");
+            }
+            // on load of page check hash url and redirect to url if any
+            window.localStorage.setItem("linkClicked", false);
+            var link = localStorage.getItem('linkClicked');
+            if (link == "false") {
+                if (window.location.hash) {
+                    var hashUrl = window.location.hash.split('#')[1];
+                    ajaxPageCall(hashUrl);
+                //to show loaded page menu active    
+                $(".menu_section li").removeClass('active');
+                $(".menu_section li ul").css("display", "none");
+                $(".menu_section a[data-url='"+hashUrl+"']").closest('li').addClass('active');
+                $(".menu_section a[data-url='"+hashUrl+"']").closest('ul').css("display", "block");
+                $(".menu_section a[data-url='"+hashUrl+"']").parent().parent().parent('li').addClass('active');
+                }
+                else {
+                    $("#homeMenu").addClass('active');
+                }
+            }
+        });
+
+        //check hash change 
+        window.addEventListener("hashchange", function (e) {
+            var linkClicked = localStorage.getItem('linkClicked');
+            if (linkClicked) {
+                window.localStorage.setItem("linkClicked", false);
+                if (window.location.hash) {
+                    var hashUrl = window.location.hash.split('#')[1];
+                    ajaxPageCall(hashUrl);
+                }
+                else {
+                    //if hash url not found trigger to get team dashboard page
+                    $('.getAjaxPageDashboard').trigger('click');
+                }
+
+            }
+            else {
+                // alert('not');
+            }
+
+        });
+        //set changed hash url to listen hashchange event and call function to get page data
+     //this function call takes place from html pages to redirect to another page.
+        function getAjaxCallFunction(url) {
+            window.localStorage.setItem("linkClicked", true);
+            window.location.hash = url; //hashchange event called
+        }
+        //get page on click of left menu 
+        $(document).off('click', '.getAjaxPage').on('click', '.getAjaxPage', function (e) {
+            window.localStorage.setItem("linkClicked", true);
+            window.localStorage.removeItem("functionalityName");
+            var data = { token: localStorage.getItem('auth_token') };
+            var url = $(this).attr('data-url');
+            window.location.hash = url;//hashchange event called
+ //to show loaded page menu active 
+            {#$(".menu_section li").removeClass('active');#}
+            {#    $(".menu_section li ul").css("display", "none");#}
+                $(".menu_section a[data-url='"+url+"']").closest('li').addClass('active');
+                $(".menu_section a[data-url='"+url+"']").closest('ul').css("display", "block");
+                $(".menu_section a[data-url='"+url+"']").parent().parent().parent('li').addClass('active');
+
+            if ($(document.body).hasClass('nav-sm')) {
+                $(".menu_section li").removeClass('active');
+                $(".menu_section li ul").css("display", "none");
+            }
+
+        });
+        //ajax used to check valid token if valid get dashboaed page else not redirect to login
+        $(document).on('click', '.getAjaxPageDashboard', function (e) {
+            $.ajax({
+                url: "/page/basic-full-booking/",
+                type: 'get',
+                dataType: 'html',
+                contentType: 'application/json',
+                headers: { "Authorization": localStorage.getItem('token') },
+                // data: JSON.stringify(formData)
+            }).done(function (response, status, request) {
+                $('<form action="/api/team-dashboard/" method="POST">' +
+                    '<input type="hidden" name="token" value="' + localStorage.getItem('auth_token') + '"/> ' +
+                    '</form>').appendTo($(document.body)).submit();
+            }).fail(function (jqXHR, status, error) {
+                if (jqXHR.status == "401") {
+                    redirectToLogin(error);
+                }
+                $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+            });
+        });
+        $(document).on('click', '.logout', function (e) {
+            var url = $(this).attr('data-url');
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: { "Authorization": localStorage.getItem('token') },
+            }).done(function (response, status, request) {
+                NProgress.done();
+                window.location.href = '/login/';
+            }).fail(function (jqXHR, status, error) {
+                if (jqXHR.status == "401") {
+                    redirectToLogin(error);
+                }
+                $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+                NProgress.done();
+            });
+        });
+        //get and append requested  page data
+        function ajaxPageCall(url, formData) {
+            $('.right_col').html('');
+            if (formData) {
+                NProgress.start();
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    data: formData,
+                    contentType: 'application/json',
+                    headers: { "Authorization": localStorage.getItem('token') },
+                }).done(function (response, status, request) {
+                    NProgress.done();
+                    window.location.hash = url;
+                    $('.right_col').html(response);
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status == "401") {
+                        redirectToLogin(error);
+                    }
+                    $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+                    NProgress.done();
+                });
+            }
+            else {
+                NProgress.start();
+                $(".titleTopDashboard").remove();
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    contentType: 'application/json',
+                    headers: { "Authorization": localStorage.getItem('token') },
+                }).done(function (response, status, request) {
+                    NProgress.done();
+                    window.location.hash = url;
+                    $('.right_col').html(response);
+                    $("html, body").animate({ scrollTop: 0 }, "slow"); // scroll to top after binding of response
+                }).fail(function (jqXHR, status, error) {
+                    if (jqXHR.status == "401") {
+                        redirectToLogin(error);
+                    }
+                    $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+                    NProgress.done();
+                });
+            }
+        }
+        $(window).bind("load", function () {
+            //initialize firebase
+            var config = {
+                apiKey: "AIzaSyDSy8iWOJy1K8ZawjwbEEYi8Iy_v-FJatI",
+                authDomain: "aaho-sales.firebaseapp.com",
+                databaseURL: "https://aaho-sales.firebaseio.com",
+                projectId: "aaho-sales",
+                storageBucket: "aaho-sales.appspot.com",
+                messagingSenderId: "904227386738"
+            };
+            firebase.initializeApp(config);
+            const messaging = firebase.messaging();
+            //call register firebase function
+            firebaseRegisterAndMessaging().then(function (value) {
+            }).catch(function (err) {
+            })
+            // recieve firebase messages        
+            setTimeout(function () {
+                firebase.messaging().onMessage(function (payload) {
+                    var path = window.location.hash;
+                    if (path == "") {
+                        var count = $("#" + payload.data.functionality + "_badge").text();
+                        if (count == '')
+                            count = 0;
+                        if (payload.data.is_count_update == "true") {
+                            count = parseInt(count) + parseInt(payload.data.notification_count);
+                            //check if any tab is active if yes then load data for that tab
+                            if ($("#" + payload.data.functionality).parent().hasClass("active")) {
+                                if (payload.data.functionality == 'lr_generation') {
+                                    lr_generation_dt.draw(true); //draw table data from respective page/js loaded
+                                }
+                                else if (payload.data.functionality == 'pay_advance') {
+                                    pay_advance_dt.draw(true);
+                                }
+                                else if (payload.data.functionality == 'verify_pod') {
+                                    dashboardAjaxPageCall('/page/bookings-verify-pod-page/', 'verify_pod');
+                                }
+                                else if (payload.data.functionality == 'pay_balance') {
+                                    pay_balance_dt.draw(true);
+                                }
+                                else if (payload.data.functionality == 'raise_invoice') {
+                                    raise_invoice_dt.draw(true);
+                                }
+                                else if (payload.data.functionality == 'process_payments') {
+                                    process_payment_dt.draw(true);
+                                }
+                                else if (payload.data.functionality == 'reconcile') {
+                                    reconcile_dt.draw(true);
+                                }
+                                else if (payload.data.functionality == 'inward_entry') {
+                                    dashboardAjaxPageCall('/page/pending-inward-list/', 'inward_entry')
+                                }
+                                else if (payload.data.functionality == 'send_invoice') {
+                                    dashboardAjaxPageCall('/page/upload-invoice-send-receipt/', 'send_invoice')
+                                }
+                                else if (payload.data.functionality == 'confirm_invoice') {
+                                    dashboardAjaxPageCall('/page/confirm-invoice-sent-receipt/', 'confirm_invoice')
+                                }
+                            }
+                            $("#" + payload.data.functionality + "_badge").text(count);
+                        }
+                        $.notify(payload.data.title + '\n' + payload.data.body, {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'success'
+                        });
+                    }
+                    else {
+                        $.notify(payload.data.title + '\n' + payload.data.body, {
+                            position: "top center",
+                            autoHideDelay: 1000,
+                            clickToHide: true,
+                            className: 'success'
+                        });
+                    }
+                });
+                navigator.serviceWorker.addEventListener('message', function (event) {
+                    if (!event.data['firebase-messaging-msg-data']) {
+                        var path = window.location.hash;
+                        if (path == "") {
+                            location.reload();
+                        }
+                    }
+                });
+                firebase.messaging().onTokenRefresh(function () {
+                    firebase.messaging().getToken().then(function (refreshedToken) {
+                        saveToken(refreshedToken);
+                    }).catch(function (err) {
+                    });
+                });
+            }, 1000)
+
+            $(document).on('keydown', 'form input', function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        })//load end
+        //register firebase js to recieve notifications
+        async function firebaseRegisterAndMessaging() {
+            navigator.serviceWorker
+                .register('/static/aaho/js/restapi/firebase-messaging-sw.js')
+                .then((registration) => {
+                    firebase.messaging().useServiceWorker(registration);
+                    firebase.messaging().requestPermission()
+                        .then(function () {
+                            return firebase.messaging().getToken();
+                        })
+                        .then(function (token) {
+                            saveToken(token);
+                        });
+                });
+        }
+        function saveToken(token) {
+            var deviceId = createDeviceGuid();
+            var data = { "token": token, "app": "WB", "device_id": deviceId }
+            $.ajax({
+                url: "/api/notification-mobile-device-create-update/",
+                type: 'POST',
+                headers: { "Authorization": localStorage.getItem('token') },
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+            }).done(function (response, status, request) {
+            }).fail(function (jqXHR, status, error) {
+                if (jqXHR.status == "401") {
+                    redirectToLogin(error);
+                }
+                else if (jqXHR.status == "400" && jqXHR.responseJSON && jqXHR.responseJSON.data.toLowerCase() === "this field must be unique.") {
+                    navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                        for (let registration of registrations) {
+                            if (registration && registration.active.scriptURL.includes("firebase-messaging-sw.js")) {
+                                registration.unregister().then(function () {
+                                    firebaseRegisterAndMessaging().then(function (response) {
+                                    }).catch(function (err) {
+                                    });
+                                })
+                            }
+                        }
+                    })
+                }
+            });
+        }
+        function createDeviceGuid() {
+            var nav = window.navigator;
+            var screen = window.screen;
+            var guid = nav.mimeTypes.length;
+            guid += nav.userAgent.replace(/\D+/g, '');
+            guid += nav.plugins.length;
+            guid += screen.height || '';
+            guid += screen.width || '';
+            guid += screen.pixelDepth || '';
+            return guid;
+        }
+        function redirectToLogin(error) {
+            $.notify("Unauthorized", {
+                position: "top center",
+                autoHideDelay: 1000,
+                clickToHide: true,
+                className: 'error'
+            });
+            setTimeout(function () {
+                window.location.href = "/login/";
+            }, 1000);
+        }
+        $.ajax({
+            url: "/api/employee-roles-mapping-data/",
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            beforeSend: function (xhr, settings) {
+                xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            }
+        }).done(function (response, status) {
+            if (!(response.includes('tech') || response.includes('management') || response.includes('accounts_payable') || response.includes('accounts_receivable'))) {
+                    $('.customerToHide').hide();
+            }
+            if (!(response.includes('tech') || response.includes('management') || response.includes('accounts_payable') || response.includes('city_head'))) {
+                    $('.AccountingSummary').hide();
+            }
+            if (!(response.includes('tech') || response.includes('management') || response.includes('accounts_payable') || response.includes('accounts_receivable') || response.includes('office_data_entry'))) {
+                $('.supplierToHide').hide();
+            }
+        }).fail(function (jqXHR, status, error) {
+        });
+
+</script>
+{% block upload_js %}{% endblock %}
+</body>
+</html>

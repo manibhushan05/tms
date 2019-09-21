@@ -1,0 +1,101 @@
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+{% is_invoice_raised id as is_invoice_raised %}
+
+<div id="div-invoice_details">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Invoice Details </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i
+                                class="fa fa-chevron-down"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content invoice-details-content">
+                    <form class="form-horizontal form-label-left" id="raise-invoice-form">
+                        <input type="hidden" name="booking_id" value="{{ id }}" />
+                        <input type="hidden" name="advance_from_company"
+                               value="{{ advance_amount_from_company|default_if_none:0 }}" />
+                        <input type="hidden" name="gst_liability" value="{{ gst_liability }}" />
+                        <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                            <div class="item form-group">
+                                <label for="invoice_raise_to"><span
+                                        class="required">To be Billed To * </span></label>
+                                <select class="customer form-control" name="to_be_billed_to" required>
+                                    <option></option>
+                                    {% if customer_to_be_billed_to_data.id != -1 %}
+                                        <option value="{{ customer_to_be_billed_to_data.id }}"
+                                                selected>{{ customer_to_be_billed_to_data.name }}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                            <div class="item form-group">
+                                <label>Address</label>
+                                <input type="text" class="form-control" name="billing_address" id="billing_address"
+                                       placeholder="Address" data-parsley-minlength="3" data-parsley-maxlength="300"
+                                        {% if customer_to_be_billed_to_data.id != -1 %}
+                                       value="{{ customer_to_be_billed_to_data.address|default:'' }}"
+                                       {% if is_invoice_raised %}readonly{% endif %}{% endif %} required />
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                            <div class="item form-group">
+                                <label for="invoice_city">City</label>
+                                <select class="city form-control" name="invoice_city" id="invoice_city" required>
+                                        {% if customer_to_be_billed_to_data.city.id != -1 %}
+                                        <option value="{{ customer_to_be_billed_to_data.city.id }}"
+                                                selected>{{ customer_to_be_billed_to_data.city.name }}</option>
+                                    {% endif %}
+                                        <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                            <div class="item form-group">
+                                <label>PIN Code</label>
+                                <input type="text" class="form-control" name="invoice_pin" placeholder="PIN Code"
+                                       data-parsley-minlength="6" data-parsley-maxlength="6" maxlength="6"
+                                       value="{{ customer_to_be_billed_to_data.pin|default_if_none:'' }}"
+                                       {% if is_invoice_raised %}readonly{% endif %} />
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                            <div class="item form-group">
+                                <label for="invoice_date">Invoice Date</label>
+                                <input type="text" class="form-control"
+                                       name="billing_invoice_date" id="invoice_date"
+                                       value="{{ billing_invoice_date|default_if_none:'' }}"
+                                       readonly style="background-color: white" required />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            {% if not  is_invoice_raised %}
+                                <div class="item form-group col-md-3 col-sm-3 col-xs-12">
+                                    <input type="hidden" name="submit_type"
+                                           id="submit_type" />
+
+                                    <button type="submit" id="btn_print_invoice"
+                                            class="btn btn-primary btn-lg"> Raise Invoice
+                                    </button>
+                                </div>
+                            {% endif %}
+                            {% for row in invoices %}
+                                <div class="item form-group col-md-6 col-sm-6 col-xs-12">
+                                    <a href="{{ row.s3_upload_url }}" class="btn btn-success btn-lg" role="button">Download {{ row.invoice_number }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

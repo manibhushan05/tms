@@ -1,0 +1,83 @@
+<div class="">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Vendor Details</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content vendor-details-content">
+                    <div class="item form-group col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <label for="supplier_name">Booking Supplier <span
+                                class="required">*</span></label>
+                        <select class="form-control" name="supplier_id" id="supplier_name"
+                                disabled>
+                            <option></option>
+                            {% if supplier_data.id != -1 %}
+                                <option value="{{ supplier_data.id }}"
+                                        selected>{{ supplier_data.name }}, {{ supplier_data.phone|default_if_none:'' }}</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="item form-group col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <label for="supplier_name">Accounting Supplier <span
+                                class="required">*</span></label>
+                        <select class="form-control" name="accounting_supplier" id="accounting_supplier_name"
+                                {% if accounting_supplier_data.id != -1 %}disabled{% endif %}>
+                            <option></option>
+                            {% if accounting_supplier_data.id != -1 %}
+                                <option value="{{ accounting_supplier_data.id }}"
+                                        selected>{{ accounting_supplier_data.name }}, {{ accounting_supplier_data.phone|default_if_none:'' }}</option>
+                            {% elif decide_account_supplier.booking_supplier.supplier_data.id != -1 or decide_account_supplier.owner_supplier.supplier_data.id != -1 %}
+                                {% if decide_account_supplier.booking_supplier.valid_pan or decide_account_supplier.booking_supplier.valid_dec %}
+                                    <option value="{{ decide_account_supplier.booking_supplier.supplier_data.id }}"
+                                            selected>{{ decide_account_supplier.booking_supplier.supplier_data.name }},{{ decide_account_supplier.booking_supplier.supplier_data.phone }}</option>
+                                {% elif decide_account_supplier.owner_supplier.valid_pan or decide_account_supplier.owner_supplier.valid_dec %}
+                                    <option value="{{ decide_account_supplier.owner_supplier.supplier_data.id }}"
+                                            selected>{{ decide_account_supplier.owner_supplier.supplier_data.name }},{{ decide_account_supplier.owner_supplier.supplier_data.phone }}</option>
+                                {% else %}
+                                    {% if decide_account_supplier.booking_supplier.supplier_data.id != -1 %}
+                                        <option value="{{ decide_account_supplier.booking_supplier.supplier_data.id }}">{{ decide_account_supplier.booking_supplier.supplier_data.name }},{{ decide_account_supplier.booking_supplier.supplier_data.phone }}</option>
+                                    {% endif %}
+                                    {% if decide_account_supplier.owner_supplier.supplier_data.id != -1 %}
+                                        <option value="{{ decide_account_supplier.owner_supplier.supplier_data.id }}">{{ decide_account_supplier.owner_supplier.supplier_data.name }},{{ decide_account_supplier.owner_supplier.supplier_data.phone }}</option>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="item form-group col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <label for="truck_owner_name">Truck Owner</label>
+                        <select class="form-control" name="truck_owner_id" id="truck_owner_name"
+                                disabled>
+                            <option></option>
+                            {% if owner_data.id  != -1 %}
+                                <option value="{{ owner_data.id }}"
+                                        selected>{{ owner_data.name|default_if_none:'' }}, {{ owner_data.phone|default_if_none:'' }}</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="item form-group col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <label for="truck_driver_name">Truck Driver <span
+                                class="required">*</span></label>
+                        <select class="form-control" name="truck_driver_id" id="truck_driver_name" required>
+                            <option></option>
+                            {% if driver_data.id != -1 %}
+                                <option value="{{ driver_data.id }}"
+                                        selected>{{ driver_data.name|default_if_none:'' }}, {{ driver_data.phone|default_if_none:'' }}</option>
+                            {% else %}
+                                {% for value in drivers %}
+                                    <option value="{{ value.id }}">{{ value.name }}, {{ value.phone }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

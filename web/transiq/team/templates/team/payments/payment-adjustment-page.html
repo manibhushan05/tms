@@ -1,0 +1,604 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <style>
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .invoice-details {
+            color: darkgreen
+        }
+
+        .fa-chevron-up {
+            color: darkgreen;
+            font-size: 1.5em
+        }
+
+        .fa-chevron-down {
+            color: darkgreen;
+            font-size: 1.5em
+        }
+
+        #reset-page {
+            width: 100%
+        }
+
+        #exit-page {
+            width: 100%
+        }
+
+        #btn-pending-inward-payment {
+            width: 100%
+        }
+
+        .scroller_anchor {
+            height: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .scroller {
+            background: #FFF;
+            z-index: 100;
+            height: 12em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Payments Adjustment</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="inward-payment-adjustment-form"
+                              data-parsley-trigger="input" autocomplete="off">
+                            <div class="scroller_anchor"></div>
+
+                            <!-- This div will be displayed as fixed bar at the top of the page, when user scrolls -->
+                            <div class="scroller">
+                                <div id="btn-groups-payment">
+                                    <div class="form-group col-md-3 col-xs-12 col-sm-3 col-lg-3">
+                                        <label for="common_remarks">Remarks for Inward Entry</label>
+                                        <input name="common_inward_payment_remarks" id="common_remarks" type="text">
+                                    </div>
+                                    <div class="form-group col-md-3 col-xs-12 col-sm-3 col-lg-3">
+                                        <button type="button" id="reset-page" class="btn  btn-danger"> RESET
+                                        </button>
+                                    </div>
+                                    <div class="form-group col-md-3 col-xs-12 col-sm-3 col-lg-3">
+                                        <button type="button" id="exit-page" class="btn  btn-info">EXIT
+                                        </button>
+                                    </div>
+                                    <div class="form-group col-md-3 col-xs-12 col-sm-3 col-lg-3">
+                                        <button type="button" id="btn-pending-inward-payment" class="btn btn-primary">
+                                            SUBMIT
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"
+                                     id="ln-payment-summary"></div>
+                                <!-- This div is used to indicate the original position of the scrollable fixed div. -->
+                                <input type="hidden" name="payment_id" value="{{ payment.id }}">
+                                <div id="payment-summary">
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>Date:</h5>
+                                        <h5><b>{{ payment.payment_date }}</b></h5>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Amount</h5>
+                                        <h5><b>{{ payment.amount|floatformat }}</b></h5>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>TDS</h5>
+                                        <h5><b>{{ payment.tds|floatformat }}</b></h5>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                        <h5>TRN </h5>
+                                        <h5><b>{{ payment.trn|default:'' }}</b></h5>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Mode </h5>
+                                        <h5><b>{{ payment.payment_mode|default:'' }}</b></h5>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-lg-3 col-xs-12">
+                                        <h5>Customer:</h5>
+                                        <h5><b>{{ payment.customer_name|default:'' }}</b></h5>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Bal Amt</h5>
+                                        <h5 id="total-balance-payment"><b>{{ total_amount }}</b></h5>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <h5>Bal TDS</h5>
+                                        <h5 id="total-balance-tds"><b>{{ tds_amount }}</b></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            {% for cnc in credit_note %}
+                                <div class="clearfix"></div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>Issues On</h5>
+                                                    <h5><b>{{ cnc.created_on|date:'d-M-Y' }}</b></h5>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>Approved On</h5>
+                                                    <h5><b>{{ cnc.approved_on|date:'d-M-Y' }}</b></h5>
+                                                </div>
+
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>CN Number</h5>
+                                                    <h5><b>{{ cnc.credit_note_number }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>CN Amount</h5>
+                                                    <h5><b>{{ cnc.credit_amount }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>Adjusted Amount</h5>
+                                                    <h5><b>{{ cnc.adjusted_amount }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12 item form-group ">
+                                                    <label class="control-label" for="owner_phone">Amount to be
+                                                        adjusted
+                                                        <span class="required">*</span></label>
+                                                    <input type="hidden" name="cnc[][id]" id="cnc_id_{{ cnc.id }}"
+                                                           value="{{ cnc.id }}">
+                                                    <input type="number"
+                                                           class="cnc_amount_to_be_adjusted form-control"
+                                                           name="cnc[][amount]"
+                                                           id="amount_to_be_adjusted_{{ cnc.id }}" value="0"
+                                                           placeholder="Enter Credit Note Amount" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            {% for dnc in debit_note %}
+                                <div class="clearfix"></div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>Issues On</h5>
+                                                    <h5><b>{{ dnc.created_on|date:'d-M-Y' }}</b></h5>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>Approved On</h5>
+                                                    <h5><b>{{ dnc.approved_on|date:'d-M-Y' }}</b></h5>
+                                                </div>
+
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>DNC Number</h5>
+                                                    <h5><b>{{ dnc.debit_note_number }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>DNC Amount</h5>
+                                                    <h5><b>{{ dnc.debit_amount }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>Adjusted Amount</h5>
+                                                    <h5><b>{{ dnc.adjusted_amount }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12 item form-group ">
+                                                    <label class="control-label" for="owner_phone">Amount to be
+                                                        adjusted <span class="required">*</span></label>
+                                                    <input type="hidden" name="dnc[][id]" id="dnc_id_{{ dnc.id }}"
+                                                           value="{{ dnc.id }}">
+                                                    <input type="number"
+                                                           class="dnc_amount_to_be_adjusted form-control"
+                                                           name="dnc[][amount]"
+                                                           id="amount_to_be_adjusted_{{ dnc.id }}" value="0"
+                                                           placeholder="Enter Debit Note Amount" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% for invoice in invoices %}
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="x_panel">
+                                        <div class="x_title invoice-details">
+                                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                <ul class="nav navbar-right panel_toolbox">
+                                                    <li><a class="collapse-link"><i
+                                                            class="fa fa-chevron-up"
+                                                            id="toggleChevron_{{ invoice.invoice_number }}"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                <h5>Invoice No.:</h5>
+                                                <h5><b>{{ invoice.invoice_number }}</b></h5>
+                                            </div>
+                                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                <h5>Date</h5>
+                                                <h5><b>{{ invoice.invoice_date|date:'d-M-Y' }}</b></h5>
+                                            </div>
+                                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                <h5>Invoice Amount</h5>
+                                                <h5><b>{{ invoice.amount }}</b></h5>
+                                            </div>
+
+                                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                <h5>To Receive</h5>
+                                                <h5 id="{{ invoice.txtToReceiveInvoice }}">
+                                                    <b>{{ invoice.to_receive|floatformat }}</b></h5>
+                                            </div>
+                                            <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                <button class="btn btn-success" type="button"
+                                                        id="{{ invoice.btnFullPaymentReceived }}"
+                                                        name="{{ invoice.btnFullPaymentReceived }}">FULL RECEIVED
+                                                </button>
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                <button class="btn btn-danger" type="button"
+                                                        id="{{ invoice.btnResetPaymentReceived }}"
+                                                        name="{{ invoice.btnResetPaymentReceived }}">RESET
+                                                </button>
+                                            </div>
+
+
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content booking-details-collapse"
+                                             id="booking-collapse-{{ invoice.invoice_number }}">
+
+                                            {% for booking in invoice.bookings %}
+                                                <input type="hidden" value="{{ invoice.invoice_number }}"
+                                                       name="bookings[][invoice_number]"
+                                                >
+
+                                                <input type="hidden" name="bookings[][booking_id]"
+                                                       value="{{ booking.mb_id }}">
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <h5>LR No.(s)</h5>
+                                                    <h5><b>{{ booking.lr_numbers }}</b></h5>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>Weight</h5>
+                                                    <h5><b>{{ booking.weight|floatformat:2 }}</b></h5>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>Rate</h5>
+                                                    <h5><b>{{ booking.rate|floatformat }}</b></h5>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>T. Amt.</h5>
+                                                    <h5><b>{{ booking.total_amount|floatformat }}</b></h5>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <h5>To Rcv</h5>
+                                                    <h5><b>{{ booking.amount_to_be_received|floatformat }}</b></h5>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <label for="{{ booking.amountId }}">Amount Received</label>
+                                                    <input type="number"
+                                                           value="{{ booking.received_amount|floatformat|default:0 }}"
+                                                           style="width:100%"
+                                                           name="bookings[][amount]" id="{{ booking.amountId }}"
+                                                           required>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <label for="{{ booking.tdsId }}">TDS</label>
+                                                    <input type="number"
+                                                           value="{{ booking.received_tds|floatformat|default:0 }}"
+                                                           style="width:100%" readonly
+                                                           name="bookings[][tds]" id="{{ booking.tdsId }}"
+                                                           required>
+                                                </div>
+                                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                                    <label for="{{ booking.balanceId }}">Bal</label>
+                                                    <input type="number"
+                                                           value="{{ booking.balance_amount|floatformat|default:0 }}"
+                                                           style="width:100%" readonly
+                                                           name="bookings[][balance]"
+                                                           id="{{ booking.balanceId }}" required>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-lg-2 col-xs-12">
+                                                    <label for="{{ booking.remarksId }}">Remarks</label>
+                                                    <input type="text" name="bookings[][remarks]"
+                                                           id="{{ booking.remarksId }}">
+                                                </div>
+                                                <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/lr/nprogress.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/inward_payment_adjustment.js" %}?v={% now 'U' %}"
+            type="text/javascript"></script>
+    <script>
+        // This function will be executed when the user scrolls the page.
+        $(window).scroll(function (e) {
+            // Get the position of the location where the scroller starts.
+            var scroller_anchor = $(".scroller_anchor").offset().top;
+
+            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
+            if ($(this).scrollTop() >= scroller_anchor && $('.scroller').css('position') != 'fixed') {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+                $('.scroller').css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'z-index': '1000',
+                    'height': '18%',
+                    'background': '#2A3F54',
+                    'color': 'white',
+                    'width': '75%'
+                });
+                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
+                {#$('.scroller_anchor').css('height', '120px');#}
+                $('#ln-payment-summary').hide();
+            } else if ($(this).scrollTop() < scroller_anchor && $('.scroller').css('position') != 'relative') {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
+
+                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
+                $('.scroller_anchor').css('height', '0px');
+
+                // Change the CSS and put it back to its original position.
+                $('.scroller').css({
+                    'position': 'relative',
+                    'z-index': '1000',
+                    'color': "#2A3F54",
+                    'width': '100%',
+                    'background': '#FFF'
+                });
+                $('#ln-payment-summary').show();
+            }
+        });
+    </script>
+    <script>
+        $('.booking-details-collapse').hide();
+        var total_balance_amount ={{ payment.amount }};
+        var total_balance_tds ={{ payment.tds }};
+        var total_balance_payment_id = $('#total-balance-payment');
+        total_balance_payment_id.text(total_balance_amount);
+        var total_balance_text_amount = parseInt(total_balance_payment_id.text());
+        $('.cnc_amount_to_be_adjusted').on('change', function () {
+            var cnc_id = $(this).attr('id').slice(22, 29);
+            if (parseInt($('#adjusted_amount_' + cnc_id).val()) < $(this).val()) {
+                alert("Maximum amount to be adjusted is " + $('#adjusted_amount_' + cnc_id).val());
+                $(this).val(0);
+            }
+            total_balance_payment_id.text({{ payment.amount }} +parseInt($(this).val()));
+            total_balance_text_amount = parseInt(total_balance_payment_id.text());
+            total_balance_amount = total_balance_text_amount;
+        });
+        $('.dnc_amount_to_be_adjusted').on('change', function () {
+            var dnc_id = $(this).attr('id').slice(22, 29);
+            if (parseInt($('#adjusted_amount_' + dnc_id).val()) < $(this).val()) {
+                alert("Maximum amount to be adjusted is " + $('#adjusted_amount_' + dnc_id).val());
+                $(this).val(0);
+            }
+            total_balance_payment_id.text({{ payment.amount }} -parseInt($(this).val()));
+            total_balance_text_amount = parseInt(total_balance_payment_id.text());
+            total_balance_amount = total_balance_text_amount;
+
+        });
+
+        function get_total_balance_amount() {
+            var amount = 0;
+            var tds = 0;
+            {% for invoice in invoices %}
+                {% for booking in invoice.bookings %}
+                    amount += Math.round($('#{{ booking.amountId }}').val());
+                    tds += Math.round($('#{{ booking.tdsId }}').val());
+                {% endfor %}
+            {% endfor %}
+            return {
+                'total_balance_amount': Math.round(parseInt(total_balance_text_amount) - amount),
+                'total_balance_tds': Math.round({{ payment.tds }}-tds)
+            }
+        }
+
+        function get_invoice_to_receive_balance(invoice_number) {
+            var to_receive_balance = 0;
+            {% for invoice in invoices %}
+                if ('{{ invoice.invoice_number }}' === invoice_number) {
+                    {% for booking in invoice.bookings %}
+                        to_receive_balance += Math.round($('#{{ booking.amountId }}').val()) + Math.round($('#{{ booking.tdsId }}').val());
+                    {% endfor %}
+                    to_receive_balance = {{ invoice.to_receive }} -to_receive_balance;
+                }
+            {% endfor %}
+            return to_receive_balance;
+        }
+
+        var data = get_total_balance_amount();
+        total_balance_amount = data['total_balance_amount'];
+        total_balance_tds = data['total_balance_tds'];
+
+        {% for invoice in invoices %}
+            {% for booking in invoice.bookings %}
+                $('#{{ booking.amountId }}').on('change', function () {
+
+                    var amount;
+                    var tds;
+                    var balance;
+                    amount = Math.round($('#{{ booking.amountId }}').val());
+                    var total_amount = amount / (1 -{{ tds_rate }});
+                    tds = Math.round(total_amount *{{ tds_rate }});
+                    balance = Math.round({{ booking.amount_to_be_received }}-(amount + tds));
+                    $('#{{ booking.amountId }}').val(amount);
+                    $('#{{ booking.tdsId }}').val(tds);
+                    if (Math.round($('#{{ booking.amountId }}').val()) > 0) {
+                        $('#{{ booking.balanceId }}').val(balance);
+                    }
+                    if (balance < 0) {
+                        $('#{{ booking.amountId }}').val(0);
+                        $('#{{ booking.tdsId }}').val(0);
+                        $('#{{ booking.balanceId }}').val(0);
+                    }
+                    var data = get_total_balance_amount();
+                    if (data['total_balance_amount'] < 0) {
+                        alert("Amount Exceeded");
+                        $('#{{ booking.amountId }}').val(0);
+                        $('#{{ booking.tdsId }}').val(0);
+                        $('#{{ booking.balanceId }}').val(0);
+                    }
+                    if (data['total_balance_tds'] < 0) {
+                        alert("TDS Exceeded");
+                        $('#{{ booking.amountId }}').val(0);
+                        $('#{{ booking.tdsId }}').val(0);
+                        $('#{{ booking.balanceId }}').val(0);
+                    }
+                    var to_receive_invoice_txt = get_invoice_to_receive_balance('{{ invoice.invoice_number }}');
+                    $('#{{ invoice.txtToReceiveInvoice }}').text(to_receive_invoice_txt);
+                    data = get_total_balance_amount();
+                    total_balance_amount = data['total_balance_amount'];
+                    total_balance_tds = data['total_balance_tds'];
+                    $('#total-balance-payment').text(total_balance_amount);
+                    $('#total-balance-tds').text(total_balance_tds);
+                    if (data['total_balance_tds'] < 5) {
+                        $('#total-balance-tds').text(0);
+                    }
+                });
+
+            {% endfor %}
+        {% endfor %}
+        {% for  invoice in invoices%}
+            $('#' + '{{ invoice.btnFullPaymentReceived }}').click(function () {
+                $('#booking-collapse-{{ invoice.invoice_number }}').show();
+                if ($('#toggleChevron_{{invoice.invoice_number}}').hasClass('fa-chevron-up')) {
+                    $('#toggleChevron_{{invoice.invoice_number}}').toggleClass('fa-chevron-up fa-chevron-down');
+                }
+                var total_invoice_received_amount = 0;
+                {% for booking in invoice.bookings %}
+                    total_invoice_received_amount += Math.round($('#{{ booking.amountId }}').val());
+                {% endfor %}
+                if (total_invoice_received_amount === 0) {
+                    {% for booking in invoice.bookings %}
+                        var amount, tds, balance;
+                        if (total_balance_amount > {{ booking.amount_to_be_received }}) {
+                            var balance_data = get_total_balance_amount();
+                            total_balance_amount = balance_data['total_balance_amount'];
+                            total_balance_tds = balance_data['total_balance_tds'];
+                            if (total_balance_tds > 0) {
+                                tds = Math.round({% multiply_numbers booking.amount_to_be_received tds_rate  %});
+                                if (total_balance_tds < tds) {
+                                    tds = total_balance_tds;
+
+                                }
+                                amount = Math.round({{ booking.amount_to_be_received }}-tds);
+                            } else {
+                                tds = 0;
+                                amount = Math.round({{ booking.amount_to_be_received }});
+
+                            }
+                            balance = {{ booking.amount_to_be_received }}-(amount + tds);
+                            if (balance >= -1 && balance <= 1) {
+                                amount += balance;
+                                balance = 0
+                            }
+                            $('#{{ booking.amountId }}').val(amount);
+                            $('#{{ booking.tdsId }}').val(tds);
+                            $('#{{ booking.balanceId }}').val(balance);
+                            balance_data = get_total_balance_amount();
+
+                            total_balance_amount = balance_data['total_balance_amount'];
+                            total_balance_tds = balance_data['total_balance_tds'];
+                        } else if (total_balance_amount > 0) {
+                            amount = Math.round(total_balance_amount);
+                            tds = total_balance_tds;
+                            balance = Math.round({{ booking.amount_to_be_received }}-(amount + tds));
+
+                            if (balance >= -1 && balance <= 1) {
+                                amount += balance;
+                                balance = 0
+                            }
+                            total_balance_amount = 0;
+                            total_balance_tds = 0;
+
+                            $('#{{ booking.amountId }}').val(amount);
+                            $('#{{ booking.tdsId }}').val(tds);
+                            $('#{{ booking.balanceId }}').val(balance);
+                        } else {
+                            $('#{{ booking.amountId }}').val(0);
+                            $('#{{ booking.tdsId }}').val(0);
+                            $('#{{ booking.balanceId }}').val(0);
+                        }
+                        var to_receive_invoice_txt = get_invoice_to_receive_balance('{{ invoice.invoice_number }}');
+                        $('#{{ invoice.txtToReceiveInvoice }}').text(to_receive_invoice_txt);
+                    {% endfor %}
+                    $('#total-balance-payment').text(total_balance_amount);
+                    $('#total-balance-tds').text(total_balance_tds);
+
+                } else {
+                    alert('Please Click RESET to enter new value');
+                }
+            });
+            $('#' + '{{ invoice.btnResetPaymentReceived }}').click(function () {
+                {% for booking in invoice.bookings %}
+                    total_balance_amount += parseInt($('#{{ booking.amountId }}').val());
+                    $('#{{ booking.amountId }}').val(0);
+                    total_balance_tds += parseInt($('#{{ booking.tdsId }}').val());
+                    $('#{{ booking.tdsId }}').val(0);
+                    $('#{{ booking.balanceId }}').val(0);
+                {% endfor %}
+                $('#{{ invoice.txtToReceiveInvoice }}').text({{ invoice.to_receive }});
+                $('#total-balance-payment').text(total_balance_amount);
+                $('#total-balance-tds').text(total_balance_tds);
+            });
+        {% endfor %}
+
+        $('#total-balance-tds').text(total_balance_tds);
+
+        $('#exit-page').click(function () {
+            window.localStorage.setItem("functionalityName", "inward_entry");
+            $("#homeDashboard").trigger("click");
+        });
+        $('#reset-page').click(function () {
+            location.reload();
+        });
+
+        $('.collapse-link').click(function () {
+            $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+            $(this).closest('.x_title').nextAll('.x_content:first').toggle();
+        });
+    </script>
+{% endblock %}

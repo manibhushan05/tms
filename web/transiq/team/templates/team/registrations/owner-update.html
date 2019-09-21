@@ -1,0 +1,181 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load team_tags.validators_tags %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Update Truck Owner</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="update-owner-form"
+                              data-parsley-trigger="input">
+                            <input type="hidden" name="owner_id" id="ownerId" value="{{ id }}">
+                            <input type="hidden" name="address_id" value="{{ owner.address.id }}">
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group ">
+                                    <label class="control-label" for="owner_name">Owner Name
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="name" id="owner_name" placeholder="Enter Owner Name"
+                                           data-parsley-error-message="Please Enter Full Owner Name"
+                                           value="{{ owner_profile.name }}"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="owner_phone">Owner's Phone
+                                        {#                                            <span class="required">*</span>#}
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           data-parsley-pattern="\d{10}"
+                                           name="phone"
+                                           value="{{ owner_profile.phone|default_if_none:'' }}"
+                                           data-parsley-minlength="10"
+                                           data-parsley-maxlength="10"
+                                           placeholder="Enter Owner's Phone">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">PAN Number </label>
+                                    <input type="text" class="form-control"
+                                           name="pan" id="pan_number"
+                                           placeholder="Enter PAN Number"
+                                           data-parsley-pattern="{% regex_pan %}"
+                                           value="{{ pan|default_if_none:'' }}"
+                                           data-parsley-minlength="10"
+                                           data-parsley-maxlength="10"
+                                           data-parsley-error-message="Please Enter Valid PAN Number ">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="route">Route </label>
+                                    <input type="text" class="form-control" name="route"
+                                           value="{{ route_temp|default_if_none:'' }}" data-parsley-minlength="3"
+                                           data-parsley-maxlength="100" placeholder="Enter Route">
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group ">
+                                    <label class="control-label">Choose Vehicles</label>
+                                    <select class="select2_multiple form-control" multiple="multiple"
+                                            name="vehicles_detail[]" style="width: 100%" id="vehicle-number"
+                                            required
+                                            data-parsley-required-message="Must Select at Least One Vehicle">
+                                        <option></option>
+                                        {% for value in vehicle_list %}
+                                            <option value="{{ value.id }}"
+                                                    selected>{{ value.vehicle_number }}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="received_from">Contact
+                                        Person Name<span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="contact_person_name" data-parsley-length="[3, 40]"
+                                           placeholder="Enter Contact Person Name"
+                                           value="{{ owner_profile.contact_person_name|default_if_none:'' }}"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Contact Person Phone<span
+                                            class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-control"
+                                           name="contact_person_phone" data-parsley-type="digits"
+                                           data-parsley-pattern="{% regex_phone %}"
+                                           placeholder="Enter Contact Person Number "
+                                           value="{{ owner_profile.contact_person_phone|default_if_none:'' }}"
+                                           data-parsley-minlength="10"
+                                           data-parsley-maxlength="15"
+                                           required="required">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label">Alternate Number </label>
+                                    <input type="text" class="form-control"
+                                           name="alternate_phone" data-parsley-type="digits"
+                                           data-parsley-pattern="{% regex_phone %}"
+                                           value="{{ owner_profile.alternate_phone|default_if_none:'' }}"
+                                           data-parsley-minlength="10"
+                                           data-parsley-maxlength="15"
+                                           placeholder="Enter Alternate Contact Number">
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+
+                                <div class="item form-group ">
+                                    <label class="control-label" for="received_from">Address </label>
+                                    <input type="text" class="form-control"
+                                           name="owner_address"
+                                           value="{{ owner_address|default_if_none:'' }}"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="100"
+                                           placeholder="Enter Owner Address">
+                                </div>
+                                <div class="item form-group">
+                                    <label>City<span class="required">*</span></label>
+                                    <select class="form-control" name="city" id="city" required>
+                                        <option></option>
+                                        {% if city_data != -1 %}
+                                            <option value="{{ city_data.id }}" selected>{{ city_data.name|default_if_none:'' }}</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="item form-group">
+                                    <label>PIN Code</label>
+                                    <input type="text" class="form-control" name="pin"
+                                           value="{{ pin|default_if_none:'' }}"
+                                           data-parsley-pattern="{% regex_pin %}"
+                                           data-parsley-minlength="6"
+                                           data-parsley-maxlength="6"
+                                           placeholder="PIN Code">
+                                </div>
+                                <div class="item form-group ">
+                                    <label class="control-label" for="textarea">Remarks
+                                    </label>
+                                    <textarea id="textarea" name="remarks"
+                                              placeholder="Please provide Any Extra Information"
+                                              data-parsley-minlength="3"
+                                              data-parsley-maxlength="100"
+                                              class="form-control">{{ owner_profile.comment|default_if_none:'' }}</textarea>
+                                </div>
+                            </div>
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            <div class="form-group col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                                <button id="btn-update-owner" class="btn btn-lg btn-success">UPDATE OWNER
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/common-new.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/update-owner.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+{% endblock %}

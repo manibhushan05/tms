@@ -1,0 +1,99 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% block css %}
+    <link href="{% static "vendor/select2/css/select2.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/parsley/css/parsley.css' %}">
+
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Issue Debit Note for Supplier Advance Payment (DNSA)</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" id="form-debit-note-supplier-direct-advance"
+                              data-parsley-trigger="input">
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 item form-group ">
+                                <label for="customer">Customer<span class="required">*</span></label>
+                                <select class="customer form-control" name="customer" required>
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 item form-group ">
+                                <label for="customer">Supplier<span class="required">*</span></label>
+                                <select class="broker form-control" name="accounting_supplier" required>
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 item form-group ">
+                                <label class="control-label" for="adjusted_bookings">Adjusted Bookings <span
+                                        class="required">*</span></label>
+                                <select class="form-control" multiple="multiple" id="adjusted_bookings"
+                                        name="bookings[]" style="width: 100%" required>
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class=" col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 item form-group ">
+                                <label class="control-label" for="owner_phone">Debit Note Amount <span
+                                        class="required">*</span></label>
+                                <input type="number" class="form-control" data-parsley-max="9999999"
+                                       data-parsley-min="0"
+                                       name="debit_amount" placeholder="Enter Debit Note Amount" required>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 item form-group ">
+                                <label for="invoice">Debit Note Reason<span class="required">*</span></label>
+                                <select class="credit_note_reason form-control" name="reason"
+                                        id="credit_note_reason" required>
+                                    <option></option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12 item form-group ">
+                                <label class="control-label" for="textarea">Debit Note Remarks<span
+                                        class="required">*</span>
+                                </label>
+                                <textarea id="textarea" name="remarks" data-parsley-maxlength="200"
+                                          placeholder="Please provide Debit Note Remarks"
+                                          class="form-control" required></textarea>
+                            </div>
+
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+                            <div class="form-group col-md-12 col-xs-12 col-sm-12 col-lg-12 ">
+                                <button id="btn-debit-note-supplier-direct-advance"
+                                        class="btn btn-lg btn-success pull-right" type="button">
+                                    Issue Debit Note
+                                </button>
+                                <button type="reset" class="btn btn-lg btn-danger pull-right btn-reset">Reset Entry
+                                </button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script src="{% static  'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}"
+            type="text/javascript"></script>
+    <script src="{% static "aaho/js/common-dashboard.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/credit-debit-note.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+{% endblock %}

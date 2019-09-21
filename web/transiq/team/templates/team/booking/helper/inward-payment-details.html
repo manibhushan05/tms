@@ -1,0 +1,175 @@
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+{% is_invoice_raised id as is_invoice_raised %}
+{% if not user|has_group:"emp_group3" %}
+    {% if user|has_group:"emp_group2"  and billing_type == 'contract' %}{% else %}
+        <div class="x_panel" id="div-inward-payment">
+            <div class="x_title">
+                <div style="clear: both">
+                    <h2 style="float: left">Inward Payment</h2>
+                    <h2 class="payment-lable" style="float: right"> Balance: <i class="fa fa-inr"
+                                                                                aria-hidden="true"></i>
+                        <b id="ip_balance_display_label"> {{ balance_for_customer }}</b>
+                    </h2>
+                    <h2 class="payment-lable" style="float: right"> Received: <i class="fa fa-inr"
+                                                                                 aria-hidden="true"></i>
+                        <b id="ip_paid_display_label"> {{ inward_amount }} </b>
+                    </h2>
+                    <h2 class="payment-lable" style="float: right"> TDS: <i class="fa fa-inr"
+                                                                            aria-hidden="true"></i>
+                        <b id="ip_tds_paid_display_label"> {{ tds_amount_customer }} </b>
+                    </h2>
+                    <h2 class="payment-lable" style="float: right"> CN: <i class="fa fa-inr"
+                                                                           aria-hidden="true"></i>
+                        <b> -{{ credit_amount_customer }} </b>
+                    </h2>
+                    <h2 class="payment-lable" style="float: right"> DN: <i class="fa fa-inr"
+                                                                           aria-hidden="true"></i>
+                        <b> {{ debit_amount_customer }} </b>
+                    </h2>
+
+                    <h2 class="payment-lable" style="float: right">Total Amount: <i class="fa fa-inr"
+                                                                                    aria-hidden="true"></i>
+                        <b id="ip_total_amount_display_label"> {{ customer_amount }}</b>
+                    </h2>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box table-responsive">
+                            <table id="in-ward-payment-table"
+                                   class="table table-striped table-bordered dt-responsive nowrap"
+                                   cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Received From</th>
+                                    <th>Amount</th>
+                                    <th>TDS</th>
+                                    <th>Mode</th>
+                                    <th>TRN/Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for value in inward_payments %}
+                                    <tr>
+                                        <td>
+                                            {% if  user|has_group:"emp_group1" %}
+                                                <button data-url="/api/team-inward-payment-retrieve/{{ value.id }}/"
+                                                        class="transaction-button getAjaxPage">{{ value.id }}</button>
+                                            {% else %}
+                                                {{ value.id }}
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ value.payment_date }}</td>
+                                        <td>{{ value.received_from }}</td>
+                                        <td>
+                                            {{ value.actual_amount }}
+                                        </td>
+                                        <td>{{ value.tds }}</td>
+                                        <td>{{ value.payment_mode }}</td>
+                                        <td>{{ value.trn|default_if_none:'' }}</td>
+                                        <td>{{ value.remarks }}</td>
+                                    </tr>
+                                {% endfor %}
+                                {% for dnc in debit_note_customer %}
+                                    {% if dnc.status == 'pending' or  dnc.status == 'approved' or dnc.status == 'partial' or dnc.status == 'adjusted' %}
+                                        <tr>
+                                            <td>{{ dnc.debit_note_number }}</td>
+                                            {% if dnc.status == 'pending' %}
+                                                <td>{{ dnc.created_on }}</td>
+                                            {% else %}
+                                                <td>{{ dnc.approved_on }}</td>
+                                            {% endif %}
+                                            <td>{{ dnc.customer_name }}</td>
+                                            {% if dnc.status == 'pending' or dnc.status == 'approved' %}
+                                                <td>-{{ dnc.debit_amount }}</td>
+                                            {% else %}
+                                                <td>-{{ dnc.adjusted_amount }}</td>
+                                            {% endif %}
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>{{ dnc.status }}</td>
+                                            <td>{{ dnc.reason.name }}({{ dnc.remarks }})</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for cnc in credit_note_customer %}
+                                    {% if cnc.status == 'pending' or  cnc.status == 'approved' or cnc.status == 'partial' or cnc.status == 'adjusted' %}
+                                        <tr>
+                                            <td>{{ cnc.credit_note_number }}</td>
+                                            {% if cnc.status == 'pending' %}
+                                                <td>{{ cnc.created_on }}</td>
+                                            {% else %}
+                                                <td>{{ cnc.approved_on }}</td>
+                                            {% endif %}
+                                            <td>{{ cnc.customer_name }}</td>
+                                            {% if cnc.status == 'pending' or  cnc.status == 'approved' %}
+                                                <td>{{ cnc.credit_amount }}</td>
+                                            {% else %}
+                                                <td>{{ cnc.adjusted_amount }}</td>
+                                            {% endif %}
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>{{ cnc.status }}</td>
+                                            <td>{{ cnc.reason.name }}({{ cnc.remarks }})</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% for cnca in credit_note_for_direct_advance %}
+                                    {% if cnca.status == 'pending' or cnca.status == 'approved' or cnca.status == 'partial' or cnca.status == 'adjusted' %}
+                                        <tr>
+                                            <td>{{ cnca.credit_note_number }}</td>
+                                            {% if cnca.status == 'pending' %}
+                                                <td>{{ cnca.created_on }}</td>
+                                            {% else %}
+                                                <td>{{ cnca.approved_on }}</td>
+                                            {% endif %}
+                                            <td>{{ cnca.customer_name }}</td>
+                                            {% if cnca.status == 'pending' or cnca.status == 'approved' %}
+                                                <td>{{ cnca.credit_amount }}</td>
+                                            {% else %}
+                                                <td>{{ cnca.adjusted_amount }}</td>
+
+                                            {% endif %}
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>{{ cnca.status }}</td>
+                                            <td>{{ cnca.reason.name }}({{ cnca.remarks }})</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="item form-group">
+                                    {% if not is_invoice_raised %}
+                                        <h4 style="color: red">**Invoice is not yet raised</h4>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#full-booking-inward_payment_modal" disabled>
+                                            Add New
+                                        </button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-primary"
+                                                id="show_inward_payment_modal"
+                                        >Add New
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h2> Inward Payments</h2>
+    <table>
+        <tr>
+            <th>Payment Date</th>
+
+            <th>Received From</th>
+            <th>LR Number(s)</th>
+            <th>Invoice Number</th>
+            <th>Amount</th>
+            <th>TDS</th>
+            <th>Mode</th>
+            <th>Remarks</th>
+        </tr>
+        {% for payment in inward_payments %}
+            <tr>
+                <td>{{ payment.payment_date|date:'d-M-Y' }}</td>
+                <td>{{ payment.received_from }}</td>
+                <td>
+                    {% for booking in payment.booking_id.all %}
+                        {% if booking.booking_id|slice:':6' == 'BROKER' %}
+                            <p>{{ booking.booking_id }}</p>
+                        {% else %}
+                            {% for booking_id in booking.lr_numbers.all %}
+                                <p> {{ booking_id.lr_number }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ payment.invoice_number }}</td>
+                <td>{{ payment.actual_amount }}</td>
+                <td>{{ payment.tds }}</td>
+                <td>{{ payment.get_payment_mode_display }}</td>
+                <td>{{ payment.remarks }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+<div>
+    <h3>Outward Payments</h3>
+    <table>
+        <tr>
+            <th>Payment Date</th>
+            <th>LR Number(s)</th>
+            <th>Paid To</th>
+            <th>Amount</th>
+            <th>Mode</th>
+            <th>Remarks</th>
+        </tr>
+        {% for payment in outward_payments %}
+            <tr>
+
+                <td>{{ payment.payment_date|date:'d-M-Y' }}</td>
+                <td>
+                    {% for booking in payment.booking_id.all %}
+                        {% if booking.booking_id|slice:':6' == 'BROKER' %}
+                            <p>{{ booking.booking_id }}</p>
+                        {% else %}
+                            {% for booking_id in booking.lr_numbers.all %}
+                                <p> {{ booking_id.lr_number }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ payment.paid_to }}</td>
+                <td>{{ payment.actual_amount }}</td>
+                <td>{{ payment.get_payment_mode_display }}</td>
+                <td>{{ payment.remarks }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+
+</body>
+</html>

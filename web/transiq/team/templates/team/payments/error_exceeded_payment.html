@@ -1,0 +1,27 @@
+{% extends "team/base.html" %}
+{% block content %}
+    <!-- page content -->
+    <div class="right_col size" role="main">
+        <div class="page-title">
+                <h3>
+                    Amount is exceeded, Please check amount and try again.
+                </h3>
+                <button class="btn btn-lg btn-success" id="return-to-edit-booking">Return Back</button>
+        </div>
+    </div>
+    <style>
+    .size{
+        height: 60em;
+    }
+    </style>
+{% endblock %}
+{% block js %}
+    <script>
+     $(document).ready(function () {
+        $('#return-to-edit-booking').click(function () {
+            window.history.back();
+        })
+    });
+    </script>
+   
+{% endblock %}

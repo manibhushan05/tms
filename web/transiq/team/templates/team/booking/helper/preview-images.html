@@ -1,0 +1,12 @@
+<div id="galley">
+    <ul class="pictures">
+        {% for value in documents %}
+            <div class="col-md-2 col-lg-2 col-sm-3 col-xs-6">
+                <img data-original="{{ value.url }}" src="{{ value.url }}" alt="{{ value.filename }}"
+                     title="{{ value.filename }}" width="120" height="120" class="img_thumbnail"/>
+                <h6 style="width: 10rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ value.filename }}</h6>
+            </div>
+        {% endfor %}
+
+    </ul>
+</div>

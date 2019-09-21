@@ -1,0 +1,153 @@
+{% load team_tags.helper %}
+{% if excess_payment_paid_to_supplier.supplier_excess_amount > 0 %}
+    <h5 style="text-align: center;color: red">* {{ excess_payment_paid_to_supplier.supplier_excess_amount_msg }}</h5>
+{% endif %}
+{% if debit_amount_to_be_adjusted > 0 %}
+    <h5 style="text-align: center;color: red">** Open DN
+        of {{ debit_amount_to_be_adjusted }}</h5>
+{% endif %}
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="paid_to"><span class="required">Paid To *</span>
+    </label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+        <input type="hidden" name="booking_id[]"
+               value="{{ id }}">
+        {% if truck_owner_name %}
+            <input type="text" id="paid_to" class="form-control col-md-7 col-xs-12" name="paid_to"
+                   value="{{ truck_owner_name }}" required>
+        {% elif truck_broker_owner_name %}
+            <input type="text" id="paid_to" class="form-control col-md-7 col-xs-12" name="paid_to"
+                   value="{{ truck_broker_owner_name }}" data-parsley-minlength="3" data-parsley-maxlength="100"
+                   required>
+        {% else %}
+            <input type="text" id="paid_to" class="form-control col-md-7 col-xs-12" data-parsley-minlength="3"
+                   data-parsley-maxlength="100" name="paid_to" required>
+        {% endif %}
+    </div>
+</div>
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="actual_amount"> <span class="required">Amount *</span>
+    </label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+        <input type="number" id="actual_amount" name="actual_amount" data-parsley-type="digits"
+               class="form-control col-md-7 col-xs-12" required>
+    </div>
+</div>
+<div class=" item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="outward_payment_mode"><span
+            class="required">Payment Mode *</span></label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <input name="payment_mode" type="hidden" id="payment_mode">
+
+        <select class="form-control"
+                name="outward_payment_mode" id="outward_payment_mode"
+                required="required" style="width: 100%">
+            <option></option>
+            <option value="bank_transfer">Bank Transfer</option>
+            <option value="cash">Cash</option>
+            <option value="cheque">Cheque</option>
+            <option value="happay">Happay</option>
+            <option value="fuel_card">Fuel Card</option>
+            {% if excess_payment_paid_to_supplier.supplier_excess_amount > 0  or  debit_amount_to_be_adjusted > 0 %}
+                <option value="adjustment">Adjustment</option>
+            {% endif %}
+        </select>
+    </div>
+</div>
+<div class=" item form-group" id="cash_mode_area">
+    {% if employee_aaho_offices|length_is:'0' %}
+    {% elif employee_aaho_offices|length_is:'1' %}
+        <input name="aaho_office" type="hidden" value="{{ employee_aaho_offices.0.id }}">
+    {% else %}
+
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="aaho_office"><span
+                class="required">Payment Office</span></label>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+            <select class="form-control" name="aaho_office" id="payment_office"
+                    style="width: 100%">
+                <option></option>
+                {% for office in employee_aaho_offices %}
+                    <option value="{{ office.id }}">Cash - {{ office.branch_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    {% endif %}
+</div>
+<div class=" item form-group" id="fuel_card_area">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">Fuel Card Number</span></label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <select class="fuel_card_number form-control" name="fuel_card" id="fuel_card_number"
+                style="width: 100%">
+            <option></option>
+        </select>
+    </div>
+</div>
+<div class=" item form-group" id="bank_account_area">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">Account Number *</span></label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <select class="form-control" name="bank_account" id="bank_account_number"
+                style="width: 100%">
+            <option></option>
+            {% for bank in bank_accounts %}
+                <option value="{{ bank.id }}">{{ bank.name }}, {{ bank.account_number }}, {{ bank.ifsc }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"><span
+            class="required">Date Of Payment *</span>
+    </label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+        <input id="outward_payment_date" name="payment_date"
+               class="date-picker form-control col-md-7 col-xs-12"
+               placeholder="Pick Date of Payment" required type="text"
+               style="background-color: white" readonly>
+    </div>
+</div>
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="textarea">
+        <span class="required">Remarks *</span>
+    </label>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+        <textarea required name="remarks" id="remarks" placeholder="Please provide explanations"
+                  data-parsley-minlength="3" data-parsley-maxlength="200"
+                  class="form-control col-md-7 col-xs-12"></textarea>
+    </div>
+</div>
+<div class=" item form-group" id="fuel_card_area">
+    <div class="col-md-3 col-sm-3 col-xs-12"
+         style="padding-left: 120px;padding-top: 5px">
+        <input type="checkbox" name="is_refund_amount" id="is_refund_amount" value="y"/>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <label class="control-label " for="is_refund_amount">Is refund amount </label>
+    </div>
+</div>
+<div class=" item form-group" id="fuel_card_area">
+    <div class="col-md-3 col-sm-3 col-xs-12"
+         style="padding-left: 120px;padding-top: 5px">
+        <input type="checkbox" name="send_sms_supplier" id="send_sms_supplier"
+               value="yes"/>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <label class="control-label " for="send_sms_supplier">Send SMS to
+            Supplier ?
+        </label>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <p id="outward_pymt_date_warning" style="color: red"></p>
+    </div>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+    </button>
+    <button id="full-booking-outward-submit" class="btn btn-primary">
+        Submit
+    </button>
+</div><!-- /.modal-content -->

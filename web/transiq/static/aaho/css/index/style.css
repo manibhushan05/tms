@@ -1,0 +1,881 @@
+
+.container {
+    width: 100%;
+}
+
+.toplist li {
+    display: inline;
+    margin-left: 3%;
+    margin-right: 3%;
+
+}
+
+.toplist li a {
+
+    font-family: "Brandon Grotesque";
+    color: white;
+    text-decoration: none;
+}
+
+.toplist li a:hover {
+
+    font-family: "Brandon Grotesque";
+    color: white;
+    text-decoration: none;
+}
+
+.toplist {
+    margin: 20px;
+
+}
+
+.logo {
+
+    font-family: "Brandon Grotesque";
+    color: white;
+
+}
+
+#mainnav {
+    font-weight: 300;
+    font-size: 13px;
+    font-family: "Brandon Grotesque";
+    color: #ffffff;
+
+}
+
+.brand {
+    font-weight: 400;
+
+}
+
+.navbar-brand {
+    padding: 0px !important;
+    margin: 0px 0px 0px 35px !important;
+    font-size: 24px !important;
+    line-height: 24px !important;
+    height: auto !important;
+}
+
+@media only screen and (max-width: 770px) {
+    .brand {
+        margin: 0px 0px 0px 30px;
+    }
+}
+
+.page1 {
+    display: block;
+
+    width: 100%;
+    height: 250px;
+    position: fixed;
+    margin-right: 0;
+
+    /*background-position: center center*/
+}
+
+#textwhite {
+    font-family: "Brandon Grotesque";
+    color: #ffffff;
+}
+
+#logo_blue {
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+}
+
+.leftmain {
+
+    line-height: 3vw;
+}
+
+#explore {
+    font-weight: 300;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-family: "Brandon Grotesque";
+    font-size: 2vw;
+    background: #53A9FF;
+    padding: 1vw 2.5vw;
+    border: solid #53A9FF 2px;
+    text-decoration: none;
+    margin-right: 5%;
+    line-height: 1.5vw;
+    margin-top: 2vw;
+
+}
+
+#explore:hover {
+    background: #a3d9fa;
+    text-decoration: none;
+}
+
+#loginbtn {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-family: "Brandon Grotesque";
+    font-size: 2vw;
+    background: #FFC107;
+    padding: 1vw 2.5vw;
+    border: solid #FFC107 2px;
+    text-decoration: none;
+    line-height: 1.5vw;
+    font-weight: 300;
+}
+
+#loginbtn:hover {
+    background: #ffda69;
+    text-decoration: none;
+}
+
+.page {
+    margin-left: 20%;
+    margin-right-right: 20%;
+
+}
+
+.navbar {
+    height: 50px;
+    opacity: 0.9;
+
+}
+
+.navbar {
+    background-color: #303F9F;
+}
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
+    font-family: "Brandon Grotesque";
+    color: #f1f1f1;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    font-family: "Brandon Grotesque";
+    color: #FFC107;
+    background-color: #9FAFD1;
+}
+
+@media only screen and (max-width: 766px) {
+    #navbarCollapse.navbar-collapse {
+        background-color: #f7f7f7;
+    }
+
+    .collapsing ul li a, .in ul li a {
+        font-family: "Brandon Grotesque";
+        color: #555 !important;
+    }
+
+    .collapsing ul li a:hover, .in ul li a:hover {
+        font-family: "Brandon Grotesque";
+        /*color: #f1f1f1 !important;*/
+    }
+}
+
+/*#navbarCollapse.navbar-collapse{*/
+/*background-color: #f7f7f7;*/
+/*}*/
+/*.collapsing ul li a, .in ul li a {*/
+/*font-family: "Brandon Grotesque";*/
+/*color: #555 !important;*/
+/*}*/
+
+/*.collapsing ul li a:hover, .in ul li a:hover {*/
+/*font-family: "Brandon Grotesque";*/
+/*!*color: #f1f1f1 !important;*!*/
+/*}*/
+
+header {
+    margin-top: -60px;
+    background-color: #303F9F;
+    height: auto;
+    padding-top: 80px;
+    padding-bottom: 5vw;
+    position: relative;
+}
+
+.intro-text1 {
+    /*top: 40px;*/
+    /*position: absolute;*/
+    text-align: left;
+    margin-right: 6vw;
+    font-family: "Brandon Grotesque";
+    /*right: 0;*/
+    color: #FFFFFF;
+}
+
+body {
+    position: relative;
+}
+
+#primarytext {
+    font-size: 1.5em;
+    text-align: center;
+    /*padding: 2em;*/
+}
+
+.padin {
+    margin-top: 1%;
+}
+
+#secondarytext {
+    font-size: 16px;
+    text-align: center;
+!important;
+    color: #ffffff;
+    font-family: "Brandon Grotesque" !important;
+
+}
+
+.rect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background-color: #FFC107;
+}
+
+.yellow {
+    color: #FFC107;
+}
+
+header .truck {
+    width: 58%;
+    margin-top: 6%;
+    margin-left: -1%;
+}
+
+header .group {
+    position: relative;
+    width: 45%;
+    margin-left: 57%;
+    margin-top: -13%;
+}
+
+
+
+header .intro-text1 .intro-lead-in1 {
+    margin-top: 20vw;
+    font-size: 2vw;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+header .intro-text1 .intro-heading1 {
+    font-family: "Brandon Grotesque";
+    font-size: 3vw;
+    padding-bottom: 2px;
+    width: 100%;
+}
+
+.transRule {
+    position: absolute;
+    width: 11vw;
+    height: .4vw;
+    margin-top: -.5vw;
+    margin-left: 23vw;
+    background-color: #FFC107;
+}
+
+@media only screen and (min-width: 766px) {
+    #header .intro-text1 {
+        margin-top: -85%;
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    #header .intro-text1 {
+        margin-left: 10.5vw;
+    }
+}
+
+.imageTxtOuter {
+    float: left;
+    width: 100%;
+    padding: 10px 30px;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+}
+
+.landscape {
+    width: 200%;
+}
+
+#require {
+}
+
+#track {
+}
+
+#coffee {
+}
+
+#pay {
+
+}
+
+#about, #howiw, #team {
+    background-color: #F6F6F6;
+    height: auto;
+    position: relative;
+}
+
+#about {
+    padding-top: 5vw;
+    padding-bottom: 15vw;
+    margin-top: 0vw;
+    margin-bottom: 3px;
+}
+
+#about .aboutHead {
+    margin-top: -15vw;
+}
+
+#about p {
+    margin-top: -25px;
+}
+
+#about .container {
+    margin-top: -30vw;
+}
+
+#about img {
+    margin-top: 5vw;
+}
+
+#about h1, #howiw h1, #team h1, #contact h1 {
+    font-size: 35px;
+}
+
+#primarytext {
+    font-size: 20px;
+}
+
+#contact h1 {
+    color: #FFFFFF;
+    margin-top: 10vw;
+}
+
+#howiw p, #team p, .subtext {
+    font-size: 18px;
+    font-family: "Brandon Grotesque";
+    color: #585858;
+}
+
+#about p {
+    font-size: 25px;
+    font-family: "Brandon Grotesque";
+    padding-bottom: 1.5em;
+    /*line-height: 40px;*/
+    color: #585858;
+}
+
+@media only screen and (min-width: 426px){
+    #about p{
+        margin-left: 6em;
+        margin-right: 6em;
+    }
+}
+
+#about p > a {
+    color: #303F9F;
+}
+
+#contact p {
+    font-family: "Brandon Grotesque" !important;
+}
+
+#contact h4 {
+    font-family: "Brandon Grotesque";
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#howiw {
+    padding-top: 50px;
+    padding-bottom: 130px;
+    margin-bottom: 7px;
+}
+
+#team {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    margin-top: -4px;
+}
+
+#team .heroImg {
+    width: 200px;
+    height: auto;
+}
+
+.rule0 {
+    background-color: #FFD900;
+    position: absolute;
+    width: 10%;
+    height: 8px;
+    bottom: -3px;
+    margin-left: 45vw;
+    margin-right: 45vw;
+    z-index: 1000;
+}
+
+.rule1 {
+    background-color: #FFD900;
+    position: absolute;
+    width: 10%;
+    height: 8px;
+    bottom: -3px;
+    margin-left: 45vw;
+    margin-right: 45vw;
+    z-index: 1000;
+}
+
+.rule2 {
+    background-color: #FFD900;
+    position: absolute;
+    width: 10%;
+    height: 8px;
+    bottom: -3px;
+    margin-left: 45vw;
+    margin-right: 45vw;
+    z-index: 1000;
+}
+
+.rule3 {
+    background-color: #FFD900;
+    position: absolute;
+    width: 10%;
+    height: 8px;
+    bottom: -3px;
+    margin-left: 45vw;
+    margin-right: 45vw;
+    z-index: 1000;
+}
+
+/*.rule1{*/
+/*bottom: -2px;*/
+/*}*/
+
+/*.rule2{*/
+/*bottom: -2px;*/
+
+/*}*/
+
+/*.cont{*/
+/*bottom: -2px;*/
+
+/*}*/
+
+.yellBorder {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #FFC107;
+}
+
+.social-icons .fa-facebook {
+    background-color: #3B5998;
+    color: #FFFFFF;
+}
+
+.social-icons .fa-linkedin {
+    background-color: #007BB6;
+    color: #FFFFFF;
+}
+
+.social-icons .fa-twitter {
+    background-color: #4099FF;
+    color: #FFFFFF;
+}
+
+.list-unstyled {
+    list-style: none;
+}
+
+.social-icons.icon-circle .fa {
+    border-radius: 50%;
+
+}
+
+.social-icons .fa {
+    font-size: 10px;
+}
+
+.social-icons .fa {
+    margin-bottom: 70px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #FFF;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.hero {
+    /*float: left;*/
+    width: 100%;
+    margin-top: 10%;
+    position: relative;
+    width: 172.5px;
+}
+
+.heroImg {
+    box-shadow: 8px 8px 8px #888888;
+}
+
+.hero .left {
+    position: absolute;
+    height: 40px;
+    width: 8.5px;
+    /*left: 20;*/
+    top: 0;
+    left: -8px;
+    background-color: #303F9F;
+    box-shadow: 0px 0px 8px #888888;
+
+}
+
+.hero .right {
+    position: absolute;
+    /*margin-top: 49px;*/
+    height: 40px;
+    width: 8.5px;
+    bottom: 0;
+    right: -36px;
+    /*margin-left: 71%;*/
+    background-color: #303F9F;
+    box-shadow: 8px 8px 8px #888888;
+
+}
+
+.hero .top {
+    margin-top: -8.5px;
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 40px;
+    height: 8.5px;
+    background-color: #FFC107;
+    box-shadow: 0px 0px 8px #888888;
+
+}
+
+.hero .bottom {
+    position: absolute;
+    bottom: -9px;
+    right: -36px;
+    width: 40px;
+    height: 8.5px;
+    background-color: #FFC107;
+    box-shadow: 8px 8px 8px #888888;
+
+}
+
+.group3 {
+    width: 100%;
+    margin-top: 10%;
+}
+
+#contact .container {
+    background-color: #303F9F;
+    padding-top: 20px;
+    margin-top: -53.3vw;
+    /*overflow: hidden;*/
+}
+
+#contact h2 {
+    font-family: "Brandon Grotesque";
+    color: #FFFFFF;
+}
+
+#contact .row {
+    margin-top: 20px;
+}
+
+#contact .btn-xl {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-family: "Brandon Grotesque";
+    color: #ffffff;
+    font-size: 15px;
+    background: #FFC107;
+    padding: 1vw;
+    border: solid #FFC107 2px;
+    text-decoration: none;
+}
+
+#contact {
+    margin-top: -18vw;
+}
+
+#contactForm {
+    margin-top: -15px;
+}
+
+.footer {
+    font-family: "Brandon Grotesque";
+    color: #FFFFFF;
+    background-color: #303F9F;
+    padding: 8vw 2vw 2vw 2vw;
+    font-size: 1vw;
+}
+
+.login {
+    cursor: pointer;
+}
+
+/*.modal-title {*/
+/*text-align: center;*/
+/*}*/
+
+#contact .text-input {
+    width: 5vw;
+    padding: 2vw;
+    background-color: #FFFFFF;
+    font-family: "Brandon Grotesque";
+    color: #303F9F;
+    border: 1px solid #303F9F;
+    border-radius: 5px;
+}
+
+.message textarea {
+    padding-bottom: 7.6vw;
+}
+
+/*.modal-dialog {*/
+/*width: 50%;*/
+/*}*/
+
+#map_canvas {
+    width: 480px;
+    height: 250px;
+}
+
+@media only screen and (max-width: 766px) {
+    #map_canvas {
+        width: 300px;
+        height: 200px;
+    }
+
+    #contact .form-control {
+        width: 50vw;
+    }
+
+}
+
+#contact .form-control {
+    padding: .75vw;
+    margin-top: 10px;
+    /*width: 30vw;*/
+}
+
+#contact .form-group input, #contact .form-group textarea {
+    font-size: 15px;
+}
+
+@media only screen and (min-width: 766px) {
+    .addr {
+        margin-left: 7vw;
+    }
+
+    #contact .form-control {
+        width: 30vw;
+    }
+
+}
+
+.head {
+    margin-top: 15px;
+    text-align: center;
+    padding: 2vw;
+    color: #6E6E6E;
+    font-size: 1.2em;
+}
+
+/*.LoginDialog-form {*/
+/*padding: 2vw;*/
+/*background: rgba(255, 255, 255, 1);*/
+/*color: rgba(51, 51, 51, 1);*/
+
+/*}*/
+
+/*.LoginForm-input {*/
+/*padding: .5vw;*/
+/*}*/
+
+/*.LoginForm-input input {*/
+/*padding: .5vw;*/
+/*font-family: "Brandon Grotesque";*/
+
+/*width: 30vw;*/
+/*}*/
+
+/*.LoginForm-rememberForgot {*/
+/*padding: 1vw;*/
+/*font-family: "Brandon Grotesque";*/
+
+/*}*/
+
+/*.submit {*/
+/*background-color: #FFC107;*/
+/*width: 30vw;*/
+/*font-family: "Brandon Grotesque";*/
+/*color: #FFFFFF;*/
+/*}*/
+
+/*.remember {*/
+/*color: #6E6E6E;*/
+/*}*/
+
+/*.submit:hover {*/
+/*font-family: "Brandon Grotesque";*/
+/*border: 2px solid #FFC107;*/
+/*background-color: #FFD900;*/
+/*}*/
+
+/*.forgot, .LoginDialog-signupLink {*/
+/*font-family: "Brandon Grotesque";*/
+/*color: #303F9F;*/
+/*}*/
+
+.msgPart {
+    float: right;
+    margin-right: 2vw;
+    margin-top: -6vw;
+    height: 6vw;
+    width: 7vw;
+
+}
+
+.partText {
+    margin-right: 10vw;
+    text-align: right;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+    }
+}
+
+.navbar-nav > li {
+    margin-right: 15px;
+}
+
+.navbar-nav > li > a:active {
+    text-decoration: underline;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    background-color: transparent !important;
+    border-bottom: 2px solid #fff;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding: 3px 3px 0px 3px;
+}
+
+.navbar-nav > li > a {
+    background-color: transparent !important;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding: 3px 3px 0px 3px !important;
+}
+
+.subtext {
+    color: #ABABAB;
+}
+
+section {
+    background-image: url("../../images/index/sample_landscape (1).png");
+    background-repeat: repeat-x;
+    background-position: left bottom;
+}
+
+.heroText {
+    width: 100%;
+    margin-left: 1.5vw;
+    /*float: left;*/
+}
+
+.heroOuter {
+    margin-left: -5vw;
+}
+
+/*.modal-body, .modal-header{*/
+/*padding: 0px !important;*/
+/*}*/
+
+/*.modal-header .close{*/
+/*margin: 3px 7px 0 0;*/
+/*}*/
+
+.head {
+    padding: 0vw;
+}
+
+/*.LoginDialog-form{*/
+/*padding: 3vw 0 3vw 0;*/
+/*}*/
+
+/*.modal-content{*/
+/*width: 35vw;*/
+/*}*/
+
+@font-face {
+    font-family: 'Brandon Grotesque';
+    src: url('/static/aaho/fonts/Brandon_med.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#contactForm {
+    text-align: center;
+}
+
+.leave {
+    text-align: center;
+}
+
+.login-form {
+    text-align: center;
+}
+
+.loginTitle {
+    text-align: center;;
+}
+
+.loginFooter {
+    text-align: center;
+}
+
+.btn-login {
+    width: 100%;
+}
+
+@media (min-width: 500px) {
+    .loginModal {
+        width: 450px;
+        margin: 30px auto;
+    }
+}
+.contact-address p{
+    color: #FFFFFF;
+    line-height: 70%;
+    text-align: center;
+}
+
+.office_address {
+    width: 15vw;
+}

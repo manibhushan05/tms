@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+{% load helper_tags_team %}
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>
+        Number of Bookings: {{ mb.count }}
+    </h4>
+    <h4><a href="{{ s3_url }}"> Click to download File</a></h4>
+</div>
+<table>
+    <tr>
+        <th>Booking ID</th>
+        <th>LR Number</th>
+        <th>From City</th>
+        <th>To City</th>
+        <th>Party Rate</th>
+        <th>Party Weight</th>
+        <th>Party Amount</th>
+        <th>Supplier Rate</th>
+        <th>Supplier Weight</th>
+        <th>Supplier Amount</th>
+        <th>Refund</th>
+        <th>Profit</th>
+    </tr>
+    {% for booking in mb %}
+        <tr>
+
+            <td>{{ booking.booking_id }}</td>
+            <td>
+                {% if booking.booking_id|slice:'0:3' == 'BRO' %}
+                    {{ booking.booking_id }}
+                {% else %}
+                    {% for lr in booking.lr_numbers.all %}
+                        <p>{{ lr.lr_number }}</p>
+                    {% endfor %}
+                {% endif %}
+            </td>
+            <td>{{ booking.from_city }}</td>
+            <td>{{ booking.to_city }}</td>
+            <td>{{ booking.party_rate }}</td>
+            <td>{{ booking.charged_weight }}</td>
+            <td>{{ booking.total_amount_to_company }}</td>
+
+            <td>{{ booking.supplier_rate }}</td>
+            <td>{{ booking.supplier_charged_weight }}</td>
+            <td>{{ booking.total_amount_to_owner }}</td>
+            <td>{{ booking.refund_amount }}</td>
+            <td>{% subtract_intgers booking.total_amount_to_company booking.total_amount_to_owner|add:booking.refund_amount %}</td>
+
+        </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load helper_tags_team %}
+
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>Invoice for the following bookings has not been raised yet. (POD has been received)</h4>
+    <h4>
+        No. of bookings: {{ mb.count }}
+    </h4>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Shipment Date</th>
+            <th>LR Number</th>
+            <th>Customer to be Billed</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Lorry Number</th>
+            <th>POD Date</th>
+            <th>Total Amount</th>
+        </tr>
+        {% for booking in mb %}
+            <tr>
+
+                <td>{{ booking.shipment_date|date:'d-M-Y' }}</td>
+                <td>
+                    {% if booking.booking_id|slice:'0:3' == 'BRO' %}
+                        {{ booking.booking_id }}
+                    {% else %}
+                        {% for lr in booking.lr_numbers.all %}
+                            <p>{{ lr.lr_number }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                <td>{{ booking.customer_to_be_billed_to.get_name }}</td>
+                <td>{{ booking.from_city }}</td>
+                <td>{{ booking.to_city }}</td>
+                <td>{{ booking.lorry_number }}</td>
+                <td>{{ booking.pod_date|date:'d-M-Y' }}</td>
+                <td>{{ booking.total_amount_to_company }}</td>
+
+            </tr>
+        {% endfor %}
+
+    </table>
+</div>
+</body>
+</html>

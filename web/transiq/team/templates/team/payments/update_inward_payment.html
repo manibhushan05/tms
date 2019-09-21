@@ -1,0 +1,222 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/js/bootstrap-datepicker.min.js' %}">
+
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">In-Ward Payment</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form class="form-horizontal form-label-left" data-parsley-validate=""
+                              data-parsley-trigger="keyup" id="update-inward-payment-form">
+                        <input type="hidden" name="payment_id" id="payment_id" value="{{ id }}">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">LR Number(s)</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="select2_multiple form-control" multiple="multiple"
+                                            name="booking_id[]" style="width: 100%" required>
+                                        {% for booking in booking_data %}
+                                            <option value="{{ booking.id }}"
+                                                    selected>{{ booking.booking_id }}( {{ booking.lr_number }})
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="invoice_number">Invoice
+                                    Number(s)
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="invoice_number" name="invoice_number"
+                                           class="form-control col-md-7 col-xs-12"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="20"
+                                           value="{{ invoice_number }}">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="received_from">Received
+                                    From <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="received_from" class="form-control col-md-7 col-xs-12"
+                                           name="received_from" required="required"
+                                           data-parsley-minlength="3"
+                                           data-parsley-maxlength="70"
+                                           value="{{ received_from }}">
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="actual_amount">Amount
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="actual_amount" name="actual_amount" required="required"
+                                           data-parsley-min="0"
+                                           data-parsley-max="999999"
+                                           data-parsley-type="number"
+                                           class="form-control col-md-7 col-xs-12"
+                                           value="{{ actual_amount }}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="inward_tds_amount">TDS
+                                    Amount
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="inward_tds_amount" name="tds"
+                                           required="required"
+                                           data-parsley-min="0"
+                                           data-parsley-max="999999"
+                                           data-parsley-type="number"
+                                           class="form-control col-md-7 col-xs-12"
+                                           value="{{ tds|default:0 }}">
+                                </div>
+                            </div>
+                            <div class=" item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode <span
+                                        class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="inward_payment_mode" required="required">
+                                        <option value="{{ payment_mode }}" selected>{{ payment_mode }}</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="cheque">Cheque</option>
+                                        <option value="neft">NEFT</option>
+                                        <option value="imps">IMPS</option>
+                                        <option value="rtgs">RTGS</option>
+                                        <option value="happay">Happay</option>
+                                        <option value="hdfc_internal_account">HDFC Internal Account</option>
+                                    </select>
+                                </div>
+                            </div>
+                            {% if payment_id.trn %}
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="actual_amount">Cheque
+                                        Number <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="cheque_number" name="trn" required="required"
+                                               data-parsley-minlength="6" data-parsley-maxlength="6"
+                                               class="form-control col-md-7 col-xs-12"
+                                               value="{{ trn|default_if_none:'' }}">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Payment <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="payment_date" name="payment_date"
+                                           class="date-picker form-control col-md-7 col-xs-12"
+                                           placeholder="Pick Date of Payment" required="required" type="text"
+                                           value="{{ payment_date }}" readonly
+                                           style="background-color: white">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Remarks
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <textarea id="textarea" required="required" name="remarks"
+                                              placeholder="Please provide explanations" data-parsley-minlength="3"
+                                              data-parsley-maxlength="100"
+                                              class="form-control col-md-7 col-xs-12">{{ remarks }}
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button type="reset" class="btn btn-primary">Reset</button>
+                                    <button type="submit" id="btn-update-inward-payment" class="btn btn-success">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    </div>#}
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "aaho/js/lr/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script>
+        $(".select2_multiple").select2({
+            maximumSelectionLength: 1,
+            placeholder: "Please add all associated LR(s)",
+            allowClear: true
+        });
+        $('#payment_date').datepicker({
+            format: "dd-M-yyyy",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $(document).off('click', '#btn-update-inward-payment').on('click', '#btn-update-inward-payment', function () {
+            var UPDATE_INWARD_PAYMENT_FORM = $('#update-inward-payment-form');
+            if (!UPDATE_INWARD_PAYMENT_FORM.parsley().isValid()) {
+                return true;
+            }
+            var payment_id = $("#payment_id").val();
+            NProgress.start();
+            var data = UPDATE_INWARD_PAYMENT_FORM.find(':input').filter(function () {
+                return $.trim(this.value).length > 0
+            }).serializeJSON();
+            $.ajax({
+                url: "/api/team-inward-payment-partial-update/" + payment_id + "/",
+                type: 'PATCH',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+                $.notify(response['msg'], {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                NProgress.done();
+                setTimeout(function () {
+                    getAjaxCallFunction('/api/team-inward-payment-retrieve/' + payment_id + '/');
+                }, 3000);
+            }).fail(function (jqXHR, status) {
+                $.notify(JSON.parse(jqXHR.responseText)['msg'], {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'error'
+                });
+                NProgress.done();
+
+            });
+            return false;
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,190 @@
+{#{% extends "fileupload/upload_base.html" %}#}
+{% load fileupload.upload_tags %}
+{% load user_tags %}
+{% load staticfiles %}
+{% block pageTitle %}
+    <h3 class="titleTop">Upload Invoice Receipt</h3>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- The file upload form used as target for the file upload widget -->
+        <form id="fileupload" method="post" action="/upload/invoice-receipt-docs-create/" data-parsley-trigger="input"
+              enctype="multipart/form-data">{% csrf_token %}
+            <!-- Redirect browsers with JavaScript disabled to the origin page -->
+            <!--<noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>-->
+            <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+            <input type="hidden" name="Authorization" id="authorization">
+            <div class="form-group col-lg-4 col-md-4">
+                <label for="single" class="control-label">Invoice Number *</label>
+                <select id="single" class="form-control select2-single" name="invoice_number" required>
+                    <option></option>
+                </select>
+            </div>
+            <br>
+
+            <div class="row fileupload-buttonbar ">
+                <div class="col-lg-7" style="padding-top:0.5em;">
+                    <!-- The fileinput-button span is used to style the file input field as button -->
+                    <span class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input type="file" name="file" accept="image/jpg, image/jpeg, image/png" multiple>
+
+                </span>
+                    <span class="fileupload-loading"></span>
+                </div>
+                <!-- The global progress information -->
+                <div class="col-lg-5 fileupload-progress fade">
+                    <!-- The global progress bar -->
+                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0"
+                         aria-valuemax="100">
+                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                    </div>
+                    <!-- The extended global progress information -->
+                    <div class="progress-extended">&nbsp;</div>
+                </div>
+            </div>
+            <!-- The table listing the files available for upload/download -->
+            <table role="presentation" class="table table-striped">
+                <tbody class="files"></tbody>
+            </table>
+            <div class="row fileupload-buttonbar " id="footer">
+                <button type="submit" class="btn btn-lg btn-success start">
+                    <span>Upload Invoice Receipt</span>
+                </button>
+
+                <button type="button" class="btn btn-lg btn-primary upload-new-invoice-receipt">
+                    <span>Upload New</span>
+                </button>
+
+            </div>
+        </form>
+        <br>
+
+    </div>
+    <!-- The blueimp Gallery widget -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+    <style>
+        #footer {
+            height: 100px;
+            width: 100%;
+        {#position: relative;#} left: 2rem;
+            top: 10rem;
+            bottom: 0;
+        }
+
+        .size {
+            height: 1em !important;
+        }
+        .fileinput-button input {
+            transform: initial !important;
+        }
+    </style>
+    {% upload_pod_js %}
+
+    <script src="{% static "vendor/jQuery/js/jquery.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="{% static "vendor/fileupload/js/vendor/jquery.ui.widget.js" %}" type="text/javascript"></script>
+    <!-- The Templates plugin is included to render the upload/download listings -->
+    <script src="{% static "vendor/fileupload/js/tmpl.min.js" %}" type="text/javascript"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="{% static "vendor/fileupload/js/load-image.min.js" %}" type="text/javascript"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="{% static "vendor/fileupload/js/canvas-to-blob.min.js" %}" type="text/javascript"></script>
+    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+    <script src="{% static "vendor/fileupload/js/bootstrap.min.js" %}" type="text/javascript"></script>
+    <!-- blueimp Gallery script -->
+    <script src="{% static "vendor/fileupload/js/jquery.blueimp-gallery.min.js" %}" type="text/javascript"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="{% static "vendor/fileupload/js/jquery.iframe-transport.js" %}" type="text/javascript"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload.js" %}" type="text/javascript"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-process.js" %}" type="text/javascript"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-image.js" %}" type="text/javascript"></script>
+    <!-- The File Upload audio preview plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-audio.js" %}" type="text/javascript"></script>
+    <!-- The File Upload video preview plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-video.js" %}" type="text/javascript"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-validate.js" %}" type="text/javascript"></script>
+    <!-- The File Upload user interface plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-ui.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+
+    <!-- The main application script -->
+    <script src="{% static "vendor/fileupload/js/main.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/fileupload/js/locale.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/fileupload/js/csrf.js" %}" type="text/javascript"></script>
+    <script>
+        $(".select2-single").select2({
+            placeholder: "Select Invoice Number",
+            ajax: {
+                url: '/api/team-invoice-list/',
+                headers: {"Authorization": localStorage.getItem('token')},
+                delay: 250,
+                data: function (params) {
+                    return {
+                        search: params.term
+                    };
+                },
+                processResults: function (data) {
+                    var invoiceArray = [];
+                    $.each(data.data, function (key, value) {
+                        invoiceArray.push({
+                            id: value.id,
+                            text: value.invoice_number
+                        })
+                    });
+                    return {results: invoiceArray};
+                },
+                error: function (jqXHR, status, error) {
+                if(jqXHR.status === "401"){
+                    redirectToLogin(error);
+                  }
+            }
+            },
+            allowClear: true
+        }).change(function () {
+            $(this).parsley().validate();
+        });
+
+
+        $('.upload-new-invoice-receipt').on('click', function (e) {
+            // window.location.href = ('/upload/pod/');
+            window.location.reload();
+        });
+
+        $(document).ready(function () {
+            $("#authorization").val(localStorage.getItem('auth_token'));
+        });
+        $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+
+            var uploadForm = $('#fileupload');
+            var $form = $('#fileupload');
+            $form.parsley().validate();
+
+            var formError = uploadForm.parsley().isValid();
+            if (formError == false) {
+                setTimeout(function () {
+                    data.context.find('button').prop('disabled', false)
+                }, 1000);
+                return false;
+            }
+        });
+    </script>
+    <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+    <!--[if gte IE 8]>
+<script src="/static/js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+{% endblock %}

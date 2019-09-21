@@ -1,0 +1,183 @@
+-------------------------------------------
+Release 20.07.2018
+-------------------------------------------
+Bug Fixes:
+	- FMS App new load notification - replacing customer name with from to cities
+	- 
+	-
+Features:
+	-
+	-
+	-
+-------------------------------------------
+Release 27.07.2018
+-------------------------------------------
+Bug Fixes:
+	- Fixed Unraised invoice e-mail inaccurate data
+	- Disable update bank account for emp_group4
+	- Changed color coding for booking history based on credit debit note
+	- Changed logic for total amount to customer on update booking page
+Features:
+	-
+	-
+	-
+-------------------------------------------
+
+-------------------------------------------
+Release 31.07.2018
+-------------------------------------------
+Bug Fixes:
+	- Fixed twice mail sent through supervisor
+-------------------------------------------
+
+-------------------------------------------
+Release 03.08.2018
+-------------------------------------------
+Bug Fixes:
+	- Set booking id unique in ManualBooking Table
+Features:
+	- Developed MIS but commented
+	- Imporved test cases
+-------------------------------------------
+-------------------------------------------
+Release 15.08.2018
+-------------------------------------------
+Bug Fixes:
+	- Adjustment mode in outward payment
+Features:
+	- Added Supplier's and Customer's Balance in booking history
+-------------------------------------------
+Release 19.08.2018
+-------------------------------------------
+Bug Fixes:
+    - Bugs fixes in task dashboard functionalities
+Features:
+    - Destination state in Supplier Registration/Update
+	- Remark field in Requirement
+	- Task Dashboard backend apis for Employee roles and TD fucntionalities and mapping   
+-------------------------------------------
+Release 20.08.2018
+-------------------------------------------
+Bug Fixes:
+    - Bugs fixes in adjustment mode for outward payment
+Features:
+    - Booking status color code
+-------------------------------------------
+Release 22.08.2018
+-------------------------------------------
+Bug Fixes:
+    - Bugs fixes in adjustment mode for outward payment
+Features:
+    - City Local changes while sending SMS
+    - Added user category search based on category
+    - Added data script for pre booking workflow
+-----------------------------------------------
+Release 01.09.2018
+-------------------------------------------
+Bug Fixes:
+    - Bugs fixes in Rest Apis
+Features:
+    - Rest Apis changes for Task Dashboard Pre booking  workflow
+-----------------------------------------------------------------
+Release 05.10.2018
+----------------------------------------------------------------
+Rest API Integration:
+1. Complete web application integration with Rest APIs
+2. FMS Android App integration with Rest APIs
+
+Task Dashboard Release: 
+1. SMS for inquiries: Send the number of (1) the city traffic person and (2) the sales person who has put in the inquiry 
+2. Send SMS to inquiry creator along with brokers 
+3. Connect App - For management/tech - show all inquiries in open inquiries and my inquiries tabs. For city heads, show all inquiries from their city. Customer inquiry is visible only to customer PoC (sales), city head and management/tech
+4. Connect App - Color code inquiries in my inquiries tab - grey for lapsed, green for fulfilled, red for cancelled, light yellow for customer inquiries 
+5. Connect App - AutoFill Material and Aaho office based on selected client 
+6. Connect App - Predefined Cancel reasons pop up for inquiry to be cancelled. Option to add free text as cancel reason other than predefined 
+7. Connect App - Forgot Password feature in Connect App 
+8. Connect App - Allow status (fulfilled/cancelled) change for inquiries even after they have lapsed.
+9. Connect App - Count on functionality cards
+10. Web Task Dashboard - User based dynamic configuration of functionalities
+11. Web Task Dashboard - Integration of ReactJS task dashboard functionalities components with existing jquery code
+12. Web Task Dashboard - Firebase registration and server update for Push notification
+13. Web Task Dashboard - New Booking generation
+14. Connect App - Receive Notification for new booking 
+15. Connect App - Automatic Pending LR count update when push notification is received
+16. Connect App - Pending LR Bookings readonly for Sales person  
+17. Connect App - Pending LR Bookings editable for traffic, ops, tech, city head and management
+18. Connect App - Pending LR Bookings Status update (confirmed to loaded) 
+19. Connect App - Pending LR Bookings Comments (with predefined suggestions) update for particular status
+20. Send push notifications to respective apps (Web/Connect) based on bookings status change
+21. Web Task Dashboard - Receive Push notification to generate LR for loaded bookings
+22. Web Task Dashboard - Automatic Count update on Generate LR Tab when push notification is received
+23. Web Task Dashboard - List loaded Bookings which are  pending for LR generation
+24. Web Task Dashboard - Two LR Generation Options 1. Detailed LR 2. Quick LR with only weights  
+25. Web - Automatic Generate LR count update when user is on another browser tab
+26. Web - Automatic append of booking row in table inside Generate LR when push notification for LR received
+27. Push notification/Alerts to respective user on expiry of a booking status 
+28. Connect App - Remove Count on non functional functionalities in Connect App
+29. Connect App - Show functionalities in order of decreasing count
+30. Connect App - Automatic update on count when app is in background
+31. Connect App - Day’s notifications to be displayed on separate screen
+-------------------------------------------------------------------------------
+Release 20.10.2018 
+-------------------------------------------------------------------------------
+Task Dashboard
+1. Web - Pay Advance
+2. Web - Verify PoD
+3. Connect - In Transit
+4. Connect - Delivered
+-------------------------------------------------------------------------------
+Release 27.10.2018
+-------------------------------------------------------------------------------
+A. Task Dashboard - New Features
+1. Web - Process payment
+2. Web - Reconcile
+3. Web - Inward Entry
+B. Modification and bugs fixes in existing features
+-------------------------------------------------------------------------------
+Release 02.11.2018
+-------------------------------------------------------------------------------
+A. Task Dashboard - New Features
+1. Web - Pay Balance
+2. Web - Raise Invoice
+3. Web - Send Invoice
+4. Web - Confirm Invoice
+5. Minor changes and bugs fixes
+B. Connect App
+1. Invoice Confirmation
+2. Pending Payments
+3. Google places for In Transit
+4. Minor changes and bugs fixes
+C. FMS APP
+1. Trip Details
+B. Modification and bugs fixes in existing features
+-------------------------------------------------------------------------------
+Release 16.11.2018
+-------------------------------------------------------------------------------
+1. Connect: Pending Pmt: Arrange by Overdue amount. Highest first. Second order arrange by Pending Amount. On Invoice list, arrange by due date, earliest first.  
+2. Connect: Pending pmt: If part pmt has been received against a booking / invoice, that needs to reflect in the display
+3. Connect: In Transit: Arrange by shipment date - oldest first, Also, red if it hasn't been updated on t-1.
+4. Connect: In Transit: Show location update timestamp. No need to display "India" with location. Can abbreviate state to create space.HH:MM format
+5. Connect: Delivered: If 10+ days have lapsed since unloading, POD is now overdue. Make it red.  If POD is uploaded but unverified, make it green.
+6. For trucks with GPS fitted, automatically pull location from GPS table (for connect)
+7. City Head filter for inquiries
+-------------------------------------------------------------------------------
+Release 27.11.2018
+-------------------------------------------------------------------------------
+1. Connect: In Transit and Delivered status irrespective of Invoice statuses
+2. Connect: Part Payment to be displayed in Invoices
+3. FMS: Push notification for new load
+4. Web: Created by field in Send and Confirm invoice
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Release 14.12.2018
+-------------------------------------------------------------------------------
+1. Customer-Web: changes password
+2. Customer-Web: invoice and pod records
+3. Customer-Web: Change login ur
+4. Web: Add CNCA amount in invoice
+5. Web: Restrict view, download, create and update for customer and supplier
+6. Web: Tally integration of cash outward payment
+7. Web: Tally integration of fuel card outward payment
+8. Web: Tally integration of bank transfer outward payment
+-------------------------------------------------------------------------------

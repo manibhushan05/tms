@@ -1,0 +1,16 @@
+.blackbuck_cache
+transiq/api/blackbuck
+transiq/transiq/settings_local.py
+#transiq/transiq/settings/local.py
+transiq/log/
+.idea
+.coverage
+*.pyc
+*.pyo
+media/
+config/ci/local/apache/
+config/ci/local/ssl/
+config/ci/local/supervisor/extra/*.conf
+config/ci/local/requirements.txt
+config/ci/local/settings.sh
+

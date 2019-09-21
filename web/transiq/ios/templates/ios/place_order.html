@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" ng-app="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'aaho/images/logo.png' %}" type="image/x-icon"/>
+    <title>Trans IQ Technology Pvt. Ltd.</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+
+    <!--Datetimepicker-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/datepicker/css/bootstrap-datetimepicker.min.css' %}"
+          xmlns="http://www.w3.org/1999/html"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'aaho/css/sme/place-order-ios.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/gentelella/css/custom.min.css' %}">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'aaho/css/sme/custom-ios.css' %}">
+
+
+    {#    <link href="../static/select2/dist/css/select2.min.css" rel="stylesheet">#}
+</head>
+<body>
+    <div class="container body">
+            <nav class="navbar navbar-default">
+                <div class="container navbar-header">
+                  <a class="navbar-brand" href="#">Place Order</a>
+                  <a class="glyphicon glyphicon-off" href="/authentication/logout/"> Logout</a>
+                </div>
+            </nav>
+            <div class="main_container">
+<div class="right_col" role="main">
+
+    <div class="">
+
+        <div class="clearfix"></div>
+        <div class="clearfix"></div>
+
+        <div class="row placeOrder">
+            <form class="form-horizontal form-label-left" onsubmit="display()"
+                  action="/company/place-order" method="POST"
+                  novalidate>{% csrf_token %}
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <p class="heading">Pickup Details</p>
+                                    <div class='messageDisplay' style='display:none'>I did something!</div>
+
+                    <div class="pickup">
+                        <div class="x_panel">
+
+                            <div class="x_content cityPick">
+                                <!--{#-->
+                                <!--<form class="cityPick form-horizontal form-label-right" action="" method="POST"-->
+                                <!--novalidate>{% csrf_token %}#}-->
+                                <div class="form-group">
+                                    <div class="city col-md-4 col-sm-10 col-xs-10">
+                                        <div class="item form-group">
+                                            <label class="control-label" for="pickup_city">City<span
+                                                    class="required">*</span>
+                                            </label>
+                                            <div class="">
+                                                <select class="form-control pickupCity" id="pickup_city"
+                                                        name="pickup_city[]">
+                                                    <option></option>
+                                                    <option>Mumbai</option>
+                                                    <option>Delhi</option>
+                                                    <option>Jaipur</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="address col-md-7 col-sm-10 col-xs-10">
+                                        <div class="item form-group">
+                                            <label class="control-label" for="pickup_address">Address<span
+                                                    class="required">*</span>
+                                            </label>
+                                            <div class="">
+                                                <input type="text" class="form-control" id="pickup_address"
+                                                       name="pickup_address[]">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="multiCheck col-md-4 col-sm-4 col-xs-12">
+                                        <input type="checkbox" value="Yes" id="multiCheck">Have more than one pickup
+                                        point?<br>
+                                    </div>
+                                </div>
+
+                                <div id="cityPickBlock">
+                                    <div class="form-group cityPickExtend" id="cityPickExtend" style="display: none;">
+                                        <div class="city col-md-4 col-sm-4 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="pickup_city">City<span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="">
+                                                    <select class="form-control pickup_city pick_extend" id="pickup_city"
+                                                            name="" style="width: 100%;">
+                                                        <option></option>
+                                                        <option>Mumbai</option>
+                                                        <option>Delhi</option>
+                                                        <option>Jaipur</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="address col-md-7 col-sm-7 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="pickup_address">Address<span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" id="pickup_address"
+                                                           name="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="removeBtn col-md-1 col-sm-1 col-xs-2">
+                                            <button type="button" id="removeBtn">Remove</button>
+                                        </div>
+
+                                        <!--<div class="addBtn">-->
+                                        <!--<button type="button" id="addBtn">Add another pickup location</button>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="addBtn hide" id="buttonAdd">
+                                    <button type="button" id="addBtn">Add another pickup location</button>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="city dateCol col-md-4 col-sm-4 col-xs-10">
+                                        <div class="item form-group">
+                                            <label class="control-label dateTime">Pickup
+                                                Date &amp; time
+                                                <span class="required">*</span>
+                                            </label>
+
+                                            <div class="input-group date form_datetime" data-date=""
+                                                 data-date-format="dd MM yyyy - HH:ii p"
+                                                 data-link-field="dtp_input1">
+
+                                                <input class="form-control" size="16" name="shipment_datetime"
+                                                       type="text" value="" readonly
+                                                       style="background-color: #fff;">
+
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </span>
+
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-th"></span>
+                                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="address col-md-4 col-sm-4 col-xs-6">
+                                        <div class="item form-group">
+                                            <label class="control-label" for="contactName">Contact Person<span
+                                                    class="required">*</span>
+                                            </label>
+                                            <div class="">
+                                                <input type="text" class="form-control" id="contactName"
+                                                       name="contact_person">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="address col-md-3 col-sm-3 col-xs-6">
+                                        <div class="item form-group">
+                                            <label class="control-label" for="contact">Contact Number<span
+                                                    class="required">*</span>
+                                            </label>
+                                            <div class="">
+                                                <input type="text" class="form-control" id="contact" value=""
+                                                       name="contact_number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--{# <br>#}-->
+                    <p class="heading">Drop Details</p>
+                    <div class="drop">
+                        <div class="x_panel">
+
+                            <div class="x_content cityDrop">
+                                <!--{#-->
+                                <!--<form class="cityPick form-horizontal form-label-right" action="" method="POST"-->
+                                <!--novalidate>{% csrf_token %}#}-->
+                                <div class="form-group">
+                                    <div class="city col-md-4 col-sm-4 col-xs-10">
+                                        <div class="item form-group">
+                                            <label class="control-label" for="drop_city">City<span
+                                                    class="required">*</span>
+                                            </label>
+                                            <div class="">
+                                                <select class="form-control dropCity" id="drop_city" name="drop_city[]">
+                                                    <option></option>
+                                                    <option>Mumbai</option>
+                                                    <option>Delhi</option>
+                                                    <option>Jaipur</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="address col-md-7 col-sm-7 col-xs-10">
+                                        <div class="item form-group">
+                                            <label class="control-label" for="drop_address">Address<span
+                                                    class="required">*</span>
+                                            </label>
+                                            <div class="">
+                                                <input type="text" class="form-control" id="drop_address"
+                                                       name="drop_address[]">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="multiCheck1 col-md-4 col-sm-4 col-xs-12">
+                                        <input type="checkbox" value="Yes" id="multiCheck1">Have more than one drop
+                                        point?<br>
+                                    </div>
+                                </div>
+
+                                <div id="cityDropBlock">
+                                    <div class="form-group cityDropExtend" id="cityDropExtend" style="display: none;">
+                                        <div class="city col-md-4 col-sm-4 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="drop_city">City<span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="">
+                                                    <select class="form-control drop_city" id="drop_city" name=""  style="width: 100%;">
+                                                    <option></option>
+                                                    <option>Mumbai</option>
+                                                    <option>Delhi</option>
+                                                    <option>Jaipur</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="address col-md-7 col-sm-7 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="drop_address">Address<span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" id="drop_address"
+                                                           name="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="removeBtn col-md-1 col-sm-1 col-xs-2">
+                                            <button type="button" id="removeBtn1">Remove</button>
+                                        </div>
+
+                                        <!--<div class="addBtn">-->
+                                        <!--<button type="button" id="addBtn1">Add another drop location</button>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="addBtn hide" id="buttonAdd1">
+                                    <button type="button" id="addBtn1">Add another drop location</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- {#                    <br>#} -->
+                    <p class="heading">Truck Details</p>
+                    <div class="truckDetails">
+
+                        <div class="x_panel" style="padding-bottom: 50px;">
+
+                            <div class="x_content truckPick">
+                                <div class="form-group">
+
+                                    <div class="row" id="truckType">
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="truck col-md-4 col-sm-4 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="truck">Select Truck Type<span
+                                                        class="required">*</span>
+                                                </label>
+
+                                                <div class="">
+                                                    <select class="form-control truck_select" id="truck" name="truck_type"
+                                                            onchange="cloning()">
+                                                        <option></option>
+                                                        <option value="{% static 'aaho/sme/images/truck/10tyretaurus.jpg' %}"
+                                                                data-id="_10_tyre_16_ton" data-value="">
+                                                            10 tyre 16 ton
+                                                        </option>
+                                                        <option value="{% static 'aaho/sme/images/truck/17feetopen.jpg' %}"
+                                                                data-id="_12_tyre_21_ton" data-value="">
+                                                            12 tyre 21
+                                                            ton
+                                                        </option>
+                                                        <option value="{% static 'aaho/sme/images/truck/14feetopen.jpg' %}"
+                                                                data-id="_14_tyre_25_ton" data-value="">
+                                                            14 tyre 25 ton
+                                                        </option>
+                                                        <option value="{% static 'aaho/sme/images/truck/34feetmultiaxle1.jpg' %}"
+                                                                data-id="tata_eicher_1109" data-value="">
+                                                            Tata eicher 1109
+                                                        </option>
+                                                        <option value="{% static 'aaho/sme/images/truck/TataAce.jpg' %}"
+                                                                data-id="_32_feet_multi_axle" data-value="">
+                                                            32 feet multi axle
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="address col-md-4 col-sm-4 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="material">Material<span
+                                                        class="required">*</span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" id="material"
+                                                           name="material">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="address col-md-4 col-sm-4 col-xs-10">
+                                            <div class="item form-group">
+                                                <label class="control-label" for="rate">Expected Rate
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" id="rate"
+                                                           name="rate">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="total">
+                                <h4 class="truckCount">Total Trucks: <p id="truckCount">0</p></h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="submitBar">
+                    <div class="col-md-7 col-sm-7 col-xs-7 col-lg-7">
+                        <p id="submitText">By clicking on submit, you accept our <a href="terms-and-conditions">terms and
+                            conditions</a></p>
+                    </div>
+                    <div class="buttonDiv col-md-5 col-sm-5 col-lg-5 col-xs-5">
+                        <div>
+                            <input type="submit" id="submit" value="Submit">
+                        </div>
+                        <div>
+                            <input type="reset" id="reset" value="Reset">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <!-- /page content -->
+
+            </div>
+    </div>
+    <!-- page content -->
+
+
+    <script src="{% static 'vendor/jQuery/js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/bootstrap/3.3.6/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+    <script src="{% static 'vendor/select2/js/select2.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendor/fastclick/fastclick.min.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static  'vendor/nprogress/js/nprogress.min.js' %}" type="text/javascript"></script>
+    <!-- validator -->
+    <script src="{% static  'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/gentelella/js/custom.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'aaho/js/sme/place-order-ios.js' %}" type="text/javascript"></script>
+
+    <script>
+    $(document).ready(function () {
+        var handleDataTableButtons = function () {
+            if ($("#datatable-buttons").length) {
+                $("#datatable-buttons").DataTable({
+                    dom: "Bfrtip",
+                    buttons: [
+                        {
+                            extend: "copy",
+                            className: "btn-sm"
+                        },
+                        {
+                            extend: "csv",
+                            className: "btn-sm"
+                        },
+                        {
+                            extend: "excel",
+                            className: "btn-sm"
+                        },
+                        {
+                            extend: "pdfHtml5",
+                            className: "btn-sm"
+                        },
+                        {
+                            extend: "print",
+                            className: "btn-sm"
+                        },
+                    ],
+                    responsive: true
+                });
+            }
+        };
+        TableManageButtons = function () {
+            "use strict";
+            return {
+                init: function () {
+                    handleDataTableButtons();
+                }
+            };
+        }();
+        $('#datatable').dataTable();
+        $('#datatable-keytable').DataTable({
+            keys: true
+        });
+        $('#datatable-responsive').DataTable();
+        $('#datatable-scroller').DataTable({
+            ajax: "js/datatables/json/scroller-demo.json",
+            deferRender: true,
+            scrollY: 380,
+            scrollCollapse: true,
+            scroller: true
+        });
+        var table = $('#datatable-fixed-header').DataTable({
+            fixedHeader: true
+        });
+        TableManageButtons.init();
+    });
+</script>
+
+</body>
+</html>

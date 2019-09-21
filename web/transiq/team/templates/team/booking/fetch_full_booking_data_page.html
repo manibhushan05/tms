@@ -1,0 +1,388 @@
+{#{% extends "team/base.html" %}#}
+{% load staticfiles %}
+{% load team_tags.helper %}
+{% block css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datetimepicker.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/parsley/css/parsley.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/icheck-1/skins/all.css' %}">
+    <style>
+        input[data-readonly] {
+            pointer-events: none;
+        }
+
+        .notifyjs-foo-base {
+            opacity: 0.85;
+            width: 100%;
+            background: #F5F5F5;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .notifyjs-foo-base .title {
+            width: 100%;
+            float: left;
+            margin: 10px 0 0 10px;
+            color: #00A000;
+        }
+
+        .notifyjs-foo-base .buttons {
+            width: 100%;
+            font-size: 9px;
+            padding: 5px;
+            margin: 2px;
+        }
+
+        .notifyjs-foo-base button {
+            position: center;
+            font-size: 12px;
+            padding: 5px;
+            margin: 2px;
+        }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Full Booking</h3>
+{% endblock %}
+{% block content %}
+    {#    <div class="right_col" role="main">#}
+
+    <form class="form-horizontal form-label-left"
+          data-parsley-validate data-parsley-trigger="keyup"
+          id="fetch-generate-lr-form">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="vehicle_number_fetch">Vehicle Number <span
+                                    class="required">*</span></label>
+                            <input type="text" class="vehicle_number form-control" name="vehicle_number"
+                                   id="vehicle_number"
+                                   placeholder="Enter Vehicle Number"
+                                   data-parsley-pattern="/^[A-Z]{2}[ -.]*\d{1,2}[ -.]*[A-Z]{0,3}[ -.]*\d{4}$/i"
+                                   data-parsley-error-message="Please Enter Valid Vehicle Number"
+                                   required="required">
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <label for="type_of_vehicle"><span class="required">Truck Type * </span></label>
+                            <select class="truck-category form-control" name="vehicle_category_id"
+                                    id="type_of_vehicle" required>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <label for="truck_driver">Truck Driver <span class="required">*</span></label>
+                            <select class="truck-driver form-control" name="truck_driver_id" id="truck_driver"
+                                    required>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="supplier_name">Supplier name <span class="required">*</span></label>
+                            <select class="truck-suppliers form-control" name="supplier_id" id="supplier_name"
+                                    required="required">
+                                <option></option>
+
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label> <span class="required">Supplier Rate *</span></label>
+                            <input type="number" class="form-control" name="supplier_rate" data-parsley-min="0"
+                                   min="0" max="999999" id="supplier_rate" placeholder="Supplier Rate" required>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <label for="truck_owner_name">Truck Owner</label>
+                            <select class="truck-owner form-control" name="truck_owner_id" id="truck_owner_name">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="x_panel">
+            <div class="x_content">
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h4>
+                                Note:- Unless this transaction is exempt from GST, it is mandatory to register the
+                                paying party along with GSTIN first
+                            </h4>
+
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12" id="error-message">
+                            {% for message in messages %}
+                                <div class="{{ message.info }}">
+                                    <p>{{ message }}</p>
+
+                                </div>
+
+                            {% endfor %}
+                        </div>
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="gst_liability">GST Liability <span class="required">*</span></label>
+                            <select class="form-control" name="gst_liability"
+                                    id="gst_liability" tabindex="-1" required>
+                                <option></option>
+                                <option value="consignor">Consignor</option>
+                                <option value="consignee">Consignee</option>
+                                <option value="carrier">Transporter</option>
+                                <option value="exempted">Exempted</option>
+                            </select>
+                        </div>
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="customer_name">Customer who has placed order <span
+                                    class="required">*</span></label>
+                            <select class="form-control" name="customer_placed_order" id="customer_name"
+                                    required="required">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="input-customer-make-payment" id="label-customer-make-payment">Customer who
+                                will make
+                                payment </label>
+                            <select class="form-control" name="customer_to_be_billed"
+                                    id="input-customer-make-payment">
+                                <option></option>
+                            </select>
+                        </div>
+
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="billing_type"><span class="required">Billing Type * </span></label>
+                            <select class="form-control" name="billing_type" id="billing_type"
+                                    tabindex="-1" required>
+                                <option></option>
+                                <option value="T.B.B.">T.B.B.</option>
+                                <option value="To Pay">To Pay</option>
+                                <option value="Paid">Paid</option>
+                                <option value="contract">Contract</option>
+                            </select>
+                        </div>
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="source_office">Source Office <span class="required">*</span></label>
+                            <select class="form-control" name="source_office"
+                                    id="source_office"
+                                    tabindex="-1" required>
+                                <option></option>
+
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="delivery_office">Destination Office <span
+                                    class="required">*</span></label>
+                            <select class="form-control" name="destination_office"
+                                    id="delivery_office" required>
+                                <option></option>
+
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="from_city"><span class="required">From * </span></label>
+                            <select class="city form-control"
+                                    name="from_city" id="from_city" required>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label for="to_city"><span class="required">To * </span></label>
+                            <select class="city form-control"
+                                    name="to_city" id="to_city" required>
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label class="control-label dateTime" for="shipment_datetime">Shipment
+                                Date &amp; time
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="input-group date datetime" data-date=""
+                                 data-date-format="dd MM yyyy - HH:ii p"
+                                 data-link-field="dtp_input1">
+
+                                <input class="custom-datepicker form-control" size="16" name="shipment_datetime"
+                                       type="text"
+                                       readonly style="background-color: #fff;" required="required">
+
+                                <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </span>
+
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-th"></span>
+                                    </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="x_panel">
+            <div class="x_content">
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label><span class="required">Party Charged Weight(in Tonnes) *</span></label>
+                            <input type="number" class="form-control" name="charged_weight"
+                                   data-parsley-min="0" min="0" max="999999"
+                                   id="charged_weight" placeholder="Charged Weight" required step="0.001">
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label><span class="required">Party Rate *</span></label>
+                            <input type="number" class="form-control" name="party_rate" data-parsley-min="0"
+                                   min="0" max="999999"
+                                   id="party_rate" placeholder="Party Rate" required>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label><span class="required">Refund *</span></label>
+                            <input type="number" class="form-control" name="refundable_amount" data-parsley-min="0"
+                                   min="0" max="999999"
+                                   id="refund-amount" placeholder="Refund Amount" required>
+                        </div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label><span class="required">Supplier Charged Weight(in Tonnes) *</span></label>
+                            <input type="number" class="form-control" name="supplier_charged_weight"
+                                   id="supplier_charged_weight" placeholder="Supplier Charged Weight"
+                                   data-parsley-min="0" min="0" max="999999"
+                                   required step="0.001">
+                        </div>
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Actual Weight(in Tonnes) *</label>
+                            <input type="number" class="form-control" name="loaded_weight" data-parsley-min="0"
+                                   min="0" max="999999"
+                                   id="loaded_weight" step="0.001" placeholder="Actual weight" required>
+                        </div>
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Number Of LR Required <span class="required">*</span></label>
+                            <input type="number" class="form-control" name="number_of_lr"
+                                   placeholder="Number of LR Per Lorry" required="required" value="1" min="1"
+                                   max="10"
+                                   data-parsley-range="[1, 10]" autocomplete="off">
+                        </div>
+
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label>Total Amount to Party:</label>
+                            <input type="number" class="form-control" name="total_amount_to_party"
+                                   id="total_amount_to_party" placeholder="Total Amount to Party:"
+                                   data-parsley-min="0" min="0" data-readonly>
+                        </div>
+
+
+                        <div class="item form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <label><span class="required">Total Amount to Supplier:</span></label>
+                            <input type="number" class="form-control" name="total_amount_to_owner"
+                                   data-parsley-min="0" min="0" id="total_amount_to_owner" step="0.001"
+                                   placeholder="Total amount to supplier" data-readonly>
+                        </div>
+
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                             id="is_print_payment_mode_instruction_div">
+                            <div class="checkbox">
+                                <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+
+                                    <label><b><span class="required">Advance Paid *: </span></b></label>
+                                </div>
+                                <div class="form-group col-lg-1 col-md-1 col-sm-1 col-xs-12">
+
+                                    Yes: <input type="radio" class="flat"
+                                                name="is_print_payment_mode_instruction"
+                                                id="is_print_payment_mode_instruction"
+                                                value="yes"/>
+                                </div>
+                                <div class="form-group col-lg-1 col-md-1 col-sm-1 col-xs-12">
+
+                                    No: <input type="radio" class="flat"
+                                               name="is_print_payment_mode_instruction"
+                                               value="no"/>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+
+                        <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <button class="btn btn-danger btn-lg pull-right"
+                                    id="btn-booking-reset" style="width: 100%"
+                                    type="button"> Reset Booking
+                            </button>
+                        </div>
+
+                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <button class="btn btn-primary btn-lg pull-right"
+                                    id="btn-detailed-lr" style="width: 100%"
+                                    name="submit_type"
+                                    value="detailed_lr"
+                                    type="submit"> Proceed for Detailed LR
+                            </button>
+                        </div>
+                        <input type="hidden" name="generate-booking-and-finish" id="generate-booking-and-finish">
+                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <button class="btn btn-success btn-lg pull-right "
+                                    id="btn-generate-lr-finish" style="width: 100%"
+                                    name="submit_type"
+                                    value="generate_finish_lr"
+                                    type="submit"> Generate Booking and Finish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {#    </div>#}
+    <style>
+        #error-message p {
+            color: red;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static 'vendor/datepicker/js/bootstrap-datetimepicker.min.js' %}" type="text/javascript"></script>
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/icheck-1/icheck.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/nprogress/js/nprogress.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/common.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/create-booking.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock %}

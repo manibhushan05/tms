@@ -1,0 +1,285 @@
+{% load staticfiles %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/parsley/css/parsley.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+    <style>
+        div.total_amount {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        div.charges_remark {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Invoices</h3>
+{% endblock %}
+{% block content %}
+
+    <div class="">
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+
+                    <div class="x_content">
+
+                        <form class="form-horizontal form-label-left" id="multi-commission-booking-invoice-form">
+                            <div class="item form-group col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label " for="to_be_billed">To Be Billed <span
+                                        class="required">*</span>
+                                </label>
+                                <input type="hidden" name="booking_ids" value="{{ booking_ids }}">
+                                <input type="hidden" name="gst_liability" value="{{ gst_liability }}">
+                                <input type="hidden" name="to_be_billed_to" value="{{ customer.id }}">
+                                <input type="text" name="to_be_billed_to_name" id="to_be_billed_to"
+                                       value="{{ customer.get_name }}"
+                                       class="form-control" required="required" readonly>
+                            </div>
+                            <div class="item form-group col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label " for="billing_address"><span
+                                        class="required">Address *</span>
+                                </label>
+                                <input type="text" class="form-control" name="billing_address"
+                                       id="billing_address"
+                                       value="{{ customer.customer_address|default_if_none:'' }}"
+                                       required="required">
+                            </div>
+
+                            <div class="item form-group col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label " for="beneficiary_code">PIN Code
+                                </label>
+                                <input type="text" id="pin_code" name="pin_code" class="form-control"
+                                       value="{{ customer.pin|default_if_none:'' }}">
+                            </div>
+                            <div class="item form-group col-md-4 col-sm-4 col-xs-12">
+                                <label class="control-label " for="party_invoice_date">Invoice Date
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" class="date-picker form-control" id="party_invoice_date"
+                                       name="party_invoice_date" required placeholder="Select Date" readonly
+                                       style="background-color: white">
+                            </div>
+
+                            <div class="item form-group col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                <div class="item form-group">
+                                    <label>Advance Amount</label>
+                                    <input type="number" class="form-control" name="advance_from_company"
+                                           id="advance_from_company" placeholder="Amount" value="0" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <div class="item form-group">
+                                    <label>City</label>
+                                    <select class="city form-control"
+                                            name="invoice_city">
+                                        <option></option>
+                                        {% if customer.city %}
+                                            <option value="{{ customer.city.id }}"
+                                                    selected>{{ customer.city.name }}</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Shipment Date</th>
+                                        <th>Booking ID</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Source</th>
+                                        <th>Destination</th>
+                                        <th>Rate</th>
+                                        <th>Weight</th>
+                                        <th>Freight</th>
+
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for value in booking_data|slice:':-1' %}
+                                        <tr>
+                                            <td>{{ value.date }}</td>
+                                            <td>{{ value.booking_id }}</td>
+                                            <td>{{ value.lorry_number }}</td>
+                                            <td>{{ value.from_city }}</td>
+                                            <td>{{ value.to_city }}</td>
+                                            <td>{{ value.party_rate }}</td>
+                                            <td>{{ value.charged_weight }}</td>
+                                            <td>{{ value.freight }}{{ value.note_symbol }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for value in booking_data|slice:'-1:' %}
+                                        <tr>
+                                            <td colspan="6" align="center"><b>Total</b></td>
+                                            <td>{{ value.charged_weight }}</td>
+                                            <td>{{ value.freight }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                {% for comment_row in comment_list %}
+                                    <div class="charges_remark">{{ comment_row.note_symbol }} {{ comment_row.comment }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6 col-xs-12">
+                                <div class="total_amount">Total Amount:
+                                    Rs. {{ invoice_amount_data.total_amount|floatformat:2 }}</div>
+
+                                {% if invoice_amount_data.is_gst_started and invoice_amount_data.gst_liability == 'carrier' %}
+                                    <div class="total_amount">GST
+                                        (@ {{ invoice_amount_data.service_tax_rate|floatformat:1 }}%): Rs.
+                                        {{ invoice_amount_data.service_tax|floatformat:2 }}</div>
+                                    <div class="total_amount">Total Amount including GST:
+                                        Rs. {{ invoice_amount_data.total_amount_with_stax|floatformat:2 }}</div>
+                                {% elif invoice_amount_data.gst_liability == 'carrier' %}
+                                    <div class="total_amount ">S.Tax
+                                        (@ {{ invoice_amount_data.service_tax_rate|floatformat:1 }}%): Rs.
+                                        {{ invoice_amount_data.service_tax|floatformat:2 }}</div>
+                                    <div class="total_amount ">Total Amount including S.Tax:
+                                        Rs. {{ invoice_amount_data.total_amount_with_stax|floatformat:2 }}</div>
+                                {% endif %}
+
+                                {% if invoice_amount_data.advance_amount > 0 %}
+                                    <div class="total_amount ">Advance Amount:
+                                        Rs. {{ invoice_amount_data.advance_amount|floatformat:2 }}</div>
+                                    <div class="total_amount">Balance Amount:
+                                        Rs. {{ invoice_amount_data.balance_amount|floatformat:2 }}</div>
+                                {% endif %}
+
+                            </div>
+
+                            {% if invoice_amount_data.gst_liability_remarks %}
+                                <div class="remark col-md-12 col-xs-12 col-sm-12 col-lg-12">{{ invoice_amount_data.gst_liability_remarks }}
+                                </div>
+                            {% endif %}
+                            <div class="ln_solid col-md-12 col-xs-12 col-sm-12 col-lg-12"></div>
+
+                            <div class="pull-right">
+                                <button id="btn-multi-commission-booking-invoice" type="submit"
+                                        class="btn btn-success btn-lg"> Generate
+                                    Invoice
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('form').parsley('validate');
+        });
+    </script>
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script>
+        function checkGST() {
+            var isGST = false;
+            {% for booking in booking_data %}
+                {% if booking.shipment_date|date:'Y-m-d' < '2017-07-01' %}
+                    isGST = true;
+                {% endif %}
+            {% endfor %}
+            return isGST;
+        }
+        $('#party_invoice_date').datepicker({
+            format: "dd-M-yyyy",
+            todayBtn: "linked",
+            autoclose: true,
+            todayHighlight: true
+        });
+        $(".city").select2({
+            placeholder: "Select City",
+            ajax: {
+                url: '/api/utils-city-list/',
+                headers: {"Authorization": localStorage.getItem('token')},
+                delay: 250,
+                data: function (params) {
+                    return {
+                        search: params.term
+                    };
+                },
+                processResults: function (data) {
+                    var cityArray = [];
+                    $.each(data.data, function (key, value) {
+                        cityArray.push({id: value.id, text: value.name + ',' + value.code + ',' + value.state.name})
+                    });
+                    return {results: cityArray};
+                },
+                error: function (jqXHR, status, error) {
+                    if (jqXHR.status === "401") {
+                        redirectToLogin(error);
+                    }
+                }
+            },
+            allowClear: true
+        }).change(function () {
+            $(this).parsley().validate();
+        });
+        $('#btn-multi-commission-booking-invoice').click(function (e) {
+            var invoice_multiple_commission_booking_form = $('#multi-commission-booking-invoice-form');
+            if (!invoice_multiple_commission_booking_form.parsley().isValid()) {
+                return true;
+            }
+            e.preventDefault();
+            NProgress.start();
+            var data = invoice_multiple_commission_booking_form.find(':input').filter(function () {
+                return $.trim(this.value).length > 0
+            }).serializeJSON();
+            $.ajax({
+                url: "/api/invoice-multiple-commission-booking/",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+                }
+            }).done(function (response, status) {
+                $.notify(response['msg'], {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                setTimeout(function () {
+                    getAjaxCallFunction('/page/fetch-commission-booking-invoie/');
+                }, 3000);
+                NProgress.done();
+
+            }).fail(function (jqXHR, status) {
+                $.notify('Failed', {
+                    position: "top center",
+                    autoHideDelay: 1000,
+                    clickToHide: true,
+                    className: 'error'
+                });
+                NProgress.done();
+            });
+            return false;
+        });
+    </script>
+{% endblock %}

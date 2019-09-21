@@ -1,0 +1,156 @@
+{% load staticfiles %}
+{% load team_tags.validators_tags %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTop">Register Driver</h3>
+{% endblock %}
+{% block content %}
+    <form class="form-horizontal form-label-left" id="register-driver-form"
+          data-parsley-trigger="input">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="driver_name" class="control-label"> Name<span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-control" data-parsley-length="[3, 50]"
+                                   name="driver_name" id="driver_name" placeholder="Enter Driver Name"
+                                   required="required" autocomplete="off">
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="dl_number" class="control-label"> DL Number </label>
+                            <input type="text" class="form-control" data-parsley-length="[3, 50]"
+                                   name="dl_number" id="dl_number" placeholder="Enter DL Number"
+                                   autocomplete="off">
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="dl_validity" class="control-label"> DL Validity
+                            </label>
+                            <input type="text" class="form-control" data-parsley-length="[3, 50]"
+                                   name="dl_validity" id="dl_validity" readonly style="background-color: white" placeholder="Select DL Validity"
+                                   autocomplete="off">
+                        </div>
+                                                <div class="item form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="route" class="control-label"> Route
+                            </label>
+                            <input type="text" class="form-control" data-parsley-length="[3, 50]"
+                                   name="driver_route" id="route" placeholder="Enter Driver's Route"
+                                   autocomplete="off">
+                        </div>
+                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                            <label for="city" class="control-label">DL City</label>
+                            <select class="city form-control" name="dl_city" id="city">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div id="InputsWrapper">
+                            <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">
+                                <label for="person_email" class="control-label">Phone<span
+                                        class="required">*</span></label>
+                                <div class="input-group">
+                                    <input type="text" class="validate_data form-control" autocomplete="off"
+                                           name="driver_phone[][phone]" id="phone-0" data-parsley-minlength="10"
+                                           data-parsley-maxlength="10" placeholder="Enter Driver's Mobile Number"
+                                           data-parsley-type="digits" required>
+                                    <span
+                                            class="input-group-btn" id="AddMoreFileId">
+                                         <button class="AddMoreFileBox btn btn-success" type="button"
+                                                 id="AddMoreFileBox"> <span
+                                                 class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+                                          </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-lg btn-danger">Reset Entry</button>
+                            <button id="btn-register-driver" class="btn btn-lg btn-success">Register
+                                Driver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/moment/js/moment.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+
+            var MaxInputs = 2; //maximum extra input boxes allowed
+            var InputsWrapper = $("#InputsWrapper"); //Input boxes wrapper ID
+            var AddButton = $("#AddMoreFileBox"); //Add button ID
+
+            var x = InputsWrapper.length; //initlal text box count
+            var FieldCount = 1; //to keep track of text box added
+
+//on add input button click
+            $(AddButton).click(function (e) {
+                //max input box allowed
+                if (x <= MaxInputs) {
+                    FieldCount++; //text box added ncrement
+                    //add input box
+                    $(InputsWrapper).append('<div id="remove-div-' + x + '">' +
+                        '                        <div class="item form-group col-md-4 col-sm-4 col-lg-4 col-xs-12">\n' +
+                        '                            <label for="person_email" class="control-label">Alternate Phone</label>\n' +
+                        '\n' +
+                        '                            <div class="input-group">\n' +
+                        '                                <input type="text" class="validate_data form-control" autocomplete="off"\n' +
+                        '                                       name="driver_phone[][phone]" id="phone-0" data-parsley-minlength="10" data-parsley-maxlength="10" id="phone-' + x + '"\n' +
+                        '                                       placeholder="Enter Driver\'s Alternate Mobile Number" data-parsley-type="digits" required> <span\n' +
+                        '                                    class="input-group-btn">\n' +
+                        '                                         <button class="removeclass btn btn-danger" type="button"> <span\n' +
+                        '                                                 class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>\n' +
+                        '                                          </span>\n' +
+                        '                            </div>\n' +
+                        '                        </div></div>');
+                    x++; //text box increment
+
+                    $("#AddMoreFileId").show();
+
+                    {#$('AddMoreFileBox').html("Add field");#}
+                }
+                return false;
+            });
+
+            $("body").on("click", ".removeclass", function (e) { //user click on remove text
+                if (x > 1) {
+
+                    x--; //decrement textbox
+                    $('#remove-div-' + x).remove(); //remove text box
+
+
+                    $("#AddMoreFileId").show();
+                }
+                return false;
+            })
+
+        });
+    </script>
+
+    <script src="{% static "aaho/js/team/common-new.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/supplier/driver.js" %}" type="text/javascript"></script>
+
+{% endblock %}

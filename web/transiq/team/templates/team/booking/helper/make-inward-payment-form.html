@@ -1,0 +1,94 @@
+{% load staticfiles %}
+{% load user_tags %}
+{% load helper_tags_team %}
+{% load team_tags.validators_tags %}
+<div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="invoice_number">Invoice Number(s)
+    </label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <input type="hidden" name="booking_id[]"
+               value="{{ id }}">
+        <input type="text" id="invoice_number" name="invoice_number" class="form-control col-md-7 col-xs-12"
+               data-parsley-minlength="3" data-parsley-maxlength="20" value="{% get_invoice_number_for_inward id %}">
+    </div>
+</div>
+
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="received_from"><span class="required">Received From *</span>
+    </label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <input type="text" id="received_from" class="form-control col-md-7 col-xs-12" name="received_from"
+               data-parsley-minlength="3" data-parsley-maxlength="200" value="{{ to_be_billed_to }}" required>
+    </div>
+</div>
+
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="actual_amount"><span class="required">Amount *</span>
+    </label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <input type="number" id="actual_amount" name="actual_amount" data-parsley-type="digits"
+               class="form-control col-md-7 col-xs-12" data-parsley-max="1000000" required>
+    </div>
+</div>
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+           for="inward_tds_amount"><span class="required">TDS Amount *</span>
+    </label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <input type="number" id="inward_tds_amount" name="tds" required data-parsley-min="0"
+               data-parsley-max="999999" data-parsley-type="digits" class="form-control">
+    </div>
+</div>
+<div class=" item form-group">
+    <label for="inward_payment_mode" class="control-label col-md-3 col-sm-3 col-xs-12">
+        <span class="required">Payment Mode *</span></label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <select class="inward_payment_mode form-control" name="payment_mode" id="inward_payment_mode" required
+                style="width: 100%;">
+            <option></option>
+            <option value="cash">Cash</option>
+        </select>
+    </div>
+</div>
+<div class="cheque_number_area item form-group">
+    <label for="cheque_number" class="control-label col-md-3 col-sm-3 col-xs-12">Cheque Number <span
+            class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <input data-parsley-type="digits" id="cheque_number" name="trn" class="form-control col-md-7 col-xs-12"
+               data-parsley-length="[6, 8]">
+    </div>
+</div>
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+        <span class="required">Date Of Payment *</span>
+    </label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <input id="inward_payment_date" name="payment_date" class="date-picker form-control col-md-7 col-xs-12"
+               placeholder="Pick Date of Payment" required="required" type="text" style="background-color: white"
+               readonly>
+    </div>
+</div>
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">
+        <span class="required">Remarks *</span>
+    </label>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <textarea id="textarea" required name="remarks" placeholder="Please provide explanations"
+                  data-parsley-minlength="3" data-parsley-maxlength="255"
+                  class="form-control col-md-7 col-xs-12"></textarea>
+    </div>
+</div>
+<div class="modal-footer">
+    {% if not  is_invoice_btn_enabled %}
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="full-booking-inward-submit" class="btn btn-primary">Make Payment</button>
+    {% else %}
+        <h4 style="color: red">**Invoice is not yet raised</h4>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="full-booking-inward-submit" class="btn btn-primary" disabled>Make Payment</button>
+    {% endif %}
+</div>

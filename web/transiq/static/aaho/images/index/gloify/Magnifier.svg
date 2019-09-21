@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="112px" height="72px" viewBox="0 0 112 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Magnifier</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-228.000000, -166.000000)">
+        <g id="Magnifier" transform="translate(230.000000, 168.000000)">
+            <rect id="Rectangle" stroke="#FFFFFF" stroke-width="3" x="0" y="0" width="67.2509434" height="68"></rect>
+            <g id="magnifier-tool" transform="translate(22.416981, 22.666667)" fill="#FFFFFF" fill-rule="nonzero">
+                <path d="M17.3222127,8.75767202 C17.3222127,3.92137513 13.4442453,0 8.66115395,0 C3.87815776,0 0,3.92137513 0,8.75767202 C0,13.5939689 3.87815776,17.5151515 8.66115395,17.5151515 C13.4442453,17.5151515 17.3222127,13.5939689 17.3222127,8.75767202 Z M8.66115395,15.3256733 C5.07911907,15.3256733 2.16534799,12.3796725 2.16534799,8.75772015 C2.16534799,5.13576783 5.07911907,2.1895263 8.66115395,2.1895263 C12.2430936,2.1895263 15.1571027,5.13576783 15.1571027,8.75772015 C15.1571027,12.3796725 12.2430936,15.3256733 8.66115395,15.3256733 Z" id="Shape"></path>
+                <path d="M22.7891104,19.8868642 L17.38721,14.4242424 C16.5823236,15.6899922 15.5171328,16.7665297 14.2653516,17.5804468 L19.6676889,23.0430685 C20.5301295,23.9149368 21.9284654,23.9149368 22.7890619,23.0430685 C23.651551,22.1726232 23.651551,20.7586834 22.7891104,19.8868642 Z" id="Shape"></path>
+            </g>
+            <path d="M67.891295,33.5454545 L107.630489,33.5454545" id="Line" stroke="#FFFFFF" stroke-width="3" stroke-linecap="square"></path>
+        </g>
+    </g>
+</svg>

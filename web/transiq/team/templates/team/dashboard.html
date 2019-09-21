@@ -1,0 +1,320 @@
+{% extends "team/base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'aaho/css/restapi/task_dashboard.css' %}"/>
+{% endblock %}
+{% block pageTitle %}
+    <h3 class="titleTopDashboard">Task Dashboard</h3>
+{% endblock %}
+{% block content %}
+<!-- page content -->
+<div class="right_col" role="main">
+{#    <div class="page-title">#}
+        <div class="title_left">
+{#            <h5>#}
+                <!-- <ul id="dashboard_tabs" class="nav nav-tabs" ></ul> -->
+                <div class="wrapper" id="dashboard_tabs">
+                               
+                    </div>
+{#            </h5>#}
+        </div>
+        <div id="dashboardPages">
+
+        </div>
+{#    </div>#}
+</div>
+<style>
+    .size{
+        height: auto;
+        overflow: '-webkit-paged-y';
+       }
+       .nav_menu {
+        margin-bottom: 0px !important;
+}
+.badge{
+    color:white !important;
+    background-color: red !important;
+    margin-left: 3px;
+    margin-top: -2px;
+    padding: 2px 7px;
+}
+.comingSoonContent{
+    font-size: 22px;
+    text-align: center;
+}
+#dashboard_tabs.nav-tabs>li>a {
+    margin-right: 0px !important;
+
+}
+ .titleTopDashboard {
+    margin-top: 15px;
+    position: absolute;
+    margin-left: 50px;
+}
+.nav-tabs {
+    border-bottom: none;
+}
+    </style>
+{% endblock %}
+{% block js %}
+<script src="{% static  'aaho/js/restapi/dashboard.js' %}" type="text/javascript"></script>
+<script src="{% static "vendor/react/js/react.min.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/react/js/react-dom.min.js" %}" type="text/javascript"></script>
+<script src="{% static "vendor/babel/js/babel.min.js" %}" type="text/javascript"></script>
+<script src="{% static  'aaho/js/restapi/ConfirmBookingComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/GenerateLRComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/PayAdvanceComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/VerifyPodComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/PayBalanceComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/RaiseInvoiceComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/ProcessPaymentComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/ReconcileComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/InwardEntryComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/SendInvoiceComponent.js' %}" type="text/babel"></script>
+<script src="{% static  'aaho/js/restapi/FileUploadComponent.js' %}" type="text/babel"></script>
+
+<script>
+    $(window).bind("load", function () {
+        //create tab html according to user functionality
+            var employee_functionalities = null;
+            var initial_tab = null;
+            employee_functionalities = get_employee_all_functionalities();
+            if(employee_functionalities.length > 0){
+                initial_tab = employee_functionalities[0].td_functionality.functionality;
+            }
+            var firstFunctionality = null;
+            setTimeout(function () {
+            for (var i = 0; i < employee_functionalities.length; i++) {
+                var obj = employee_functionalities[i];
+                firstFunctionality = obj.td_functionality.functionality;
+                var tab_html = '<div class="nav-item" id="functionality_tab">\n <a ';
+                if (i === 0)
+                    tab_html += ' active ';
+                if (obj.td_functionality.functionality === 'confirm_booking') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/confirm-new-booking/">';
+                    tab_html += obj.caption;
+                    tab_html += '</a>\n</div>';
+                }
+                else if (obj.td_functionality.functionality === 'lr_generation') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/generate-lr-page/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'pay_advance') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/bookings-pay-advance-page/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'verify_pod') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/bookings-verify-pod-page/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'pay_balance') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/pay-balance-booking-history/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'raise_invoice') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/raise-invoice-booking-history/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'process_payments') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/process-payment-enet/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'reconcile') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/reconcile-payment/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'inward_entry') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/pending-inward-list/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: text-top; font-size: smaller;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'send_invoice') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/upload-invoice-send-receipt/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: initial;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: initial;"></span></a>\n</div>';
+                    }
+                }
+                else if (obj.td_functionality.functionality === 'confirm_invoice') {
+                    tab_html += 'class="nav-link getDashboardAjaxPage" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="/page/confirm-invoice-sent-receipt/">';
+                    tab_html += obj.caption;
+                    if (obj.current_functionality_count > 0) {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: initial;">' + obj.current_functionality_count + '</span></a>\n</div>';
+                    }
+                    else {
+                        tab_html += '<span id="' + obj.td_functionality.functionality + '_badge" class="badge" style="vertical-align: initial;"></span></a>\n</div>';
+                    }
+                }
+                else {
+                    tab_html += 'class="nav-link comingSoonPages" id="' + obj.td_functionality.functionality + '" href="javascript:;" data-functionality="' + obj.td_functionality.functionality + '" data-url="">';
+                    tab_html += obj.caption;
+                    tab_html += '</a>\n</div>';
+                }
+                $('#dashboard_tabs').append(tab_html);
+            }
+            if ($("#confirm_booking").html() != undefined) {
+                    var functionalityName = localStorage.getItem("functionalityName");
+                    window.localStorage.removeItem("functionalityName");
+                    if (functionalityName == "inward_entry") {
+                        $("#inward_entry").trigger("click");
+                        $('#inward_entry').parent().addClass('active');
+                    }
+                    else {
+                        dashboardAjaxPageCall('/page/confirm-new-booking/', 'confirm_booking');
+                        $('#confirm_booking').parent().addClass('active');
+                    }
+                }
+            else {
+                {#if (firstFunctionality != null || firstFunctionality != undefined) {#}
+                {#    var functionalityName = localStorage.getItem("functionalityName");#}
+                {#    window.localStorage.removeItem("functionalityName");#}
+                {#    if (functionalityName == "inward_entry") {#}
+                {#        $("#inward_entry").trigger("click");#}
+                {#        $('#inward_entry').parent().addClass('active');#}
+                {#    }  #}
+                {#    else{#}
+                {#        comingSoonContent('Coming soon...');#}
+                {#        $("#" + firstFunctionality).parent().addClass('active').siblings().removeClass('active');#}
+                {#    }#}
+                {#   #}
+                {# }#}
+                if(initial_tab){
+                    var functionalityName = localStorage.getItem("functionalityName");
+                    window.localStorage.removeItem("functionalityName");
+                    $("#"+initial_tab).trigger("click");
+                    $('#'+initial_tab).parent().addClass('active');
+                }
+                else {
+                    comingSoonContent('No functionality assigned...');
+                }
+            }
+             },100);
+        });
+    function comingSoonContent(comingSoonContent) {
+        var htmlStr = "<div class='x_panel'>";
+        htmlStr += "<div class='x_content'>";
+        htmlStr += "<div class='panel-body'>";
+        htmlStr += "<div class='row'>";
+        htmlStr += "<div class='comingSoonContent'>" + comingSoonContent + "</div>";
+        htmlStr += "</div>";
+        htmlStr += "</div>";
+        htmlStr += "</div>";
+        htmlStr += "</div>";
+        $("#dashboardPages").html(htmlStr);
+    }
+    $(document).off('click', '.comingSoonPages').on('click', '.comingSoonPages', function (e) {
+        comingSoonContent('Coming soon...');
+        $(this).parent().addClass('active').siblings().removeClass('active');
+    });
+    $(document).off('click', '.getDashboardAjaxPage').on('click', '.getDashboardAjaxPage', function (e) {
+        var url = $(this).attr('data-url');
+        var functionality = $(this).attr('data-functionality');
+        $(this).parent().addClass('active').siblings().removeClass('active');
+        dashboardAjaxPageCall(url,functionality);
+    });
+    //get page data and pass to react component
+    function dashboardAjaxPageCall(url,functionality) {
+        $('#dashboardPages').html('');
+        var dataType = 'html';
+        NProgress.start();
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: dataType,
+            headers: { "Authorization": localStorage.getItem('token') },
+            contentType: 'application/json',
+        }).done(function (response, status, request) {
+            NProgress.done();
+            if(functionality === 'lr_generation'){
+                ReactDOM.render(React.createElement(GenerateLRComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'pay_advance'){
+                ReactDOM.render(React.createElement(PayAdvanceComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'verify_pod'){
+                ReactDOM.render(React.createElement(VerifyPodComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'pay_balance'){
+                ReactDOM.render(React.createElement(PayBalanceComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'raise_invoice'){
+                ReactDOM.render(React.createElement(RaiseInvoiceComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'process_payments'){
+                ReactDOM.render(React.createElement(ProcessPaymentComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'reconcile'){
+                ReactDOM.render(React.createElement(ReconcileComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'inward_entry'){
+                ReactDOM.render(React.createElement(InwardEntryComponent, { context: $('#dashboard_tabs'), html_string: response}), document.getElementById('dashboardPages'));
+            }
+            else if(functionality === 'send_invoice'){
+               $("#dashboardPages").html(response);
+            }
+            else if(functionality === 'confirm_invoice'){
+               $("#dashboardPages").html(response);
+            }
+            else{
+                ReactDOM.render(React.createElement(ConfirmBookingComponent, { context: $('#dashboard_tabs'), html_string: response }), document.getElementById('dashboardPages'));
+            }
+        }).fail(function (jqXHR, status,error) {
+            if(jqXHR.status == "401"){
+                redirectToLogin(error);
+              }
+            $('#error-response').text(JSON.parse(jqXHR.responseText)['msg']);
+            NProgress.done();
+        });
+    }
+</script>
+{% endblock %}

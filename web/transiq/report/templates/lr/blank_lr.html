@@ -1,0 +1,301 @@
+        <div class="outer_border">
+
+            <div class="relative">
+                <span class="pay_msg">
+                    {% if billing_type == 'Paid' %}
+                        Paid
+                    {% elif billing_type == 'T.B.B.' %}
+                        TBB
+                    {% elif billing_type == 'To Pay' %}
+                        To Pay
+                    {% endif %}
+                </span>
+            </div>
+            <div class="content_container">
+                <div class="left_side">
+                    <div class="header">
+                        <div class="title_container">
+                            <img class="logo_img" width="50px" height="50px" src="{{ transiq.logo_data }}" alt="logo.png">
+                            <h1 class="title">{{ transiq.name }}</h1>
+                        </div>
+                        <div class="left_header">
+                            <div class="header_address">
+                                {{ office_address }}
+                            </div>
+                            <div class="header_phone">
+                                Phone: {{ office_phone }}
+                            </div>
+                            <div class="tax_details">
+                               PAN: {{ transiq.pan }}<br />CIN: {{ transiq.cin }}
+                            </div>
+                        </div>
+                        <div class="right_header">
+                            <div class="mumbai_jud">Subject To {{ transiq.jurisdiction_city }} Jurisdiction Only</div>
+                            <div class="consignor_copy">{{ copy_for|upper }} COPY</div>
+                            <div class="owner_risk">AT OWNER'S RISK</div>
+                            <div class="notice">
+                                <div class="notice_title">NOTICE</div>
+                                <div class="notice_content">
+                                    The consignment covered by this set of Special Lorry Receipt Forms shall be stored at the
+                                    destination under the control of Transport Operator and shall be delivered to or to the
+                                    order of the Consignee Bank whose name is mentioned in the Lorry Receipt. It will under no
+                                    circumstance be delivered to anyone without the written authority from the Consignee Bank or
+                                    its order, endorsed on the Consignee copy or on a separate Letter of Authority.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <table class="consignor_table">
+                            <tr>
+                                <th>CONSIGNOR'S NAME & ADDRESS</th>
+                                <th>CONSIGNEE'S NAME & ADDRESS</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form_row">
+                                        <div class="underline"></div>
+                                    </div>
+                                    <div class="address">
+                                        <span></span>
+                                        <div class="form_row">
+                                            <div class="underline"></div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="underline"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form_row">
+                                        <div class="left_form_side">
+                                            <span>CITY</span>
+                                            <div class="span-underline"></div>
+                                        </div>
+                                        <div class="right_form_side">
+                                            <span>PIN</span>
+                                            <div class="span-underline"></div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form_row">
+                                        <span>TEL. NO.</span>
+                                        <div class="span-underline"></div>
+                                    </div>
+                                    <div class="form_row">
+                                        <span>GSTIN</span>
+                                        <div class="span-underline"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form_row">
+                                        <div class="underline"></div>
+                                    </div>
+                                    <div class="address">
+                                        <span></span>
+                                        <div class="form_row">
+                                            <div class="underline"></div>
+                                        </div>
+                                        <div class="form_row">
+                                            <div class="underline"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form_row">
+                                        <div class="left_form_side">
+                                            <span>CITY</span>
+                                            <div class="span-underline"></div>
+                                        </div>
+                                        <div class="right_form_side">
+                                            <span>PIN</span>
+                                            <div class="span-underline"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form_row">
+                                        <span>TEL. NO.</span>
+                                        <div class="span-underline"></div>
+                                    </div>
+                                    <div class="form_row">
+                                        <span>GSTIN</span>
+                                        <div class="span-underline"></div>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                    <div class="table">
+                        <div class="complex_table">
+                            <div class="header_row">
+                                <div class="data_pkgs">PKGS.</div>
+                                <div class="data_desc">DESCRIPTION<br />(SAID TO CONTAIN)</div>
+                                <div class="data_weight">
+                                    <div class="top">WEIGHT</div>
+                                    <div class="bottom-left">Actual</div>
+                                    <div class="bottom-right">Charged</div>
+                                </div>
+                                <div class="data_rate">RATE<br />Kg / Cft / M.T.</div>
+                                <div class="data_charges">CHARGES</div>
+                                <div class="data_tp">TO-PAY/TBB/PAID<br />Rupees</div>
+                            </div>
+                            <div class="body_row">
+                                <div class="data_pkgs"></div>
+                                <div class="data_desc"></div>
+
+                                <div class="data_weight">
+                                    <div class="bottom-left"></div>
+                                    <div class="bottom-right"></div>
+                                </div>
+                                <div class="data_rate"></div>
+                                <div class="data_charges">
+                                    <div class="cell">Freight</div>
+                                    <div class="cell">Loading</div>
+                                    <div class="cell">Unloading</div>
+                                    <div class="cell">LR Charge</div>
+                                    <div class="cell">GST</div>
+                                    <div class="cell">Others</div>
+                                    <div class="top_border">TOTAL</div>
+                                </div>
+                                <div class="data_tp">
+                                    <div class="cell"></div>
+                                    <div class="top_border"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="left_col">
+                            <div class="insurance">
+                                <div class="insurance_title">INSURANCE</div>
+                                <div class="insurance_dec">The Customer has stated that:</div>
+                                <div><b>{% if insured == 'insured' %}&#9744;{% else %}&#9744;{% endif %}</b> They have not insured the consignment</div>
+
+                                <div><b>{% if insured == 'insured' %}&#9744;{% else %}&#9744;{% endif %}</b> They have insured the consignment</div>
+                                <div class="form_row_ins">
+                                    <span class="span-underline-ins-full">Company</span>
+                                    <div class="span-underline-ins-full"></div>
+                                </div>
+                                <div class="form_row_ins">
+                                    <div class="left_form_side_ins">
+                                        <span class="span-underline-ins">Policy No.</span>
+                                        <div class="span-underline-ins"></div>
+                                    </div>
+                                    <div class="right_form_side_ins">
+                                        <span class="span-underline-ins">Date</span>
+                                        <div class="span-underline-ins"></div>
+                                    </div>
+                                </div>
+                                <div class="form_row_ins">
+                                    <div class="left_form_side_ins">
+                                        <span class="span-underline-ins">Amount</span>
+                                        <div class="span-underline-ins"></div>
+                                    </div>
+                                    <div class="right_form_side_ins">
+                                        <span class="span-underline-ins">Risk</span>
+                                        <div class="span-underline-ins"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right_col">
+                            <table class="pod_table">
+                                <tr>
+                                    <th>PROOF OF DELIVERY</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Reporting Date & Time</p>
+                                        <div class="underline_short"></div>
+                                        <p>Unloading Date & Time</p>
+                                        <div class="receiver_sign">
+                                            <div class="underline_short"></div>
+                                            <span class="receiver_sign">Receiver's Sign. with Stamp</span>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="bottom_text">
+                        <div>1. This is an electronically generated LR and does not require a signature. Please read Terms & Conditions overleaf.</div>
+                        <div>2. POD to be submitted within 10 days of delivery, after which Rs. 50 per day will be deducted.</div>
+                    </div>
+                </div>
+                <div class="right_side">
+                    <table class="details">
+                        <tr>
+                            <td><span>BRANCH</span><span class="values">{{ branch }}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="office">
+                                <div>DELIVERY OFFICE</div>
+                                <div class="leave_space">{{ delivery_office }}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="title">CONSIGNMENT NOTE</div>
+                                <div class="wider"><span>No.</span><span class="values"></span></div>
+                                <div class="wider"><span>Dated</span><span class="values"></span></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="info_box">
+                        <div><span>From:</span><span class="values"></span></div>
+                    </div>
+
+                    <div class="info_box">
+                        <div><span>To:</span><span class="values"></span></div>
+                    </div>
+
+                    <div class="info_box">
+                        <div><span>Lorry No.:</span><span class="values"></span></div>
+                    </div>
+
+                    <div class="info_box">
+                        <div><span>Driver Mobile No.:</span><span class="values"></span></div>
+                    </div>
+
+                    <div class="info_box">
+                        <div><span>DL No.:</span><span class="values"></span></div>
+                    </div>
+
+                    <div class="info_box">
+                        <div>Party Invoice No.:</div>
+                        <div class="leave_space"><span class="values"></span></div>
+                        <div class="wider"><span>Date:</span><span class="values"></span></div>
+                        <div class="wider"><span>Value:</span><span class="values"></span></div>
+                    </div>
+
+                    <div class="info_box">
+                        <div>Road Permit No.:</div>
+                        <div class="leave_space"><span class="values"></span></div>
+                    </div>
+
+                    <table class="tax_lia">
+                        <tr>
+                            <th colspan=2>LIABILITY OF GST</th>
+                        </tr>
+                        <tr>
+                            <td><b>{% if gst_liability == 'consignor' %}&#9744;{% else %}&#9744;{% endif %}</b> Consignor</td>
+                            <td><b>{% if gst_liability == 'consignee' %}&#9744;{% else %}&#9744;{% endif %}</b> Consignee</td>
+                        </tr>
+                        <tr>
+                            <td><b>{% if gst_liability == 'carrier' %}&#9744;{% else %}&#9744;{% endif %}</b> Carrier</td>
+                            <td><b>{% if gst_liability == 'exempted' %}&#9744;{% else %}&#9744;{% endif %}</b> Exempted</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="payment_note">
+                {% if is_print_payment_mode_instruction %}
+                <div>PLEASE ISSUE CHEQUE/NEFT IN FAVOUR OF "TRANS IQ TECHNOLOGIES PVT LTD" ONLY (no other mode of payment)</div>
+                {% endif %}
+            </div>
+
+        </div>

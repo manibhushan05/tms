@@ -1,0 +1,78 @@
+{% extends "mobile/base.html" %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/css/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{#{% block pageTitle %}#}
+{#    <h3 class="titleTopDashboard">Task Dashboard</h3>#}
+{#{% endblock %}#}
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/page/outward-payment-page/" class="btn btn-lg btn-primary dash-div getAjaxPage"
+                                   role="button">Outward Payment</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/upload/upload-cheque-document-page/" class="btn btn-lg btn-warning dash-div getAjaxPage"
+                                   role="button">Upload Cheque</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/page/register-driver-page/" class="btn btn-lg btn-info dash-div getAjaxPage" role="button">Register
+                                    Driver</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/page/fetch-ifsc/" class="btn btn-lg btn-success dash-div getAjaxPage"
+                                   role="button">Register Bank Account</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/page/pod-upload-page/" class="btn btn-lg btn-warning dash-div getAjaxPage" role="button">POD
+                                    Upload</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/upload/upload-vehicle-document-page/" class="btn btn-lg btn-primary dash-div getAjaxPage"
+                                   role="button">Vehicle Docs</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/upload/upload-driver-document-page/" class="btn btn-lg btn-info dash-div getAjaxPage"
+                                   role="button">Driver Docs</a>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a href="javascript:;" data-url="/upload/upload-owner-document-page/" class="btn btn-lg btn-success dash-div getAjaxPage"
+                                   role="button">Owner Docs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .btn {
+            width: 100%;
+        }
+
+        .dash-div {
+            margin-bottom: 5rem;
+        }
+     .titleTopDashboard {
+    margin-top: 15px;
+    position: absolute;
+    margin-left: 50px;
+}
+    </style>
+{% endblock %}
+{% block js %}
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/datepicker/js/bootstrap-datepicker.min.js" %}"
+            type="text/javascript"></script>
+{% endblock %}

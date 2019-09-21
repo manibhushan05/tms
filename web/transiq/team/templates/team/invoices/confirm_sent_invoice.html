@@ -1,0 +1,364 @@
+{% load fileupload.upload_tags %}
+{% load user_tags %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'vendor/datepicker/css/bootstrap-datepicker.min.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- The file upload form used as target for the file upload widget -->
+        {% if data|length  %}
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                <h5></h5>
+        </div>
+        {% for row in data %}
+        <div class="clearfix rowUpload_{{row.id}}"></div>
+        <div class="row rowUpload_{{row.id}}">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                        <div class="x_title">
+                                <div class="col-md-1 col-sm-1 col-lg-1 col-xs-12">
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up" id="toggleChevron_ah1906259"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-11 col-sm-11 col-lg-11 col-xs-12">
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <h5>Invoice No: {{row.invoice_number}}</h5>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <h5>Customer: {{row.company_name}}</h5>
+                                    </div>
+                                    <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <h5>Date: {{row.date}}</h5>
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <h5>Created By: {{row.created_by}}</h5>
+                                        </div>
+                                        </div>
+                            </div>
+
+                    <div class="x_content" style="display:none;">
+                        <form id="fileupload_{{row.id}}" method="post" action="/upload/invoice-receipt-docs-create/" data-parsley-validate data-parsley-trigger="keyup"
+                               enctype="multipart/form-data">
+                            <input type="hidden" name="Authorization" class="authorization">
+                            <input type="hidden" name="invoice_number" value="{{row.invoice_number}}">
+                                <div class="col-md-12 col-sm-12 col-xs-12"></div>
+                                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="form-group">
+                                                <h5>Confirmed By:</h5>
+                                            </div>
+                                            <h6 class="confirmModeError" style="display:none;">This value is required...</h6>
+                                    <label>
+                                        
+                                        <input type="radio" class="delivery_mode" name="invoice_confirm_mode" value="PH"
+                                                required>
+                                        Phone <br/> 
+                                        <div class="phoneFields" style="display:none;">
+                                        <span > 
+                                            Name* <input type="text" class="form-control phoneName" name="invoice_confirm_by_name" placeholder="Name" />
+                                        </span>
+                                        <span > 
+                                            No* <input type="number" class="form-control phoneNumber" name="invoice_confirm_by_phone"
+                                            maxlength="10" data-parsley-minlength="10" data-parsley-maxlength="10" 
+                                           placeholder="Phone Number">
+                                        </span>
+                                    </div>
+                                        
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" class="delivery_mode" name="invoice_confirm_mode" value="WA"
+                                                required>
+                                        Written Acknowledgement (Upload Scan)
+                                    </label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" class="delivery_mode" name="invoice_confirm_mode" value="EM"
+                                                required>
+                                        Email (Upload Screenshot)
+                                    </label>
+                                </div>
+                                <br>
+                                <div id="fileUploadDiv_{{row.id}}">
+                                    </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="comingSoonContent">No data found...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <br>
+    </div>
+    <!-- The blueimp Gallery widget -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+    <style>
+        #footer {
+            height: 100px;
+            width: 100%;
+        {#position: relative;#} left: 2rem;
+            top: 10rem;
+            bottom: 0;
+        }
+
+        .size {
+            height: 1em !important;
+        }
+
+        .fileinput-button input {
+            transform: initial !important;
+        }
+        h5{
+            font-weight: bold !important;
+        }
+        .template-upload .start{
+            display: none !important;
+        }
+        .x_panel{
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+        .x_title{
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            border-bottom: none;
+        }
+        .fileuploadButtons{
+            float: right;
+        }
+        #parsley-id-multiple-invoice_confirm_mode{
+            margin-top: -50px;
+        }
+        .form-control {
+            display: inline-block;
+        }
+        /* .escalateToSales{
+            float: right;
+        } */
+        .confirmModeError{
+            color:red;
+        }
+        .escalated{
+            font-size: 15px;
+            margin-left: 24px;
+            color: red;
+        }
+    </style>
+    {% upload_pod_js %}
+    <script src="{% static "vendor/jQuery/js/jquery.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/select2/js/select2.min.js" %}" type="text/javascript"></script>
+    <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    <script src="{% static "vendor/fileupload/js/vendor/jquery.ui.widget.js" %}" type="text/javascript"></script>
+    <!-- The Templates plugin is included to render the upload/download listings -->
+    <script src="{% static "vendor/fileupload/js/tmpl.min.js" %}" type="text/javascript"></script>
+    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    <script src="{% static "vendor/fileupload/js/load-image.min.js" %}" type="text/javascript"></script>
+    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    <script src="{% static "vendor/fileupload/js/canvas-to-blob.min.js" %}" type="text/javascript"></script>
+    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+    <script src="{% static "vendor/fileupload/js/bootstrap.min.js" %}" type="text/javascript"></script>
+    <!-- blueimp Gallery script -->
+    <script src="{% static "vendor/fileupload/js/jquery.blueimp-gallery.min.js" %}" type="text/javascript"></script>
+    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+    <script src="{% static "vendor/fileupload/js/jquery.iframe-transport.js" %}" type="text/javascript"></script>
+    <!-- The basic File Upload plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload.js" %}" type="text/javascript"></script>
+    <!-- The File Upload processing plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-process.js" %}" type="text/javascript"></script>
+    <!-- The File Upload image preview & resize plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-image.js" %}" type="text/javascript"></script>
+    <!-- The File Upload audio preview plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-audio.js" %}" type="text/javascript"></script>
+    <!-- The File Upload video preview plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-video.js" %}" type="text/javascript"></script>
+    <!-- The File Upload validation plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-validate.js" %}" type="text/javascript"></script>
+    <!-- The File Upload user interface plugin -->
+    <script src="{% static "vendor/fileupload/js/jquery.fileupload-ui.js" %}" type="text/javascript"></script>
+
+    <script src="{% static "vendor/parsley/js/parsley.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/notify/notify.min.js" %}" type="text/javascript" ></script>
+    <!-- The main application script -->
+    <script src="{% static "vendor/fileupload/js/locale.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/fileupload/js/csrf.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/jquery.serializejson.js" %}" type="text/javascript"></script>
+    <script src="{% static "aaho/js/team/confirm_invoice.js" %}?v={% now 'U' %}" type="text/javascript"></script>
+  <script id="myScript">
+        $(document).ready(function () {
+            $(".authorization").val(localStorage.getItem('auth_token'));
+        });
+      
+ {% for row in data %}
+ //html to add  additional button in file upload component
+ var escalateBtnHtml ="";
+ escalateBtnHtml +='<div class="escalateBtnDiv">';
+        {%if row.is_escalate %}
+        escalateBtnHtml +='<button type="button" class="col-md-7 col-sm-7 col-xs-7  btn btn-md btn-primary escalateToSales" ';
+        escalateBtnHtml +='data-id="{{row.id}}" data-invoiceid="{{row.invoice_number}}" >Escalate to sales';
+        escalateBtnHtml +='</button>';
+        {%else%}
+        escalateBtnHtml +='<br/><br/><h5 class="escalated">Escalated</h5>';
+        {% endif %}
+        escalateBtnHtml +='</div>';
+
+    ReactDOM.render(React.createElement(FileUploadComponent, {escalateBtn_string: escalateBtnHtml, html_string: null }), document.getElementById('fileUploadDiv_{{row.id}}')); 
+
+ var uploadCount  = 0;
+ var fileUploadCount  = 0;
+ $('#fileupload_{{row.id}}').bind('fileuploadsubmit', function (e, data) {
+            var uploadForm = $(this);
+            var $form = $(this);
+            uploadCount = 1;
+            fileUploadCount +=1;
+            var formError = uploadForm.parsley().isValid();
+            if (formError === false) {
+                if(!$('#fileupload_{{row.id}} .delivery_mode').is(':checked')){
+                    $('#fileupload_{{row.id}} .confirmModeError').show();
+                }
+                fileUploadCount=0;
+                setTimeout(function () {
+                    data.context.find('button').prop('disabled', false)
+                }, 1000);
+                return false;
+            }
+            else{
+                $('#fileupload_{{row.id}} .cancel').prop('disabled', true);
+                return data;
+            }
+        });
+
+        $('#fileupload_{{row.id}}').bind('fileuploaddone', function (e, data) {
+            fileUploadCount -=1;
+                if (fileUploadCount == 0) {
+                uploadCount = 0;
+                $.notify(data._response.textStatus, {
+                    position: "top center",
+                    autoHideDelay: 3000,
+                    clickToHide: true,
+                    className: 'success'
+                });
+                var confirmInvoiceCount = $("#confirm_invoice_badge").text();
+                if (parseInt(confirmInvoiceCount) == 1 || isNaN(parseInt(confirmInvoiceCount))) {
+                        $("#confirm_invoice_badge").text('');
+                    }
+                    else {
+                        $("#confirm_invoice_badge").text(parseInt(confirmInvoiceCount) - 1);
+                    }
+                setTimeout(function () {
+                    $('.rowUpload_{{row.id}}').remove();
+                    noData();
+                }, 1000);
+            }
+        })
+        $('#fileupload_{{row.id}}').bind('fileuploadfail', function (e, data) {
+            if (data._response.jqXHR) {
+                if (uploadCount == 1) {
+                    uploadCount = 0;
+                    $.notify(data._response.jqXHR.responseJSON.msg, {
+                        position: "top center",
+                        autoHideDelay: 3000,
+                        clickToHide: true,
+                        className: 'error'
+                    });
+                }
+            }
+        })
+
+         $('#fileupload_{{row.id}} .delivery_mode').click(function () {
+             $("#parsley-id-multiple-delivery_mode").remove();
+             $('#fileupload_{{row.id}} .confirmModeError').hide();
+             if($(this).val()=="PH"){
+                 $("#fileupload_{{row.id}} .phoneFields").show();
+                 $("#fileupload_{{row.id}} .phoneName").attr("required",true);
+                 $("#fileupload_{{row.id}} .phoneNumber").attr("required",true);
+                 $("#fileupload_{{row.id}}").parsley().validate();
+                 $("#fileupload_{{row.id}} .btnSubmit").addClass("confirmedByPhone");
+                 $("#fileupload_{{row.id}} .btnSubmit").removeClass("start");
+                 $("#fileupload_{{row.id}} .btnSubmit").attr("type","button");
+                 $("#fileupload_{{row.id}} .btnSubmit").attr("data-id","{{row.id}}");
+                 $("#fileupload_{{row.id}} .fileUpload").attr("disabled",true);
+                 $("#fileupload_{{row.id}} .files").html('');
+             }
+             else{
+                $("#fileupload_{{row.id}} .phoneFields").hide();
+                $("#fileupload_{{row.id}} .phoneName").attr("required",false);
+                $("#fileupload_{{row.id}} .phoneNumber").attr("required",false);
+                $("#fileupload_{{row.id}} .btnSubmit").removeClass("confirmedByPhone");
+                $("#fileupload_{{row.id}} .btnSubmit").addClass("start");
+                $("#fileupload_{{row.id}} .btnSubmit").attr("type","submit");
+                $("#fileupload_{{row.id}} .fileUpload").attr("disabled",false);
+             }
+         });
+
+$(function () {
+    'use strict';
+    // Initialize the jQuery File Upload widget for individual invoice://dont remove this from page
+    $('#fileupload_{{row.id}}').fileupload({
+       // maxNumberOfFiles: 2
+    });
+    $('#fileupload_{{row.id}}').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
+    if (window.location.hostname === 'blueimp.github.io') {
+        // Demo settings:
+        $('#fileupload_{{row.id}}').fileupload('option', {
+            url: '//jquery-file-upload.appspot.com/',
+            // Enable image resizing, except for Android and Opera,
+            // which actually support image resizing, but fail to
+            // send Blob objects via XHR requests:
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator.userAgent),
+            maxFileSize: 5000000,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+        });
+        // Upload server status check for browsers with CORS support:
+        if ($.support.cors) {
+            $.ajax({
+                url: '//jquery-file-upload.appspot.com/',
+                type: 'HEAD'
+            }).fail(function () {
+                $('<div class="alert alert-danger"/>')
+                    .text('Upload server currently unavailable - ' +
+                        new Date())
+                    .appendTo('#fileupload_{{row.id}}');
+            });
+        }
+    } else {
+       
+    }
+
+});
+
+{% endfor %}
+
+   
+ </script>
+{% endblock %}

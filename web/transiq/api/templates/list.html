@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blackbuck Data</title>
+
+    <style>
+        div#list_container {
+            margin: 20px;
+        }
+        div#list_container a {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="list_container">
+    {% for file in files %}
+        <a href="/blackbuck/file/{{ file }}">{{ file }}</a>
+    {% endfor %}
+</div>
+
+</body>
+</html>

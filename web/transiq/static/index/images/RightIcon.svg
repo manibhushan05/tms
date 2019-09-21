@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="29px" viewBox="0 0 27 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>RightIcon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Aaho_FInal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1099.000000, -5477.000000)">
+        <g id="Group-43" transform="translate(-6.000000, 5092.000000)" fill="#FFFFFF">
+            <g id="Group-40" transform="translate(1084.000000, 365.000000)">
+                <g id="RightIcon" transform="translate(21.000000, 20.000000)">
+                    <rect id="Rectangle-37" transform="translate(6.399495, 14.399495) scale(-1, -1) rotate(45.000000) translate(-6.399495, -14.399495) " x="1.89949494" y="9.89949494" width="9" height="9"></rect>
+                    <g id="left-arrow" transform="translate(18.000000, 14.500000) scale(-1, -1) translate(-18.000000, -14.500000) translate(9.000000, 0.000000)" fill-rule="nonzero">
+                        <path d="M6.04866206,14.5061301 L17.5107669,3.65682927 C17.826377,3.35881301 18,2.96035772 18,2.53549593 C18,2.11039837 17.826377,1.71217886 17.5107669,1.41369106 L16.5063941,0.463528455 C16.1912822,0.164569106 15.7700534,0 15.3211745,0 C14.8722957,0 14.4515651,0.164569106 14.136204,0.463528455 L0.488741616,13.3805528 C0.172135035,13.6799837 -0.00123882816,14.0800894 6.67372796e-06,14.5054228 C-0.00123882816,14.9326423 0.171885935,15.3322764 0.488741616,15.6319431 L14.1234999,28.5364715 C14.438861,28.8354309 14.8595915,29 15.3087195,29 C15.7575984,29 16.1783289,28.8354309 16.4939391,28.5364715 L17.4980627,27.5863089 C18.151453,26.967878 18.151453,25.9611301 17.4980627,25.342935 L6.04866206,14.5061301 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
