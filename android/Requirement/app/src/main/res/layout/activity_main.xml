@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF232790">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView8"
+        android:background="@mipmap/ic_splash"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:gravity="bottom|center_horizontal" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView9"
+        android:src="@mipmap/ic_logo_transparent"
+        android:layout_marginTop="184dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aaho"
+        android:textSize="35sp"
+        android:textColor="@color/cardview_light_background"
+        android:textStyle="bold"
+        android:paddingBottom="15dp"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/imageView9"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Only Solution for"
+        android:textColor="#8f91c9"
+        android:textSize="12sp"
+        android:paddingBottom="4dp"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inter-City Transportation"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#8f91c9"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

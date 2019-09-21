@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".vehicles.VehicleDocumentsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="#f6f6f6">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:layout_marginLeft="5dp"
+                        android:text="Send Documents"
+                        style="@style/FlatButton"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    >
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/doc_details_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/emails_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="80dp"
+                        android:hint="enter email ids separated by commas, e.g. abc@gmail.com, xyz@yahoo.com, etc."
+                        android:inputType="textMultiLine"
+                        android:maxLength="100"
+                        android:minLines="4"/>
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="#f6f6f6">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical|left">
+
+                        <Button
+                            android:id="@+id/owner_add_dialog_cancel_btn"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="cancel"
+                            style="@style/FlatButton"/>
+
+                        <Button
+                            android:id="@+id/owner_add_dialog_add_btn"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="send"
+                            style="@style/FlatButton"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

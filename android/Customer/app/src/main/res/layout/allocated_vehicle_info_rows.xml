@@ -1,0 +1,208 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlPendingMainContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="17dp"
+            android:paddingTop="6dp"
+            android:paddingLeft="19dp"
+            android:paddingStart="19dp"
+            android:paddingRight="6dp"
+            android:paddingEnd="6dp">
+
+
+            <TextView
+                android:id="@+id/tvAllocatedVehicleStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/imageView10"
+                android:text="Approved"
+                android:textSize="@dimen/card_text_label_2" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="16dp"
+                android:layout_height="12dp"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/tvAllocatedVehicleStatus"
+                android:layout_toStartOf="@+id/tvAllocatedVehicleStatus"
+                android:src="@mipmap/ic_check" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleTypeOfVehicleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvAllocatedVehicleStatus"
+                android:text="@string/type_of_vehicle"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_2" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleTypeOfVehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAlloctedVehicleTypeOfVehicleLabel"
+                android:layout_alignStart="@+id/tvAlloctedVehicleTypeOfVehicleLabel"
+                android:layout_below="@+id/tvAlloctedVehicleTypeOfVehicleLabel"
+                android:textStyle="bold"
+                android:textSize="@dimen/card_text_label_4"
+                android:textColor="@color/card_text_color_1"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleLrNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAlloctedVehicleTypeOfVehicle"
+                android:layout_alignStart="@+id/tvAlloctedVehicleTypeOfVehicle"
+                android:layout_below="@+id/tvAlloctedVehicleTypeOfVehicle"
+                android:layout_marginTop="14dp"
+                android:text="@string/lr_numbers"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_2" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleLrNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAlloctedVehicleLrNumberLabel"
+                android:layout_alignStart="@+id/tvAlloctedVehicleLrNumberLabel"
+                android:layout_below="@+id/tvAlloctedVehicleLrNumberLabel"
+                android:textColor="@color/card_text_color_1"
+                android:text="STR160708002"
+                android:textStyle="bold"
+                android:textSize="@dimen/card_text_label_4" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleNumberlbel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView10"
+                android:layout_toLeftOf="@+id/imageView10"
+                android:layout_toStartOf="@+id/imageView10"
+                android:text="@string/vehicle_number"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_2" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleVehicleNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAlloctedVehicleNumberlbel"
+                android:layout_alignStart="@+id/tvAlloctedVehicleNumberlbel"
+                android:layout_below="@+id/tvAlloctedVehicleNumberlbel"
+                android:textStyle="bold"
+                android:textSize="@dimen/card_text_label_4"
+                android:textColor="@color/card_text_color_1" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleLicenceNumberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAlloctedVehicleVehicleNumber"
+                android:layout_alignStart="@+id/tvAlloctedVehicleVehicleNumber"
+                android:layout_alignTop="@+id/tvAlloctedVehicleLrNumberLabel"
+                android:text="@string/driver_licence_number"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_2" />
+
+            <TextView
+                android:id="@+id/tvAlloctedVehicleLicenceNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvAlloctedVehicleLicenceNumberLabel"
+                android:layout_alignStart="@+id/tvAlloctedVehicleLicenceNumberLabel"
+                android:layout_below="@+id/tvAlloctedVehicleLicenceNumberLabel"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_4"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f6f6f6"
+            android:clickable="true"
+            android:paddingBottom="16dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="8dp"
+            android:paddingStart="20dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/viDriverLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Driver"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_5" />
+
+            <TextView
+                android:id="@+id/viDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viDriverLabel"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_3"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/imageButtonCallDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_phone" />
+
+            <TextView
+                android:id="@+id/viContactNoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageButtonCallDriver"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_toLeftOf="@+id/imageButtonCallDriver"
+                android:layout_toStartOf="@+id/imageButtonCallDriver"
+                android:text="Contact No"
+                android:textSize="@dimen/card_text_label_5" />
+
+            <TextView
+                android:id="@+id/viContactNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageButtonCallDriver"
+                android:layout_alignLeft="@+id/viContactNoLabel"
+                android:layout_alignStart="@+id/viContactNoLabel"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_3"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

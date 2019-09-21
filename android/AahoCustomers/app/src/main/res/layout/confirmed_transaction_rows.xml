@@ -1,0 +1,307 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_confirmed"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rel_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="8dp"
+            android:paddingStart="10dp"
+            android:background="#f6f6f6">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="false"
+                android:textSize="@dimen/card_vehicle_number_text"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:textColor="@color/btn_color_flat"
+                android:id="@+id/tvConfirmVehicleNumber" />
+
+            <TextView
+                android:id="@+id/tvViewPOD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_toLeftOf="@+id/tvPOD"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/image_preview"
+                android:theme="@style/TextLabel"
+                android:text="View POD"/>
+
+            <TextView
+                android:id="@+id/tvPOD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:drawableRight="@drawable/upload"
+                android:theme="@style/TextLabel"
+                android:text="POD"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCnfMainContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="8dp"
+            android:paddingStart="10dp"
+            android:paddingTop="8dp">
+
+            <!--tvTripDetailsStatus Not in used now-->
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/blank_text"
+                android:id="@+id/tvTripDetailsStatus"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                style="@style/TextLabel"
+                android:layout_marginBottom="12dp"
+                android:background="@color/cardview_light_background"
+                android:theme="@style/transaction_status"
+                android:textColor="@color/cardview_light_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pickup_from"
+                android:id="@+id/tvNumberOfBookingsLabel"
+                android:layout_below="@+id/tvTripDetailsStatus"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:theme="@style/TextLabel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drop_at"
+                android:id="@+id/tvTotalAmountLabel"
+                android:theme="@style/TextLabel"
+                android:layout_alignTop="@+id/tvNumberOfBookingsLabel"
+                android:layout_toLeftOf="@+id/imageView2"
+                android:layout_toStartOf="@+id/imageView2"
+                android:layout_marginRight="84dp"
+                android:layout_marginEnd="84dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTotalAmountValue"
+                android:layout_below="@+id/tvTotalAmountLabel"
+                android:layout_alignLeft="@+id/tvTotalAmountLabel"
+                android:layout_alignStart="@+id/tvTotalAmountLabel"
+                android:theme="@style/CardTextValue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNumberOfBookingsValue"
+                android:layout_below="@+id/tvNumberOfBookingsLabel"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:theme="@style/CardTextValue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lr_number"
+                android:id="@+id/tvPaidAmountLabel"
+                android:layout_below="@+id/tvNumberOfBookingsValue"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:theme="@style/TextLabel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:id="@+id/tvCnfLrNumber"
+                android:layout_below="@+id/tvPaidAmountLabel"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:theme="@style/CardTextValue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shipment_date"
+                android:id="@+id/tvBalanceLabel"
+                android:layout_below="@+id/tvTotalAmountValue"
+                android:layout_alignLeft="@+id/tvTotalAmountValue"
+                android:layout_alignStart="@+id/tvTotalAmountValue"
+                android:theme="@style/TextLabel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCnfShipmentDate"
+                android:layout_below="@+id/tvBalanceLabel"
+                android:layout_alignLeft="@+id/tvBalanceLabel"
+                android:layout_alignStart="@+id/tvBalanceLabel"
+                android:theme="@style/CardTextValue" />
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/go_right_width"
+                android:layout_height="@dimen/go_right_height"
+                android:layout_alignBottom="@+id/tvTotalAmountValue"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:contentDescription="@string/btn_forward_image"
+                android:src="@mipmap/ic_go_right" />
+
+        </RelativeLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:paddingLeft="20dp"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:background="#f6f6f6"-->
+            <!--android:orientation="horizontal">-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/amount"-->
+                <!--android:paddingRight="3dp"-->
+                <!--android:id="@+id/tvConfirmedAmountLabel"-->
+                <!--android:textSize="@dimen/card_text_label_2"-->
+                <!--android:textColor="@color/card_text_color_1" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingRight="38dp"-->
+                <!--android:id="@+id/tvConfirmedAmount"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="@dimen/card_text_label_1"-->
+                <!--android:theme="@style/CardAmountText" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Paid"-->
+                <!--android:paddingRight="3dp"-->
+                <!--android:id="@+id/tvConfirmedPaidLabel"-->
+                <!--android:textSize="@dimen/card_text_label_2"-->
+                <!--android:textColor="@color/card_text_color_1" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingRight="38dp"-->
+                <!--android:id="@+id/tvConfirmedPaid"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="@dimen/card_text_label_1"-->
+                <!--android:theme="@style/CardAmountText" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Balance"-->
+                <!--android:paddingRight="3dp"-->
+                <!--android:id="@+id/tvConfirmedBalanceLabel"-->
+                <!--android:textSize="@dimen/card_text_label_2"-->
+                <!--android:textColor="@color/card_text_color_1" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/tvConfirmedBalance"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="@dimen/card_text_label_1"-->
+                <!--android:theme="@style/CardAmountText" />-->
+        <!--</LinearLayout>-->
+        <LinearLayout
+            android:layout_weight="0.45"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/last_location"
+                android:layout_weight="0.45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp"
+                    android:theme="@style/TextLabel"
+                    android:text="Last Location" />
+
+                <TextView
+                    android:id="@+id/track_card_location_details_tv"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp"
+                    android:theme="@style/CardTextValue"
+                    android:text="Kota at 21 Jan, 5pm " />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/track_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingLeft="0dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="0dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="0.15">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_near_me_black_24dp" />
+
+                <TextView
+                    android:id="@+id/tvTrackCaption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:textSize="10sp"
+                    android:text="Track"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

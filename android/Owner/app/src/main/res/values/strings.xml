@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name">Aaho FMS</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="font_fontFamily_medium" translatable="false">sans-serif</string>
+
+
+    <!--Tracking-->
+    <string name="blank_text" translatable="false"></string>
+    <string name="track" translatable="false">Track</string>
+    <string name="heading_message" translatable="false">All Scheduled Trips</string>
+    <string name="transaction_id" translatable="false">Transaction ID</string>
+    <string name="status" translatable="false">Status</string>
+    <string name="pickup_from" translatable="false">Pick From</string>
+    <string name="drop_at" translatable="false">Drop At</string>
+    <string name="shipment_date" translatable="false">Shipment Date</string>
+    <string name="started_on" translatable="false">Started On</string>
+    <string name="number_of_truck" translatable="false">Number of Trucks</string>
+    <string name="material" translatable="false">Material</string>
+    <string name="last_location">Last Location</string>
+    <string name="title_activity_tracking_maps" translatable="false">Map</string>
+    <string name="title_activity_landing" translatable="false">LandingActivity</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="amout" translatable="false">Amount</string>
+    <string name="quote" translatable="false">Quote</string>
+    <string name="cancelled_on" translatable="false">Cancelled On</string>
+
+    <!-- Booking -->
+    <string name="city" translatable="false">City</string>
+    <string name="add_more" translatable="false">Add More</string>
+    <string name="reset_form" translatable="false">Reset Form</string>
+    <string name="submit_booking" translatable="false">Submit Booking</string>
+    <string name="remove_address" translatable="false">Remove this Address</string>
+
+    <string name="pickup_details" translatable="false">Pickup Details</string>
+    <string name="pickup_address" translatable="false">Pickup Address</string>
+    <string name="pickup_date" translatable="false">Pickup Date</string>
+    <string name="extra_pickup_msg" translatable="false">Have more than 1 pickup address?</string>
+
+    <string name="drop_details" translatable="false">Drop Details</string>
+    <string name="drop_address">Drop Address</string>
+    <string name="extra_drop_msg" translatable="false">Have more than 1 drop address?</string>
+
+    <string name="booking_contact_phone_hint" translatable="false">Contact person\'s phone</string>
+    <string name="booking_contact_name_hint" translatable="false">Contact person\'s name</string>
+    <string name="booking_shipdate_hint" translatable="false">Shipment Date</string>
+    <string name="booking_material_hint" translatable="false">Material</string>
+    <string name="booking_rate_hint" translatable="false">Expected Rate</string>
+
+    <string name="shipment_details" translatable="false">Vehicle Details</string>
+    <string name="other_details" translatable="false">Other Details</string>
+    <string name="no_shipment" translatable="false">No vehicles added</string>
+    <string name="add_shipment" translatable="false">Add Vehicle</string>
+    <string name="edit_shipment" translatable="false">Change</string>
+    <string name="remove_shipment" translatable="false">Remove</string>
+
+    <string name="booking_result_desc" translatable="false">Thanks for trusting aaho with your requirements\nOur team is on your request to find best\noptions for you</string>
+    <string name="booking_result_desc_extra" translatable="false">You can also send quotation requests to\nyour previous vendors</string>
+    <string name="send_request" translatable="false">Send Request</string>
+    <string name="booking_vendor_dialog_selected" translatable="false">&#160;Selected</string> <!-- do not trim space character -->
+    <string name="booking_vendor_dialog_title" translatable="false">select vendors</string>
+    <string name="select_a_city" translatable="false">select a city</string>
+    <string name="booking_received" translatable="false">Booking Received</string>
+    <string name="request_vendors" translatable="false">Request Vendors</string>
+    <string name="number_of_trucks" translatable="false">Number of Trucks</string>
+    <string name="select_your_truck" translatable="false">select your truck</string>
+    <string name="ship_dialog_footer_part1" translatable="false">You have selected&#160;</string> <!-- do not trim space character -->
+    <string name="ship_dialog_footer_part2" translatable="false">&#160;Truck(s)</string> <!-- do not trim space character -->
+
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="zero">0</string>
+    <string name="no_thanks" translatable="false">No Thanks</string>
+    <string name="select_all" translatable="false">Select All</string>
+    <string name="done" translatable="false">Done</string>
+
+
+    <!--STATUS-->
+    <string name="pending_status" translatable="false">Pending</string>
+    <string name="confirmed_status" translatable="false">Confirmed</string>
+    <string name="in_transit_status" translatable="false">In-Transit</string>
+    <string name="delivered_status" translatable="false">Delivered</string>
+    <string name="cancelled_status" translatable="false">Cancelled</string>
+
+    <string name="action_settings" translatable="false">Profile</string>
+    <string name="type_of_vehicle" translatable="false">Type of Vehicle</string>
+    <string name="vehicle_number" translatable="false">Vehicle Number</string>
+    <string name="lr_numbers" translatable="false">LR Number(s)</string>
+    <string name="driver_licence_number" translatable="false">Driver\'s Licence No</string>
+    <string name="driver_licence_validity" translatable="false">Driver\'s Licence Validity</string>
+    <string name="support_email" translatable="false">info@aaho.in</string>
+    <string name="support_phone" translatable="false">+919324799518</string>
+    <string name="support_aaho_address" translatable="false">B Wing, Ground Floor, Krislon House, Krishanlal Marwah Marg, Saki Vihar Road, Andheri East</string>
+    <string name="booking_history" translatable="false">Booking History</string>
+    <string name="trip_history_dashboard">My Trips with Aaho</string>
+    <string name="new_booking" translatable="false">New Booking</string>
+    <string name="my_vehicles" translatable="false">My Vehicles</string>
+    <string name="my_drivers" translatable="false">My Drivers</string>
+    <string name="payments" translatable="false">Payments</string>
+    <string name="quotations" translatable="false">Quotations</string>
+    <string name="support" translatable="false">Support</string>
+    <string name="responses_received" translatable="false"><![CDATA[ Responses Received]]></string>
+    <string name="responses" translatable="false">Responses</string>
+    <string name="responses_num" translatable="false">Responses #</string>
+    <string name="decline" translatable="false">Decline</string>
+    <string name="accept" translatable="false">Accept</string>
+    <string name="login" translatable="false">Login</string>
+
+
+    <string name="username_label" translatable="false">Username</string>
+    <string name="password_label" translatable="false">Password</string>
+
+    <string name="progress_title" translatable="false">Waiting</string>
+    <string name="progress_msg" translatable="false">Waiting for server to respond...</string>
+
+    <string name="call_us" translatable="false">Call Us</string>
+    <string name="send_action_logs" translatable="false">Send App Logs</string>
+    <string name="vehicle_info" translatable="false">Vehicle Info</string>
+    <string name="terms_and_conditions" translatable="false"><u>Terms and Conditions</u></string>
+    <string name="terms_and_conditions_title" translatable="false">Terms and Conditions</string>
+    <string name="amount">Amount</string>
+    <string name="balance">Balance</string>
+    <string name="final_payment_date" translatable="false">Final Payment On</string>
+    <string name="lr_number">LR Number</string>
+    <string name="payment_id_label" translatable="false">Payment ID</string>
+    <string name="payment_date" translatable="false">Payment Date</string>
+    <string name="payment_mode" translatable="false">Payment Mode</string>
+    <string name="remarks" translatable="false">Remarks</string>
+    <string name="paid_to" translatable="false">Paid To</string>
+    <string name="trip_details" translatable="false">Trip Details</string>
+    <string name="rate_details" translatable="false">Rate Details</string>
+    <string name="number_of_bookings" translatable="false">No. of Bookings</string>
+    <string name="total_amount" translatable="false">Total Amount</string>
+    <string name="paid" translatable="false">Paid</string>
+    <string name="btn_forward_image" translatable="false">forward</string>
+    <string name="type_to_search">Type to search</string>
+    <string name="submit">Submit</string>
+    <string name="new_password">New password</string>
+
+    <!--Auth key for OTP Message DO NOT CHANGE-->
+    <string name="sendotp_key">115151AKpRGb9tug57565bd3</string>
+    <string name="title_activity_path_map">Path</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="call">Call</string>
+
+
+    <string name="youAreNotUpdatedTitle" translatable="false">Update Available</string>
+    <string name="youAreNotUpdatedMessage" translatable="false">A new version of Aaho FMS App is available. Please update to version</string>
+    <string name="youAreNotUpdatedMessage1" translatable="false">now</string>
+    <string name="update" translatable="false">Update</string>
+    <string name="skip" translatable="false">Skip</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="type_otp">Type OTP</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="no_trip_detail">There is no trip</string>
+    <string name="debit_note_no">Debit Note No</string>
+    <string name="credit_note_no">Credit Note No</string>
+    <string name="reason">Reason</string>
+    <string name="remark">Remark</string>
+    <string name="comment">Comment</string>
+
+</resources>

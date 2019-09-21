@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string name="app_name">Aaho Driver</string>
+    <string name="app_logo">Aaho</string>
+
+    <string name="status_service_create">Service created</string>
+    <string name="status_service_destroy">Service destroyed</string>
+    <string name="status_send_fail">Send failed</string>
+    <string name="status_location_update">Location update</string>
+    <string name="status_connectivity_change">Connectivity change</string>
+
+    <string name="progress_title">Waiting</string>
+    <string name="progress_msg">Waiting for server to respond...</string>
+
+    <string name="loaded">Loaded</string>
+    <string name="unloaded">Unloaded</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="unloading">Unloading&#8230;</string>
+
+    <!-- Play Services -->
+    <string name="play_services">Play Services Required</string>
+    <string name="play_services_msg">App requires Google Play Services version >= 9.0.1 to function, please update to continue</string>
+    <!-- GPS Location -->
+    <string name="gps_request_title">GPS Required</string>
+    <string name="gps_request_msg">App needs GPS enabled to function, please enable it to continue</string>
+    <!-- truck status -->
+    <string name="confirm_action">Confirm Action</string>
+    <string name="action_status_change">Change the status to \'%s\'?</string>
+
+    <!-- Generic (typical ui texts, like 'ok', 'cancel' etc.) -->
+    <string name="ok">Ok</string>
+    <string name="quit">Quit</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="register">Register</string>
+    <string name="status">Status</string>
+    <string name="later">Later</string>
+    <string name="cancel">Cancel</string>
+    <string name="register_success">Registration Successful</string>
+    <string name="edit_success">Edit Successful</string>
+    <string name="edit_registration">Edit Details</string>
+    <string name="call_us">Call Us</string>
+
+    <!-- Register Vehicle -->
+    <string name="vehicle_type">Type of Vehicle</string>
+    <string name="veh_number">Vehicle Number</string>
+    <string name="imei_number">IMEI Number</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="registration_details">Registration Details</string>
+    <string name="select_language">Select Language</string>
+
+    <string name="unloaded_desc">Vehicle is empty and ready for next order</string>
+    <string name="loading_desc">Vehicle is in the process of loading or is on its way to the pickup point</string>
+    <string name="loaded_desc">Vehicle is loaded and is now on its way to the destination</string>
+    <string name="unloading_desc">Vehicle has reached its destination and is now waiting for unloading</string>
+
+    <string name="one_time_password">One Time Password</string>
+    <string name="waiting">Waiting...</string>
+    <string name="resend">Resend</string>
+    <string name="verify">Verify</string>
+    <string name="reenter">Reenter</string>
+    <string name="pod_preview">POD Preview</string>
+    <string name="loading_image">Loading Image</string>
+    <string name="no_pod_selected">No POD selected</string>
+    <string name="proof_of_delivery">Proof of Delivery</string>
+
+    <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
+    <string name="terms_and_conditions_title">Terms and Conditions</string>
+    <string name="terms_html_file">file:///android_asset/terms-en.html</string>
+
+
+</resources>

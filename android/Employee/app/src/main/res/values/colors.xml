@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#37474F</color>
+    <color name="colorPrimaryDark">#263238</color>
+    <color name="colorAccent">#009688</color>
+    <!--<color name="colorPrimary">#232790</color>
+    <color name="colorPrimaryDark">#1C1F73</color>
+    <color name="colorAccent">#009688</color>-->
+
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorTabIndicator">#ffb700</color>
+    <color name="colorTabText">#FFD900</color>
+    <color name="colorTabSelectedText">#b2ffffff</color>
+    <color name="colorPrimaryText">#BBBBBB</color>
+    <color name="colorSecondaryText">#FF9C9B9B</color>
+    <color name="recycle_view_background">#E2E2E2</color>
+
+    <color name="booking_background">#d8d8d8</color>
+
+    <color name="colorPrimaryLight">#E0E0E0</color>
+
+    <color name="btn_color_flat">#009688</color>
+    <color name="btn_primary_bg">#232790</color>
+    <color name="btn_secondary_bg">#F0F0F0</color>
+
+
+    <color name="formText">#898989</color>
+
+    <!--Card-->
+    <color name="card_text_color_1">#878787</color>
+    <color name="card_text_color_2">#6d70c2</color>
+    <color name="card_border_color_button">#979797</color>
+    <color name="card_border_color_approved_button">#61af11</color>
+
+    <!--status-->
+    <color name="colorPendingStatus">#f5a623</color>
+    <color name="colorConfirmStatus">#b8e986</color>
+    <color name="colorInTransitStatus">#4a90e2</color>
+    <color name="colorDeliveredStatus">#7ed321</color>
+    <color name="colorCancelledStatus">#d0021b</color>
+
+    <color name="colorLightGray">#D3D3D3</color>
+    <color name="colorLightRed">#FFCCCC</color>
+    <color name="colorLightGreen">#90EE90</color>
+    <color name="colorLightYellow">#FFFF99</color>
+
+
+</resources>

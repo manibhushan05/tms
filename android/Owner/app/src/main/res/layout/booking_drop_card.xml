@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_drop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="4dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:paddingBottom="7dp"
+            android:orientation="vertical">
+
+            <in.aaho.android.ownr.common.InstantAutoComplete
+                android:id="@+id/drop_addr_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:inputType="textAutoComplete|textNoSuggestions"
+                android:maxLines="1"
+                android:hint="@string/drop_address"/>
+
+            <in.aaho.android.ownr.common.InstantAutoComplete
+                android:id="@+id/drop_city_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:inputType="textAutoComplete|textNoSuggestions"
+                android:maxLines="1"
+                android:hint="@string/city"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/drop_subcontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f6f6f6">
+
+
+            <RelativeLayout
+                android:id="@+id/drop_add_layout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <TextView
+                    android:id="@+id/more_drop_addr_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left"
+                    android:text="@string/extra_drop_msg"
+                    android:textSize="12sp"
+                    android:textColor="#898989"
+                    android:layout_marginLeft="20dp" />
+
+                <Button
+                    android:id="@+id/more_drop_addr_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:text="@string/add_more"
+                    android:textColor="#009688"
+                    android:textSize="14sp"
+                    android:layout_marginRight="10dp"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/del_drop_addr_btn"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:gravity="center"
+                android:text="@string/remove_address"
+                android:textColor="#009688"
+                android:textSize="14sp"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

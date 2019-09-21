@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="vehicle_category">
+        <item>Tata Ace</item>
+        <item>Pick Up</item>
+        <item>14 Feet Open</item>
+        <item>14 Feet Close</item>
+        <item>17 Feet Open</item>
+        <item>17 Feet Close</item>
+        <item>19 Feet Open</item>
+        <item>19 Feet Close</item>
+        <item>20 Feet Open</item>
+        <item>20 Feet Close</item>
+        <item>6 Tyre Open</item>
+        <item>10 Tyre Taurus</item>
+        <item>12 Tyre Taurus</item>
+        <item>14 Tyre Taurus</item>
+        <item>20 Feet Trailer High Bed</item>
+        <item>20 Feet Trailer Low Bed</item>
+        <item>22 Feet Closed</item>
+        <item>24 Feet Closed</item>
+        <item>34 Feet Multi Axle</item>
+        <item>40 Feet Semi Low Bed</item>
+        <item>40 Feet High Bed</item>
+        <item>24 Feet Single Axle</item>
+        <item>28 Feet Single Axle</item>
+        <item>32 Feet Single Axle</item>
+        <item>34 Feet Single Axle</item>
+        <item>24 Feet Multi Axle</item>
+        <item>28 Feet Multi Axle</item>
+        <item>32 Feet Multi Axle</item>
+        <item>34 Feet Multi Axle</item>
+        <item>34 Feet Tripple Axle Close</item>
+        <item>Refrigerated Truck</item>
+        <item>28 Feet JCB Trailer</item>
+        <item>others</item>
+    </string-array>
+</resources>

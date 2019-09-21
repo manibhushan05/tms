@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="amount">Amount</string>
+    <string name="balance">Balance</string>
+    <string name="lr_number">LR Number</string>
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        card_view:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#393939"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="#333333">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/status"
+                    style="@style/FlatButton"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/dialog_status_container"
+                android:layout_width="match_parent"
+                android:layout_height="350dp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="#333333">
+
+                <Button
+                    android:id="@+id/dialog_ok_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/ok"
+                    style="@style/FlatButton"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

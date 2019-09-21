@@ -1,0 +1,106 @@
+package in.aaho.android.customer.profile;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import org.json.JSONObject;
+
+import in.aaho.android.customer.common.ApiResponseListener;
+import in.aaho.android.customer.common.BaseDialogFragment;
+import in.aaho.android.customer.R;
+import in.aaho.android.customer.requests.PasswordEditRequest;
+
+/**
+ * Created by shobhit on 8/8/16.
+ */
+
+public class PasswordChangeDialogFragment extends BaseDialogFragment {
+
+    private Button doneButton, cancelButton;
+    private EditText curPassEditText, newPassEditText, confirmPassEditText;
+    private View dialogView;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        dialogView = inflater.inflate(R.layout.password_change_dialog, container, false);
+
+        setViewVariables();
+        setClickListeners();
+
+        return dialogView;
+    }
+
+
+
+    private void setClickListeners() {
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String currPass = curPassEditText.getText().toString();
+                String newPass = newPassEditText.getText().toString();
+                String confirmPass = confirmPassEditText.getText().toString();
+
+                if (currPass.length() == 0) {
+                    curPassEditText.setError("This field cannot be left blank");
+                    return;
+                }
+                if (newPass.length() == 0) {
+                    newPassEditText.setError("This field cannot be left blank");
+                    return;
+                }
+                if (confirmPass.length() == 0) {
+                    confirmPassEditText.setError("This field cannot be left blank");
+                    return;
+                }
+                if (!newPass.equals(confirmPass)) {
+                    confirmPassEditText.setError("Passwords do not Match");
+                    return;
+                }
+                if (newPass.length() < 8) {
+                    newPassEditText.setError("Password must be at least 8 characters long");
+                    return;
+                }
+
+                makePasswordChangeRequest(currPass, newPass);
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PasswordChangeDialogFragment.this.dismiss();
+            }
+        });
+    }
+
+    private void setViewVariables() {
+        doneButton = (Button) dialogView.findViewById(R.id.password_dialog_update_btn);
+        cancelButton = (Button) dialogView.findViewById(R.id.password_dialog_cancel_btn);
+        curPassEditText = (EditText) dialogView.findViewById(R.id.current_password_edittext);
+        newPassEditText = (EditText) dialogView.findViewById(R.id.new_password_edittext);
+        confirmPassEditText = (EditText) dialogView.findViewById(R.id.confirm_new_password_edittext);
+    }
+
+    private void makePasswordChangeRequest(String currPass, String newPass) {
+        PasswordEditRequest passRequest = new PasswordEditRequest(currPass, newPass, new PasswordEditListener());
+        queue(passRequest);
+    }
+
+    private class PasswordEditListener extends ApiResponseListener {
+        @Override
+        public void onResponse(JSONObject response) {
+            dismissProgress();
+            toast("Password Updated");
+            dismiss();
+        }
+
+        @Override
+        public void onError() {
+            dismissProgress();
+            dismiss();
+        }
+    }
+}

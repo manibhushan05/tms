@@ -1,0 +1,159 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_tracking_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="3dp"
+
+        card_view:cardCornerRadius="3dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp">
+
+            <TextView
+                android:id="@+id/transaction_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/colorPrimaryText"
+                android:text="@string/transaction_id" />
+
+            <TextView
+                android:id="@+id/transaction_id"
+                android:layout_width="@dimen/left_align"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginBottom="@dimen/margin_below_card"
+                android:textColor="@color/colorPrimary"
+                android:layout_below="@+id/transaction_id_label" />
+
+            <TextView
+                android:id="@+id/status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_toRightOf="@id/transaction_id"
+                android:text="@string/status" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_below_card"
+                android:textSize="@dimen/secondary_text_size"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_below="@id/status_label"
+                android:layout_toRightOf="@id/transaction_id" />
+
+            <TextView
+                android:id="@+id/pickup_from_label"
+                android:layout_width="@dimen/left_align"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_below="@id/transaction_id"
+                android:text="@string/pickup_from" />
+
+            <TextView
+                android:id="@+id/pickup_from"
+                android:layout_width="@dimen/left_align"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_below_card"
+                android:textSize="@dimen/secondary_text_size"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_below="@+id/pickup_from_label" />
+
+            <TextView
+                android:id="@+id/drop_at_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_below="@id/status"
+                android:layout_toRightOf="@id/pickup_from_label"
+                android:text="@string/drop_at" />
+
+            <TextView
+                android:id="@+id/drop_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_below_card"
+                android:textSize="@dimen/secondary_text_size"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_below="@id/drop_at_label"
+                android:layout_toRightOf="@+id/pickup_from" />
+
+            <TextView
+                android:id="@+id/started_on_label"
+                android:layout_width="@dimen/left_align"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_below="@id/pickup_from"
+                android:text="@string/started_on" />
+
+            <TextView
+                android:id="@+id/last_location_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/primary_text_size"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_below="@id/drop_at"
+                android:layout_toRightOf="@+id/started_on_label"
+                android:text="@string/last_location" />
+
+            <TextView
+                android:id="@+id/started_on"
+                android:layout_width="@dimen/left_align"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/secondary_text_size"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_below="@+id/started_on_label" />
+
+            <TextView
+                android:id="@+id/last_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/secondary_text_size"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_below="@+id/last_location_label"
+                android:layout_toRightOf="@+id/started_on" />
+
+            <TextView
+                android:id="@+id/last_location_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/colorSecondaryText"
+                android:layout_below="@+id/last_location"
+                android:layout_toRightOf="@+id/started_on" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_go_right"
+                 />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

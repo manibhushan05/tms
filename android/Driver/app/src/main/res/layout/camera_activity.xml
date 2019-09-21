@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/camera_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <FrameLayout
+                android:id="@+id/camera_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/button_capture"
+            android:src="@drawable/ic_photo_camera_black_36dp"
+            style="@style/TransButtonCamera"
+            android:layout_margin="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageButton
+            android:id="@+id/button_flash"
+            android:src="@drawable/ic_flash_auto_black_24dp"
+            style="@style/TransButtonCamera"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            />
+
+        <ImageButton
+            android:id="@+id/button_back"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            style="@style/TransButtonCamera"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/review_image_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@android:color/black">
+
+            <ImageView
+                android:id="@+id/review_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <ImageButton
+                android:id="@+id/button_recapture"
+                android:src="@drawable/ic_close_black_24dp"
+                style="@style/TransButtonCamera"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/button_ok"
+                android:src="@drawable/ic_check_black_24dp"
+                style="@style/TransButtonCamera"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

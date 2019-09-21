@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "904227386738",
+    "firebase_url": "https://aaho-sales.firebaseio.com",
+    "project_id": "aaho-sales",
+    "storage_bucket": "aaho-sales.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904227386738:android:9192d27cbd927029",
+        "android_client_info": {
+          "package_name": "in.aaho.android.loads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904227386738-5atcmcsq2i2fb6r1pvekkodic8vk9gku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp8rULZ7Bce-_TXt7cZSFRuA-vUlZE1Xo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

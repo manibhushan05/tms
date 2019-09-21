@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Sme</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">RESET</string>
+    <string name="title_activity_transaction">Transaction</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_track_order">Map</string>
+
+    <string name="fill_details">Fill details</string>
+    <!--Place order-->
+    <string name="source">Pick-up Location</string>
+    <string name="destination">Drop Location</string>
+    <string name="source_city">Pick-up City</string>
+    <string name="destination_city">Drop City</string>
+    <string name="num_of_unloading_points">Number of Unloading Points</string>
+    <string name="choose_vehicle_type"> Choose Vehicle Category</string>
+    <string name="number_of_vehicle">Number of vehicle</string>
+    <string name="material">Type of Material</string>
+    <string name="weight_of_material">Quantity</string>
+    <string name="shipment_date">Shipment date</string>
+    <string name="shipment_time">Shipment time</string>
+    <string name="submit">Place Order</string>
+
+    <!--TEST-->
+    <string name="transID">Trans ID</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="_91_7767005442">+91-7767005442</string>
+</resources>

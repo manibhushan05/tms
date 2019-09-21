@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".RequirementActivity">
+
+    <!--<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/drawer_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/recycle_view_background"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!--tools:openDrawer="start">-->
+
+    <!--<include-->
+    <!--layout="@layout/app_bar_landing"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
+
+    <!--<android.support.design.widget.NavigationView-->
+    <!--android:id="@+id/nav_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="start"-->
+    <!--android:fitsSystemWindows="true"-->
+    <!--app:headerLayout="@layout/nav_header_landing"-->
+    <!--app:menu="@menu/activity_landing_drawer" />-->
+
+    <!--</android.support.v4.widget.DrawerLayout>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AahoTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AahoTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            card_view:cardCornerRadius="4dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear_client_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/RequirementFieldLabel"
+                            android:text="Client *" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/client_autoComplete"
+                            style="@style/RequirementInput"
+                            android:ems="10" />
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/from_shipment_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="From Shipment Date *"
+                        android:inputType="date"
+                        android:paddingTop="20dp"
+                        android:textSize="18sp" />
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/to_shipment_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="To Shipment Date"
+                        android:inputType="date"
+                        android:paddingTop="20dp"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/linear_fromcity_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/RequirementFieldLabel"
+                            android:layout_width="50dp"
+                            android:text="From City *" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/fromCity_autoComplete"
+                            style="@style/RequirementInput"
+                            android:ems="10" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_tocity_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/RequirementFieldLabel"
+                            android:layout_width="52dp"
+                            android:text="To City *" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/toCity_autoComplete"
+                            style="@style/RequirementInput"
+                            android:ems="10" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_aahooffice_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/RequirementFieldLabel"
+                            android:layout_width="49dp"
+                            android:text="Aaho Office *" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/aahoOffice_autoComplete"
+                            style="@style/RequirementInput"
+                            android:ems="10" />
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/tonnageTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/tonnage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tonnage"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:maxLines="1"
+                            android:textSize="18sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/noOfVehiclesTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/no_of_vehicles"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/no_of_vehicles"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:maxLines="1"
+                            android:textSize="18sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/materialTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/material"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/req_material"
+                            android:inputType="text"
+                            android:maxLength="50"
+                            android:maxLines="1"
+                            android:textSize="18sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_vehicletype_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/RequirementFieldLabel"
+                            android:text="Vehicle Type" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/vehicleType_autoComplete"
+                            style="@style/RequirementInput"
+                            android:ems="10" />
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/rateTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/req_rate"
+                            android:inputType="number"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:textSize="18sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/remarkTextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/remark"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/remark"
+                            android:inputType="text"
+                            android:maxLength="25"
+                            android:maxLines="3"
+                            android:textSize="18sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/RequirementFieldLabel"
+                            android:visibility="gone"
+                            android:id="@+id/txtStatus"
+                            android:layout_width="52dp"
+                            android:paddingTop="0dp"
+                            android:text="Status" />
+
+                        <CheckBox
+                            style="@style/RequirementInput"
+                            android:visibility="gone"
+                            android:id="@+id/cbFullfilled"
+                            android:text="Fulfilled"
+                            android:checked="false"
+                            android:ems="10"/>
+
+                        <CheckBox
+                            style="@style/RequirementInput"
+                            android:visibility="gone"
+                            android:id="@+id/cbCancelled"
+                            android:text="Cancelled"
+                            android:checked="false"
+                            android:ems="10"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:visibility="gone"
+                            android:id="@+id/cbIsVerified"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:text="Verify Load"
+                            android:checked="false"/>
+
+                        <Button
+                            android:id="@+id/btn_submit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="@string/req_submit" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </ScrollView>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

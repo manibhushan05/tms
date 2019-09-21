@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/driver_list_item"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/driver_name_text_view"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/driver_phone_text_view"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="match_parent"
+        android:textStyle="italic"/>
+
+</LinearLayout>

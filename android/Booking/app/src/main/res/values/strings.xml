@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Booking</string>
+    <!--Booking-->
+    <string name="loading_location_1">Loading Location 1</string>
+    <string name="loading_location_2">Loading Location 2</string>
+    <string name="loading_location_3">Loading Location 3</string>
+    <string name="loading_location_4">Loading Location 4</string>
+    <string name="loading_location_5">Loading Location 5</string>
+    <string name="loading_city_1"> City </string>
+    <string name="loading_city_2"> City </string>
+    <string name="loading_city_3"> City </string>
+    <string name="loading_city_4"> City </string>
+    <string name="loading_city_5"> City </string>
+    <string name="unloading_location_1">Unloading Location 1</string>
+    <string name="unloading_location_2">Unloading Location 2</string>
+    <string name="unloading_location_3">Unloading Location 3</string>
+    <string name="unloading_location_4">Unloading Location 4</string>
+    <string name="unloading_location_5">Unloading Location 5</string>
+    <string name="unloading_city_1">City</string>
+    <string name="unloading_city_2">City</string>
+    <string name="unloading_city_3">City</string>
+    <string name="unloading_city_4">City</string>
+    <string name="unloading_city_5">City</string>
+    <string name="choose_vehicle_category">Choose Vehicle Category</string>
+    <string name="number_of_vehicle">No. of Vehicle</string>
+    <string name="material">Material</string>
+    <string name="shipment_date">Shipment Date</string>
+    <string name="shipment_time">Time</string>
+    <string name="contact_number">Contact Number</string>
+</resources>

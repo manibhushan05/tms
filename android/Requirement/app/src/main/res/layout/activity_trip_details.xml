@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_trip_details"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/recycle_view_background"
+    android:orientation="vertical"
+    tools:context="in.aaho.android.ownr.transaction.TripDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AahoTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AahoTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="Trip Details"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_basic_transaction_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rlTripDetailsMainContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="8dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="8dp"
+                        android:paddingStart="20dp"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvTripDetailsStatus"
+                            style="@style/TextLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginBottom="12dp"
+                            android:background="@color/colorConfirmStatus"
+                            android:text="@string/confirmed_status"
+                            android:textColor="@color/cardview_light_background"
+                            android:theme="@style/transaction_status" />
+
+                        <TextView
+                            android:id="@+id/tvNumberOfBookingsLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/tvTripDetailsStatus"
+                            android:text="@string/pickup_from"
+                            android:theme="@style/TextLabel" />
+
+                        <TextView
+                            android:id="@+id/tvTotalAmountLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/tvNumberOfBookingsLabel"
+                            android:layout_marginEnd="84dp"
+                            android:layout_marginRight="84dp"
+                            android:layout_toLeftOf="@+id/imageView2"
+                            android:layout_toStartOf="@+id/imageView2"
+                            android:text="@string/drop_at"
+                            android:theme="@style/TextLabel" />
+
+                        <TextView
+                            android:id="@+id/tvTotalAmountValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvTotalAmountLabel"
+                            android:layout_alignStart="@+id/tvTotalAmountLabel"
+                            android:layout_below="@+id/tvTotalAmountLabel"
+                            android:theme="@style/CardTextValue" />
+
+                        <TextView
+                            android:id="@+id/tvNumberOfBookingsValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/tvNumberOfBookingsLabel"
+                            android:theme="@style/CardTextValue" />
+
+                        <TextView
+                            android:id="@+id/tvPaidAmountLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/tvNumberOfBookingsValue"
+                            android:text="@string/lr_number"
+                            android:theme="@style/TextLabel" />
+
+                        <TextView
+                            android:id="@+id/tvTripDetailsLrNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/tvPaidAmountLabel"
+                            android:text=" "
+                            android:theme="@style/CardTextValue" />
+
+                        <TextView
+                            android:id="@+id/tvBalanceLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvTotalAmountValue"
+                            android:layout_alignStart="@+id/tvTotalAmountValue"
+                            android:layout_below="@+id/tvTotalAmountValue"
+                            android:text="@string/shipment_date"
+                            android:theme="@style/TextLabel" />
+
+                        <TextView
+                            android:id="@+id/tvTripDetailsShipmentDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/tvBalanceLabel"
+                            android:layout_alignStart="@+id/tvBalanceLabel"
+                            android:layout_below="@+id/tvBalanceLabel"
+                            android:theme="@style/CardTextValue" />
+
+                        <TextView
+                            android:id="@+id/tvTripDetailsTransactionID"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_toEndOf="@+id/tvTripDetailsStatus"
+                            android:layout_toRightOf="@+id/tvTripDetailsStatus"
+                            android:theme="@style/CardTransactionID" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="@dimen/go_right_width"
+                            android:layout_height="@dimen/go_right_height"
+                            android:layout_alignBottom="@+id/tvTotalAmountValue"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="17dp"
+                            android:layout_marginRight="17dp" />
+
+                        <TextView
+                            android:id="@+id/tvConfirmVehicleNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="7dp"
+                            android:layout_marginRight="7dp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="Rate Details"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_trip_details_payments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/recycle_view_background" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="Payment Info"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_trip_details_allocted_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="620dp"
+                android:background="@color/recycle_view_background" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_custom_ship_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    card_view:cardCornerRadius="1dp">
+
+    <requestFocus />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/custom_ship_dialog_truck_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:textSize="14sp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Truck Type"
+                    android:textColor="#333333" />
+
+                <EditText
+                    android:id="@+id/custom_ship_dialog_truck_capacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:textSize="14sp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Capacity e.g. 15 Tons"
+                    android:textColor="#333333" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#a6a6a6"
+                    android:textSize="9sp"
+                    android:text="@string/number_of_trucks" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/custom_ship_dialog_truck_count_minus_btn"
+                        android:src="@drawable/minus_icon"
+                        style="@style/ShipPlusMinusButton" />
+
+                    <EditText
+                        android:id="@+id/custom_ship_dialog_truck_count_edit_text"
+                        style="@style/ShipPlusMinusCount" />
+
+                    <ImageButton
+                        android:id="@+id/custom_ship_dialog_truck_count_plus_btn"
+                        android:src="@drawable/plus_icon"
+                        style="@style/ShipPlusMinusButton" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/custom_ship_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="#aaaaaa"
+            android:src="@drawable/close_icon"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:layout_alignParentRight="true"
+            android:padding="3dp"
+            android:background="@null" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

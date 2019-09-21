@@ -1,0 +1,47 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_loading_address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView13"
+            android:src="@mipmap/ic_unloading"
+            android:layout_alignBottom="@+id/tvuladdAddress"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvuladdCity"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/imageView13"
+            android:layout_toStartOf="@+id/imageView13"
+            android:textSize="@dimen/card_text_label_4"
+            android:textStyle="bold"
+            android:textColor="@color/card_text_color_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvuladdAddress"
+            android:layout_below="@+id/tvuladdCity"
+            android:layout_toLeftOf="@+id/imageView13"
+            android:layout_toStartOf="@+id/imageView13"
+            android:textSize="@dimen/card_text_label_2"
+            android:textColor="@color/card_text_color_1" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

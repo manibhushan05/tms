@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Activity.ContactUs"
+    android:weightSum="1">
+
+
+    <TextView
+        android:id="@+id/mumbai_address_line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:text="Krislon House, Krishanlal Marwah Marg, Saki Naka, Opp Marwah Center, Andheri East" />
+
+    <TextView
+        android:id="@+id/mumbai_address_line2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:text="Mumbai, Maharashtra 400072" />
+
+    <TextView
+        android:id="@+id/mumbai_phone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textAlignment="center"
+        android:autoLink="phone"
+        android:text="+917767005442"
+        android:layout_weight="0.01" />
+
+    <TextView
+        android:id="@+id/mumbai_email"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="18dp"
+        android:textAlignment="center"
+        android:autoLink="email"
+        android:text="mani@aaho.in"
+        android:layout_weight="0.09" />
+
+
+</LinearLayout>
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
+    tools:context=".transaction.TeamBookingDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AahoTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AahoTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/booking_background"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/trip_details"
+                android:textColor="@color/navigationBarColor" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/trip_details_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/rate_details"
+                android:textColor="@color/navigationBarColor" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rate_details_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

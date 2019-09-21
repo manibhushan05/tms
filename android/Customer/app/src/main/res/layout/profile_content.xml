@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="Account Details"/>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="4dp">
+                <requestFocus />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Username"/>
+
+                        <EditText
+                            android:id="@+id/profile_username_edittext"
+                            style="@style/ProfileInputDisabled" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Password"/>
+
+                        <EditText
+                            android:id="@+id/profile_password_edittext"
+                            android:text="*********"
+                            android:drawableRight="@drawable/profile_edit_icon"
+                            style="@style/ProfileInputDisabled" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="Basic Info"/>
+
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Name"/>
+
+                        <EditText
+                            android:id="@+id/profile_name_edittext"
+                            android:inputType="textPersonName"
+                            style="@style/ProfileInput" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Address"/>
+
+                        <EditText
+                            android:id="@+id/profile_address_edittext"
+                            android:inputType="textPostalAddress"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            style="@style/ProfileInput" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="Contact Details"/>
+
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Person Name"/>
+
+                        <EditText
+                            android:id="@+id/profile_contact_name_edittext"
+                            android:inputType="textPersonName"
+                            style="@style/ProfileInput" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Phone"/>
+
+                        <EditText
+                            android:id="@+id/profile_contact_phone_edittext"
+                            android:inputType="phone"
+                            style="@style/ProfileInput" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Email"/>
+
+                        <EditText
+                            android:id="@+id/profile_contact_email_edittext"
+                            android:inputType="textEmailAddress"
+                            style="@style/ProfileInput" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/ProfileInputLabel"
+                            android:text="Designation"/>
+
+                        <EditText
+                            android:id="@+id/profile_designation_edittext"
+                            android:inputType="text"
+                            style="@style/ProfileInput" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="Vendors"/>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/profile_no_vendors_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center"
+                        android:text="No vendors added"
+                        android:textSize="12sp"
+                        android:textColor="#898989" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/profile_vendor_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="#f0f0f0">
+
+                        <Button
+                            android:id="@+id/profile_add_vendor_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Add Vendor"
+                            android:textColor="#009688"
+                            android:textSize="14sp"
+                            style="@style/Widget.AppCompat.Button.Borderless"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="#232790"
+            android:visibility="gone"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

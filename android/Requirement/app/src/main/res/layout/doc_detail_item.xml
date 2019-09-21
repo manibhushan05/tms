@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.9"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/doc_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/doc_id_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="11sp"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/doc_send_check_box"
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"/>
+
+</LinearLayout>

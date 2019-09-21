@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="90dp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="80dp"
+                    android:scaleType="matrix"
+                    android:src="@drawable/aaho_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
+                    android:gravity="bottom"
+                    android:text="aaho"
+                    android:textColor="#ffffff"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <!--<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="30dp"-->
+            <!--card_view:cardCornerRadius="4dp">-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/userNameTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/input_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/username_label"
+                        android:inputType="text"
+                        android:maxLength="50"
+                        android:maxLines="1"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/passwordTextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/input_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:hint="@string/password_label"
+                        android:inputType="textPassword"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="18sp"
+                android:text="Forgot Password?"/>
+
+                <!--<Button-->
+                <!--android:id="@+id/btn_login"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="@string/login" />-->
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/btn_color_flat"
+                    android:minWidth="120dp"
+                    android:text="@string/login"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <!--</android.support.v7.widget.CardView>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

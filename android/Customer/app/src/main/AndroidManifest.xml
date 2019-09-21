@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in.aaho.android.customer">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name=".common.MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/aaho_launcher_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AahoTheme">
+        <activity
+            android:name=".LoadingActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LandingActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".profile.ProfileActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".booking.BookingActivity"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transaction.TransactionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".tracking.TrackingListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sms.SendSmsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sms.ReadSmsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transaction.CompleteTripDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transaction.ConfirmTransactionDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transaction.GenerateLrActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sms.SmsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transaction.QuotationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".transaction.QuotationResponseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".support.ContactUsActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver
+            android:name=".sms.SmsBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".transaction.PrintLrActivity"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="vehicle_category">
+        <item>Tata Ace 1 ton</item>
+        <item>Tata 407 2.5 ton</item>
+        <item>14 Feet Closed 3.5 ton</item>
+        <item>14 Feet Open 4 ton</item>
+        <item>17 Feet Open 5 ton</item>
+        <item>17 Feet Closed 5 ton</item>
+        <item>19 Feet Open 7 ton</item>
+        <item>20 Feet Closed 7 ton</item>
+        <item>22 Feet Closed 7 ton </item>
+        <item>24 Feet Closed 7 ton </item>
+        <item>24 Feet Single Axle 7 ton</item>
+        <item>28 Feet Single Axle 7 ton </item>
+        <item>32 Feet Single Axle 7 ton</item>
+        <item>34 Feet Single Axle 7 ton</item>
+        <item>6 Tyre Open 10 ton</item>
+        <item>24 Feet Multi Axle 14 ton</item>
+        <item>28 Feet Multi Axle 14 ton</item>
+        <item>32 Feet Multi Axle 14 ton</item>
+        <item>34 Feet Multi Axle 14 ton </item>
+        <item>10 Tyre Taurus 15 ton</item>
+        <item>12 Tyre Taurus 20 ton</item>
+        <item>20 Feet Trailer Low Bed 20 ton</item>
+        <item>28 Feet JCB Trailer 20 ton</item>
+        <item>32 Feet Triple Axle Closed 20 ton</item>
+        <item>40 Feet Semi Low Bed 20 ton</item>
+        <item>40 Feet High Bed 20 ton</item>
+        <item> 14 Tyre Taurus 25 ton </item>
+        <item>20 Feet Trailer High Bed 25 ton</item>
+        <item>Refrigerated Truck</item>
+        <item>Other</item>
+    </string-array>
+    <integer-array name="number_of_vehicle">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </integer-array>
+</resources>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/recycle_view_background"
+    android:orientation="vertical"
+    tools:context=".transaction.CompleteTripDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AahoTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AahoTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="Transaction"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_basic_transaction_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rlPendingMainContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+
+                        <TextView
+                            android:id="@+id/btdPickupFromLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:text="Pickup From"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/btdPickupFrom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/btdPickupFromLabel"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btdTransactionIdLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/btdPickupFrom"
+                            android:text="Transaction ID"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/btdTransactionID"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/btdTransactionIdLabel"
+                            android:textColor="@color/card_text_color_2"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btdShipmentDateLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/btdTransactionID"
+                            android:text="Shipment Date"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/btdShipmentDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/btdShipmentDateLabel"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btdDropAtLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="70dp"
+                            android:layout_marginRight="70dp"
+                            android:text="Drop At"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/btdDropAt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/btdDropAtLabel"
+                            android:layout_alignStart="@+id/btdDropAtLabel"
+                            android:layout_alignTop="@+id/btdPickupFrom"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btdStatuslabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/btdDropAt"
+                            android:layout_alignStart="@+id/btdDropAt"
+                            android:layout_below="@+id/btdDropAt"
+                            android:text="Status"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/btdStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/btdStatuslabel"
+                            android:layout_alignStart="@+id/btdStatuslabel"
+                            android:layout_below="@+id/btdStatuslabel"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/btdBookingDateLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/btdStatus"
+                            android:layout_alignStart="@+id/btdStatus"
+                            android:layout_below="@+id/btdStatus"
+                            android:text="Booking Date"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/btdBookingDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/btdBookingDateLabel"
+                            android:layout_alignStart="@+id/btdBookingDateLabel"
+                            android:layout_below="@+id/btdBookingDateLabel"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#f6f6f6"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp">
+
+
+                        <TextView
+                            android:id="@+id/bdtTotalAmountLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="3dp"
+                            android:text="Amount"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/bdtTotalAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="38dp"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/bdtPaidAmountLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="3dp"
+                            android:text="Paid"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/bdtPaidAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="38dp"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/bdtBalanceAmountLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="3dp"
+                            android:text="Balance"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_2" />
+
+                        <TextView
+                            android:id="@+id/bdtBalanceAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/card_text_color_1"
+                            android:textSize="@dimen/card_text_label_1"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Cancel This Transaction ?"
+                android:id="@+id/btnCTDCancel"
+                android:textColor="@color/card_text_color_1"
+                android:textSize="@dimen/card_text_label_3" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="26dp"
+                android:text="@string/vehicle_info"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_pending_transaction_details_allocted_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/recycle_view_background" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_pending_transaction_details_requested_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/recycle_view_background" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="26dp"
+                android:text="Loading &amp; Unloading Point(s)"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_pending_transaction_details_loading_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/recycle_view_background"
+                android:paddingEnd="59dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="59dp"
+                android:paddingStart="0dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_pending_transaction_details_unloading_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/recycle_view_background"
+                android:paddingEnd="0dp"
+                android:paddingLeft="59dp"
+                android:paddingRight="0dp"
+                android:paddingStart="59dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="26dp"
+                android:text="Material"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/card_view_cdt_material"
+                android:paddingBottom="25dp"
+                android:layout_marginBottom="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvCDTMaterial"
+                    android:paddingStart="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:textSize="@dimen/card_text_label_2"
+                    android:textColor="@color/card_text_color_1"/>
+            </android.support.v7.widget.CardView>
+
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                <!--</RelativeLayout>-->
+            <!--</android.support.v7.widget.CardView>-->
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

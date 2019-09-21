@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/booking_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <in.aaho.android.ownr.common.InstantAutoComplete
+                    android:id="@+id/search_bar_text"
+                    android:hint="Search by Vehicle Number"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:drawableTint="#aaaaaa"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"/>
+
+                <ImageButton
+                    android:id="@+id/clear_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="7dp"
+                    android:background="@null"
+                    android:tint="#999999"
+                    android:src="@drawable/ic_close_black_24dp"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/vehicle_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/toggle_vehicle_list_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Vehicles " />
+
+            <TextView
+                android:id="@+id/vehicle_list_detail_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="(0 Vehicles)"
+                android:textStyle="italic"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/expand_image_list"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_expand_less_black_24dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vehicle_list_container"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/vehicle_list_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:text="No vehicles to track"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/vehicle_detail_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/toggle_vehicle_detail_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@android:color/darker_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Vehicle - " />
+
+            <TextView
+                android:id="@+id/vehicle_number_tv"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/expand_image_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_expand_less_black_24dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vehicle_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/vehicle_track_detail_card" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

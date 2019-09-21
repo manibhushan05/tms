@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">आहो मालिक</string>
+    <string name="drop_address">ड्रॉप</string>
+    <string name="amount">"राशी "</string>
+    <string name="balance">"बकाया "</string>
+    <string name="lr_number">LR Number</string>
+    <string name="trip_history_dashboard">यात्रा</string>
+    <string name="zero">0</string>
+    <string name="last_location">पिछला स्थान</string>
+</resources>

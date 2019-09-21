@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "283612773551",
+    "firebase_url": "https://fleet-management-system-1a029.firebaseio.com",
+    "project_id": "fleet-management-system-1a029",
+    "storage_bucket": "fleet-management-system-1a029.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283612773551:android:e0f17905cfee129a",
+        "android_client_info": {
+          "package_name": "in.aaho.android.ownr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283612773551-csfbcuf63gbfdhklsjea80rf1ra94qo4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.aaho.android.ownr",
+            "certificate_hash": "dc00f206ffd8f8ab31273165b40ffe90430768b0"
+          }
+        },
+        {
+          "client_id": "283612773551-1ffibe70nt5eenodehlhrv1hjs2n3ddr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHMVouUUOoi4PIWoqvEj3p82oykAP-YFU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283612773551-1ffibe70nt5eenodehlhrv1hjs2n3ddr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

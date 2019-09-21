@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
+    tools:context=".vehicles.VehicleDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AahoTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AahoTheme.PopupOverlay" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/booking_background">
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_vehicle_details"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.9"
+                android:layout_margin="7dp"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardElevation="4dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="0.8"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:textColor="#333333"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginBottom="3dp"
+                                    android:id="@+id/vehicle_details_number_tv"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:textColor="#333333"
+                                    android:textSize="16sp"
+                                    android:id="@+id/vehicle_details_model_tv"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/vehicle_details_vehicle_edit_btn"
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:layout_height="match_parent"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:tint="#666666"
+                                    android:src="@drawable/ic_mode_edit_black_24dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="7dp"
+                            android:background="#dddddd"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        style="@style/DocListItem"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsLabelTitle"
+                            android:text="Location" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            style="@style/DetailsValue"
+                            android:id="@+id/vehicle_details_location_tv"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        style="@style/DocListItem"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsLabelTitle"
+                            android:text="Status" />
+
+                        <Spinner
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsValue"
+                            android:id="@+id/vehicle_details_status_spinner"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        style="@style/DocListItem"
+                        android:id="@+id/vehicle_details_owner_btn">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsLabelTitle"
+                            android:text="Owner" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.6"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            style="@style/DetailsValue"
+                            android:id="@+id/vehicle_details_owner_tv"/>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:gravity="center"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:src="@drawable/ic_mode_edit_black_18dp"
+                                android:tint="#666666" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        style="@style/DocListItem"
+                        android:id="@+id/vehicle_details_driver_btn">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsLabelTitle"
+                            android:text="Driver" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.6"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            style="@style/DetailsValue"
+                            android:id="@+id/vehicle_details_driver_tv"/>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:gravity="center"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:src="@drawable/ic_mode_edit_black_18dp"
+                                android:tint="#666666" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        style="@style/DocListItem"
+                        android:id="@+id/vehicle_details_documents_btn">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.9"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsLabelTitle"
+                            android:text="Documents" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:gravity="center"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="#666666"
+                                android:src="@drawable/ic_navigate_next_black_24dp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        style="@style/DocListItem"
+                        android:id="@+id/vehicle_details_trip_history_btn">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="0.9"
+                            android:layout_height="wrap_content"
+                            style="@style/DetailsLabelTitle"
+                            android:text="Trip History" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="0.1"
+                            android:gravity="center"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:tint="#666666"
+                                android:src="@drawable/ic_navigate_next_black_24dp"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/vehicle_details_save_btn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:text="SAVE"
+                android:background="@color/colorPrimary"
+                android:textColor="#ffffff"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

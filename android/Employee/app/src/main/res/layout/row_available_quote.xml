@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvBidNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|start"
+                android:text="Bid 1"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/linear_transporter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTransporterLabel"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Supplier" />
+
+                <TextView
+                    android:id="@+id/tvTransporterName"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="SM Transport" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_no_of_vehicle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNoOfVehiclesLabel"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="No of Vehicles" />
+
+                <TextView
+                    android:id="@+id/tvNoOfVehicles"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="2 Trucks" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_tonnage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end|right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTonnageLabel"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Tonnage" />
+
+                <TextView
+                    android:id="@+id/tvTonnage"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="1600" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/linear_bid_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|start"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBidPriceLabel"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Rate per ton" />
+
+                <TextView
+                    android:id="@+id/tvBidPrice"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="1600" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_contact_us"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|end"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_call"
+                    android:tint="@color/btn_color_flat" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

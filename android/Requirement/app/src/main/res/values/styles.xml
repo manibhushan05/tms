@@ -1,0 +1,292 @@
+<resources>
+
+    <style name="AahoTheme" parent="AahoTheme.Base">
+        <item name="android:textSize">14sp</item>
+        <item name="android:actionMenuTextColor">#232790</item>
+    </style>
+
+    <style name="AahoTheme.Splash" parent="AahoTheme.Base">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <style name="AahoTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomTabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabIndicatorColor">@color/colorTabIndicator</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">264dp</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabTextColor">@color/colorTabSelectedText</item>
+        <item name="tabSelectedTextColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="CustomTabTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AahoTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AahoTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AahoTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextLabel">
+        <item name="android:textSize">@dimen/card_text_label_2</item>
+        <item name="android:textColor">@color/card_text_color_1</item>
+    </style>
+
+    <style name="CardTextValue">
+        <item name="android:textSize">@dimen/card_text_label_1</item>
+        <item name="android:textColor">@color/card_text_color_1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">@dimen/margin_card_values</item>
+    </style>
+
+    <style name="TextLabelQuotes">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="CardTextValueQuotes">
+        <item name="android:textSize">14sp</item>
+        <!--item name="android:textColor">@color/card_text_color_1</item-->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardTransactionID">
+        <item name="android:textSize">@dimen/card_text_label_3</item>
+        <item name="android:textColor">@color/card_text_color_1</item>
+        <item name="android:padding">@dimen/status_padding</item>
+    </style>
+
+    <style name="transaction_status">
+        <item name="android:textSize">@dimen/card_text_label_3</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:padding">@dimen/status_padding</item>
+    </style>
+
+    <style name="CardAmountText">
+        <item name="android:textSize">@dimen/card_text_label_1</item>
+        <item name="android:textColor">@color/card_text_color_2</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardButton">
+        <item name="android:background">@drawable/btn_cardlayout</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">11dp</item>
+        <item name="android:textColor">@color/card_text_color_1</item>
+        <item name="android:textSize">@dimen/card_text_label_2</item>
+    </style>
+
+    <style name="DialogFragmentContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <style name="TransButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:tint">#dddddd</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:background">@drawable/trans_btn</item>
+    </style>
+
+    <style name="TransButtonCamera">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:tint">@android:color/darker_gray</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:background">@drawable/trans_btn</item>
+    </style>
+
+
+
+    <style name="FlatButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">#009688</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DocListItem">
+        <item name="android:padding">10dp</item>
+        <item name="android:minHeight">50dp</item>
+    </style>
+
+    <style name="DetailsLabelTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DetailsValue">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DocListTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:layout_marginBottom">7dp</item>
+    </style>
+
+    <style name="DocListBottomText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DocListDetail">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DashboardCardText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:textColor">@color/abc_primary_text_disable_only_material_light</item>
+        <item name="android:layout_marginLeft">65dp</item>
+    </style>
+
+    <style name="DashboardCardImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleX">0.6</item>
+        <item name="android:scaleY">0.6</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">2dp</item>
+    </style>
+
+    <style name="ProfileInputBase">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">0.8</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minWidth">50dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <!--<item name="android:text">Sample text</item>-->
+    </style>
+
+    <style name="RequirementInputBase">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">0.8</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minWidth">50dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <!--<item name="android:text">Sample text</item>-->
+    </style>
+
+    <style name="RequirementInput" parent="RequirementInputBase">
+
+    </style>
+
+    <style name="ProfileInput" parent="ProfileInputBase">
+
+    </style>
+
+    <style name="ProfileInputDisabled" parent="ProfileInputBase">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:paddingTop">11dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="RequirementFieldLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">0.3</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ProfileInputLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">0.3</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ShipPlusMinusButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.3</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:tint">#666666</item>
+        <item name="android:scaleX">0.75</item>
+        <item name="android:scaleY">0.75</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="ShipPlusMinusCount">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.4</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:focusable">false</item>
+        <item name="android:background">@null</item>
+        <item name="android:text">0</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="CenterTextView" parent="@android:style/Widget.TextView">
+        <item name="android:gravity">center|center_vertical</item>
+    </style>
+
+    <!--<style name="CenterJustifyDialogTitle" parent="@android:style/" >-->
+    <!--<item name="android:gravity">center|center_vertical</item>-->
+    <!--<item name="android:textColor">#000000</item>-->
+    <!--</style>-->
+    <style name="myBackgroundStyle" parent="@android:style/Theme.Translucent">
+        <!--<item name="android:background">#3344</item>-->
+        <item name="android:textViewStyle">@style/CenterTextView</item>
+        <!--<item name="android:windowTitleStyle">@style/CenterJustifyDialogTitle</item>-->
+    </style>
+
+</resources>

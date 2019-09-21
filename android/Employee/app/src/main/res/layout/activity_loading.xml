@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:visibility="invisible"
+        android:layout_marginTop="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="13dp"
+        android:text="aaho"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#8f91c9"
+        android:textSize="11.5sp"
+        android:layout_marginBottom="3dp"
+        android:text="Your Only Solution for"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#8f91c9"
+        android:textSize="17.5sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        android:text="Inter-City Transportation"/>
+
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/error_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textColor="#ff4466"
+        android:visibility="invisible"
+        android:text="Failed to load data"/>
+
+    <Button
+        android:id="@+id/try_again_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        style="@style/FlatButton"
+        android:text="Try Again"/>
+
+</LinearLayout>

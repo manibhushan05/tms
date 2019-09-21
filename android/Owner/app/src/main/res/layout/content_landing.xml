@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".LandingActivity"
+    tools:showIn="@layout/app_bar_landing">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_my_vehicles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:paddingLeft="2dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/dashboard_circle" />
+
+                    <ImageView
+                        android:id="@+id/imageViewMyVehiclesRight"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_go_right" />
+
+                    <ImageView
+                        android:id="@+id/imageViewMyVehicles"
+                        style="@style/DashboardCardImage"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:src="@mipmap/ic_place_order" />
+
+                    <TextView
+                        android:id="@+id/tvMyVehicles"
+                        style="@style/DashboardCardText"
+                        android:text="@string/my_vehicles" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_my_drivers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:paddingLeft="2dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/dashboard_circle" />
+
+                    <ImageView
+                        android:id="@+id/imageViewMyDriversRight"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_go_right" />
+
+                    <ImageView
+                        android:id="@+id/imageViewMyDrivers"
+                        style="@style/DashboardCardImage"
+                        android:layout_marginLeft="-1dp"
+                        android:src="@mipmap/icon_dashboard_driver"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/tvMyDrivers"
+                        style="@style/DashboardCardText"
+                        android:text="@string/my_drivers" />
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_available_loads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:paddingLeft="2dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/dashboard_circle" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_go_right" />
+
+                    <ImageView
+                        style="@style/DashboardCardImage"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:src="@drawable/ic_available_loads" />
+
+                    <TextView
+                        style="@style/DashboardCardText"
+                        android:text="Available Loads" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_trip_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:paddingLeft="2dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/dashboard_circle" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_go_right" />
+
+                    <ImageView
+                        android:id="@+id/imageViewTripHistory"
+                        style="@style/DashboardCardImage"
+                        android:src="@mipmap/ic_booking_history" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        style="@style/DashboardCardText"
+                        android:text="@string/trip_history_dashboard" />
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_track"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:paddingLeft="2dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/dashboard_circle" />
+
+                    <ImageView
+                        android:id="@+id/imageViewTrackRight"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_go_right" />
+
+                    <ImageView
+                        android:id="@+id/imageViewTrack"
+                        style="@style/DashboardCardImage"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:src="@mipmap/ic_track" />
+
+                    <TextView
+                        android:id="@+id/tvTrack"
+                        style="@style/DashboardCardText"
+                        android:text="Track" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_support"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:paddingLeft="2dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/dashboard_circle" />
+
+                    <ImageView
+                        android:id="@+id/imageViewSupportRight"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_go_right" />
+
+                    <ImageView
+                        android:id="@+id/imageViewSupport"
+                        style="@style/DashboardCardImage"
+                        android:src="@mipmap/ic_support" />
+
+                    <TextView
+                        android:id="@+id/textViewSupport"
+                        style="@style/DashboardCardText"
+                        android:text="@string/support" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".profile.ProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="#f6f6f6">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left"
+                        android:layout_marginLeft="5dp"
+                        android:text="Add New Vendor"
+                        style="@style/FlatButton"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    >
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_vendor_name_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name"
+                            android:inputType="textPersonName"
+                            android:fontFamily="sans-serif"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/add_vendor_phone_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Phone number"
+                            android:inputType="phone"
+                            android:fontFamily="sans-serif"
+                            android:singleLine="true" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="#f6f6f6">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical|left">
+
+                        <Button
+                            android:id="@+id/add_vendor_dialog_cancel_btn"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="cancel"
+                            style="@style/FlatButton"/>
+
+                        <Button
+                            android:id="@+id/add_vendor_dialog_add_btn"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="add"
+                            style="@style/FlatButton"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">आहो ड्राइवर</string>
+    <string name="app_logo">आहो</string>
+
+    <string name="status_service_create">सेवा बनाया</string>
+    <string name="status_service_destroy">सेवा को नष्ट कर दिया</string>
+    <string name="status_send_fail">भेजना विफल</string>
+    <string name="status_location_update">स्थान अद्यतन</string>
+    <string name="status_connectivity_change">कनेक्टिविटी बदलें</string>
+
+    <string name="progress_title">कृपया प्रतीक्षा करें</string>
+    <string name="progress_msg">सर्वर के उत्तर की प्रतीक्षा की जा रही है...</string>
+
+    <string name="loaded">वाहन लदा हुआ है</string>
+    <string name="unloaded">वाहन खाली है</string>
+    <string name="loading">वाहन लद रहा है&#8230;</string>
+    <string name="unloading">वाहन खाली हो रहा है&#8230;</string>
+
+    <!-- Play Services -->
+    <string name="play_services">गूगल प्ले सेवा अनिवार्य</string>
+    <string name="play_services_msg">ऐप गूगल प्ले सेवा संस्करण 9.0.1 से ज्यादा चाहिए, जारी रखने के लिए अपडेट करने की आवश्यकता है</string>
+    <!-- GPS Location -->
+    <string name="gps_request_title">जीपीएस अनिवार्य</string>
+    <string name="gps_request_msg">ऐप के काम करने के लिए जीपीएस चालू होना जरूरी है, जारी रखने के लिए जीपीएस चालू करें</string>
+    <!-- truck status -->
+    <string name="confirm_action">कार्य की पुष्टि</string>
+    <string name="action_status_change">क्या आप स्थिति \'%s\' में बदलना चाहते हैं?</string>
+
+    <!-- Generic (typical ui texts, like 'ok', 'cancel' etc.) -->
+    <string name="ok">ठीक</string>
+    <string name="yes">हाँ</string>
+    <string name="no">नहीं</string>
+    <string name="register">रजिस्टर</string>
+    <string name="status">स्थिति</string>
+    <string name="later">बाद में</string>
+    <string name="cancel">रद्द</string>
+    <string name="register_success">पंजीकरण सफल</string>
+    <string name="edit_success">बदलाव सफल</string>
+    <string name="edit_registration">विवरण बदलें</string>
+    <string name="call_us">हमें फोन करें</string>
+
+    <!--Register Vehicle-->
+    <string name="vehicle_type">वाहन का प्रकार</string>
+    <string name="veh_number">वाहन संख्या</string>
+    <string name="imei_number">आईएमईआई संख्या</string>
+    <string name="driver_name">चालक का नाम</string>
+    <string name="mobile_number">मोबाइल नंबर</string>
+    <string name="registration_details">पंजीकरण के विवरण</string>
+
+    <string name="unloaded_desc">वाहन खाली है और अगले आदेश के लिए तैयार है</string>
+    <string name="loading_desc">वाहन लोड करने की प्रक्रिया में है या पिकअप करने के लिए अपने रास्ते पर है</string>
+    <string name="loaded_desc">वाहन लदा हुआ है और अब अपने रास्ते पर है</string>
+    <string name="unloading_desc">वाहन अपने लक्ष्य तक पहुँच गया है और अब उतारने के लिए इंतज़ार कर रहा है</string>
+
+    <string name="one_time_password">एक बार इस्तेमाल किये जाने वाला पासवर्ड</string>
+    <string name="waiting">इंतज़ार...</string>
+    <string name="resend">फिर भेजें</string>
+    <string name="verify">सत्यापित करें</string>
+    <string name="reenter">फिर से दर्ज करें</string>
+    <string name="pod_preview">पीओडी देखें</string>
+    <string name="loading_image">छवि लोड हो रहा है</string>
+    <string name="no_pod_selected">कोई पीओडी चयनित नहीं</string>
+    <string name="proof_of_delivery">डिलीवरी का सबूत (पीओडी)</string>
+    <string name="quit">छोडें</string>
+    <string name="terms_html_file">file:///android_asset/terms-hi.html</string>
+    <string name="language"></string>
+
+</resources>

@@ -1,0 +1,154 @@
+<resources>
+    <string name="app_name">Aaho Customer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="font_fontFamily_medium">sans-serif</string>
+
+
+    <!--Tracking-->
+    <string name="track">Track</string>
+    <string name="heading_message">All Scheduled Trips</string>
+    <string name="transaction_id">Transaction ID</string>
+    <string name="status">Status</string>
+    <string name="pickup_from">Pick From</string>
+    <string name="drop_at">Drop At</string>
+    <string name="shipment_date">Shipment Date</string>
+    <string name="started_on">Started On</string>
+    <string name="number_of_truck">Number of Trucks</string>
+    <string name="material">Material</string>
+    <string name="last_location">Last Location</string>
+    <string name="title_activity_tracking_maps">Map</string>
+    <string name="title_activity_landing">LandingActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="amout">Amount</string>
+    <string name="quote">Quote</string>
+    <string name="cancelled_on">Cancelled On</string>
+
+    <!-- Booking -->
+    <string name="city">City</string>
+    <string name="add_more">Add More</string>
+    <string name="reset_form">Reset Form</string>
+    <string name="submit_booking">Submit Booking</string>
+    <string name="remove_address">Remove this Address</string>
+
+    <string name="pickup_details">Pickup Details</string>
+    <string name="pickup_address">Pickup Address</string>
+    <string name="pickup_date">Pickup Date</string>
+    <string name="extra_pickup_msg">Have more than 1 pickup address?</string>
+
+    <string name="drop_details">Drop Details</string>
+    <string name="drop_address">Drop Address</string>
+    <string name="extra_drop_msg">Have more than 1 drop address?</string>
+
+    <string name="booking_contact_phone_hint">Contact person\'s phone</string>
+    <string name="booking_contact_name_hint">Contact person\'s name</string>
+    <string name="booking_shipdate_hint">Shipment Date</string>
+    <string name="booking_material_hint">Material</string>
+    <string name="booking_rate_hint">Expected Rate</string>
+
+    <string name="shipment_details">Vehicle Details</string>
+    <string name="other_details">Other Details</string>
+    <string name="no_shipment">No vehicles added</string>
+    <string name="add_shipment">Add Vehicle</string>
+    <string name="edit_shipment">Change</string>
+    <string name="remove_shipment">Remove</string>
+
+    <string name="booking_result_desc">Thanks for trusting aaho with your requirements\nOur team is on your request to find best\noptions for you</string>
+    <string name="booking_result_desc_extra">You can also send quotation requests to\nyour previous vendors</string>
+    <string name="send_request">Send Request</string>
+    <string name="booking_vendor_dialog_selected">&#160;Selected</string> <!-- do not trim space character -->
+    <string name="booking_vendor_dialog_title">select vendors</string>
+    <string name="select_a_city">select a city</string>
+    <string name="booking_received">Booking Received</string>
+    <string name="request_vendors">Request Vendors</string>
+    <string name="number_of_trucks">Number of Trucks</string>
+    <string name="select_your_truck">select your truck</string>
+    <string name="ship_dialog_footer_part1">You have selected&#160;</string> <!-- do not trim space character -->
+    <string name="ship_dialog_footer_part2">&#160;Truck(s)</string> <!-- do not trim space character -->
+
+    <string name="cancel">Cancel</string>
+    <string name="zero">0</string>
+    <string name="no_thanks">No Thanks</string>
+    <string name="select_all">Select All</string>
+    <string name="done">Done</string>
+
+
+    <!--STATUS-->
+    <string name="pending_status">Pending</string>
+    <string name="confirmed_status">Confirmed</string>
+    <string name="in_transit_status">In-Transit</string>
+    <string name="delivered_status">Delivered</string>
+    <string name="cancelled_status">Cancelled</string>
+
+    <string name="action_settings">Profile</string>
+    <string name="type_of_vehicle">Type of Vehicle</string>
+    <string name="vehicle_number">Vehicle Number</string>
+    <string name="lr_numbers">LR Number(s)</string>
+    <string name="driver_licence_number">Driver\'s Licence No</string>
+    <string name="support_email">info@aaho.in</string>
+    <string name="support_phone">+91-9324799518</string>
+    <string name="support_aaho_address">Krislon House, Krishanlal Marwah Marg, Saki Naka, Opp Marwah Center, Andheri East</string>
+    <string name="booking_history">Booking History</string>
+    <string name="new_booking">New Booking</string>
+    <string name="payments">Payments</string>
+    <string name="quotations">Quotations</string>
+    <string name="support">Support</string>
+    <string name="responses_received"><![CDATA[ Responses Received]]></string>
+    <string name="responses">Responses</string>
+    <string name="responses_num">Responses #</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="login">Login</string>
+
+
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+
+    <string name="progress_title">Waiting</string>
+    <string name="progress_msg">Waiting for server to respond...</string>
+
+    <string name="call_us">Call Us</string>
+    <string name="send_action_logs">Send App Logs</string>
+    <string name="vehicle_info">Vehicle Info</string>
+    <string name="consignor_name">Consignor Name</string>
+    <string name="consignor_address">Consignor Address</string>
+    <string name="consignor_city">Consignor City</string>
+    <string name="consignor_pin">Consignor Pin</string>
+    <string name="consignor_phone">Consignor Phone</string>
+    <string name="consignor_cst_tin">Consignor CST/TIN/VAT</string>
+    <string name="consignee_description">Consignee Description</string>
+    <string name="consignee_name">Consignee Name</string>
+    <string name="consignee_address">Consignee Address</string>
+    <string name="consignee_city">Consignee City</string>
+    <string name="consignee_pin">Consignee PIN</string>
+    <string name="consignee_phone">Consignee Phone</string>
+    <string name="consignee_cst_tin">Consignee CST/TIN/VAT</string>
+    <string name="others">Others</string>
+    <string name="source_city">Source City</string>
+    <string name="destination_city">Destination City</string>
+    <string name="invoice_number">Invoice Number</string>
+    <string name="invoice_date">Invoice Date</string>
+    <string name="invoice_amount">Invoice Amount</string>
+    <string name="vehicle_details">Vehicle Details</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="driver_phone">Driver Mobile Number</string>
+    <string name="road_permit_number">Road Permit Number</string>
+    <string name="number_of_packages">Number of Packages</string>
+    <string name="material_description">Material Description</string>
+    <string name="actual_weight">Actual Weight</string>
+    <string name="charged_weight">Charged Weight</string>
+    <string name="rate">Rate(Kg/Cft./M.T.)</string>
+    <string name="insurance_info">Insurance</string>
+    <string name="insurance_provider">Insurance Provider</string>
+    <string name="insurance_policy_number">Insurance Policy Number</string>
+    <string name="insured_amount">Insured_amount</string>
+    <string name="insurance_date">Insurance Date</string>
+    <string name="insurance_risk">Insurance Risk</string>
+    <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
+    <string name="terms_and_conditions_title">Terms and Conditions</string>
+
+</resources>

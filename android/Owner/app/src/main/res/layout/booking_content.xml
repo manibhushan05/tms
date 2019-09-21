@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/booking_background">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/pickup_details"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/pickup_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/drop_details"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/drop_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/shipment_details"/>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_ship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/no_ship_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center"
+                        android:text="@string/no_shipment"
+                        android:textSize="12sp"
+                        android:textColor="#898989" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/custom_ship_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/ship_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <RelativeLayout
+                        android:id="@+id/ship_subcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="#f0f0f0">
+
+                        <Button
+                            android:id="@+id/more_ship_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/add_shipment"
+                            android:textColor="#009688"
+                            android:textSize="14sp"
+                            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                        <Button
+                            android:id="@+id/del_ship_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/remove_shipment"
+                            android:textColor="#009688"
+                            android:textSize="14sp"
+                            android:visibility="gone"
+                            style="@style/Widget.AppCompat.Button.Borderless"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:text="@string/other_details"/>
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_other_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/other_details_phone_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:inputType="phone"
+                        android:hint="@string/booking_contact_phone_hint"/>
+
+                    <EditText
+                        android:id="@+id/other_details_name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:hint="@string/booking_contact_name_hint"/>
+
+                    <EditText
+                        android:id="@+id/other_details_material_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:hint="@string/booking_material_hint"/>
+
+                    <EditText
+                        android:id="@+id/other_details_rate_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/booking_rate_hint"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="22dp">
+
+                <CheckBox
+                    android:id="@+id/booking_terms_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="italic"
+                    android:text="I accept the "/>
+
+                <TextView
+                    android:id="@+id/booking_terms_open_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    android:text="@string/terms_and_conditions"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset_form_btn"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/reset_form"
+            android:textColor="#898989"
+            android:textSize="14sp"
+            android:background="#ebeef0"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/submit_booking"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="#232790"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

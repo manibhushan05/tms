@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tvInvoiceNumber"
+                style="@style/CardTextValueQuotes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_gravity="center_vertical"
+                android:gravity="start"
+                android:text=""
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linear_upload_pod"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvViewInvoice"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/button_round_rectangle"
+                    android:padding="5dp"
+                    android:text="View Invoice"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvUpdateStatus"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/button_round_rectangle"
+                    android:padding="5dp"
+                    android:text="Update Status/Comment"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tvCustomerName"
+                style="@style/CardTextValueQuotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/linear_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextLabelQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Amount" />
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_amount_to_be_received"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextLabelQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Amt To Be Received" />
+
+                <TextView
+                    android:id="@+id/tvAmountToBeReceived"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_invoice_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextLabelQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Invoice Date" />
+
+                <TextView
+                    android:id="@+id/tvInvoiceDate"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/linear_due_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextLabelQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Due On" />
+
+                <TextView
+                    android:id="@+id/tvDueOn"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:id="@+id/linear_status"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--style="@style/TextLabelQuotes"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:text="Status" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvStatus"-->
+                    <!--style="@style/CardTextValueQuotes"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="" />-->
+
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/linear_update_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextLabelQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Latest Comment" />
+
+                <TextView
+                    android:id="@+id/tvComment"
+                    style="@style/CardTextValueQuotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

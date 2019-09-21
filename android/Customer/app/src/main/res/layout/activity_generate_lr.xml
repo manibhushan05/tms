@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/recycle_view_background"
+    android:orientation="vertical"
+    tools:context=".transaction.CompleteTripDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AahoTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AahoTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="Consignor Details"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_lr_consignor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignor_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignor_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignor_name"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignor_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignor_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignor_address"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignor_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignor_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignor_city"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignor_pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignor_pin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignor_pin"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignor_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignor_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignor_phone"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignor_cst_tin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignor_cst_tin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignor_cst_tin"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="@string/consignee_description"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_lr_consignee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignee_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignee_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignee_name"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignee_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignee_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignee_address"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignee_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignee_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignee_city"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignee_pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignee_pin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignee_pin"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignee_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignee_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignee_phone"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_consignee_cst_tin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_consignee_cst_tin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/consignee_cst_tin"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="@string/other_details"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_lr_others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_source_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_source_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/source_city"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_destination_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_destination_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/destination_city"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_invoice_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_invoice_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/invoice_number"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_invoice_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_invoice_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/invoice_date"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_invoice_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_invoice_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/invoice_amount"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="@string/vehicle_details"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_lr_vehicle_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_vehicle_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_vehicle_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/vehicle_number"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_driver_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_driver_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/driver_name"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_driver_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_driver_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/driver_phone"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_driving_licence_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_driving_licence_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/driver_licence_number"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_road_permit_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_road_permit_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/road_permit_number"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="@string/material_description"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_lr_material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_number_of_package"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_number_of_package"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/number_of_packages"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_material_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_material_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/material_description"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_actual_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_actual_weight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/actual_weight"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:id="@+id/layout_lr_charged_weight"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+
+                    <!--<AutoCompleteTextView-->
+                    <!--android:id="@+id/input_charged_weight"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/charged_weight"-->
+                    <!--android:maxLines="2" />-->
+                    <!--</android.support.design.widget.TextInputLayout>-->
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_rate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_rate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/rate"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="21dp"
+                android:text="@string/insurance_info"
+                android:textColor="#de000000"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_insurance_company"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_insurance_company"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/insurance_provider"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_insurance_policy_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_insurance_policy_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/insurance_policy_number"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_insured_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_lr_insured_amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/insured_amount"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_insurance_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_insurance_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/insurance_date"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/layout_lr_insurance_risk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/input_insurance_risk"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/insurance_risk"
+                            android:maxLines="2" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset_form_btn"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/reset_form"
+            android:textColor="#898989"
+            android:textSize="14sp"
+            android:background="#ebeef0"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Generate LR"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="#232790"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,42 @@
+<!-- fragment_edit_name.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:minWidth="500dp"
+    android:padding="15dp"
+    android:layout_gravity="center" android:orientation="vertical"  >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:textColor="@color/btn_color_flat"
+        android:text="Select dates:"/>
+
+    <EditText
+        android:id="@+id/fromDateEditText"
+        android:layout_width="match_parent"  android:layout_height="wrap_content"
+        android:hint="From Date"
+        android:inputType="none"
+        android:focusable="false"
+        android:drawableRight="@drawable/date_range"
+        android:imeOptions="actionDone" />
+
+    <EditText
+        android:id="@+id/toDateEditText"
+        android:layout_width="match_parent"  android:layout_height="wrap_content"
+        android:hint="To Date"
+        android:inputType="none"
+        android:focusable="false"
+        android:drawableRight="@drawable/date_range"
+        android:imeOptions="actionDone" />
+
+    <Button
+        android:id="@+id/btnFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@color/btn_color_flat"
+        android:textColor="@android:color/white"
+        android:text="Filter"/>
+
+</LinearLayout>

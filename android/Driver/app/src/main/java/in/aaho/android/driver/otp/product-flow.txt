@@ -1,0 +1,150 @@
+
+Owner => Fleet Owner or Broker
+Notify => Send one or more of Mail/SMS/In-app/Admin-panel notification
+
+ON-BOARDING FLOW -
+
+Owner is registered manually, and provided with a login and password
+    Owner documents are verified
+    In case of verification failure, ask Owner to provide correct documents
+Some vehicles can also be added at this point
+    Vehicle documents are verified
+    In case of verification failure, ask Owner to provide correct documents
+Owner can also add some drivers at this point
+    Driver documents are verified
+    In case of verification failure, ask Owner to provide correct documents
+
+Owner installs the FMS app and logs in
+Owner adds vehicles using FMS app
+    Optionally adds vehicle documents
+        Notify Aaho team to manually verify the documents
+        In case of verification failure, notify Owner, Owner can provide the correct documents
+Owner adds drivers using FMS app
+    Optionally adds driver documents
+        Notify Aaho team to manually verify the documents
+        In case of verification failure, notify Owner, Owner can provide the correct documents
+
+Drivers install the Driver app and registers, provides phone number and vehicle number
+    Driver app starts sending location updates
+    Phone number is verified using an OTP
+    When verification is successful the driver gets assigned to the provided vehicle
+    Optionally adds driver documents
+        Notify Aaho team to manually verify the documents
+        In case of verification failure, notify Driver, Driver can provide the correct documents
+
+Customer is registered manually, and provided with a login and password
+Customer installs the SME app and logs in
+
+
+APP BOOKING FLOW -
+
+Customer creates a new booking using SME app
+Owners get notified periodically of new relevant bookings (currently all bookings)
+Owner provides a quote (with vehicles selected)
+    Aaho team gets notified about a new quote
+    Aaho team adds commission and sets a final amount to be paid by customer
+Customer gets notified about a new quote for their booking
+    Customer rejects the quote
+        Notify Aaho team and Owner
+    Customer confirms the quote
+        Allocated Vehicle entry is created
+        Aaho team is notified
+        Aaho team performs "finalization checks"* to confirm booking authenticity
+            In case of check failure,
+                Owner/Customer are asked to rectify the reason for the check failure
+                On failure to rectify,
+                    Vehicles are de-allocated, booking entry is removed if required
+                    Owner and Customer are notified if required
+                On successful rectification,
+                    Check is considered successful
+            In case of check success,
+                Booking is set confirmed
+                Owner and Customer are notified about the booking confirmation
+                LR is generated and sent to the concerned parties (after manual verification if required)
+
+
+* Finalization Checklist -
+    - Nothing looks out of place in booking
+        Pickup point and drop point should not be exactly the same
+        Prices/other fields should not be absurd, etc.
+
+    - All required documents for allocated vehicles are verified
+    - All required documents for the owner/broker are verified
+    - All required documents for assigned drivers are verified
+
+    - Owner/Broker is trusted (vague, based on previous trips, and/or other factors)
+    - Customer is trusted (vague, based on previous bookings, payment history, and/or other factors)
+
+    - Customer is called to confirm the booking and booking details
+    - Owner is called to confirm his commitment and quote details
+
+
+EXECUTION FLOW -
+
+Aaho team is regularly notified of devices not sending location updates using mail (aggregated)
+
+Apt time before Pickup date, Customer is reminded to be ready for pickup
+Apt time before Pickup date, Owner is reminded of upcoming commitment
+
+Owner can optionally change some details
+    Assign a new driver or edit driver details (as long as driver documents are in place)
+    Assign a different vehicle of the same type/capacity (as long as vehicle documents are in place)
+    LR is regenerated if required because of detail changes, and resent to the concerned parties (after manual verification if required)
+    Customer is notified of the changes if required
+
+Throughout the trip, if location updates are missing from an allocated vehicle for say 12 hrs,
+    Driver is notified by SMS that location updates are not regular
+    Driver app detects the SMS and tries to fix the problem and reports to the server
+    If app is unable to fix the issue, Aaho team is notified
+        Aaho team coordinates with driver and/or owner if required
+
+On pickup date, vehicles reach their respective pickup points
+Driver switches the status to 'loading'
+    Customer (and Owner?) get notified
+Driver switches the status to 'loaded' after loading the vehicle and starts moving towards drop point
+    Customer (and Owner?) get notified
+Driver reaches the drop point and switches the status to 'unloading'
+    Customer (and Owner?) get notified
+Driver unloads the vehicle and switches the status to 'unloaded'
+
+POD is provided
+    Driver uploads a POD from Driver app (optionally?)
+        Aaho team is notified to verify the POD
+        if POD Verification fails,
+            Aaho asks driver to provide proper POD
+        if POD Verification succeeds,
+            Customer and Owner are notified and sent a copy of the POD
+            Customer is asked to process the payment
+
+    or, POD is sent via courier
+        if POD Verification fails,
+            Aaho asks owner/driver to provide proper POD
+        if POD Verification succeeds,
+            Customer and Owner are notified and sent a copy of the POD
+            Customer is asked to process the payment
+
+Aaho team reminds Customers about their outstanding payments on a regular basis
+Aaho team pays owners when all/sufficient payment is made from the customer side
+Booking is closed when all the payments are confirmed
+
+
+
+First iteration -
+
+Production and Development mirrors
+
+Git, 2 main branches,
+
+after individual developer has developed a feature, and done his personal testing
+pull request
+peer review
+merge to develop
+deploy to development env
+run tests on dev env
+revert if not clearing tests
+merge with master when feature-set complete
+
+
+
+
+

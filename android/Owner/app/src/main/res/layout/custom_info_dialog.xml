@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Message" />
+
+    <LinearLayout
+        android:id="@+id/linear_msg_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMsg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="Show more" />
+
+        <TextView
+            android:id="@+id/tvMsgDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Message Detail" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_msg_detail"
+        android:layout_marginTop="10dp"
+        android:background="@color/btn_color_flat"
+        android:textColor="@android:color/white"
+        android:text="OK"/>
+
+</RelativeLayout>

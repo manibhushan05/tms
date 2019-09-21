@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view_ship_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    card_view:cardCornerRadius="1dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ship_dialog_truck_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:layout_gravity="center_vertical|left"
+            android:textSize="14sp"
+            android:textColor="#333333" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#a6a6a6"
+                android:textSize="9sp"
+                android:text="@string/number_of_trucks" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/ship_dialog_truck_count_minus_btn"
+                    android:src="@drawable/minus_icon"
+                    style="@style/ShipPlusMinusButton" />
+
+                <EditText
+                    android:id="@+id/ship_dialog_truck_count_edit_text"
+                    style="@style/ShipPlusMinusCount" />
+
+                <ImageButton
+                    android:id="@+id/ship_dialog_truck_count_plus_btn"
+                    android:src="@drawable/plus_icon"
+                    style="@style/ShipPlusMinusButton" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,80 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/vehicle_request_row_content" />
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="#f6f6f6"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp">
+
+            <LinearLayout
+                android:id="@+id/sent_quote_layout"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_check_black_24dp"
+                    android:tint="@color/card_border_color_approved_button"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/card_border_color_approved_button"
+                    android:text="Quote Sent"
+                    android:textStyle="italic|bold"/>
+
+                <TextView
+                    android:id="@+id/sent_quote_tv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:text="3 Vehicles for \u20B9 10,000"
+                    android:textStyle="italic"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/launch_send_quote_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical|right">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#009688"
+                    android:textSize="14sp"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:text="Send Quote"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
