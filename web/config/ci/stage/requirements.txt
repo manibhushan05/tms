@@ -41,7 +41,7 @@ slugify==0.0.1
 urllib3==1.22
 vine==1.1.4
 unittest-xml-reporting==2.1.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 django-filter==1.1.0
 xlrd==1.1.0
 fcm-django==0.2.21
