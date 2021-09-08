@@ -12,7 +12,7 @@ Django==2.2.24
 django-filter==2.0.0
 django-simple-history==2.0
 django-storages==1.6.6
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 django-admin-rangefilter==0.3.6
 docutils==0.14
 googletrans==2.2.0
