@@ -20,7 +20,7 @@ jsonschema==2.5.1
 kombu==4.0.2
 lxml==4.6.3
 meld3==1.0.2
-numpy==1.11.3
+numpy==1.21.0
 olefile==0.44
 pandas==0.19.2
 pathlib2==2.2.0
