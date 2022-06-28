@@ -44,7 +44,7 @@ unittest-xml-reporting==2.1.0
 urllib3==1.26.5
 vine==1.1.4
 xlrd==1.1.0
-arrow==0.12.1
+arrow==0.15.1
 coverage==4.5.1
 selenium==3.11.0
 python-slugify==1.2.5
